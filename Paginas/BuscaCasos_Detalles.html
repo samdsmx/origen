@@ -1,0 +1,459 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF" LINK="#000000" ALINK="#000000" VLINK="#000000">
+<CENTER><FORM ACTION="" METHOD=POST>
+<CENTER><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH=630>
+<TR><TD VALIGN=top>
+<P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
+<TR>
+
+<TD VALIGN=top><P><FONT FACE="Arial"><B><? include ("Paginas/CodigoMenuSinOpciones.html"); ?></B></FONT></P></TD>
+<TD VALIGN=top><P ALIGN=right>
+
+<TABLE BORDER=0 BGCOLOR="#000000" WIDTH=40 HEIGHT=40><TR><TD BGCOLOR="#FFFFFF"><CENTER><FONT FACE="Arial" COLOR="#000000"><B><?echo $IDCaso;?></B></FONT></CENTER></TD></TR></TABLE>
+
+<BR>
+</P></TD></TR></TABLE>
+
+             <TABLE BORDER=0 BGCOLOR="#000000" WIDTH="100%">
+               <TR>
+                  <TD VALIGN=top WIDTH="50%" BGCOLOR="#FFFFFF">
+                     <P><FONT SIZE="-2" COLOR="#000000"><TABLE BORDER=0 WIDTH="100%">
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Nombre:</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($Nombre) echo $Nombre; else echo "--"; ?></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
+                                 <TR>
+                                    <TD BGCOLOR="#FFFFFF">
+                                       <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Edad:</B></FONT></P>
+                                    </TD>
+                                    <TD BGCOLOR="#FFFFFF">
+                                       <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Estado
+                                       Civil:</B></FONT></P>
+                                    </TD>
+                                    <TD BGCOLOR="#FFFFFF">
+                                       <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Religi&oacute;n:</B></FONT></P>
+                                    </TD>
+                                    <TD BGCOLOR="#FFFFFF">
+                                       <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Medio de Contacto:</B></FONT></P>
+                                    </TD>
+                                 </TR>
+                                 <TR>
+                                    <TD BGCOLOR="#FFFFFF">
+                                       <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($Edad) echo $Edad; else echo "--"; ?></FONT></P>
+                                    </TD>
+                                    <TD BGCOLOR="#FFFFFF">
+                                       <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($EstadoCivil) echo $EstadoCivil; else echo "--"; ?></FONT></P>
+                                    </TD>
+                                    <TD BGCOLOR="#FFFFFF">
+                                       <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($Religion) echo $Religion; else echo "--"; ?></FONT></P>
+                                    </TD>
+                                    <TD BGCOLOR="#FFFFFF">
+                                       <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($MedioContacto) echo $MedioContacto; else echo "--"; ?></FONT></P>
+                                    </TD>
+                                 </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Genero:</B></FONT></P>
+                           </TD>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Tel&eacute;fono:</B></FONT></P>
+                           </TD>
+                           <TD BGCOLOR="#FFFFFF" colspan="2">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Correo Electronico:</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><?if($Sexo=="M") echo "Masculino"; else if($Sexo=="F") echo "Femenino"; else echo "--"; ?></FONT></P>
+                           </TD>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($Telefono) echo $Telefono; else echo "--"; ?></FONT></P>
+                           </TD>
+                           <TD BGCOLOR="#FFFFFF" colspan="2">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($CorreoElectronico) echo $CorreoElectronico; else echo "--"; ?></FONT></P>
+                           </TD>
+                        </TR>
+                              </TABLE>
+                               </FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>País:</B><? echo $Pais; ?></FONT></P>
+
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>
+                                 <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
+                                    <TR>
+                                       <TD BGCOLOR="#FFFFFF">
+                                          <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>C.P.:</B></FONT></P>
+                                       </TD>
+                                       <TD BGCOLOR="#FFFFFF">
+                                          <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Entidad:</B></FONT></P>
+                                       </TD>
+                                       <TD BGCOLOR="#FFFFFF">
+                                          <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Delegaci&oacute;n o Municipio:</B></FONT></P>
+                                       </TD>
+                                       <TD BGCOLOR="#FFFFFF">
+                                          <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Colonia:</B></FONT></P>
+                                       </TD>
+                                    </TR>
+                                    <TR>
+                                       <TD BGCOLOR="#FFFFFF">
+                                          <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($CP) echo $CP; else echo "--"; ?></FONT></P>
+                                       </TD>
+                                       <TD BGCOLOR="#FFFFFF">
+                                          <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($Estado) echo $Estado; else echo "--"; ?></FONT></P>
+                                       </TD>
+                                       <TD BGCOLOR="#FFFFFF">
+                                          <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($Municipio) echo $Municipio; else echo "--"; ?></FONT></P>
+                                       </TD>
+                                       <TD BGCOLOR="#FFFFFF">
+                                          <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($Colonia) echo $Colonia; else echo "--"; ?></FONT></P>
+                                       </TD>
+                                       
+                                    </TR>
+                                 </TABLE>
+                               </B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>                           
+                           <TD BGCOLOR="#FFFFFF">
+                                 <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Habla alguna lengua indigena?</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P style="text-align:justify"><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($LenguaIndigena) echo $LenguaIndigena; else echo "--"; ?></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>                           
+                           <TD BGCOLOR="#FFFFFF">
+                                 <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Nivel de estudios:</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P style="text-align:justify"><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($NivelEstudios) echo $NivelEstudios; else echo "--"; ?></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Ocupaci&oacute;n:</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P style="text-align:justify"><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($Ocupacion) echo $Ocupacion; else echo "--"; ?></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Vives
+                              con?</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($VivesCon) echo $VivesCon; else echo "--"; ?></FONT></P>
+                           </TD>
+                        </TR>
+                     </TABLE>
+                      </FONT><FONT SIZE="-1" COLOR="#000000">
+                     </FONT><FONT COLOR="#000000">
+                     </FONT><FONT SIZE="-1" COLOR="#AAAAAA">
+                     </FONT><FONT SIZE="-1"> </FONT></P>
+                  </TD>
+                  <TD VALIGN=top WIDTH="50%" BGCOLOR="#FFFFFF">
+                     <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><TABLE BORDER=0 WIDTH="100%">
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Nombre
+                              de la Consejera:</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $Consejera;?></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Fecha:</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $FechaLlamada;?></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Hora de inicio:</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $HoraInicio;?></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Hora
+                              de t&eacute;rmino:</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $HoraTermino;?></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Llamada No.:</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $LlamadaNo;?></FONT></P>
+                           </TD>
+                        </TR>
+
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Tiempo Invertido.:</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000">
+                     <? 
+					      include("Datos_Comunicacion.php");
+                     $sql ="SELECT SUM(duracion) FROM llamadas WHERE IDCaso= '".rs($IDCaso)."'";
+						   $result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+						   $row = mysql_fetch_array($result);
+						   $HorasInvertidas=$row['SUM(duracion)'];
+						   echo $HorasInvertidas;
+                     mysql_close($connection);                    
+						   ?>
+                     </FONT></P>
+                           </TD>
+                        </TR>
+
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Comentarios adicionales:</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD VALIGN=top BGCOLOR="#FFFFFF">
+                              <P style="text-align:justify"><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($ComentariosAdicionales) echo $ComentariosAdicionales; else echo "--"; ?></FONT></P>
+                           </TD>
+                        </TR>
+
+
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Tipo de caso</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $TipoCaso;?></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Posible Solucion:</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $PosibleSolucion;?></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Estatus:</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $Estatus;?></FONT></P>
+                           </TD>
+                        </TR>
+
+
+                     </TABLE>
+                      </FONT></P>
+                  </TD>
+               </TR>
+            </TABLE>
+            <BR>
+            <FONT SIZE="-2" FACE="Arial" COLOR="#000000"><TABLE BORDER=0 BGCOLOR="#000000" CELLPADDING=3 WIDTH="100%">
+
+               <TR>
+                  <TD BGCOLOR="#FFFFFF">
+                     <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>PSICOLOGICO</B></FONT></CENTER>
+                  </TD>
+                  <TD BGCOLOR="#FFFFFF">
+                     <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>LEGAL</B></FONT></CENTER>
+                  </TD>
+                  <TD BGCOLOR="#FFFFFF">
+                     <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>MEDICO</B></FONT></CENTER>
+                  </TD>
+                  <TD BGCOLOR="#FFFFFF">
+                     <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>OTROS</B></FONT></CENTER>
+                  </TD>
+               </TR>
+               <TR>
+                  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+                     <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $AyudaPsicologico; ?><U><BR>
+                     <BR>
+                     </U></FONT></P>
+                  </TD>
+                  <TD VALIGN=top BGCOLOR="#FFFFFF">
+                     <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $AyudaLegal; ?><BR>
+                     <BR>
+                     </FONT></P>
+                  </TD>
+                  <TD VALIGN=top BGCOLOR="#FFFFFF">
+                     <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $AyudaMedica; ?><BR>
+                     <BR>
+                     </FONT></P>
+                  </TD>
+                  <TD VALIGN=top BGCOLOR="#FFFFFF">
+                     <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $AyudaOtros; ?><BR>
+                     <BR>
+                     </FONT></P>
+                  </TD>
+               </TR>
+
+
+   <TR>
+                  <TD BGCOLOR="#FFFFFF" colspan=2>
+                     <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>TIPO DE VIOLENCIA</B></FONT></CENTER>
+                  </TD>
+                  <TD BGCOLOR="#FFFFFF" colspan=2>
+                     <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>MODALIDAD DE VIOLENCIA</B></FONT></CENTER>
+                  </TD>
+               </TR>
+
+              <TR>
+                  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF" colspan=2>
+                     <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $TipoViolencia; ?><U><BR>
+                     <BR>
+                     </U></FONT></P>
+                  </TD>
+                  <TD VALIGN=top BGCOLOR="#FFFFFF" colspan=2>
+                     <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $ModalidadViolencia; ?><BR>
+                     <BR>
+                     </FONT></P>
+                  </TD>
+               </TR>
+ 
+
+            </TABLE>
+            <BR>
+            <TABLE BORDER=0 BGCOLOR="#000000" CELLPADDING=3 WIDTH="100%">
+               <TR>
+                  <TD WIDTH=438 BGCOLOR="#FFFFFF">
+                     <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Desarrollo
+                     del caso:</B></FONT></P>
+                  </TD>
+                  <TD BGCOLOR="#FFFFFF">
+                     <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Como te enteraste:</B></FONT></P>
+                  </TD>
+               </TR>
+               <TR>
+                  <TD VALIGN=top NOWRAP WIDTH=438 BGCOLOR="#FFFFFF">
+                     <P style="text-align:justify"><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($DesarrolloCaso) echo $DesarrolloCaso; else echo "--"; ?><BR>
+                     <BR>
+                     </FONT></P>
+                  </TD>
+                  <TD VALIGN=top BGCOLOR="#FFFFFF">
+                     <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($ComoTeEnteraste) echo $ComoTeEnteraste; else echo "--"; ?></FONT></P>
+                  </TD>
+               </TR>
+            </TABLE>
+            <BR>
+            </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#000000">
+            </FONT><FONT FACE="Arial" COLOR="#000000">
+            </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#FFCC00">
+            </FONT><FONT FACE="Arial" COLOR="#FFCC00">
+            </FONT><FONT SIZE="-2" FACE="Arial" COLOR="#000000">
+<B><TABLE BORDER=0 BGCOLOR="#000000" CELLPADDING=3 WIDTH="100%">
+
+<TR>
+<TD BGCOLOR="#FFFFFF">
+<P><FONT SIZE="-2" FACE="Arial" COLOR="#000000">
+<B>Canalizaci&oacute;n Legal:</B>
+</FONT></P>
+</TD>
+</TR>
+<TR>
+<TD BGCOLOR="#FFFFFF">
+<P style="text-align:justify">
+<FONT SIZE="-2" FACE="Arial" COLOR="#000000">
+<? if($CanaLegal) echo $CanaLegal; else echo "--"; ?>
+<B>
+<BR>
+<BR>
+</B>
+</FONT>
+</P>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="#FFFFFF">
+<P><FONT SIZE="-2" FACE="Arial" COLOR="#000000">
+<B>Canalizaci&oacute;n Otros:</B>
+</FONT></P>
+</TD>
+</TR>
+<TR>
+<TD BGCOLOR="#FFFFFF">
+<P style="text-align:justify">
+<FONT SIZE="-2" FACE="Arial" COLOR="#000000">
+<? if($CanaOtro) echo $CanaOtro; else echo "--"; ?>
+<B>
+<BR>
+<BR>
+</B>
+</FONT>
+</P>
+</TD>
+</TR>
+</TABLE>
+</TABLE>
+<BR>
+<?	
+	include("Datos_Comunicacion.php");
+	$NombreConsejero=RevisaSesion($Sesion, "identidad");
+	$sql3 ="SELECT Nombre, NivelSeguridad FROM consejeros WHERE Nombre='".rs($NombreConsejero)."'";
+	$total_result3 = @mysql_query($sql3, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+	$row3=mysql_fetch_array($total_result3);
+	$Seg=$row3['NivelSeguridad'];
+	if($Seg=="2"){
+		echo "<INPUT TYPE=hidden NAME=Accion VALUE=Modifica>";
+	      echo "<INPUT TYPE=image SRC=\"resc/Boton_Modificar.gif\" WIDTH=127 HEIGHT=33 BORDER=0 ALIGN=bottom>";
+		}
+	mysql_close($connection);
+?>
+</CENTER>
+</FORM></CENTER>
+</BODY>
+</HTML>

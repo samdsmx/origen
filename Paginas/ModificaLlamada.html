@@ -1,0 +1,743 @@
+<HEAD>
+   <TITLE>Modifica Caso</TITLE>
+</HEAD>
+<span><p>
+</span>
+<p>
+<?
+	$HoraActual=date("h:i A");
+	$FechaActual=date("d/m/Y");
+	$NombreConsejero=RevisaSesion($Sesion, "identidad");
+?>
+<script>
+function rellenaMedios(formulario){
+		with (document.forms[formulario]){
+			var idmedio2;
+			var idmedio = medio[medio.selectedIndex].value; 
+          	var n = medio2.length;  
+			medio2.disabled = false; 
+			for (var i = 0; i < n; ++i)
+				medio2.remove(medio2.options[i]); 
+			medio2[0] = new Option("-", ""); 
+			if (idmedio != ""){
+		  		<?php  
+					include("Datos_Comunicacion.php");
+					$sql ="select * from campos where Tipo = 'ComoTeEnteraste' AND Activo = 1 AND Nombre like '%-%'";
+					$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+			     	while ($row = mysql_fetch_array($total_result)){
+						$MedioNombre = $row["Nombre"];
+						?>
+					idmedio2="<?php echo $MedioNombre;?>";
+					if(idmedio2.search(idmedio)!=-1){
+						medio2[medio2.length] = new Option( "<?php echo("$MedioNombre"); ?>", "<?php echo ("$MedioNombre");?>");
+						}
+						<?php
+						}
+						?>
+				}
+			}
+		}
+</script>
+<span BGCOLOR="#FFFFFF" LINK="#000000" ALINK="#000000" VLINK="#000000"><p>
+<CENTER><BR>
+<BR>
+<FORM ACTION="" METHOD=POST name=forma>
+   <CENTER><TABLE BORDER=0 BGCOLOR="#EEEEEE" CELLSPACING=0 CELLPADDING=0 WIDTH=630>
+      <TR>
+         <TD>
+            <P><TABLE BORDER=0 BGCOLOR="#EEEEEE" WIDTH="100%">
+               <TR>
+                  <TD VALIGN=top WIDTH="50%" BGCOLOR="#FFFFFF">
+                     <P><FONT SIZE="-1" COLOR="#AAAAAA"><TABLE BORDER=0 WIDTH="100%">
+                        <TR>
+                           <TD>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Nombre</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD>
+                              <P><FONT SIZE="-1" COLOR="#AAAAAA"><INPUT TYPE=text NAME=Nombre VALUE="<? echo $Nombre;?>" SIZE=40 MAXLENGTH=255></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
+                                 <TR>
+                                    <TD>
+                                       <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Edad</B></FONT></P>
+                                    </TD>
+                                    <TD>
+                                       <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Estado Civil</B></FONT></P>
+                                    </TD>
+                                    <TD>
+                                       <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Religi&oacute;n</B></FONT></P>
+                                    </TD>
+                                 </TR>
+                                 <TR>
+                                    <TD>
+
+                                       <P>
+						    <select size="1" name="Edad">
+                                        <?echo "<OPTION SELECTED VALUE=".$Edad.">".$Edad;?>
+                                        <option>0</option>
+							<?
+							for ($i=8;$i<91;$i++)
+								echo "<option>".$i."</option>";
+							?>
+                                       </select></P>
+                                    </TD>
+                                    <TD>
+                                       <P><FONT SIZE="-1" COLOR="#AAAAAA"><SELECT NAME=EstadoCivil>
+	                                    <?echo "<OPTION SELECTED VALUE=".$EstadoCivil.">".$EstadoCivil;?>
+                                          <OPTION VALUE=Soltera>Soltera
+                                          <OPTION VALUE=Divorciada>Divorciada
+                                          <OPTION VALUE=Viuda>Viuda
+                                          <OPTION VALUE=Casada>Casada
+                                          <OPTION VALUE=Separada>Separada
+                                          <OPTION VALUE=Concubinato>Concubinato
+                                          <OPTION VALUE="Union Libre">Union Libre
+                                       </SELECT></FONT></P>
+                                    </TD>
+                                    <TD>
+                                       <P><FONT SIZE="-1" COLOR="#AAAAAA"><SELECT NAME=Religion>
+							<?echo "<OPTION SELECTED VALUE=".$Religion.">".$Religion;?>
+                                          <OPTION>Catolica
+                                          <OPTION>Musulmana
+                                          <OPTION>Judia
+                                          <OPTION>Pentecostes
+                                          <OPTION>Mormona
+                                          <OPTION>Evangelica
+                                          <OPTION>Cristiana
+				          		<OPTION>Testigo de Jehova
+                                          <OPTION>Ninguna
+                                       </SELECT></FONT></P>
+                                    </TD>
+                                 </TR>
+                        <TR>
+                           <TD colspan=2>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Genero</B></FONT></P>
+                           </TD>
+                           <TD>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Tel&eacute;fono</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+<TD colspan=2>
+					<FONT SIZE="-1" COLOR="#AAAAAA"><input type="radio" name="Sexo" value="F" <?if($Sexo=='F')echo "checked";?>>Femenino <input type="radio" name="Sexo" value="M" <?if($Sexo=='M')echo "checked";?>>Masculino</FONT>
+                           </TD>
+                           <TD>
+                              <P><FONT SIZE="-1" COLOR="#AAAAAA"><INPUT TYPE=text NAME=Telefono VALUE="<? echo $Telefono;?>"SIZE=19 MAXLENGTH=30></FONT></P>
+                           </TD>
+                        </TR>
+                              </TABLE>
+                               </FONT>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
+                                 <TR>
+                                    <TD WIDTH="50%">
+                                       <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Delegaci&oacute;n</B></FONT></P>
+                                    </TD>
+                                    <TD WIDTH="50%">
+                                       <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Estado</B></FONT></P>
+                                    </TD>
+                                 </TR>
+                                 <TR>
+                                    <TD WIDTH="50%">
+                                       <P><select size="1" name="Delegacion">
+   	 	 				   <?echo "<OPTION SELECTED VALUE=".$Delegacion.">".$Delegacion;?>
+                                       <option>Ninguna</option>
+                                       <option>Alvaro Obregon</option>
+                                       <option>Azcapotzalco</option>
+                                       <option>Benito Juarez</option>
+                                       <option>Coyoacan</option>
+                                       <option>Cuajimalpa de Morelos</option>
+                                       <option>Cuahutemoc</option>
+                                       <option>Gustavo A. Madero</option>
+                                       <option>Iztacalco</option>
+                                       <option>Iztapalapa</option>
+                                       <option>Magdalena Contreras</option>
+                                       <option>Miguel Hidalgo</option>
+                                       <option>Milpalta</option>
+                                       <option>Tlahuac</option>
+                                       <option>Tlalpan</option>
+                                       <option>Venustiano Carranza</option>
+                                       <option>Xochimilco</option>
+                                       <option>Acambay</option>
+                                       <option>Acolman</option>
+                                       <option>Aculco</option>
+                                       <option>Almoloya de Alquisiras</option>
+                                       <option>Almoloya de Juarez</option>
+                                       <option>Almoloya del Rio</option>
+                                       <option>Amanalco</option>
+                                       <option>Amatepec</option>
+                                       <option>Amecameca</option>
+                                       <option>Apaxco</option>
+                                       <option>Atenco</option>
+                                       <option>Atizapan</option>
+                                       <option>Atizapan de Zaragoza</option>
+                                       <option>Atlacomulco</option>
+                                       <option>Atlautla</option>
+                                       <option>Axapuso</option>
+                                       <option>Ayapango</option>
+                                       <option>Calimaya</option>
+                                       <option>Capulhuac</option>
+                                       <option>Coacalco</option>
+                                       <option>Coatepec Harinas</option>
+                                       <option>Cocotitlan</option>
+                                       <option>Coyotepec</option>
+                                       <option>Cuautitlan</option>
+                                       <option>Cuautitlan Izcalli</option>
+                                       <option>Chalco</option>
+                                       <option>Valle de Chalco Solidaridad</option>
+                                       <option>Chapa de Mota</option>
+                                       <option>Chapultepec</option>
+                                       <option>Chiautla</option>
+                                       <option>Chicoloapan</option>
+                                       <option>Chiconcuac</option>
+                                       <option>Chimalhuacan</option>
+                                       <option>Donato Guerra</option>
+                                       <option>Ecatepec</option>
+                                       <option>Ecatzingo</option>
+                                       <option>Huehuetoca</option>
+                                       <option>Hueypoxtla</option>
+                                       <option>Huixquilucan</option>
+                                       <option>Isidro Fabela</option>
+                                       <option>Ixtapaluca</option>
+                                       <option>Ixtapan de la Sal</option>
+                                       <option>Ixtapan del Oro</option>
+                                       <option>Ixtlahuaca</option>
+                                       <option>Jalatlaco</option>
+                                       <option>Jaltenco</option>
+                                       <option>Jilotepec</option>
+                                       <option>Jilotzingo</option>
+                                       <option>Jiquipilco</option>
+                                       <option>Jocotitlan</option>
+                                       <option>Joquicingo</option>
+                                       <option>Juchitepec</option>
+                                       <option>Lerma</option>
+                                       <option>Malinalco</option>
+                                       <option>Melchor Ocampo</option>
+                                       <option>Metepec</option>
+                                       <option>Mexicalcingo</option>
+                                       <option>Morelos</option>
+                                       <option>Naucalpan</option>
+                                       <option>Nezahualcoyotl</option>
+                                       <option>Nextlalpan</option>
+                                       <option>Nicolas Romero </option>
+                                       <option>Nopaltepec</option>
+                                       <option>Ocoyacac</option>
+                                       <option>Ocuilan</option>
+                                       <option>El Oro</option>
+                                       <option>Otumba</option>
+                                       <option>Otzoloapan</option>
+                                       <option>Otzolotepec</option>
+                                       <option>Ozumba</option>
+                                       <option>Papalotla</option>
+                                       <option>La Paz</option>
+                                       <option>Plotitlan</option>
+                                       <option>Ra&ntildeon</option>
+                                       <option>San Antonio de las Islas </option>
+                                       <option>San Felipe del Progreso </option>
+                                       <option>San Martin de las Piramides</option>
+                                       <option>San Mateo Atenco </option>
+                                       <option>San Simon de Guerrero </option>
+                                       <option>Santo Tomas </option>
+                                       <option>Soyaniquilpan de Ju&aacute;rez </option>
+                                       <option>Sultepec </option>
+                                       <option>Tecamac</option>
+                                       <option>Tejupilco</option>
+                                       <option>Temamatla</option>
+                                       <option>Temascalapa</option>
+                                       <option>Temascalcingo</option>
+                                       <option>Temascaltepec</option>
+                                       <option>Temoaya</option>
+                                       <option>Tenancingo</option>
+                                       <option>Tenango del Aire</option>
+                                       <option>Tenango del Valle </option>
+                                       <option>Teoloyucan</option>
+                                       <option>Teotihuacan</option>
+                                       <option>Tepetlaoxtoc</option>
+                                       <option>Tepetlixpa</option>
+                                       <option>Tepozotlan</option>
+                                       <option>Tequixquiac</option>
+                                       <option>Texcatitlan</option>
+                                       <option>Texcalyacac</option>
+                                       <option>Texcoco</option>
+                                       <option>Tezoyuca</option>
+                                       <option>Toianguistenco</option>
+                                       <option>Timilpan</option>
+                                       <option>Tlalmanalco</option>
+                                       <option>Tlalnepantla</option>
+                                       <option>Tlatalva</option>
+                                       <option>Toluca</option>
+                                       <option>Tonatico</option>
+                                       <option>Tultepec</option>
+                                       <option>Tultitlan</option>
+                                       <option>Valle de Bravo</option>
+                                       <option>Villa de Allende </option>
+                                       <option>Villa del Carbon </option>
+                                       <option>Villa Guerrero</option>
+                                       <option>Villa Victoria </option>
+                                       <option>Xonacatlan</option>
+                                       <option>Zacazonapan</option>
+                                       <option>Xacualpan</option>
+                                       <option>Zinacantepec</option>
+                                       <option>Zumpahuacan</option>
+                                       <option>Zumpango </option>
+                                       </select></P>
+                                    </TD>
+                                    <TD WIDTH="50%">
+                                       <P><select size="1" name="Estado">
+						   <?echo "<OPTION SELECTED VALUE=".$Estado.">".$Estado;?>
+                                       <option>Ninguno</option>
+				       <optgroup label="Paises extranjeros">
+                                       <option>Colombia</option>
+                                       <option>Costa Rica</option>
+                                       <option>Guatemala</option>
+                                       <option>Honduras</option>
+                                       <option>Panama</option>
+                                       <option>Salvador</option>
+				       <optgroup label="Estados de Mexico">                                       
+   				       <option>Aguascalientes</option>
+                                       <option>Baja California</option>
+                                       <option>Baja California Sur</option>
+                                       <option>Campeche</option>
+                                       <option>Coahuila</option>
+                                       <option>Colima</option>
+                                       <option>Chiapas</option>
+                                       <option>Chihuahua</option>
+                                       <option>Distrito Federal</option>
+                                       <option>Durango</option>
+                                       <option>Guanajuato</option>
+                                       <option>Guerrero</option>
+                                       <option>Hidalgo</option>
+                                       <option>Jalisco</option>
+                                       <option>Mexico</option>
+                                       <option>Michoacan de Ocampo</option>
+                                       <option>Morelos</option>
+                                       <option>Nayarit</option>
+                                       <option>Nuevo Leon</option>
+                                       <option>Oaxaca</option>
+                                       <option>Puebla</option>
+                                       <option>Queretaro de Arteaga</option>
+                                       <option>Quintana Roo</option>
+                                       <option>San Luis Potosi</option>
+                                       <option>Sinaloa</option>
+                                       <option>Sonora</option>
+                                       <option>Tabasco</option>
+                                       <option>Tamaulipas</option>
+                                       <option>Tlaxcala</option>
+                                       <option>Veracruz de Ignacio</option>
+                                       <option>Yucatan</option>
+                                       <option>Zacatecas</option>
+                                       </select></P>
+                                    </TD>
+                                 </TR>
+                              </TABLE>
+                               </B></FONT>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Ocupaci&oacute;n</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD>
+                              <P><select size="1" name="Ocupacion">
+					  <?echo "<OPTION SELECTED VALUE=".$Ocupacion.">".$Ocupacion;?>
+                                <option>Ama de casa</option>
+                                <option>Empleada</option>
+                                <option>Negocio propio</option>
+                                <option>Estudiante</option>
+                                <option>Desempleada</option>
+                              </select></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Vives con?</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD>
+                              <P><FONT SIZE="-1" COLOR="#AAAAAA"><SELECT NAME=VivesCon>
+						<?echo "<OPTION SELECTED VALUE=".$VivesCon.">".$VivesCon;?>
+	                             	<OPTION>Sola
+                                 	<OPTION>Padres
+                                 	<OPTION>Pareja
+                                 	<OPTION>Familia
+	                              <OPTION>Hijos
+						<OPTION>Padre
+						<OPTION>Madre
+                                 	<OPTION>Otros
+                              </SELECT></FONT></P>
+                           </TD>
+                        </TR>
+                     </TABLE>
+                      </FONT><FONT SIZE="-1"> </FONT>
+                  </TD>
+                  <TD VALIGN=top WIDTH="50%" BGCOLOR="#FFFFFF">
+                     <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><TABLE BORDER=0 WIDTH="100%">
+                        <TR>
+                           <TD>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Nombre de la consejera</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><!--NOEDIT--><?echo $Consejera;?><!--/NOEDIT-->
+					<INPUT TYPE=hidden NAME=AccionSec VALUE=Modificar>
+					</FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Fecha</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=hidden NAME=FechaLlamada VALUE="<? echo $FechaLlamada;?>"><!--NOEDIT--><? echo $FechaLlamada;?><!--/NOEDIT--></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Caso </B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=hidden NAME=IDCaso VALUE="<? echo $IDCaso;?>"><? echo $IDCaso;?></FONT></P>
+                           </TD>
+                        </TR>
+
+                        <TR>
+                           <TD>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Comentarios adicionales</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD VALIGN=top>
+                            <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+<TEXTAREA NAME=ComentariosAdicionales ROWS=5 COLS=38 WRAP=virtual><? echo $ComentariosAdicionales;?></TEXTAREA>
+</FONT></P>
+                           </TD>
+                        </TR>
+
+<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Tipo de Caso</B></FONT></P></TD></TR>
+<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=text NAME=TipoCaso VALUE="<? echo $TipoCaso;?>" SIZE=40 MAXLENGTH=40></FONT></P></TD></TR>
+
+<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Posible Solucion</B></FONT></P></TD></TR>
+<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=text NAME=PosibleSolucion VALUE="<? echo $PosibleSolucion;?>" SIZE=40 MAXLENGTH=40></FONT></P></TD></TR>
+
+<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Estatus</B></FONT></P></TD></TR>
+<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=text NAME=Estatus VALUE="<? echo $Estatus;?>" SIZE=40 MAXLENGTH=40></FONT></P></TD></TR>
+
+                     </TABLE>
+                      </FONT><FONT SIZE="-1" FACE="Arial">
+                     </FONT><FONT FACE="Arial"> </FONT>
+                  </TD>
+               </TR>
+            </TABLE>
+
+
+<FONT FACE="Arial" COLOR="#D80808"><TABLE BORDER=0 BGCOLOR="#EEEEEE" WIDTH="100%">
+               <TR>
+                  <TD BGCOLOR="#FFFFFF">
+                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>PSICOLOGICO</B></FONT></CENTER>
+                  </TD>
+                  <TD BGCOLOR="#FFFFFF">
+                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>LEGAL</B></FONT></CENTER>
+                  </TD>
+                  <TD BGCOLOR="#FFFFFF">
+                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>MEDICO</B></FONT></CENTER>
+                  </TD>
+                  <TD BGCOLOR="#FFFFFF">
+                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>OTROS</B></FONT></CENTER>
+                  </TD>
+               </TR>
+	  <TR>
+
+  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
+	<? 
+	include("Datos_Comunicacion.php");
+	$sql ="select * from campos where Tipo = 'AYUDAPSICOLOGICO' ORDER BY Nombre ASC";
+	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+	$total_found = @mysql_num_rows($total_result);
+	$i=1;
+	while ($row = mysql_fetch_array($total_result)){
+		$Nombre=$row['Nombre'];
+		$Tipo=$row['Tipo'];
+		if(!strstr($AyudaPsicologico, $Nombre)){
+	    		echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
+			}
+			else{
+				echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'" checked>'.$Nombre.'<BR>';
+				}
+		$i=$i+1;
+		}
+	?>
+	</FONT></P>
+      </TD>
+
+  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
+	<? 
+	include("Datos_Comunicacion.php");
+	$sql ="select * from campos where Tipo = 'AYUDALEGAL' ORDER BY Nombre ASC";
+	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+	$total_found = @mysql_num_rows($total_result);
+	$i=1;
+	while ($row = mysql_fetch_array($total_result)){
+		$Nombre=$row['Nombre'];
+		$Tipo=$row['Tipo'];
+		if(!strstr($AyudaLegal, $Nombre)){
+	    		echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
+			}
+			else{
+				echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'" checked>'.$Nombre.'<BR>';
+				}
+		$i=$i+1;
+		}
+	?>
+	</FONT></P>
+      </TD>
+
+  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
+	<? 
+	include("Datos_Comunicacion.php");
+	$sql ="select * from campos where Tipo = 'AYUDAMEDICA' ORDER BY Nombre ASC";
+	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+	$total_found = @mysql_num_rows($total_result);
+	$i=1;
+	while ($row = mysql_fetch_array($total_result)){
+		$Nombre=$row['Nombre'];
+		$Tipo=$row['Tipo'];
+		if(!strstr($AyudaMedica, $Nombre)){
+	    		echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
+			}
+			else{
+				echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'" checked>'.$Nombre.'<BR>';
+				}
+		$i=$i+1;
+		}
+	?>
+	</FONT></P>
+      </TD>
+
+  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
+	<? 
+	include("Datos_Comunicacion.php");
+	$sql ="select * from campos where Tipo = 'AYUDAOTROS' ORDER BY Nombre ASC";
+	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+	$total_found = @mysql_num_rows($total_result);
+	$i=1;
+	while ($row = mysql_fetch_array($total_result)){
+		$Nombre=$row['Nombre'];
+		$Tipo=$row['Tipo'];
+		if(!strstr($AyudaOtros, $Nombre)){
+	    		echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
+			}
+			else{
+				echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'" checked>'.$Nombre.'<BR>';
+				}
+		$i=$i+1;
+		}
+	?>
+	</FONT></P>
+      </TD>
+               </TR>
+
+ <TR>
+                  <TD BGCOLOR="#FFFFFF" colspan=2>
+                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>TIPO DE VIOLENCIA</B></FONT></CENTER>
+                  </TD>
+                  <TD BGCOLOR="#FFFFFF" colspan=2>
+                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>MODALIDAD DE VIOLENCIA</B></FONT></CENTER>
+                  </TD>
+               </TR>
+               <TR>
+               
+<TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
+   <? 
+   include("Datos_Comunicacion.php");
+   $sql ="select * from campos where Tipo = 'TipoViolencia' ORDER BY Nombre ASC";
+   $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+   $total_found = @mysql_num_rows($total_result);
+   $i=1;
+   while ($row = mysql_fetch_array($total_result)){
+      $Nombre=$row['Nombre'];
+      $Tipo=$row['Tipo'];
+      if(!strstr($TipoViolencia, $Nombre)){
+            echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
+         }
+         else{
+            echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'" checked>'.$Nombre.'<BR>';
+            }
+      $i=$i+1;
+      }
+   ?>
+   </FONT></P>
+      </TD>
+
+<TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
+   <? 
+   include("Datos_Comunicacion.php");
+   $sql ="select * from campos where Tipo = 'ModalidadViolencia' ORDER BY Nombre ASC";
+   $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+   $total_found = @mysql_num_rows($total_result);
+   $i=1;
+   while ($row = mysql_fetch_array($total_result)){
+      $Nombre=$row['Nombre'];
+      $Tipo=$row['Tipo'];
+      if(!strstr($ModalidadViolencia, $Nombre)){
+            echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
+         }
+         else{
+            echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'" checked>'.$Nombre.'<BR>';
+            }
+      $i=$i+1;
+      }
+   ?>
+   </FONT></P>
+      </TD>
+               </TR>
+
+
+
+            </TABLE>
+             </FONT><FONT FACE="Arial" COLOR="#FFCC00">
+            </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#FFCC00"><TABLE BORDER=0 WIDTH="100%">
+               <TR>
+                  <TD WIDTH=438 BGCOLOR="#FFFFFF">
+                     <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Desarrollo del caso</B></FONT></P>
+                  </TD>
+                  <TD BGCOLOR="#FFFFFF">
+                     <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Como te enteraste</B></FONT></P>
+                  </TD>
+               </TR>
+               <TR>
+
+<TD VALIGN=top NOWRAP WIDTH=438 BGCOLOR="#FFFFFF">
+<P><FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME=DesarrolloCaso ROWS=10 COLS=56 WRAP=virtual><?echo $DesarrolloCaso;?></TEXTAREA></FONT></P>
+</TD>
+<TD BGCOLOR="#FFFFFF">
+<FONT SIZE="-1" FACE="Arial" COLOR="#00AA00"><B><?echo $ComoTeEnteraste;?></B></FONT>
+<INPUT TYPE=hidden NAME=ComoTeEnteraste VALUE=<?echo $ComoTeEnteraste;?>><P>
+
+				<select name="medio" onChange="rellenaMedios('forma');" id="Medio">
+                    <option value="">-
+                    	<? 
+						include("Datos_Comunicacion.php");
+						$sql ="select * from campos where Tipo = 'ComoTeEnteraste' AND Activo = 1 AND NOT(Nombre LIKE '%-%') ORDER BY Nombre ASC";
+						$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+						$total_found = @mysql_num_rows($total_result);
+						$i=1;
+						while ($row = mysql_fetch_array($total_result)){
+							$Nombre=$row['Nombre'];
+							echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre;
+							$i=$i+1;
+							}
+						?>
+                  </select>
+<P>
+                <select name="medio2" disabled>
+					<option value="">-
+                    </select>
+<P>
+<!--
+	<? 
+	include("Datos_Comunicacion.php");
+	$sql ="select * from campos where Tipo = 'ComoTeEnteraste' AND Nombre <> 'Otros' and activo=1 ORDER BY Nombre ASC";
+	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+	$total_found = @mysql_num_rows($total_result);
+	while ($row = mysql_fetch_array($total_result)){
+		$Nombre=$row['Nombre'];
+		$Tipo=$row['Tipo'];
+		if($Nombre=="No Informa")
+			    		echo '<INPUT TYPE=radio NAME=ComoTeEnteraste VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
+					else
+				    		echo '<INPUT TYPE=radio NAME=ComoTeEnteraste VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
+		}
+	?>
+-->
+Otros
+<BR><INPUT TYPE=text NAME=OtrosEnteraste VALUE="" SIZE=19><BR>
+		   
+ 	<BR>
+	</FONT></P>
+      </TD>
+ </TR>
+
+</TABLE>
+
+<p align=center style='text-align:center'><span style='font-size:22.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'>
+<a href="#" onClick="window.open('?Accion=RealizarBusquedaOrga','mywindow','height=600,width=350,scrollbars=yes,status=yes'); return false;">Busqueda de Organismos</a>
+<p align=center style='text-align:center'><span style='font-size:22.0pt;
+    mso-bidi-font-size:10.0pt;font-family:Arial'><a
+    href="Real.bat">Mensajeria</a><o:p></o:p></span></p>
+             </FONT>
+
+<FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B><TABLE BORDER=0 WIDTH="100%">
+               
+<TD BGCOLOR="#FFFFFF">
+<FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+<B>Legal</B>
+</FONT>
+</TD>
+
+<TR>
+<TD BGCOLOR="#FFFFFF">
+<P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>
+<TEXTAREA NAME=CanaLegal ROWS=4 COLS=80 WRAP=virtual><?echo $CanaLegal;?></TEXTAREA>
+</B></FONT></P>
+</TD>
+</TR>
+
+<TD BGCOLOR="#FFFFFF">
+<FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+<B>Otro</B>
+</FONT>
+</TD>
+
+<TR>
+<TD BGCOLOR="#FFFFFF">
+<P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>
+<TEXTAREA NAME=CanaOtro ROWS=4 COLS=80 WRAP=virtual><?echo $CanaOtro;?></TEXTAREA>
+</B></FONT></P>
+</TD>
+</TR>
+
+            </TABLE>
+             </B></FONT><FONT SIZE="-1" FACE="Arial" COLOR="#FFCC00">
+            </FONT><FONT FACE="Arial" COLOR="#FFCC00">
+            </FONT><TABLE BORDER=0 BGCOLOR="#FFFFFF" CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
+               <TR>
+                  <TD>
+                     <P ALIGN=right><BR>
+                     <TABLE BORDER=0 WIDTH="100%">
+<TR><TD>
+<CENTER><INPUT TYPE=submit NAME=submit VALUE="Modificar"></CENTER>
+                           </TD>
+                        </TR>
+                     </TABLE>
+                      &nbsp;</P>
+                  </TD>
+               </TR>
+            </TABLE>
+         </TD>
+      </TR>
+   </TABLE>
+   <BR>
+   </CENTER>
+</FORM></CENTER>
+</span>

@@ -1,0 +1,124 @@
+<HTML>
+<HEAD>
+</HEAD>
+<SCRIPT language="JavaScript1.2">
+function openwindow(cad){
+	var n=new Date();
+	window.open(cad,"mywindow"+n.getTime());
+	}
+
+function contar() {
+	var cont = 0; 
+	var n=new Date();
+	var seleccion ="";
+	for (var i=0;i < document.forms[0].elements.length;i++){
+     		var elemento = document.forms[0].elements[i];
+    		if (elemento.type == "checkbox" && elemento.id != "chk1"){		
+	     		if (elemento.checked){
+				if (cont>=1)
+					seleccion=seleccion+","+elemento.name;
+					else
+						seleccion=elemento.name;
+				cont= cont +1;
+				}
+			}
+		}
+
+	if (cont == 0)
+		alert ("No hay ningun caso seleccionado para modificar");
+		else
+			window.open("?Accion=ModificaVarias&seleccion="+seleccion,"mywindow"+n.getTime());
+	}
+
+function DesChequearTodos(chkbox){
+	var chk = document.getElementById('chk1');
+	if (!chkbox.checked && chk.checked)
+		chk.checked = chkbox.checked;
+   	}
+ 
+function ChequearTodos(chkbox){
+	for (var i=0;i < document.forms[0].elements.length;i++){
+     		var elemento = document.forms[0].elements[i];
+     		if (elemento.type == "checkbox"){
+          		elemento.checked = chkbox.checked
+ 	    		}
+     		}
+   	}
+</SCRIPT>
+<BODY BGCOLOR="#FFFFFF" LINK="#000000" ALINK="#000000" VLINK="#000000">
+<CENTER><FONT FACE="Arial"><B><!--NOEDIT--><? include ("Paginas/CodigoMenu.html"); ?><!--/NOEDIT--></B></FONT><BR>
+<BR>
+<FORM NAME="form1" ACTION="" METHOD="POST">
+<TABLE BORDER=0 WIDTH=630>
+   <TR>
+      <TD>
+         <P><A HREF="?Accion=RealizarBusqueda"><FONT SIZE="-1" FACE="Arial"><B><IMG SRC="resc/Buscar.gif" WIDTH=30 HEIGHT=25 BORDER=0 ALIGN=bottom></B></FONT></A><FONT SIZE="-1" FACE="Arial"><B>
+         </B></FONT><A HREF="?Accion=RealizarBusqueda"><FONT SIZE="-1" FACE="Arial"><B>Otra
+         Busqueda</B></FONT></A><FONT SIZE="-1" FACE="Arial"><B><BR>
+         </B></FONT></P>
+      </TD>
+      <TD VALIGN=bottom>
+         <P ALIGN=right><FONT SIZE="-1" FACE="Arial"><B><!--NOEDIT--><?echo $total_found?><!--/NOEDIT-->
+         Casos y Seguimientos</B></FONT></P>
+      </TD>
+   </TR>
+</TABLE>
+
+ <FONT FACE="Arial"><TABLE BORDER=0 BGCOLOR="#EEEEEE" CELLSPACING=3 CELLPADDING=3 WIDTH=800>
+   <TR>
+	<TD><input type="checkbox" name="checkbox11" id="chk1" onClick="ChequearTodos(this);">
+
+<?	
+	include("Datos_Comunicacion.php");
+	$NombreConsejero=RevisaSesion($Sesion, "identidad");
+	$sql3 ="SELECT Nombre, NivelSeguridad FROM consejeros WHERE Nombre='".rs($NombreConsejero)."'";
+	$total_result3 = @mysql_query($sql3, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+	$row3=mysql_fetch_array($total_result3);
+	$Seg=$row3['NivelSeguridad'];
+	if($Seg=="2"){
+	      echo "<A HREF=\"#\" title=\"Modificar\" onClick=\"contar();\"><IMG SRC=\"resc/edit_f2.png\" WIDTH=18 HEIGHT=15 BORDER=0></A>";
+		}
+	mysql_close($connection);
+?>
+
+
+</TD>
+      <TD NOWRAP BGCOLOR="#FFFFFF">
+         <P><FONT SIZE="-1" FACE="Arial"><B>Fecha</B></FONT></P>
+      </TD>
+      <TD NOWRAP WIDTH=350 BGCOLOR="#FFFFFF">
+         <P><FONT SIZE="-1" FACE="Arial"><B>Nombre</B></FONT></P>
+      </TD>
+      <TD NOWRAP WIDTH=150 BGCOLOR="#FFFFFF">
+         <P><FONT SIZE="-1" FACE="Arial"><B>Consejera</B></FONT></P>
+      </TD>
+      <TD BGCOLOR="#FFFFFF">
+         <P></P>
+      </TD>
+      <TD BGCOLOR="#FFFFFF">
+         <P></P>
+      </TD>
+   </TR><?php echo "$display_block<br>"; ?>
+</TABLE>
+</FORM>
+ </FONT>
+
+<?
+if(($Pagina - 1) > 0) {
+	echo "<a href='?Pagina=".($Pagina-1)."'>< Anterior</a> ";
+	}
+$total_paginas=($total_found/50)+1;
+for ($i=1; $i<=$total_paginas; $i++){ 
+	if ($Pagina == $i) 
+		echo "<b>".$Pagina."</b> "; 
+		else
+			echo "<a href='?Pagina=$i'>$i</a> "; 
+	}
+
+if(($Pagina+1)<=$total_paginas) {
+echo " <a href='?Pagina=".($Pagina+1)."'>Siguiente ></a>";
+}
+?>
+</CENTER>
+</BODY>
+</HTML>

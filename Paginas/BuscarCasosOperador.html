@@ -1,0 +1,169 @@
+<HTML>
+<HEAD>
+</HEAD>
+<BODY TEXT="#5DBC00" BGCOLOR="#FFFFFF">
+<CENTER><FONT FACE="Arial"><B><!--NOEDIT--><? include ("Paginas/CodigoMenu.html"); ?><!--/NOEDIT--><BR>
+<BR>
+</B></FONT>
+
+<FORM ACTION="" METHOD=GET enctype="multipart/form-data">
+<CENTER>
+<FONT FACE="Arial">
+<TABLE BORDER=0 BGCOLOR="#EEEEEE" WIDTH=630>
+<TR>
+<TD BGCOLOR="#FFFFFF">
+<CENTER>
+<BR>
+<FONT FACE="Arial" COLOR="#D80808">
+<TABLE BORDER=0>
+<TR>
+<TD WIDTH=75>
+<CENTER>
+<FONT FACE="Arial" COLOR="#D80808">Clave:</FONT>
+</CENTER>
+</TD>
+<TD NOWRAP>
+<P><FONT FACE="Arial" COLOR="#D80808">
+<INPUT TYPE=hidden NAME=Accion VALUE=RealizarBusqueda>
+<INPUT TYPE=text NAME=IDCaso VALUE="" SIZE=40 MAXLENGTH=255>
+<INPUT TYPE=hidden NAME=Pagina VALUE=1>
+<INPUT TYPE=submit NAME=submit VALUE="Buscar">
+<INPUT TYPE=hidden NAME=AccionSec VALUE=General>
+</FONT></P>
+</TD>
+</TR>
+</TABLE>
+</FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</FONT>
+</CENTER>
+</FORM>
+
+<FORM ACTION="" METHOD=GET enctype="multipart/form-data">
+<CENTER>
+<FONT FACE="Arial">
+<TABLE BORDER=0 BGCOLOR="#EEEEEE" WIDTH=630>
+<TR>
+<TD BGCOLOR="#FFFFFF">
+<CENTER>
+<BR>
+<FONT FACE="Arial" COLOR="#D80808">
+<TABLE BORDER=0>
+<TR>
+<TD WIDTH=75>
+<CENTER>
+<FONT FACE="Arial" COLOR="#D80808">Nombre:</FONT>
+</CENTER>
+</TD>
+<TD NOWRAP>
+<P><FONT FACE="Arial" COLOR="#D80808">
+<INPUT TYPE=hidden NAME=Accion VALUE=RealizarBusqueda>
+<INPUT TYPE=text NAME=Nombre VALUE="" SIZE=40 MAXLENGTH=255>
+<INPUT TYPE=hidden NAME=Pagina VALUE=1>
+<INPUT TYPE=submit NAME=submit VALUE="Buscar">
+<INPUT TYPE=hidden NAME=AccionSec VALUE=General>
+</FONT></P>
+</TD>
+</TR>
+</TABLE>
+</FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</FONT>
+</CENTER>
+</FORM>
+
+<FORM ACTION="" METHOD=GET enctype="multipart/form-data">
+<CENTER>
+<FONT FACE="Arial">
+<TABLE BORDER=0 BGCOLOR="#EEEEEE" WIDTH=630>
+<TR>
+<TD BGCOLOR="#FFFFFF">
+<CENTER>
+<BR>
+<FONT FACE="Arial" COLOR="#D80808">
+<TABLE BORDER=0>
+<TR>
+<TD WIDTH=75>
+<CENTER>
+<FONT FACE="Arial" COLOR="#D80808">Telefono:</FONT>
+</CENTER>
+</TD>
+<TD NOWRAP>
+<P><FONT FACE="Arial" COLOR="#D80808">
+<INPUT TYPE=hidden NAME=Accion VALUE=RealizarBusqueda>
+<INPUT TYPE=text NAME=Telefono VALUE="" SIZE=40 MAXLENGTH=255>
+<INPUT TYPE=hidden NAME=Pagina VALUE=1>
+<INPUT TYPE=submit NAME=submit VALUE="Buscar">
+<INPUT TYPE=hidden NAME=AccionSec VALUE=General>
+</FONT></P>
+</TD>
+</TR>
+</TABLE>
+</FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</FONT>
+</CENTER>
+</FORM>
+
+<FORM ACTION="" METHOD=GET enctype="multipart/form-data">
+   <CENTER><FONT FACE="Arial"><TABLE BORDER=0 BGCOLOR="#EEEEEE" WIDTH=630>
+      <TR>
+         <TD BGCOLOR="#FFFFFF">
+            <CENTER><FONT FACE="Arial"><BR>
+            </FONT><FONT FACE="Arial" COLOR="#D80808"><TABLE BORDER=0>
+               <TR>
+                  <TD NOWRAP>
+<CENTER>
+<FONT FACE="Arial" COLOR="#D80808">Mostrar todos mis casos del: </FONT>
+<FONT SIZE="-1" FACE="Arial" COLOR="#D80808">
+<INPUT TYPE=hidden NAME=Accion VALUE=RealizarBusqueda>
+<INPUT TYPE=hidden NAME=Consejera VALUE="<?$SecureCad=base64_decode($Sesion);list($Nombre, $Password)= split("@", $SecureCad);echo $Nombre;?>">
+<INPUT TYPE=hidden NAME=Pagina VALUE=1>
+
+
+</FONT></CENTER>
+                  </TD>
+                           <TD WIDTH=150>
+<FONT FACE="Arial" COLOR="#D80808">A&ntilde;o<INPUT TYPE=text NAME=Ano VALUE="<? echo date('Y');?>" SIZE=9>
+<FONT FACE="Arial" COLOR="#D80808">Mes   
+						<SELECT NAME=Mes>
+							<OPTION VALUE=1>Enero                          
+							<OPTION VALUE=2>Febrero
+							<OPTION VALUE=3>Marzo
+							<OPTION VALUE=4>Abril
+							<OPTION VALUE=5>Mayo
+							<OPTION VALUE=6>Junio
+							<OPTION VALUE=7>Julio
+							<OPTION VALUE=8>Agosto
+							<OPTION VALUE=9>Septiembre
+							<OPTION VALUE=10>Octubre
+							<OPTION VALUE=11>Noviembre
+							<OPTION VALUE=12>Diciembre
+						</SELECT>
+                           </TD>
+                 <TD NOWRAP>
+<P>
+<INPUT TYPE=submit NAME=submit VALUE="Buscar">
+<INPUT TYPE=hidden NAME=AccionSec VALUE=General>
+</P> 
+                  </TD>
+               </TR>
+            </TABLE>
+             </FONT><FONT FACE="Arial"><BR>
+            </FONT></CENTER>
+         </TD>
+      </TR>
+   </TABLE>
+    </FONT></CENTER>
+</FORM></CENTER>
+</BODY>
+</HTML>

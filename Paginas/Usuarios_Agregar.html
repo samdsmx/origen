@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<CENTER><? include ("Paginas/CodigoMenu.html"); ?>
+ <FORM ACTION="" METHOD=POST>
+   <P><FONT FACE="Verdana" COLOR="#5DBC00"><TABLE BORDER=0 CELLSPACING=3 CELLPADDING=3 WIDTH=450>
+      <TR>
+         <TD WIDTH=154>
+            <P ALIGN=right><FONT FACE="Verdana" COLOR="#5DBC00">Nombre:</FONT></P>
+         </TD>
+         <TD WIDTH="75%">
+            <P><FONT FACE="Verdana" COLOR="#5DBC00"><INPUT TYPE=text NAME=Nombre VALUE="" SIZE=40 MAXLENGTH=255></FONT></P>
+         </TD>
+      </TR>
+      <TR>
+         <TD WIDTH=154>
+            <P ALIGN=right><FONT FACE="Verdana" COLOR="#5DBC00">Password:</FONT></P>
+         </TD>
+         <TD WIDTH="75%">
+            <P><FONT FACE="Verdana" COLOR="#5DBC00"><INPUT TYPE="Password" NAME="Password" VALUE="" SIZE="40" MAXLENGTH="255" autocomplete="off"></FONT></P>
+         </TD>
+      </TR>
+      <TR>
+         <TD WIDTH=154>
+            <P ALIGN=right><FONT FACE="Verdana" COLOR="#5DBC00">NivelSeguridad:</FONT></P>
+         </TD>
+         <TD WIDTH="75%">
+            <P><FONT FACE="Verdana" COLOR="#5DBC00"><SELECT NAME=NivelSeguridad>
+               <OPTION VALUE=1>Consejero
+               <OPTION VALUE=4>Abogado
+               <OPTION VALUE=5>Servicio
+               <OPTION VALUE=2>Supervisor
+               <OPTION VALUE=3>Administrador
+            </SELECT></FONT></P>
+         </TD>
+      </TR>
+	<TR>
+         <TD WIDTH=154>
+            <P ALIGN=right><FONT FACE="Verdana" COLOR="#5DBC00">Acceso via internet:</FONT></P>
+         </TD>
+         <TD WIDTH="75%">
+			<INPUT TYPE=checkbox NAME=internet VALUE=2>
+         </TD>
+      </TR>
+	<TR>
+         <TD WIDTH=154>
+            <P ALIGN=right><FONT FACE="Verdana" COLOR="#5DBC00">Acceso a todos los casos:</FONT></P>
+         </TD>
+         <TD WIDTH="75%">
+		<INPUT TYPE=checkbox NAME=casos VALUE=1>
+         </TD>
+      </TR>
+
+      <TR>
+         <TD WIDTH=154>
+            <P><FONT FACE="Verdana" COLOR="#5DBC00"><INPUT TYPE=hidden NAME=Accion VALUE=AgregaUsuario>&nbsp;</FONT></P>
+         </TD>
+         <TD WIDTH="75%">
+            <P><FONT FACE="Verdana" COLOR="#5DBC00"><INPUT TYPE=submit NAME=submit VALUE="Agregar">&nbsp;<INPUT TYPE=reset VALUE="Limpiar Campos" name=reset></FONT></P>
+         </TD>
+      </TR>
+   </TABLE>
+    <B> </B></FONT>
+</FORM></CENTER>
+</BODY>
+</HTML>

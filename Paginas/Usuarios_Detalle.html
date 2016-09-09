@@ -1,0 +1,107 @@
+<HTML>
+<HEAD>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<CENTER><? include ("Paginas/CodigoMenu.html"); ?>
+ <FORM ACTION="" METHOD=POST enctype="multipart/form-data">
+   <CENTER><FONT FACE="Verdana" COLOR="#5DBC00"><B><BR>
+   </B><TABLE BORDER=0 CELLSPACING=3 CELLPADDING=3 WIDTH=544>
+      <TR>
+         <TD WIDTH="55%">
+          <P ALIGN=right><FONT FACE="Verdana" COLOR="#5DBC00">Nombre:</FONT></P>         </TD>
+         <TD WIDTH="43%">
+            <P><FONT FACE="Verdana" COLOR="#5DBC00">
+            <?
+            	if ($Nombre=="Administrador"){
+            		echo "<INPUT TYPE=hidden NAME=Nombre VALUE='Administrador'>";
+            		echo "$Nombre<BR>";
+            		echo "Advertencia: cambiando el password de administrador tendra que iniciar sesion nuevamente";
+	            	}
+            		else{
+            			echo "<INPUT TYPE=text NAME=Nombre VALUE=\"$Nombre\" SIZE=40 MAXLENGTH=255>";
+            			}
+            ?>
+          </FONT></P>         </TD>
+      </TR>
+      <TR>
+         <TD WIDTH="55%">
+          <P ALIGN=right><FONT FACE="Verdana" COLOR="#5DBC00">Password:</FONT></P>         </TD>
+         <TD WIDTH="43%">
+          <P><FONT FACE="Verdana" COLOR="#5DBC00"><INPUT TYPE="Password" NAME="Password" VALUE="<? echo  $Password?>" autocomplete="off" SIZE=30></FONT></P>         </TD>
+      </TR>
+      <TR>
+         
+        
+            <?
+            
+            	if ($Nombre=="Administrador")
+            	{
+            	
+            		echo "<INPUT TYPE=hidden NAME=NivelSeguridad VALUE='3'>";
+            	
+            	}
+            	else
+            	{
+            		include("Paginas/CodigoListaAdmin.html");
+            	
+            	
+            	}
+            
+            
+            
+	            ?>
+         </TD>
+      </TR>
+
+	<TR>
+         <TD WIDTH="55%" height="33" NOWRAP>
+          <P align="right"><font face="Verdana" color="#5DBC00">Acceso via internet:</font></P>         </TD>
+
+         <TD>
+            <P ALIGN=left>
+			<?
+				if($acceso>1)
+              		echo "<input type=checkbox name=internet value=2 checked>";
+			  		else
+						echo "<input type=checkbox name=internet value=2>";
+			  ?>
+            </P>         </TD>
+         <TD width="2%">&nbsp;</TD>
+      </TR>
+	<TR>
+         <TD WIDTH="55%" height="61" NOWRAP><div align="right"><font face="Verdana" color="#5DBC00">Acceso a todos los casos:</font> </div></TD>
+
+         <TD>
+            <P ALIGN=left>
+			<?
+				if($acceso==1||$acceso==3)
+              		echo "<input type=checkbox name=casos value=1 checked>";
+			  		else
+						echo "<input type=checkbox name=casos value=1>";
+			  ?>
+			
+			
+            </P>         </TD>
+         <TD>&nbsp;</TD>
+      </TR>
+
+      <TR>
+         <TD NOWRAP WIDTH="55%">
+            <P align="right"><font face="Verdana" color="#5DBC00">
+              <input type=submit name=submit2 value="Actualizar">
+          </font></P>         </TD>
+         <TD WIDTH="43%">
+            <P><FONT FACE="Verdana" COLOR="#5DBC00">
+          <INPUT TYPE=reset VALUE="Limpiar campos"><INPUT TYPE=hidden NAME=Accion VALUE=Modificar><INPUT TYPE=hidden NAME=NombreViejo VALUE='<? echo $Nombre; ?>'></FONT></P>         </TD>
+      </TR>
+   </TABLE>
+    <B> </B></FONT><FONT FACE="Arial" COLOR="#FF9900"><B>
+   </B></FONT></CENTER>
+</FORM>
+ <FORM ACTION="" METHOD=GET>
+   <P>	 
+     <input type=submit name=submit value="Borrar Usuario">
+     <INPUT TYPE=hidden NAME=Nombre VALUE="<?php echo $Nombre ?>"><INPUT TYPE=hidden NAME=Accion VALUE=Eliminar>
+</FORM></CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,100 @@
+<html>
+<head>
+</head>
+
+<body bgcolor=white lang=ES link="#657989" vlink="#fb8b00" style='tab-interval:35.4pt' alink="#FB8B00">
+
+<div class=Section1>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center'><b>
+<? include ("Paginas/CodigoMenu.html"); ?>
+<span style='font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<div align=center>
+
+<table border=0 cellpadding=0 width=600 bgcolor="#eeeeee" style='width:450.0pt;
+ mso-cellspacing:1.5pt;background:#EEEEEE;mso-padding-alt:0cm 0cm 0cm 0cm'>
+ <tr>
+  <td style='background:white;padding:.75pt .75pt .75pt .75pt'>
+  <div align=center>
+  <table border=0 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+   mso-cellspacing:0cm;mso-padding-alt:0cm 0cm 0cm 0cm'>
+   <tr>
+    <td style='padding:0cm 0cm 0cm 0cm'>
+    <table border=0 cellpadding=0 width="100%" style='width:100.0%;mso-cellspacing:
+     1.5pt;mso-padding-alt:0cm 0cm 0cm 0cm'>
+     <tr>
+      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <p align=center style='text-align:center'><span style='font-family:Tahoma;
+      color:red'>
+</span><span style='font-family:Arial;color:#D80808'>
+<!--NOEDIT-->
+<?
+$fun=getdate();
+if($fun[hours]>=6&&$fun[hours]<=12)print("BUENOS DIAS, ");
+if($fun[hours]>=13&&$fun[hours]<=18)print("BUENAS TARDES, ");
+if($fun[hours]>=19&&$fun[hours]<=24)print("BUENAS NOCHES, ");
+if($fun[hours]>=0&&$fun[hours]<=5)print("BUENAS NOCHES, ");
+echo strtoupper(RevisaSesion($Sesion, "identidad"));
+?>
+</span></p>
+      </td>
+     </tr>
+    </table>
+    <p class=MsoNormal><span style='color:red'><o:p></o:p></span></p>
+    </td>
+   </tr>
+  </table>
+  <b><span
+  style='font-family:Arial;color:#D80808'>&nbsp;
+  <![endif]>
+    <o:p></o:p>
+  </span></b></div>
+  <div align=center>
+  <table border=0 cellpadding=0 width=630 style='width:472.5pt;mso-cellspacing:
+   1.5pt;mso-padding-alt:0cm 0cm 0cm 0cm'>
+   <tr>
+     <td width="317" style='padding:.75pt .75pt .75pt .75pt'><div align="center"><span class="MsoNormal" style="text-align:center"><a
+    href="?Accion=RegistraOrga2"><span style='font-family:Arial;color:#D80808'>Agregar organismo</span></a></span></div></td>
+    
+    <td width="307" style='padding:.75pt .75pt .75pt .75pt'>
+    <p class=MsoNormal align=center style='text-align:center'><a
+    href="?Accion=RealizarBusqueda"><span style='font-family:Arial;color:#D80808'>Buscar
+    un organismo</span></a></p>    </td>
+   </tr>
+  </table>
+  </div>
+  <p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center'><b><span
+  style='font-family:Arial;color:#D80808'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+  <div align=center>
+  <table border=0 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+   mso-cellspacing:0cm;mso-padding-alt:0cm 0cm 0cm 0cm'>
+   <tr>
+    <td style='padding:0cm 0cm 0cm 0cm'>
+    <p style='text-align:justify'><span style='font-size:7.5pt;font-family:
+    Arial;color:#D80808'>La informaci&oacute;n y asesor&iacute;a que se brinde a trav&eacute;s de la
+    l&iacute;nea de ayuda, incluyendo los casos (nombres y datos personales) es
+    confidencial, por lo que queda estrictamente prohibido el uso de esta
+    informaci&oacute;n al exterior de la instituci&oacute;n, ya sea para an&aacute;lisis o alg&uacute;n
+    otro motivo ajeno a nuestro objetivos.</span></p>
+    </td>
+   </tr>
+  </table>
+  </div>
+  <p class=MsoNormal align=center style='text-align:center'><o:p></o:p></p>
+  </td>
+ </tr>
+</table>
+
+</div>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center'><br
+style='mso-special-character:line-break'>
+<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+<![endif]></p>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<link href="css/cusco.css" rel="stylesheet" type="text/css" />
+<?
+$contexto="ORIGEN";
+?>
+<CENTER>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+   <TR>
+      <TD>
+         <CENTER><IMG SRC="resc/logolinea/<? 
+        if (isset($contexto)){
+        	if ($contexto == 'SEGOB')echo 'LogoSegob.png'; else echo 'LogoMonita.gif';
+        	}
+        	else{
+        		echo 'blanco.png';	
+        	}
+        	?>" style="border:0;"></CENTER>
+      </TD>
+   </TR>
+</TABLE>
+</CENTER>

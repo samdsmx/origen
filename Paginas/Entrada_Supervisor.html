@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+</HEAD>
+<BODY TEXT="#324C62" BGCOLOR="#FFFFFF" LINK="#657989" ALINK="#FB8B00" VLINK="#FB8B00">
+<CENTER><FONT FACE="Arial"><B><!--NOEDIT--><? include ("Paginas/CodigoMenu.html"); ?><!--/NOEDIT--><BR>
+<BR>
+<TABLE BORDER=0 BGCOLOR="#EEEEEE" WIDTH=600>
+   <TR>
+      <TD BGCOLOR="#FFFFFF">
+         <CENTER><FONT FACE="Arial" COLOR="#D80808"><B><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
+            <TR>
+               <TD>
+                  <P><FONT FACE="Arial" COLOR="#D80808"><TABLE BORDER=0 WIDTH="100%">
+                     <TR>
+                        <TD>
+<p align=center style='text-align:center'>
+   <span style='font-family:Arial;color:#D80808'>
+<?
+$fun=getdate();
+if($fun[hours]>=6&&$fun[hours]<=12)print("BUENOS DIAS, ");
+if($fun[hours]>=13&&$fun[hours]<=18)print("BUENAS TARDES, ");
+if($fun[hours]>=19&&$fun[hours]<=24)print("BUENAS NOCHES, ");
+if($fun[hours]>=0&&$fun[hours]<=5)print("BUENAS NOCHES, ");
+echo strtoupper(RevisaSesion($Sesion, "identidad")); 
+?>
+</span></p>
+                        </TD>
+                     </TR>
+                  </TABLE>
+                   </FONT></P>
+               </TD>
+            </TR>
+         </TABLE>
+         <BR>
+         <TABLE BORDER=0 WIDTH=630>
+            <TR>
+               <TD>
+                  <CENTER><A HREF="?Accion=RealizarBusqueda"><FONT FACE="Arial" COLOR="#D80808">Realizar
+                  busquedas de casos</FONT></A></CENTER>
+               </TD>
+            </TR>
+         </TABLE>
+         <BR>
+         <BR>
+         <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
+            <TR>
+               <TD>
+                  <P style="text-align:justify"><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">La
+                  informaci&oacute;n y asesor&iacute;a que se brinde
+                  a trav&eacute;s de la l&iacute;nea de ayuda,
+                  incluyendo los casos (nombres y datos personales)
+                  es confidencial, por lo que queda estrictamente
+                  prohibido el uso de esta informaci&oacute;n al
+                  exterior de la instituci&oacute;n, ya sea para
+                  an&aacute;lisis o alg&uacute;n otro motivo ajeno a
+                  nuestro objetivos.</FONT></P>
+               </TD>
+            </TR>
+         </TABLE>
+         <BR>
+         </B></FONT></CENTER>
+      </TD>
+   </TR>
+</TABLE>
+ </B></FONT><BR>
+<BR>
+<BR>
+</CENTER>
+</BODY>
+</HTML>

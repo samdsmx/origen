@@ -1,0 +1,194 @@
+<HTML>
+<HEAD>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#000000" ALINK="#000000" VLINK="#000000">
+<CENTER><FONT FACE="Arial"><B><!--NOEDIT--><? include ("Paginas/CodigoMenu.html"); ?><!--/NOEDIT--></B></FONT><BR>
+<BR>
+<TABLE BORDER=0 WIDTH=630>
+   <TR>
+      <TD>
+         <P><A HREF="?Accion=RealizarBusqueda"><FONT SIZE="-1" FACE="Arial"><B><IMG SRC="resc/Buscar.gif" WIDTH=30 HEIGHT=25 BORDER=0 ALIGN=bottom></B></FONT></A><FONT SIZE="-1" FACE="Arial"><B>
+         </B></FONT><A HREF="?Accion=RealizarBusqueda"><FONT SIZE="-1" FACE="Arial"><B>Otra Busqueda</B></FONT></A><FONT SIZE="-1" FACE="Arial"><B><BR>
+         </B></FONT></P>
+      </TD>
+      <TD VALIGN=bottom>
+         <P></P>
+      </TD>
+   </TR>
+</TABLE>
+<BR>
+<BR>
+<FONT SIZE="-2" FACE="Arial"><TABLE BORDER=1>
+   <TR>
+      <TD>
+         <P><?echo $criterio?></P>
+      </TD>
+      <TD NOWRAP><P><?echo "$MesL[$Mes]";?></P></TD>
+   </TR>
+<TR><TD>Total de servicios brindados</TD><?echo "<TD>$TotalLlamadasMes</TD>";?></TR>
+<TR><TD>+- por callcenter</TD><?echo "<TD>$TotalLlamadasCMes</TD>";?></TR>
+<TR><TD>+- por internet</TD><?echo "<TD>$TotalLlamadasIMes</TD>";?></TR>
+
+<TR><TD COLSPAN=13><CENTER>Medio de contacto</CENTER></TD></TR>
+<?echo "<TD>$MedioContacto</TD>";?>
+
+<TR><TD>Personas atendidas</TD><?echo "<TD>$TotalPersonas </TD>";?></TR>
+<TR><TD>Total de casos</TD><?echo "<TD>$TotalCasos</TD>";?></TR>
+<TR><TD>Llamadas de seguimiento</TD><?echo "<TD>$TotalSeguimiento</TD>";?></TR>
+<TR><TD COLSPAN=13><CENTER>
+<?
+$Nom="Tipos de llamadas";
+$data="Total de casos,Llamadas de Seguimiento";
+$datag=$TotalCasos.",".$TotalSeguimiento;
+echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
+?>
+
+
+<TR><TD>Casos Resueltos</TD><?echo "<TD>$TotalResueltos</TD>";?></TR>
+<TR><TD>Casos Canalizados</TD><?echo "<TD>$TotalCasosCana</TD>";?></TR>
+<TR><TD>Casos en Seguimiento</TD><?echo "<TD>$TotalCasosSeguimiento</TD>";?></TR>
+<TR><TD>Casos sin Canalizar</TD><?echo "<TD>$TotalCasossinCana</TD>";?></TR>
+<TR><TD COLSPAN=13><CENTER>
+<?
+$Nom="Casos";
+$data="Resueltos,Canalizados,Seguimiento,Sin Canalizar";
+$datag=$TotalResueltos.",".$TotalCasosCana.",".$TotalCasosSeguimiento.",".$TotalCasossinCana;
+echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
+?>
+</CENTER></TD></TR> 
+
+<TR><TD COLSPAN=13><CENTER>Duraci&oacute;n de la llamada (Minutos)</CENTER></TD></TR> 
+<TR><TD>0 a 10</TD><?echo "<TD>$De0a10</TD>";?></TR>
+<TR><TD>10 a 20</TD><?echo "<TD>$De10a20</TD>";?></TR>
+<TR><TD>20 a 30</TD><?echo "<TD>$De20a30</TD>";?></TR>
+<TR><TD>30 a 45</TD><?echo "<TD>$De30a45</TD>";?></TR>
+<TR><TD>Mas De 45</TD><?echo "<TD>$MasDe45</TD>";?></TR>
+<TR><TD COLSPAN=13><CENTER>
+<?
+$Nom="Duracion de llamada (Minutos)";
+$data="0 a 10,10 a 20,20 a 30,30 a 45,Mas de 45";
+$datag=$De0a10.",".$De10a20.",".$De20a30.",".$De30a45.",".$MasDe45;
+echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
+?>
+</CENTER></TD></TR> 
+
+<TR><TD COLSPAN=13><CENTER>Llamadas +45</CENTER></TD></TR>
+<?echo "<TD>$TotalMas45</TD>";?>
+
+<TR><TD COLSPAN=13><CENTER>Religion</CENTER></TD></TR>
+<?echo "<TD>$TotalReligion</TD>";?>
+
+<TR><TD COLSPAN=13><CENTER>Por Día</CENTER></TD></TR>
+<?echo "<TD>$PorDia</TD>";?>
+
+<TR><TD COLSPAN=13><CENTER>Edad (A&ntilde;os)</CENTER></TD></TR> 
+<TR><TD>No Dada</TD><?echo "<TD>$NoDada</TD>";?></TR>
+<TR><TD>1-12</TD><?echo "<TD>$De1a12</TD>";?></TR>
+<TR><TD>13-17</TD><?echo "<TD>$De13a17</TD>";?></TR>
+<TR><TD>18-29</TD><?echo "<TD>$De18a29</TD>";?></TR>
+<TR><TD>30-39</TD><?echo "<TD>$De30a39</TD>";?></TR>
+<TR><TD>40-49</TD><?echo "<TD>$De40a49</TD>";?></TR>
+<TR><TD>50-59</TD><?echo "<TD>$De50a59</TD>";?></TR>
+<TR><TD>60-69</TD><?echo "<TD>$De60a69</TD>";?></TR>
+<TR><TD>Mas De 70</TD><?echo "<TD>$MasDe70</TD>";?></TR>
+<TR><TD COLSPAN=13><CENTER>
+<?
+$Nom="Edad";
+$data="No Dada,1-12,13-17,18-29,30-39,40-49,50-59,60-69,Mas de 70";
+$datag=$NoDada.",".$De1a12.",".$De13a17.",".$De18a29.",".$De30a39.",".$De40a49.",".$De50a59.",".$De60a69.",".$MasDe70;
+echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
+?>
+</CENTER></TD></TR> 
+
+<TR><TD COLSPAN=13><CENTER>Edad por casos</CENTER></TD></TR> 
+<TR><TD>No Dada</TD><?echo "<TD>$CNoDada</TD>";?></TR>
+<TR><TD>1-12</TD><?echo "<TD>$CDe1a12</TD>";?></TR>
+<TR><TD>13-17</TD><?echo "<TD>$CDe13a17</TD>";?></TR>
+<TR><TD>18-29</TD><?echo "<TD>$CDe18a29</TD>";?></TR>
+<TR><TD>30-39</TD><?echo "<TD>$CDe30a39</TD>";?></TR>
+<TR><TD>40-49</TD><?echo "<TD>$CDe40a49</TD>";?></TR>
+<TR><TD>50-59</TD><?echo "<TD>$CDe50a59</TD>";?></TR>
+<TR><TD>60-69</TD><?echo "<TD>$CDe60a69</TD>";?></TR>
+<TR><TD>Mas De 70</TD><?echo "<TD>$CMasDe70</TD>";?></TR>
+<TR><TD COLSPAN=13><CENTER>
+<?
+$Nom="EdadCasos";
+$data="No Dada,1-12,13-17,18-29,30-39,40-49,50-59,60-69,Mas de 70";
+$$datag=$CNoDada.",".$CDe1a12.",".$CDe13a17.",".$CDe18a29.",".$CDe30a39.",".$CDe40a49.",".$CDe50a59.",".$CDe60a69.",".$CMasDe70;
+echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
+?>
+</CENTER></TD></TR> 
+
+
+<TR><TD COLSPAN=13><CENTER>Genero</CENTER></TD></TR> 
+<TR><TD>Femenino</TD><?echo "<TD>$Femenino</TD>";?></TR>
+<TR><TD>Masculino</TD><?echo "<TD>$Masculino</TD>";?></TR>
+<TR><TD COLSPAN=13><CENTER>
+<?
+$Nom="Genero";
+$data="Femenino,Masculino";
+$datag=$Femenino.",".$Masculino;
+echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
+?>
+</CENTER></TD></TR> 
+
+
+<TR><TD COLSPAN=13><CENTER>Ocupaci&oacute;n</CENTER></TD></TR> 
+<?echo "<TD>$TotalOcu</TD>";?>
+
+<TR><TD COLSPAN=13><CENTER>Informaci&oacute;n Prestada</CENTER></TD></TR>
+<TR><TD>Psicologico</TD><?echo "<TD>$psicologico</TD>";?></TR>
+<TR><TD>Legal</TD><?echo "<TD>$legal</TD>";?></TR>
+<TR><TD>Medico</TD><?echo "<TD>$medico</TD>";?></TR>
+<TR><TD>Otros</TD><?echo "<TD>$otros</TD>";?></TR>
+<TR><TD COLSPAN=13><CENTER>
+<?
+$Nom="Informacion prestada";
+$data="Psicologico,Legal,Medico";
+$datag=$psicologico.",".$legal.",".$medico;
+echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
+?>
+</CENTER></TD></TR> 
+
+<TR><TD COLSPAN=13><CENTER>Motivo Especifico Psicologico</CENTER></TD></TR>
+<?echo "<TD>$TotalAyuP</TD>";?>
+<TR><TD COLSPAN=13><CENTER>Motivo Especifico Legal</CENTER></TD></TR>
+<?echo "<TD>$TotalAyuL</TD>";?>
+<TR><TD COLSPAN=13><CENTER>Motivo Especifico Medica</CENTER></TD></TR>
+<?echo "<TD>$TotalAyuM</TD>";?>
+<TR><TD COLSPAN=13><CENTER>Motivo Especifico Otros</CENTER></TD></TR>
+<?echo "<TD>$TotalAyuO</TD>";?>
+<TR><TD COLSPAN=13><CENTER>Tipo de Violencia</CENTER></TD></TR>
+<?echo "<TD>$TotalTViol</TD>";?>
+<TR><TD COLSPAN=13><CENTER>Modalidad de Violencia</CENTER></TD></TR>
+<?echo "<TD>$TotalMViol</TD>";?>
+
+<TR><TD COLSPAN=13><CENTER>Estado</CENTER></TD></TR>
+<?echo "<TD>$TotalEst</TD>";?>
+
+<TR><TD COLSPAN=13><CENTER>Delegacion o Municipio</CENTER></TD></TR>
+<?echo "<TD>$TotalDele</TD>";?>
+
+<TR><TD COLSPAN=13><CENTER>Codigo Postal</CENTER></TD></TR>
+<?echo "<TD>$TotalCP</TD>";?>
+
+<TR><TD COLSPAN=13><CENTER>Como Se Entero</CENTER></TD></TR> 
+<?echo "<TD>$TotalEnteraste</TD>";?>
+
+<TR><TD COLSPAN=13><CENTER>Canalizaciones Legales</CENTER></TD></TR>
+<?echo "<TD>$TotalCanaLegal</TD>";?>
+<TR><TD COLSPAN=13><CENTER>Canalizaciones Legales (Voluntarios)</CENTER></TD></TR>
+<?echo "<TD>$TotalCanaLegalV</TD>";?>
+
+<TR><TD COLSPAN=13><CENTER>Canalizaciones Otros</CENTER></TD></TR>
+<?echo "<TD>$TotalCanaOtro</TD>";?>
+<TR><TD COLSPAN=13><CENTER>Canalizaciones Otros (Voluntarios)</CENTER></TD></TR>
+<?echo "<TD>$TotalCanaOtroV</TD>";?>
+
+</TABLE>
+ </FONT><BR>
+<BR>
+
+</CENTER>
+</BODY>
+</HTML>

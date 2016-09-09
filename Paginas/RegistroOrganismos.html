@@ -1,0 +1,174 @@
+<HEAD>
+   <TITLE>Registro de Organismos</TITLE>
+</HEAD>
+<script>
+function ponTema(){
+if (document.forma.Tema.value != '')
+	document.forma.Tema.value = document.forma.Tema.value + "\n" + document.forma.TemaSel.value ;
+	else
+		document.forma.Tema.value = document.forma.TemaSel.value ;
+}
+</script> 
+<BODY BGCOLOR="#FFFFFF" LINK="#000000" ALINK="#000000" VLINK="#000000">
+<? 
+include("Datos_Comunicacion.php");
+if ($IDOrganismo) {
+	$sql ="select * from organismos where ID = '".rs($IDOrganismo)."'";
+	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+	$total_found = @mysql_num_rows($total_result);
+	while ($row = mysql_fetch_array($total_result)){
+		$IDOrganismo=$row['ID'];
+		$Tema=$row['Tema'];
+		$Institucion=$row['Institucion'];
+		$Estado=$row['Estado'];
+		$Direccion=$row['Direccion'];
+		$Telefono=$row['Telefono'];
+		$Email=$row['Email'];
+		$Objetivo=$row['Objetivo'];	
+		$Referencia=$row['Referencia'];
+		$Observaciones=$row['Observaciones'];
+		$Requisitos=$row['Requisitos'];
+		$HorariosCostos=$row['HorariosCostos'];
+		}
+	}
+ ?>
+<form id="forma" action="" method=POST name=forma>
+  <center>
+    <table width="582" height="424" border="0">
+      <tr>
+        <td colspan="2"><div align="right">
+          <?
+			if (RevisaSesion($Sesion, "verifica") == "5")
+		echo "<BR><A HREF=?Accion=Elimina&IDOrganismo=$IDOrganismo><IMG SRC=\"resc/borrar.gif\" BORDER=0 ALIGN=top>   Eliminar</A>";
+			?>
+        </div></td>
+      </tr>
+      <tr>
+        <td><p><font color="#AAAAAA" size="-1"><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000"><font face="Arial"><b>Instituci&oacute;n</b></font></span></font></p></td>
+        <td width="286"><p><font color="#AAAAAA" size="-1" face="Arial"><b><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000">Tema</span></b></font></p></td>
+      </tr>
+      <tr>
+        <td><p><font color="#AAAAAA" size="-1"><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000">
+            <input name="Institucion" type="text" id="Institucion" size="43" VALUE="<?echo $Institucion;?>" maxlength="255" required="true"/>
+        </span></font></p></td>
+        <td><p> <font color="#AAAAAA" size="-1" face="Arial"><b><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000">
+            <select name="TemaSel" id="TemaSel">
+              <option value="">-
+                <? 
+				$sql ="select Nombre from campos where Tipo = 'Tema' and activo = 1 order by Nombre";
+				$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+				$total_found = @mysql_num_rows($total_result);
+				while ($row = mysql_fetch_array($total_result)){
+					$Nombre=$row['Nombre'];
+					echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre;
+					}
+				?>
+              </option>
+            </select>
+        </span></b></font>
+<A HREF="#" onClick=ponTema()><IMG SRC="resc/edit.png" BORDER=0 ALIGN=top></a>
+</p>
+</td>
+      </tr>
+      <tr>
+        <td><p><font color="#AAAAAA" size="-1" face="Arial"><b><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000">Estado</span></b></font></p></td>
+	  <td rowspan=2>
+          <textarea name="Tema" cols="33" rows="2" wrap="virtual" id="Tema" required="true"><?echo $Tema;?></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td><p><font color="#AAAAAA" size="-1" face="Arial"><b><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000">
+            <select name="Estado" id="Estado">
+              <option value="">-
+                <? 
+			$sql ="select estado from organismos group by estado order by estado Asc";
+			$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+			$total_found = @mysql_num_rows($total_result);
+			while ($row = mysql_fetch_array($total_result)){
+				$Nombre=$row['estado'];
+				if ($Nombre==$Estado)
+					echo '<OPTION SELECTED VALUE="'.$Nombre.'":>'.$Nombre;
+					else
+						echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre;
+				}
+			?>
+              </option>
+            </select>
+        </span></b></font></p>
+
+
+
+</td>
+      </tr>
+      <tr>
+        <td><p><font color="#AAAAAA" size="-1"><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000"><font face="Arial"><b>Direccion</b></font></span></font></p></td>
+        <td><font color="#AAAAAA" size="-1"><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000"><b><font face="Arial">Telefono</font></b></span></font></td>
+      </tr>
+      <tr>
+        <td rowspan="3"><font color="#AAAAAA" size="-1"><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000"><font face="Arial">
+          <textarea name="Direccion" cols="33" rows="4" wrap="virtual" id="Direccion"><?echo $Direccion;?></textarea>
+        </font></span></font></td>
+        <td><font color="#AAAAAA" size="-1"><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000">
+          <input name="Telefono" type="text" id="Telefono" value="<?echo $Telefono;?>" size="43" />
+        </span></font></td>
+      </tr>
+      <tr>
+        <td><p><font color="#AAAAAA" size="-1"><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000"><font face="Arial"><b>Email</b></font></span></font></p></td>
+      </tr>
+      <tr>
+        <td><font color="#AAAAAA" size="-1"><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000">
+          <input name="Email" type="text" id="Email" value="<?echo $Email;?>" size="43" />
+        </span></font></td>
+      </tr>
+      <tr>
+        <td><p><font color="#AAAAAA" size="-1"><font face="Arial"><b>Objetivo</b></font></font></p></td>
+        <td><font color="#AAAAAA" size="-1"><font face="Arial"><b>Referencia</b></font></font></td>
+      </tr>
+      <tr>
+        <td><font color="#FFCC00" size="-1" face="Arial"><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000">
+          <textarea name="Objetivo" cols="33" rows="5" wrap="virtual" id="Objetivo"><?echo $Objetivo;?></textarea>
+        </span></font></td>
+        <td><font color="#FFCC00" size="-1" face="Arial"><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000">
+          <textarea name="Referencia" cols="33" rows="5" wrap="virtual" id="Referencia"><?echo $Referencia;?></textarea>
+        </span></font></td>
+      </tr>
+      <tr>
+        <td><font color="#AAAAAA" size="-1"><font face="Arial"><b>Observaciones</b></font></font></td>
+        <td><font color="#AAAAAA" size="-1"><font face="Arial"><b>Requisitos</b></font></font></td>
+      </tr>
+      <tr>
+        <td><font color="#AAAAAA" size="-1" face="Arial"><b><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000">
+          <textarea name="Observaciones" cols="33" rows="5" wrap="virtual" id="Observaciones"><?echo $Observaciones;?></textarea>
+        </span></b></font></td>
+        <td height="85"><font color="#AAAAAA" size="-1" face="Arial"><b><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000">
+          <textarea name="Requisitos" cols="33" rows="5" wrap="virtual" id="Requisitos"><?echo $Requisitos;?></textarea>
+        </span></b></font></td>
+      </tr>
+	<tr>
+        <td colspan=2><font color="#AAAAAA" size="-1"><font face="Arial"><b>Horarios y Costos</b></font></font></td>
+      </tr>
+      <tr>
+        <td colspan=2><font color="#AAAAAA" size="-1" face="Arial"><b><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000">
+          <textarea name="HorariosCostos" cols="70" rows="5" wrap="virtual" id="HorariosCostos"><?echo $HorariosCostos;?></textarea>
+        </span></b></font></td>
+      </tr>
+    </table>
+    <span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000"><font color="#AAAAAA" size="-1" face="Arial"><b><span bgcolor="#FFFFFF" link="#000000" alink="#000000" vlink="#000000">
+	<INPUT TYPE=hidden NAME=Accion VALUE=GuardaCambios>
+	<?
+	if (RevisaSesion($Sesion, "verifica") == "5")
+		echo "<input type=\"submit\" name=\"submit\" value=\"Guardar\"/>";
+	?>
+    </span></b></font><br />
+    </span>
+  </center>
+</form>
+<span><p>
+</span>
+<p>
+<span BGCOLOR="#FFFFFF" LINK="#000000" ALINK="#000000" VLINK="#000000"><p>
+<CENTER><BR>
+<BR>
+</CENTER>
+</span>
+</BODY>

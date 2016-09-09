@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<CENTER><? include ("Paginas/CodigoMenu.html"); ?>
+ <FORM ACTION="" METHOD=POST>
+   <P><FONT FACE="Verdana" COLOR="#5DBC00"><TABLE BORDER=0 CELLSPACING=3 CELLPADDING=3 WIDTH=450>
+      <TR>
+         <TD WIDTH=154>
+            <P ALIGN=right><FONT FACE="Verdana" COLOR="#5DBC00">Nombre:</FONT></P>
+         </TD>
+         <TD WIDTH="75%">
+            <P><FONT FACE="Verdana" COLOR="#5DBC00"><INPUT TYPE=text NAME=Nombre VALUE="" SIZE=40 MAXLENGTH=255></FONT></P>
+         </TD>
+ <TD WIDTH="75%">
+            <P><FONT FACE="Verdana" COLOR="#5DBC00"><SELECT NAME=Tipo>
+               <OPTION VALUE=AYUDAPSICOLOGICO>Psicologico
+               <OPTION VALUE=AYUDALEGAL>Legal
+               <OPTION VALUE=AYUDAMEDICA>Medico
+               <OPTION VALUE=AYUDAOTROS>Otros
+               <OPTION VALUE=ComoTeEnteraste>Como te Enteraste
+               <OPTION VALUE=Tema>Tema
+               <OPTION VALUE=TipoViolencia>Tipo de Violencia
+               <OPTION VALUE=ModalidadViolencia>Modalidad de Violencia
+               <OPTION VALUE=CanaLegal>Canalizacion Legal
+            </SELECT></FONT></P>
+         </TD>
+      </TR>
+	  <TR>
+	  <TD WIDTH=154>
+            
+         </TD>
+         <TD>
+            <P ALIGN=right><FONT FACE="Verdana" COLOR="#5DBC00">Campo activo:</FONT></P>
+         </TD>
+         <TD WIDTH="75%">
+			<INPUT TYPE=checkbox NAME=activo value=1 checked>
+         </TD>
+      </TR>
+      <TR>
+         <TD WIDTH=154>
+            <P><FONT FACE="Verdana" COLOR="#5DBC00"><INPUT TYPE=hidden NAME=Accion VALUE=AgregaCampo>&nbsp;</FONT></P>
+         </TD>
+         <TD WIDTH="75%">
+            <P><FONT FACE="Verdana" COLOR="#5DBC00"><INPUT TYPE=submit NAME=submit VALUE="Agregar"></FONT></P>
+         </TD>
+      </TR>
+   </TABLE>
+    <B> </B></FONT>
+</FORM></CENTER>
+</BODY>
+</HTML>

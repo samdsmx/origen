@@ -1,0 +1,177 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=us-ascii">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./Entrada_Operador_archivos/filelist.xml">
+<style>
+<!--
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:1627421319 -2147483648 8 0 66047 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:#324C62;}
+a:link, span.MsoHyperlink
+	{color:#657989;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:#FB8B00;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:#324C62;}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:70.85pt 3.0cm 70.85pt 3.0cm;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+
+</head>
+
+<body bgcolor=white lang=ES link="#657989" vlink="#fb8b00" style='tab-interval:
+35.4pt' alink="#FB8B00">
+<SCRIPT language="JavaScript1.2">
+function openwindow()
+{
+	var n=new Date();
+	window.open("?Accion=RegistrarNuevoCaso","mywindow"+n.getTime());
+}
+</SCRIPT>
+<div class=Section1>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center'><b><!--NOEDIT--><? include ("Paginas/CodigoMenu.html"); ?><!--/NOEDIT--><span
+style='font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<div align=center>
+
+<table border=0 cellpadding=0 width=600 bgcolor="#eeeeee" style='width:450.0pt;
+ mso-cellspacing:1.5pt;background:#EEEEEE;mso-padding-alt:0cm 0cm 0cm 0cm'>
+ <tr>
+  <td style='background:white;padding:.75pt .75pt .75pt .75pt'>
+  <div align=center>
+  <table border=0 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+   mso-cellspacing:0cm;mso-padding-alt:0cm 0cm 0cm 0cm'>
+   <tr>
+    <td style='padding:0cm 0cm 0cm 0cm'>
+    <table border=0 cellpadding=0 width="100%" style='width:100.0%;mso-cellspacing:
+     1.5pt;mso-padding-alt:0cm 0cm 0cm 0cm'>
+     <tr>
+      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <p align=center style='text-align:center'><span style='font-family:Tahoma;
+      color:red'>
+</span><span style='font-family:Arial;color:#D80808'>
+<!--NOEDIT-->
+<?
+$fun=getdate();
+if($fun[hours]>=6&&$fun[hours]<=12)print("BUENOS DIAS, ");
+if($fun[hours]>=13&&$fun[hours]<=18)print("BUENAS TARDES, ");
+if($fun[hours]>=19&&$fun[hours]<=24)print("BUENAS NOCHES, ");
+if($fun[hours]>=0&&$fun[hours]<=5)print("BUENAS NOCHES, ");
+?>
+BIENVENIDA(O) A LA LÍNEA <?if ($contexto == 'SEGOB')echo 'HÁBLALO, '; else echo 'DE AYUDA ORIGEN, '; ?>TE ATIENDE
+<? echo strtoupper(RevisaSesion($Sesion, "identidad"))."  ";  ?>
+&iquest;EN QUE TE PUEDO APOYAR?</span></p>
+      </td>
+     </tr>
+    </table>
+    <p class=MsoNormal><span style='color:red'><o:p></o:p></span></p>
+    </td>
+   </tr>
+  </table>
+  </div>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Arial;color:#D80808'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+  <div align=center>
+  <table border=0 cellpadding=0 width=630 style='width:472.5pt;mso-cellspacing:
+   1.5pt;mso-padding-alt:0cm 0cm 0cm 0cm'>
+   <tr>
+    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <p class=MsoNormal align=center style='text-align:center'><a
+    href="javascript: openwindow();"><span style='font-family:Arial;
+    color:#D80808'>Registrar un caso nuevo</span></a></p>
+    </td>
+    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <p class=MsoNormal align=center style='text-align:center'><a
+    href="?Accion=RealizarBusqueda"><span style='font-family:Arial;color:#D80808'>Buscar
+    un caso (seguimiento o consulta)</span></a></p>
+    </td>
+   </tr>
+  </table>
+  </div>
+  <p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center'><b><span
+  style='font-family:Arial;color:#D80808'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+  <div align=center>
+  <table border=0 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+   mso-cellspacing:0cm;mso-padding-alt:0cm 0cm 0cm 0cm'>
+   <tr>
+    <td style='padding:0cm 0cm 0cm 0cm'>
+    <p style='text-align:justify'><span style='font-size:7.5pt;font-family:
+    Arial;color:#D80808'>La informaci&oacute;n y asesor&iacute;a que se brinde a trav&eacute;s de la
+    l&iacute;nea de ayuda, incluyendo los casos (nombres y datos personales) es
+    confidencial, por lo que queda estrictamente prohibido el uso de esta
+    informaci&oacute;n al exterior de la instituci&oacute;n, ya sea para an&aacute;lisis o alg&uacute;n
+    otro motivo ajeno a nuestro objetivos.</span></p>
+    </td>
+   </tr>
+  </table>
+  </div>
+  <p class=MsoNormal align=center style='text-align:center'><o:p></o:p></p>
+  </td>
+ </tr>
+</table>
+<p>
+<? 
+	include("Datos_Comunicacion.php");
+	$y=date('Y');
+	$m=date('m');
+	$c=strtoupper(RevisaSesion($Sesion, "identidad"));
+	$sql ="select * from llamadas where Month(FechaLlamada) = '".rs($m)."' and Year(FechaLlamada) = '".rs($y)."'";
+	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+	$Total = @mysql_num_rows($total_result);
+	$sql ="select * from llamadas where Month(FechaLlamada) = '".rs($m)."' and Consejera = '".rs($c)."' and Year(FechaLlamada) = '".rs($y)."'";
+	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+	$Total2 = @mysql_num_rows($total_result);
+	echo "En este mes se han recibido $Total llamadas y tu has atendido $Total2";
+?>
+
+
+</div>
+
+<IFRAME SRC='vcalendar/index.php' WIDTH=980 HEIGHT=500></IFRAME>
+
+</div>
+
+</body>
+
+</html>

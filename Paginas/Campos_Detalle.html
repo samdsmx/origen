@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<CENTER><? include ("Paginas/CodigoMenu.html"); ?>
+ <FORM ACTION="" METHOD=POST enctype="multipart/form-data">
+   <CENTER><FONT FACE="Verdana" COLOR="#5DBC00"><B><BR>
+   </B><TABLE BORDER=0 CELLSPACING=3 CELLPADDING=3 WIDTH=450>
+      <TR>
+         <TD WIDTH="25%">
+         <P ALIGN=right><FONT FACE="Verdana" COLOR="#5DBC00">Nombre:</FONT></P>
+         </TD>
+         <TD>
+         <P><FONT FACE="Verdana" COLOR="#5DBC00">
+         <?echo "<INPUT TYPE=text NAME=Nombre VALUE=\"$Nombre\" SIZE=40 MAXLENGTH=255>";?>
+            </FONT></P>
+         </TD>
+      </TR>
+      <TR>
+         <TD WIDTH="25%">
+         <P ALIGN=right><FONT FACE="Verdana" COLOR="#5DBC00">Tipo:</FONT></P>
+         </TD>
+         <TD>
+         <P><FONT FACE="Verdana" COLOR="#FF0000"><? echo  $Tipo?>
+	   <INPUT TYPE=hidden NAME=Tipo VALUE="<? echo  $Tipo?>" SIZE=30>
+         </FONT></P>
+         </TD>
+      </TR>
+
+	  <TR>
+         <TD WIDTH=154>
+            <P ALIGN=right><FONT FACE="Verdana" COLOR="#5DBC00">Campo activo:</FONT></P>
+         </TD>
+         <TD WIDTH="75%">
+			<?
+				if($Activo==1)
+              		echo "<input type=checkbox name=activo value=1 checked>";
+			  		else
+						echo "<input type=checkbox name=activo value=1>";
+			  ?>
+			
+			
+         </TD>
+      </TR>
+
+      <TR>
+         <TD NOWRAP WIDTH="75%"></TD>
+         <TD WIDTH="75%">
+<INPUT TYPE=submit NAME=submit VALUE="Actualizar">
+<INPUT TYPE=hidden NAME=Accion VALUE=Modificar2>
+<INPUT TYPE=hidden NAME=NombreViejo VALUE='<? echo $Nombre; ?>'>
+         </TD>
+      </TR>
+   </TABLE>
+</FONT></CENTER>
+</FORM>
+<FORM ACTION="" METHOD=GET>
+   <P><INPUT TYPE=submit NAME=submit VALUE="Borrar Campo"><INPUT TYPE=hidden NAME=Nombre VALUE="<?php echo $Nombre ?>">
+<INPUT TYPE=hidden NAME=Accion VALUE=Eliminar2>
+</FORM></CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,16 @@
+<TD COLSPAN=2 WIDTH="100%" BGCOLOR="#5DBC00">
+            <CENTER><FONT FACE="Verdana" COLOR="#FFFFFF">Seleccionar
+            un nuevo nivel de seguridad</FONT></CENTER>
+         </TD>
+      </TR>
+      <TR>
+         <TD COLSPAN=2 WIDTH="100%">
+         <CENTER>
+	<SELECT NAME=NivelSeguridad>
+               <OPTION VALUE=1 <? if ($NivelSeguridad=="1"){ echo "SELECTED";}?>>Consejero
+               <OPTION VALUE=4 <? if ($NivelSeguridad=="4"){ echo "SELECTED";}?>>Abogado
+               <OPTION VALUE=5 <? if ($NivelSeguridad=="5"){ echo "SELECTED";}?>>Servicio
+               <OPTION VALUE=2 <? if ($NivelSeguridad=="2"){ echo "SELECTED";}?>>Supervisor
+               <OPTION VALUE=3 <? if ($NivelSeguridad=="3"){ echo "SELECTED";}?>>Administrador
+	</SELECT>
+</CENTER>
