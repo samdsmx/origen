@@ -7,9 +7,9 @@
         </a>
         <ul id="boxLogin" class="dropdown-menu">
             <li class="user-header text-center">
-                <i class='fa fa-sign-in fa-5x'></i>
+                <img src="{{ asset('images/LogoMonita.png' ) }}" style="border:0;" />
                 <p>
-                    SIA <small>El Ingreso a esta parte no esta disponible para el público en general.</small>
+                    Callcenter <small>El Ingreso a esta parte no esta disponible para el público en general.</small>
                 </p>
             </li>
             <li class="user-body">

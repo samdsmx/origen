@@ -54,7 +54,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' => 'soporte_cenac@ipn.mx', 'name' => 'Linea de Ayuda Origen'],
+	'from' => ['address' => 'soporte@origenac.org', 'name' => 'Linea de Ayuda Origen'],
 
 	/*
 	|--------------------------------------------------------------------------

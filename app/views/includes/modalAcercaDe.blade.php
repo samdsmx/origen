@@ -26,8 +26,11 @@
                                 <div>Directora de Líneas de Ayuda</div>
                             </div>
                             <div style="background: #fafafa; border-radius: 3px; border: 1px solid #ededed; color: #777; font-size: 13px; padding: 10px; position: relative">
-                                <p>Coordinación y gestión del proyecto Línea de Ayuda Origen, elaboración de nuevas proyectos y propuestas enfocados en atención psicológica.</p>
-                                <a href="mailto:kenriquez@origenac.org"><span class="glyphicon glyphicon-envelope"></span></a>
+                                <p>
+                                    Coordinación y gestión del proyecto Línea de Ayuda Origen, elaboración de nuevas proyectos y propuestas enfocados en atención psicológica.
+                                    <a href="mailto:kenriquez@origenac.org"><span class="glyphicon glyphicon-envelope" style="padding-left:5px;"></span></a>
+                                </p>
+                                
                             </div>
                         </li><li class="col-sm-6 col-md-4" style="text-align:center;">
                             <img src="{{ asset('images/Sergio.jpg' ) }}" style="border-radius:50%;" width="150">
@@ -36,8 +39,10 @@
                                 <div>Autor del sistema</div>
                             </div>
                             <div style="background: #fafafa; border-radius: 3px; border: 1px solid #ededed; color: #777; font-size: 13px; padding: 10px; position: relative">
-                                <p>Diseño, Implementación y mantenimiento del software.</p>
-                                <a href="mailto:samdsmx@hotmail.org"><span class="glyphicon glyphicon-envelope"></span></a>
+                                <p>
+                                    Diseño, Implementación y mantenimiento del software.
+                                    <a href="mailto:samdsmx@hotmail.org"><span class="glyphicon glyphicon-envelope" style="padding-left:5px;"></span></a>
+                                </p>
                             </div>
                         </li>
                     </ul>
