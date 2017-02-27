@@ -1,0 +1,33 @@
+/* 
+    Created on : 25/03/2015, 19:02:20 AM
+    Author     : Luis Garcia
+*/
+
+/*Pie estatico y personalizado*/
+
+.main-footer .contenedor div a {
+    font-size: 14px;
+    color: #6d1a42;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: block;
+    padding-bottom: 8px;
+}
+
+.main-footer .contenedor div a:hover {
+    color: #000000;
+}
+
+.main-footer .contenedor .direccion {
+    text-align: center;
+    line-height: 15px;
+    font-size: 12px;
+    color: #636468;
+}
+
+.main-footer .contenedor .derechos {
+    text-align: center;
+    line-height: 15px; 
+    font-size: 12px; 
+    color: #636468;
+}

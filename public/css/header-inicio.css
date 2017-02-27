@@ -1,0 +1,80 @@
+/* 
+    Created on : 24/03/2015, 16:40:44 AM
+    Author     : Luis Garcia
+*/
+
+/*Cabecera estatica*/
+#staticheader{
+    width:100%;
+    padding-bottom: 0px;
+}
+
+#staticheader 
+.banner {
+    background-color: #ffffff;
+}
+
+.banner 
+.contbanner {
+    min-width: 240px;
+    height: 100px;
+    margin: auto;
+}
+
+fieldset {
+    border: 1px solid #ddd !important;
+    
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+}
+
+fieldset > legend {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+     width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
+
+}
+
+.ipn {
+    position: relative;
+    float: left;
+}
+
+.cenac {
+    position: relative;
+    float: right;
+}
+
+.logoLinea {
+    width: 88px;
+    height: 90px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.cenac .logoLinea a img { 	
+    width: 88px;
+    height: 90px;
+}
+
+@media screen and (max-width: 515px) {
+    .banner .contbanner .ipn {	
+        visibility: hidden;
+    }
+  
+    .banner .contbanner .ipn {
+        position: absolute;
+    }
+}
+
+@media screen and (max-width: 606px) {
+    .banner .contbanner .cenac {
+        position: absolute;
+	visibility: hidden;
+    }
+}

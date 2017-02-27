@@ -1,0 +1,8 @@
+.paginacion{
+    display: -webkit-inline-box;
+    float: right;
+}
+.opcionPaginacion{
+    padding: 5px;
+}
+

@@ -1,0 +1,40 @@
+/*
+  Basicamente es un css para lo que necesitames personalizar
+  llamado listaDragabble porque fue para lo que sirvio en un comiezo
+*/
+
+#sortable { 
+    list-style-type: none; 
+    display: inline-block;
+}
+
+
+.lista_dragable {
+    color: #FFFFFF;
+    font-weight: bold;
+    float: left;
+    border-radius: 10px;
+    list-style: none;
+    text-align: center;
+    background-color: #00BFFF;
+    margin: 5px;
+    display: inline-block;
+    padding: 5px;
+    line-height: 20px;
+}
+
+@media (min-width: 1200px){
+    #errors-display{
+        position: fixed;
+        padding-left: 97%;
+    }
+}
+@media ( max-width: 1023){
+    #errors-display{
+        position: fixed;
+        padding-top: 70%;
+    }
+}
+
+
+

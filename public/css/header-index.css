@@ -1,0 +1,62 @@
+/* 
+    Created on : 24/03/2015, 16:40:44 AM
+    Author     : Luis Garcia
+*/
+
+/*Cabecera estatica*/
+#staticheader{
+    width:100%;
+    padding-bottom: 0px;
+}
+
+#staticheader 
+.banner {
+    background-color: #ffffff;
+}
+
+.banner 
+.contbanner {
+    max-width: 1140px; 
+    min-width: 240px;
+    height: 100px;
+    margin: auto;
+}
+
+.ipn {
+    position: relative;
+    float: left;
+}
+
+.cenac {
+    position: relative;
+    float: right;
+}
+
+.logoLinea {
+    width: 88px;
+    height: 90px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.cenac .logoLinea a img { 	
+    width: 88px;
+    height: 90px;
+}
+
+@media screen and (max-width: 515px) {
+    .banner .contbanner .ipn {	
+        visibility: hidden;
+    }
+  
+    .banner .contbanner .ipn {
+        position: absolute;
+    }
+}
+
+@media screen and (max-width: 606px) {
+    .banner .contbanner .cenac {
+        position: absolute;
+	visibility: hidden;
+    }
+}
