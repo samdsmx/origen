@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta name="description" content="Sistema Callcenter Origen">
         <meta name="author" content="M en C Sergio A. Marquez De Silva">
-        <link rel="shortcut icon" href="{{ asset('images/Loguito.gif' )}}" type="image/x-icon"/>
+        <link rel="shortcut icon" href="{{ asset('images/Loguito.png' )}}" type="image/x-icon"/>
         <title>Callcenter - @yield('titulo')</title>
         @section('recursos')
         {{ HTML::style('css/bootstrap.min.css') }}
