@@ -17,6 +17,13 @@ class siaSistemaModel extends Eloquent{
     protected $primaryKey = 'id_sistema';
     protected $fillable = ['id_fase', 'status'];
     
+    public function __construct($id_fase=null,$status=1){
+        //parent::__construct();
+        $this->id_fase = $id_fase;
+        $this->status = $status;
+        return $this;
+        }
+    
     public function fase(){
         return $this->belongsTo('siaFaseModel', 'id_fase');
     }

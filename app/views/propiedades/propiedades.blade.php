@@ -298,7 +298,7 @@ function actualizaPropiedad(id) {
 
         $('#condicionesAnidadas').on('keypress', function(tecla) {
             if (tecla.charCode == 89 || tecla.charCode == 79 || tecla.charCode == 111 ||
-                    tecla.charCode == 121 || tecla.charCode == 40 || tecla.charCode == 41 || tecla.charCode == 0 || tecla.charCode == 8) {
+                    tecla.charCode == 121 || tecla.charCode == 40 || tecla.charCode == 41 || tecla.charCode == 0 || tecla.charCode == 8 || tecla.charCode == 33) {
             } else {
                 return false;
             }

@@ -996,7 +996,7 @@ Gauge.initialized = false;
     var
         d = document,
         ie = navigator.userAgent.toLocaleLowerCase().indexOf('msie') != -1,
-        fontSrc = "url('" + (window.CANV_GAUGE_FONTS_PATH || 'fonts') + "/digital-7-mono." + (ie ? 'eot' : 'ttf') + "')",
+        fontSrc = "url('../fonts/digital-7-mono." + (ie ? 'eot' : 'ttf') + "')",
         fontFamily = 'Led';
 
     function onFontLoadSuccess() {

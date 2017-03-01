@@ -72,8 +72,7 @@ class GruposController extends BaseController {
             return Response::json(array('errors' => $validator->errors()->toArray()));
         }
         if ($datos["id_grupo"] == "") {
-            $grupo = new siaGrupoModel();
-            $grupo->status = 1;
+            $grupo = new siaGrupoModel(null,1);
             Session::flash('mensaje', 'Grupo agregado');
         } else {
             $grupo = siaGrupoModel::find($datos["id_grupo"]);

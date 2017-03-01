@@ -157,7 +157,7 @@
                     </div>
                     <div class="row text-center" style="margin-bottom: auto;">
                         <div class="col-lg-4 col-lg-offset-8">
-                            <button class="btn btn-success disabled">Las unicas teclas permitidas son: Y , O , ( , ) </button>
+                            <button class="btn btn-success disabled">Las unicas teclas permitidas son: Y, O, (, ), !</button>
                         </div>
                     </div>
                 </fieldset>

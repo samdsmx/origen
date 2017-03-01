@@ -3,7 +3,7 @@
     <li class="dropdown user user-menu">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class='fa fa-sign-in fa-lg'></i>
-            <span class="hidden-xs">Iniciar Sesión</span>
+            Iniciar Sesión
         </a>
         <ul id="boxLogin" class="dropdown-menu">
             <li class="user-header text-center">

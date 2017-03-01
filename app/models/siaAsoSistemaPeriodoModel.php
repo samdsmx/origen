@@ -28,8 +28,16 @@ class siaAsoSistemaPeriodoModel extends Eloquent{
     public function observacion(){
         return $this->belongsTo('siaObservacionModel', 'id_observacion');
     }
-    
-    public function sistemasperiodos(){
-        return $this->hasMany('siaAsoSistemaPeriodoModel', 'id_sistema_periodo');
-    }
+
+    public static function validar($datos) {
+        $rules = array(
+            "baja_razon" => "required|regex:/^[a-zA-ZáéíóúñÁÉÍÓÚÑ][a-zA-ZáéíóúñÁÉÍÓÚÑ0-9\s]*/"
+        );
+        $messages = array(
+            "baja_razon.required" => "La razón es obligatoria.",
+            "baja_razon.regex" => "La razón no es valida."
+        );
+        return Validator::make($datos, $rules, $messages);
+    }    
+
 }

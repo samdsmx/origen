@@ -69,7 +69,7 @@
                 </div>
             </aside>
 
-            <div class="content-wrapper">
+            <div class="content-wrapper" style="padding-bottom: 100px;">
                 <div class="container">
                     <div id="panel-messages-vista" style=" vertical-align: middle; font-size: 20px; text-align: center; font-weight: bolder;" hidden>
                         <div id="mensajeVista" class="alert" style="border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-left-radius: 10px; border-bottom-right-radius:10px;">Test</div>

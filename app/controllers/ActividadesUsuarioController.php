@@ -18,11 +18,12 @@ class ActividadesUsuarioController extends BaseController {
             return Redirect::to('inicio');
         }
         $menu = parent::createMenu();
-        $datos = DB::select('select u.id_usuario, u.usuario, concat(p.nombres,\' \', p.primer_apellido, \' \', p.segundo_apellido) nombre, ur.nombre_ur unidad, u.status, r.id_persona conRespuesta ' .
+        $datos = DB::select('select u.id_usuario, u.usuario, concat(p.nombres,\' \', p.primer_apellido, \' \', p.segundo_apellido) nombre, ur.nombre_ur unidad, u.status, r.id_persona + ps.id_persona conRespuesta  ' .
                         'from sia_usuario u ' .
                         'join sia_persona p on  p.id_persona = u.id_persona ' .
                         'join sia_cat_unidad_responsable ur on ur.id_unidad_responsable = p.id_unidad_responsable ' .
                         'left join sia_respuesta r on r.id_persona = p.id_persona ' .
+                        'left join sia_aso_persona_sistema ps on ps.id_persona = p.id_persona ' .
                         'group by p.id_persona');
         $urs = siaUnidadResponsableModel::where('status', '=', 1)->orderBy('nombre_ur', 'asc')->get();
         return View::make('actividadesusuario.actividadesusuario', array('menu' => $menu, 'usuarios' => $datos, 'urs' => $urs));
@@ -77,7 +78,6 @@ class ActividadesUsuarioController extends BaseController {
         if ($validator->fails()) {
             return Response::json(array('errors' => $validator->errors()->toArray()));
         }
-        
         if (empty($datos["id_user"])) {
             $usuario = new User();
             $persona = new siaPersonaModel();
@@ -87,12 +87,10 @@ class ActividadesUsuarioController extends BaseController {
             $usuario = User::find($datos["id_user"]);
             $persona = siaPersonaModel::find($usuario->id_persona);
         }
-
         $msg = User::validarDuplicidad($datos,$usuario,$persona);
         if (!empty($msg)) {
             return Response::json(array('errors' => $msg));
         }
-
         $persona->primer_apellido = $datos["apaterno"];
         $persona->segundo_apellido = $datos["amaterno"] == null ? '' : $datos["amaterno"];
         $persona->nombres = $datos["nombres"];
@@ -107,6 +105,7 @@ class ActividadesUsuarioController extends BaseController {
             $usuario->password = $datos["pass"];
         }
         $usuario->save();
+        Session::flash('mensaje', 'Usuario actualizado');
     }
 
 }

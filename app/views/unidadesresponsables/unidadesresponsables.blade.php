@@ -39,7 +39,7 @@ Unidades Responsables
                             <button id="abrirModal" type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#modalRegistroUR" ><span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Unidad Responsable</button>
                         </div>
                         <thead>
-                        <th class="alert-info col-md-5">UNIDAD RESPONSABLE4</th>
+                        <th class="alert-info col-md-5">UNIDAD RESPONSABLE</th>
                         <th class="alert-info col-md-3">NOMBRE CORTO</th>
                         <th class="alert-info col-md-2">RESPONSABLE</th>
                         <th class="alert-info col-md-1">ESTATUS</th>

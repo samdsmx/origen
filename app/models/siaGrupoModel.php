@@ -17,6 +17,12 @@ class siaGrupoModel extends Eloquent {
     protected $primaryKey = 'id_grupo';
     protected $fillable = ['grupo', 'status'];
 
+    public function __construct($grupo = null, $status = null) {
+        $this->grupo = $grupo;
+        $this->status = $status;
+        return $this;
+    }
+
     public function propiedades() {
         return $this->hasMany('siaPropiedadModel', 'id_propiedad');
     }

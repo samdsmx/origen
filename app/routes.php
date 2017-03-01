@@ -37,7 +37,7 @@ Route::group(array('before' => 'auth'), function() {
     Route::controller('Periodos', 'PeriodosController');
     Route::controller('Grupos', 'GruposController');
     Route::get('CrearSistemaMio', 'MisSistemasController@crearSistema');
-    Route::get('ActualizaMiSistema/{id}', 'MisSistemasController@actualizarSistema');
+    Route::get('ActualizaMiSistema/{id}/{nombre}', 'MisSistemasController@actualizarSistema');
     Route::get('Ver/{id}', 'ConsultasController@verSistema');
 });
 

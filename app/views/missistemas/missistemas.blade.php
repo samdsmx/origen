@@ -35,47 +35,49 @@ Sistemas
                 <div class="box-body">
                     <table id="tablaSistemas" class="table table-bordered table-striped table-dataTable text-center" width="100%">
                         @if ($dentroPeriodo)
-                            <div class="col-md-6" style="padding: 0px; text-align: center;">
-                                <a href="{{ url('CrearSistemaMio') }}"><button type="button" class="btn btn-success pull-left"><span class="fa fa-plus-circle fa-lg"></span>&nbsp;Reportar Nuevo Sistema</button></a>
-                            </div>
+                        <div class="col-md-6" style="padding: 0px; text-align: center;">
+                            <a href="{{ url('CrearSistemaMio') }}"><button type="button" class="btn btn-success pull-left"><span class="fa fa-plus-circle fa-lg"></span>&nbsp;Reportar Nuevo Sistema</button></a>
+                        </div>
                         @endif
                         <thead>
                         <th class="alert-info col-md-3">NOMBRE DEL SISTEMA</th>
                         <th class="alert-info col-md-2">PERIODO</th>
                         <th class="alert-info col-md-2">FASE</th>
-                        <th class="alert-info col-md-2">OBSERVACION</th>
+                        <th class="alert-info col-md-2">OBSERVACI&Oacute;N</th>
                         <th class="alert-info col-md-2">ACCIONES</th>
                         <th class="alert-info col-md-1">FICHA</th>
                         </thead>
                         <tbody>
                             @foreach($sistemas as $sistema)
                             <tr>
-                                <td style="vertical-align: middle;" title="{{ $sistema->nombreCompleto }}">{{ $sistema->Sistema }}</td>
+                                <td style="vertical-align: middle;" title="{{ $sistema->nombreCompleto }}">{{ ($sistema->Sistema)?$sistema->Sistema:'Sin nombre' }}</td>
                                 <td style="vertical-align: middle;">{{ $sistema->periodo }}</td>
-                                <td style="vertical-align: middle;">{{ $sistema->fase }}</td>
-                                <td style="vertical-align: middle;">{{ $sistema->observacion }}</td>
+                                <td style="vertical-align: middle; {{ (($idPeriodoActual!=$sistema->id_periodo || strpos($sistema->fase,'Incom'))?'color:red;':'') }} ">{{($idPeriodoActual==$sistema->id_periodo)?$sistema->fase:"Pendiente" }}</td>
+                                <td style="vertical-align: middle;">{{ (($sistema->observacion == "Baja")?'<span title="'.$sistema->nota.'">'.$sistema->observacion.'</span>':$sistema->observacion) }}</td>
                                 <td style="vertical-align: middle;">
                                     <div class="btn-group">
-                                        <a href="#" data-toogle="tooltip" data-placement="top" title="Reportar sin Cambios">
-                                            <button data-id="{{ intval( $sistema->id_sistema ) }}" type="button" class="btn btn-success sinCambios">
-                                                <i class="fa fa-refresh"></i>
-                                            </button>
+                                        <a href="{{ url('Ver/'.$sistema->id_sistema) }}" role="button" data-toogle="tooltip" title="Ver" class="btn btn-success">
+                                            <i class="fa fa-eye"></i>
                                         </a>
-                                        <a href="{{ url('ActualizaMiSistema/'.$sistema->id_sistema) }}" data-toogle="tooltip" data-placement="top" title="Actualizar">
-                                            <button type="button" class="btn btn-primary actualizar">
+                                        @if ($dentroPeriodo && $sistema->status)
+                                            <a href="{{ url('ActualizaMiSistema/'.$sistema->id_sistema.'/'.(($sistema->Sistema)?$sistema->Sistema:'Sin nombre')) }}" role="button" data-toogle="tooltip" data-placement="top" title="Actualizar" class="btn btn-primary actualizar">
                                                 <i class="fa fa-level-up"></i>
-                                            </button>
-                                        </a>
-                                        <button type="button" class="btn btn-danger baja" 
-                                                data-toggle="modal" data-target="#modalBaja" 
-                                                data-id="{{$sistema->id_sistema}}" >
-                                            <i class="fa fa-times"></i>
-                                        </button>
+                                            </a>
+                                            @if($sistema->fase != 'Registro Incompleto')
+                                                <button data-id="{{$sistema->id_sistema}}" data-target="#modalBaja" type="button" data-toggle="modal"  data-placement="top" title="Dar de baja" class="btn btn-danger baja">
+                                                <i class="fa fa-times"></i>
+                                                </button>
+                                            @else
+                                                <button type="button" class="btn btn-danger eliminar" data-toggle="modal"  data-target="#modalConfirma" data-id="{{$sistema->id_sistema}}" data-placement="top" title="Eliminar" >
+                                                <i class="fa fa-trash-o"></i>	
+                                                </button>
+                                            @endif
+                                        @endif
                                     </div>
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <a href="{{ url('/Consultas/crearexcel/'.$sistema->id_sistema_periodo) }}"><img width="35" src="{{ asset('images/xls.png' )}}"/></a>
-                                    <a href="{{ url('/Consultas/crearpdf/'.$sistema->id_sistema_periodo) }}"><img width="35" src="{{ asset('images/pdf.png' )}}"/></a>
+                                     <a href="{{ url('/Consultas/crearpdf/'.$sistema->id_sistema_periodo) }}"><img width="35" src="{{ asset('images/pdf.png' )}}"/></a> 
                                 </td>
                             </tr>
                             @endforeach
@@ -86,7 +88,6 @@ Sistemas
         </div>
     </div>
     {{ Form::close() }}
-
 </section>
 @stop
 @section('recursosExtra')
@@ -97,66 +98,31 @@ Sistemas
         responsive: true,
         searching: true,
         paging: true,
-        lengthMenu: [[5, 10, 15, 20], [5, 10, 15, 20]],
+        lengthMenu: [[10, 15, 20], [10, 15, 20]],
         ordering: true,
         info: true,
-        order: [[0, "asc"]],
+        order: [[1, "desc"]],
         language: dataTablesSpanish,
         sDom: 'Rfrt <"col-md-12" <"col-md-4 pull-left"i> <"paginacion" <"opcionPaginacion"l> p > >',
         columnDefs: [{orderable: false, targets: [3, 4]}]
     });
 
-    $('#bajaSistema').submit(function(e) {
-        e.preventDefault();
-        if (confirm("¿Esta usted seguro?") === true) {
-            var data = $(this).serialize();
-            $.ajax({
-                type: 'POST',
-                url: 'MisSistemas/bajasistema',
-                data: data,
-                success: function(response) {
-                    $('div').removeClass('has-error');
-                    if (response.errors) {
-                        $.each(response.errors, function(index, error) {
-                            var campo = $(index);
-                            campo.addClass("has-error");
-                        });
-                    } else {
-                        location.reload();
-                    }
-                },
-                error: function(xhr, status, error) {
-
-                }
-            });
-        } else {
-        }
-    });
-
-    $('.baja').click(function(e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-        $('#id_hidden_sis').val(id);
-    });
-
-    $('.sinCambios').click(function(e) {
-        e.preventDefault();
-        var data = "Id=" + $(this).data("id");
-        $.ajax({
-            type: 'POST',
-            data: data,
-            url: 'Sistemas/reportarsincambios',
-            success: function(response) {
-                if (response.mensaje) {
-                    mostrarMensaje("<p>" + response.mensaje + "</p>");
-                } else {
-                    window.location.href = "Sistemas";
-                }
-            },
-            error: function(xhr, status, error) {
-                alert("error en el servidor");
-            }
+    $("#tablaSistemas").on("click", ".baja", function() {
+        $("#id_hidden_sis").attr("value", $(this).data('id'));
+        $("#bajaSistema").submit(function(e) {
+            e.preventDefault();
+            borrarRegistro($(this).serialize(), 'MisSistemas/bajasistema');
         });
     });
+
+    $("#tablaSistemas").on("click", ".eliminar", function() {
+        $('#modalConfirmaTitle').text("Eliminar sistema");
+        $("#modalConfirmaId").attr("value", $(this).data('id'));
+        $("#formConfirma").submit(function(e) {
+            e.preventDefault();
+            borrarRegistro($(this).serialize(), 'MisSistemas/eliminar');
+        });
+    });
+
 </script>
 @stop

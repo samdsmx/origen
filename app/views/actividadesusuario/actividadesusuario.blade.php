@@ -99,32 +99,6 @@ Usuarios
         });
     });
 
-    $('#registraUsuario').submit(function(e) {
-        e.preventDefault();
-        var data = $(this).serialize();
-        $.ajax({
-            type: 'POST',
-            url: 'ActividadesUsuario/registrausuario',
-            data: data,
-            success: function(response) {
-                $('div').removeClass('has-error');
-                $('input').removeAttr("title");
-                if (response.errors) {
-                    $.each(response.errors, function(index, error) {
-                        $("#d" + index).addClass("has-error");
-                        $("#" + index).attr("title", error);
-                    });
-                } else {
-                    $('html, body').animate({scrollTop: 0}, 'fast');
-                    location.reload();
-                }
-            },
-            error: function(xhr, status, error) {
-                alert("Error en el servidor");
-            }
-        });
-    });
-
     $("#abrirModal").click(function(e) {
         e.preventDefault();
         $('div').removeClass('has-error');
@@ -137,6 +111,8 @@ Usuarios
         $('#curp').removeAttr("value");
         $('#correo').removeAttr("value");
         $('#telefono').removeAttr("value");
+        $("select#ur").find("option").removeAttr("selected");
+        $("select#ur").find("option#-1").attr("selected", true);
         $('#ur').removeAttr("value");
         $('#urName').removeAttr("value");
         $('#usuario').removeAttr("value");

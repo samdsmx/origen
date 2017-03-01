@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => '148.204.14.124',
+			'host'      => (is_numeric($_SERVER['HTTP_HOST'][0])?'148.204.14.124':'localhost'),
 			'database'  => 'sia',
-			'username'  => 'base',
-			'password'  => 'buURe2hLmyjBxVan',
+			'username'  => 'root',
+			'password'  => 'origendb',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

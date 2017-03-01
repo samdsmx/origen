@@ -25,24 +25,17 @@
     <body class="skin-purple layout-top-nav">
         <div class="wrapper">
             <header class="main-header">               
-                <nav class="navbar navbar-static-top">
+                <nav class="navbar">
                     <div class="container-fluid">
                         <div class="navbar-header">
                             @section('tituloSistema')
                                 
                             @show
                         </div>                      
-                        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-                            <ul class="nav navbar-nav">
-                                @section('menu')
-                                    
-                                @show
-                            </ul>
-                        </div>
                         @if(Auth::check())
                         <div class="navbar-custom-menu">
                             <ul class="nav navbar-nav">
-                                @section('opcionesDerechaHome')
+                                @section('opcionesDerecha')
                                   
                                 @show
                             </ul>

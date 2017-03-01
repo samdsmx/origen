@@ -25,12 +25,12 @@
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                 @foreach($grupos as $in => $grupo)
-                    <li id="{{ $grupo["grupo"]."-pest" }}" class="{{ $in == 0 ? "active" : "" }}"><a href="#{{$grupo["grupo"]."-tab"}}" data-toggle="tab"  aria-expanded="true" >{{ $grupo["grupo"] }}</a></li>
+                    <li id="{{ $grupo["grupo"]."-pest" }}" class="{{ $in == 0 ? "active" : "" }}"><a href="#{{str_replace(' ','_',$grupo["grupo"])."-tab"}}" data-toggle="tab"  aria-expanded="true" >{{ $grupo["grupo"] }}</a></li>
                 @endforeach
             </ul>
             <div class="tab-content">
                 @foreach($pantallas as $index => $seccion)
-                    <div class="tab-pane {{ $index == $grupos[0]["grupo"] ? 'active' : '' }}" id="{{$index."-tab"}}">
+                    <div class="tab-pane {{ $index == $grupos[0]["grupo"] ? 'active' : '' }}" id="{{str_replace(' ','_',$index)."-tab"}}">
                         <div class="box-body">
                             <div class="form-group">
                                 <table>
@@ -46,7 +46,6 @@
                     </div>
                 @endforeach
             </div>
-            <!-- /.tab-content -->
         </div>    
         {{ Form::close() }}
     </div>

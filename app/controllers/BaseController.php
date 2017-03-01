@@ -7,15 +7,15 @@ class BaseController extends Controller {
             $this->layout = View::make($this->layout);
         }
     }
-    
-    public static function existe($model, $campo, $val, $org="") {
+
+    public static function existe($model, $campo, $val, $org = "") {
         $mensaje = array();
-        if ($val != $org){
+        if ($val != $org) {
             $registro = $model::where($campo, '=', $val)->first();
             if (!empty($registro)) {
                 $mensaje = array($campo => "Valor existente");
-                }
             }
+        }
         return $mensaje;
     }
 
@@ -33,7 +33,7 @@ class BaseController extends Controller {
             }
             $activo1 = ($inicio == null || $inicio->getTimestamp() <= strtotime("now"));
             $activo2 = ($fin == null || $fin->getTimestamp() >= strtotime("now"));
-            if (!$activo1 || !$activo2) {               
+            if (!$activo1 || !$activo2) {
                 return false;
             }
         } else {
@@ -69,6 +69,68 @@ class BaseController extends Controller {
             }
         }
         return $menu;
+    }
+
+    protected function apuntaPeriodoActual($sistema) {
+        $periodo = siaPeriodoModel::where('status', '=', 1)->orderBy('fecha_inicio', 'desc')->first();
+        $sistemaPeriodoRes = siaAsoSistemaPeriodoModel::where('id_sistema', '=', $sistema->id_sistema)->orderBy('id_periodo', 'desc')->first();
+        if ($sistemaPeriodoRes == null || $sistemaPeriodoRes->id_periodo != $periodo->id_periodo) {
+            $sistemaPeriodo = new siaAsoSistemaPeriodoModel();
+            $sistemaPeriodo->id_sistema = $sistema->id_sistema;
+            $sistemaPeriodo->id_periodo = $periodo->id_periodo;
+            $sistemaPeriodo->status = 1;
+            if ($sistemaPeriodoRes == null) {
+                $sistemaPeriodo->id_observacion = 2;
+                $sistemaPeriodo->nota = "Nuevo Sistema";
+            } else {
+                $sistemaPeriodo->id_observacion = 5;
+                $sistemaPeriodo->nota = "migracion respuestas del periodo anterior";
+                $sistema->id_fase=3;                
+                $sistema->save();
+            }
+            $sistemaPeriodo->save();
+        } else {
+            $sistemaPeriodo = $sistemaPeriodoRes;
+        }
+        if ($sistemaPeriodoRes != null && $sistemaPeriodoRes->id_periodo != $periodo->id_periodo) {
+            $propiedadesContestadas = siaRespuestaModel::where('id_sistema_periodo', '=', $sistemaPeriodoRes->id_sistema_periodo)->get();
+            foreach ($propiedadesContestadas as $propiedadC) {
+                $res = new siaRespuestaModel();
+                $res->id_sistema_periodo = $sistemaPeriodo->id_sistema_periodo;
+                $res->id_propiedad = $propiedadC->id_propiedad;
+                $res->id_persona = Auth::user()->persona->id_persona;
+                $res->valor = $propiedadC->valor;
+                $res->status = 1;
+                $res->save();
+            }
+        }
+        return $sistemaPeriodo;
+    }
+
+    protected function obtieneRespuestas($id_sistema_periodo) {
+        $secciones = array();
+        $propiedadesContestadas = siaRespuestaModel::where('id_sistema_periodo', '=', $id_sistema_periodo)->get();
+        foreach ($propiedadesContestadas as $i => $propiedadC) {
+            $prop = siaPropiedadModel::where('id_propiedad', '=', $propiedadC->id_propiedad)->where('status', '=', 1)->first();
+            $grupo = siaGrupoModel::find($prop->id_grupo);
+            $secciones[$grupo->grupo][$prop->id_propiedad] = self::construyeOracionConRespuesta($i + 1, $prop->id_propiedad, $grupo, $prop->descripcion, $propiedadC->valor, $propiedadC->id_respuesta);
+        }
+        return $secciones;
+    }
+
+    private function construyeOracionConRespuesta($i, $id_pregunta, $grupo, $detalleProp, $res, $id_respuesta) {
+        $arreglo = array();
+        $arreglo["id_respuesta"] = $id_respuesta;
+        $arreglo["res"] = $res;
+        $arreglo["pregunta"] = $detalleProp;
+        $arreglo["num"] = $i;
+        if (strlen($res) < 50) {
+            $in = "<input type='text' name='" . $grupo->grupo . $id_pregunta . "' style='width:100%;' value='" . $res . "' readonly/>";
+        } else {
+            $in = "<textarea style='width:100%;' readonly>" . $res . "</textarea>";
+        }
+        $arreglo["campo"] = $in;
+        return $arreglo;
     }
 
 }

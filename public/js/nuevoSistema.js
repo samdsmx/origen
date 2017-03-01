@@ -39,7 +39,8 @@ function evaluaSentence(subexp) {
                 val = (valAct <= obj_op_val[2]);
                 break;
             case "like":
-                val = (valAct.indexOf(obj_op_val[2].slice(1, -1)) > -1);
+                val = valAct.match(RegExp(obj_op_val[2]));
+                val = (val[0].length > 0);
                 break;
             case "is":
                 val = (valAct.length === 0);
@@ -155,51 +156,9 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
 $(document).ready(function() {
     detectaCambio(null);
     renumera();
-
     $(".chosen-select").chosen({
         no_results_text: "Oops, opción no encontrada!",
         allow_single_deselect: true,
         width: '100%'
     });
 });
-
-$('button[name="guardarSeguir"]').click(function(e) {
-    e.preventDefault();
-    var activo = $('.nav').find('li.active').text();
-    var _id = $('#_id').val();
-    var data = "Tipo=" + activo + "&";
-    data += "Id=" + _id + "&"
-    data += $('[id^=' + activo + ']').serialize();
-    $.ajax({
-        type: "POST",
-        url: "MisSistemas/registraseccion",
-        data: data,
-        success: function(response) {
-            $("[id^='___']").remove();
-            if (response.errors) {
-                $.each(response.errors, function(index, error) {
-                    var campo = $("#" + index);
-                    campo.addClass("has-error");
-                    var datos = '<div class="input-group-addon alert-danger" id="___' + index + '">' + error + '</div>'
-                    campo.parent().append(datos);
-                });
-            } else if (response.mensaje) {
-                mostrarMensaje("<p>" + response.mensaje + "</p>");
-            } else {
-                if (response.siguiente != null) {
-                    var pest = $('.nav-tabs > .active');
-                    pest.find('a').removeAttr("data-toggle");
-                    var sig = $('#' + response.siguiente + "-pest");
-                    sig.find('a').attr('data-toggle', "tab");
-                    sig.find('a').trigger('click');
-                } else if (response.siguiente == null) {
-                    window.location.href = "MisSistemas";
-                }
-            }
-        },
-        error: function(xhr, status, error) {
-            alert("error en el servidor");
-        }
-    });
-});
-

@@ -11,18 +11,26 @@
  *
  * @author Angel
  */
-class siaAsoPersonaSistemaModel extends Eloquent{
-    
+class siaAsoPersonaSistemaModel extends Eloquent {
+
     protected $table = 'sia_aso_persona_sistema';
     protected $primaryKey = 'id_persona_sistema';
     protected $fillable = ['id_sistema', 'id_persona', 'status'];
-    
-    public function sistema(){
+
+    public function __construct($id_sistema = null, $id_persona =null,  $status = 1) {
+        //parent::__construct();
+        $this->id_persona = $id_persona;
+        $this->id_sistema = $id_sistema;
+        $this->status = $status;
+        return $this;
+    }
+
+    public function sistema() {
         return $this->belongsTo('siaSistemaModel', 'id_sistema');
     }
-    
-    public function persona(){
+
+    public function persona() {
         return $this->belongsTo('siaPersonaModel', 'id_persona');
     }
-    
+
 }

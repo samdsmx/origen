@@ -47,9 +47,9 @@
                         <div class='form-group' id="dur">
                             @if ( isset($urs) )
                                 <select class="form-control" name="ur" id="ur">
-                                    <option value="" selected label="-- Unidad Responsable --"/>
+                                    <option id="-1" value="" selected label="-- Unidad Responsable --"/>
                                     @foreach($urs as $ur)
-                                        <option value="{{$ur->id_unidad_responsable}}" label="{{$ur->nombre_ur}}" {{ 1 == 1 ? "selected" : "" }} />
+                                    <option id="ur{{$ur->id_unidad_responsable}}" value="{{$ur->id_unidad_responsable}}" label="{{$ur->nombre_ur}}"/>
                                     @endforeach
                                 </select>
                             @else
@@ -73,7 +73,7 @@
                 </div>
             </div>
             <div class="modal-footer" style="background: #ffffff;">
-                {{ Form::reset('Borrar', array('class' => 'btn btn-primary', 'id' => "resetearUsuario")) }}
+                {{ Form::reset('Limpiar', array('class' => 'btn btn-primary', 'id' => "resetearUsuario")) }}
                 {{ Form::submit('Guardar', array('class' => 'btn btn-success', 'id' => 'btnGuardausuario')) }}
             </div>
         </div>

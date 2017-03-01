@@ -1,6 +1,7 @@
-function mostrarMensaje(mensaje) {
+function mostrarMensaje(mensaje, clase) {
+    clase = (typeof (clase) !== 'undefined' ? clase : "alert-danger");
     $("#mensajeVista").html(mensaje);
-    $("#mensajeVista").addClass("alert-danger");
+    $("#mensajeVista").addClass(clase);
     $("#panel-messages-vista").show();
     $("#panel-messages-vista").fadeTo(3000, 500).slideUp(500, function() {
     $("#panel-messages-vista").hide();
@@ -64,7 +65,10 @@ function updateUser(id) {
             $('#curp').attr("value", usu.curp);
             $('#correo').attr("value", usu.correo);
             $('#telefono').attr("value", usu.telefono);
+            $("select#ur").find("option").removeAttr("selected");
+            $("select#ur").find("option#ur"+usu.id_unidad_responsable).attr("selected", true);
             $('#ur').attr("value", usu.id_unidad_responsable);
+            $('#ur').val(usu.id_unidad_responsable);
             $('#urName').attr("value", usu.nombre_ur);
             $('#usuario').attr("value", usu.usuario);
             $('.modal-title').text("Modificar usuario");
@@ -74,6 +78,34 @@ function updateUser(id) {
         }
     });
 }
+
+$('#registraUsuario').submit(function(e) {
+    e.preventDefault();
+    var data = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        url: "ActividadesUsuario/registrausuario",
+        data: data,
+        success: function(response) {
+            $('div').removeClass('has-error');
+            $('input').removeAttr("title");
+            if (response.errors) {
+                $.each(response.errors, function(index, error) {
+                    $("#d" + index).addClass("has-error");
+                    $("#" + index).attr("title", error);
+                });
+            } else {
+                $('html, body').animate({scrollTop: 0}, 'fast');
+                location.reload();
+            }
+        },
+        error: function(xhr, status, error) {
+            alert("Error en el servidor");
+        }
+    });
+});
+
+
 
 $(document).ready(function() {
     $("#panel-messages").fadeTo(3000, 500).slideUp(500, function() {
@@ -105,3 +137,13 @@ $(document).ready(function() {
     });
 
 });
+
+//Codigo Analytics
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-46971700-3', 'auto');
+  ga('require', 'linkid');
+  ga('send', 'pageview');
+//Fin codigo analytics
