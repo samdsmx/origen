@@ -1,3 +1,8 @@
+$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+});
 function mostrarMensaje(mensaje, clase) {
     clase = (typeof (clase) !== 'undefined' ? clase : "alert-danger");
     $("#mensajeVista").html(mensaje);
