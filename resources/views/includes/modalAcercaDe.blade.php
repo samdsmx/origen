@@ -7,27 +7,27 @@
             </div>
             <div class="modal-body" style="text-align: center; padding-left: 100px; padding-right: 100px;">
                 <h3 style="font-weight:bold">Pro Ayuda a la Mujer Origen, A.C.</h3>
-                <h4>Sistema web y Base de datos de atenci髇, seguimitento y canalizaci髇 de usuarios del servicio de Linea de Ayuda Origen</h4>
+                <h4>Sistema web y Base de datos de atenci贸n, seguimitento y canalizaci贸n de usuarios del servicio de Linea de Ayuda Origen</h4>
                 <div class="row col-sm-12">
                     <ul style="list-style: none; margin: 0 -15px; padding: 3px 0 0 0;">
                         <li class="col-sm-6 col-md-4" style="text-align:center;">
                             <img src="{!! asset('images/Mariana.jpg' ) !!}" style="border-radius:50%;" width="150">
                             <div>
-                                <div style="font-weight: bold;">Mariana Ba駉s Reynaud</div>
+                                <div style="font-weight: bold;">Mariana Ba帽os Reynaud</div>
                                 <div>Presidente</div>
                             </div>
                             <div style="background: #fafafa; border-radius: 3px; border: 1px solid #ededed; color: #777; font-size: 13px; padding: 10px; position: relative">
-                                <p>Fundadora de fundaci髇 origen.</p>
+                                <p>Fundadora de fundaci贸n origen.</p>
                             </div>
                         </li><li class="col-sm-6 col-md-4" style="text-align:center;">
                             <img src="{!! asset('images/Karla.jpg' ) !!}" style="border-radius:50%;" width="150">
                             <div>
-                                <div style="font-weight: bold;">Karla Enr韖uez Valencia</div>
-                                <div>Directora de L韓eas de Ayuda</div>
+                                <div style="font-weight: bold;">Karla Enr铆quez Valencia</div>
+                                <div>Directora de L铆neas de Ayuda</div>
                             </div>
                             <div style="background: #fafafa; border-radius: 3px; border: 1px solid #ededed; color: #777; font-size: 13px; padding: 10px; position: relative">
                                 <p>
-                                    Coordinaci髇 y gesti髇 del proyecto L韓ea de Ayuda Origen, elaboraci髇 de nuevas proyectos y propuestas enfocados en atenci髇 psicol骻ica.
+                                    Coordinaci贸n y gesti贸n del proyecto L铆nea de Ayuda Origen, elaboraci贸n de nuevas proyectos y propuestas enfocados en atenci贸n psicol贸gica.
                                     <a href="mailto:kenriquez@origenac.org"><span class="glyphicon glyphicon-envelope" style="padding-left:5px;"></span></a>
                                 </p>
                                 
@@ -35,12 +35,12 @@
                         </li><li class="col-sm-6 col-md-4" style="text-align:center;">
                             <img src="{!! asset('images/Sergio.jpg' ) !!}" style="border-radius:50%;" width="150">
                             <div>
-                                <div style="font-weight: bold;">Sergio Antonio M醨quez De Silva</div>
+                                <div style="font-weight: bold;">Sergio Antonio M谩rquez De Silva</div>
                                 <div>Autor del sistema</div>
                             </div>
                             <div style="background: #fafafa; border-radius: 3px; border: 1px solid #ededed; color: #777; font-size: 13px; padding: 10px; position: relative">
                                 <p>
-                                    Dise駉, Implementaci髇 y mantenimiento del software.
+                                    Dise帽o, Implementaci贸n y mantenimiento del software.
                                     <a href="mailto:samdsmx@hotmail.org"><span class="glyphicon glyphicon-envelope" style="padding-left:5px;"></span></a>
                                 </p>
                             </div>
