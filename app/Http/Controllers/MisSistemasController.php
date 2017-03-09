@@ -7,7 +7,7 @@ use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator;
 class MisSistemasController extends BaseController {
 
     public function getIndex() {
-        if (!parent::tienePermiso(8)) {
+        if (!parent::tienePermiso('Mis Sistemas')) {
             return Redirect::to('inicio');
         }
         $menu = parent::createMenu();
@@ -22,7 +22,7 @@ class MisSistemasController extends BaseController {
             LEFT JOIN sia_respuesta r on r.id_sistema_periodo = asp.id_sistema_periodo and r.id_propiedad = 6
             LEFT JOIN sia_respuesta r2 on r2.id_sistema_periodo = asp.id_sistema_periodo and r2.id_propiedad = 5
             where T2.id_periodo = p.id_periodo and asp.id_sistema=T2.id_sistema and asp.id_periodo = T2.id_periodo and o.id_observacion = asp.id_observacion');
-        return View::make('missistemas.missistemas', array('menu' => $menu, "sistemas" => $sistemas, "dentroPeriodo" => $dentroDelPeriodo, "idPeriodoActual" => $periodo->id_periodo));
+        return View::make('missistemas.missistemas', array('menu' => $menu, "sistemas" => $sistemas, "dentroPeriodo" => $dentroDelPeriodo, "idPeriodoActual" => $periodo->id_periodo, 'modificarFuera' => parent::tienePermiso('Modificar fuera del periodo')));
     }
 
     public function construyePregunta($i, $prop, $res = "") {

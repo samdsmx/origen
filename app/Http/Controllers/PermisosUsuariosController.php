@@ -7,7 +7,7 @@ use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator;
 class PermisosUsuariosController extends BaseController {
 
     public function getIndex() {
-        if (!parent::tienePermiso(2)) {
+        if (!parent::tienePermiso('Permisos de usuario')) {
             return Redirect::to('inicio');
         }
         $menu = parent::createMenu();

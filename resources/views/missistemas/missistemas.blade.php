@@ -34,10 +34,10 @@ Sistemas
             <div class="box">
                 <div class="box-body">
                     <table id="tablaSistemas" class="table table-bordered table-striped table-dataTable text-center" width="100%">
-                        @if ($dentroPeriodo)
-                        <div class="col-md-6" style="padding: 0px; text-align: center;">
-                            <a href="{!! url('CrearSistemaMio') !!}"><button type="button" class="btn btn-success pull-left"><span class="fa fa-plus-circle fa-lg"></span>&nbsp;Reportar Nuevo Sistema</button></a>
-                        </div>
+                        @if ($dentroPeriodo ||  $modificarFuera )
+                            <div class="col-md-6" style="padding: 0px; text-align: center;">
+                                <a href="{!! url('CrearSistemaMio') !!}"><button type="button" class="btn btn-success pull-left"><span class="fa fa-plus-circle fa-lg"></span>&nbsp;Reportar Nuevo Sistema</button></a>
+                            </div>
                         @endif
                         <thead>
                         <th class="alert-info col-md-3">NOMBRE DEL SISTEMA</th>
@@ -59,7 +59,7 @@ Sistemas
                                         <a href="{!! url('Ver/'.$sistema->id_sistema) !!}" role="button" data-toogle="tooltip" title="Ver" class="btn btn-success">
                                             <i class="fa fa-eye"></i>
                                         </a>
-                                        @if ($dentroPeriodo && $sistema->status)
+                                        @if (($dentroPeriodo ||  $modificarFuera) && $sistema->status ) 
                                             <a href="{!! url('ActualizaMiSistema/'.$sistema->id_sistema.'/'.(($sistema->Sistema)?$sistema->Sistema:'Sin nombre')) !!}" role="button" data-toogle="tooltip" data-placement="top" title="Actualizar" class="btn btn-primary actualizar">
                                                 <i class="fa fa-level-up"></i>
                                             </a>

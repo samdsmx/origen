@@ -7,7 +7,7 @@ use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator;
 class ReportesController extends BaseController {
 
     public function getIndex() {
-        if (!parent::tienePermiso(10)) {
+        if (!parent::tienePermiso('Reportes')) {
             return Redirect::to('inicio');
         }
         $menu = parent::createMenu();

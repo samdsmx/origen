@@ -7,7 +7,7 @@ use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator;
 class ActividadesController extends BaseController {
 
     public function getIndex() {
-        if (!parent::tienePermiso(1)){
+        if (!parent::tienePermiso('Actividades')){
             return Redirect::to('inicio');
             }
         $menu = parent::createMenu();

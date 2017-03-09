@@ -7,7 +7,7 @@ use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator;
 class UnidadesResponsablesController extends BaseController {
 
     public function getIndex() {
-        if (!parent::tienePermiso(6)) {
+        if (!parent::tienePermiso('Unidades Responsables')) {
             return Redirect::to('inicio');
         }
         $menu = parent::createMenu();

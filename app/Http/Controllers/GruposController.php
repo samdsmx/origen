@@ -7,7 +7,7 @@ use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator;
 class GruposController extends BaseController {
 
     public function getIndex() {
-        if (!parent::tienePermiso(3)) {
+        if (!parent::tienePermiso('Secciones del cuestionario')) {
             return Redirect::to('inicio');
         }
         $menu = parent::createMenu();

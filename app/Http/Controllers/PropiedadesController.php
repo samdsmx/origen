@@ -7,7 +7,7 @@ use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator;
 class PropiedadesController extends BaseController {
 
     public function getIndex() {
-        if (!parent::tienePermiso(5)) {
+        if (!parent::tienePermiso('Preguntas del cuestionario')) {
             return Redirect::to('inicio');
         }
         $menu = parent::createMenu();

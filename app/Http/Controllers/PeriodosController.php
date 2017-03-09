@@ -7,7 +7,7 @@ use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator;
 class PeriodosController extends BaseController {
 
     public function getIndex() {
-        if (!parent::tienePermiso(4)) {
+        if (!parent::tienePermiso('Periodos')) {
             return Redirect::to('inicio');
         }
         $menu = parent::createMenu();

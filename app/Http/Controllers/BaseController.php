@@ -24,12 +24,12 @@ class BaseController extends Controller {
         return $mensaje;
     }
 
-    protected function tienePermiso($id) {
+    protected function tienePermiso($nombre) {
         if (Auth::guest()){
             return false;
         }
-        $actividad = siaActividadModel::where('id_actividad', '=', $id)->where('status', '=', 1)->first();
-        $permiso = siaAsoUsuarioActividadModel::where('id_usuario', '=', Auth::user()->id_usuario)->where('id_actividad', '=', $id)->where('status', '=', 1)->first();
+        $actividad = siaActividadModel::where('nombre', '=', $nombre)->where('status', '=', 1)->first();
+        $permiso = siaAsoUsuarioActividadModel::where('id_usuario', '=', Auth::user()->id_usuario)->where('id_actividad', '=', $actividad->id_actividad)->where('status', '=', 1)->first();
         if ($actividad && $permiso) {
             $inicio = null;
             $fin = null;

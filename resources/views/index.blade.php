@@ -11,7 +11,7 @@
 @stop
 @section('cuerpo')
     @include('includes.modalAcercaDe') 
-    @include('includes.modalRecuperaPass') 
+    @include('includes.modalRecuperaPass')
 @stop
 @section ('recursosExtra')
 @stop

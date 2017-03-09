@@ -30,17 +30,19 @@ Bienvenido
     {!!'Usted cuenta con '. sizeof($menu) .' opciones habilitadas.'!!}
     <div style="padding-top: 5%;" >
         @foreach($menu as $opc)
-        <div style="display: inline-block; margin-bottom: 15px;" >
-            <a href="{!! $opc["url"] !!}" style="text-align: center; display: inline-block; vertical-align: top; width: 200px; padding: 30px;">
-                <i class="{!! $opc["icono"] !!} fa-5x" style="color: {!! $opc["color"] !!}"></i>
-                <br/>
-                {!! $opc["texto"] !!}
-                <br/>
-                <font style="color: #888686; font-style: italic;">
-                {!! $opc["desc"] !!}
-                </font>
-            </a>
-        </div>
+            @if ($opc['icono'] !== '')
+                <div style="display: inline-block; margin-bottom: 15px;" >
+                    <a href="{!! $opc['url'] !!}" style="text-align: center; display: inline-block; vertical-align: top; width: 200px; padding: 30px;">
+                        <i class="{!! $opc['icono'] !!} fa-5x" style="color: {!! $opc['color'] !!}"></i>
+                        <br/>
+                        {!! $opc["texto"] !!}
+                        <br/>
+                        <font style="color: #888686; font-style: italic;">
+                        {!! $opc["desc"] !!}
+                        </font>
+                    </a>
+                </div>
+            @endif
         @endforeach
     </div>
 </section>

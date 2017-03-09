@@ -9,7 +9,7 @@ use Excel;
 class ConsultasController extends BaseController {
 
 	public function getIndex() {
-		if (!parent::tienePermiso(9)) {
+		if (!parent::tienePermiso('Consultas')) {
 			return Redirect::to('inicio');
 		}
 		$menu = parent::createMenu();
@@ -39,11 +39,11 @@ class ConsultasController extends BaseController {
             LEFT JOIN sia_respuesta r2 on r2.id_sistema_periodo = asp.id_sistema_periodo and r2.id_propiedad = 5
             where T2.id_periodo = p.id_periodo and asp.id_sistema=T2.id_sistema and asp.id_periodo = T2.id_periodo and o.id_observacion = asp.id_observacion');
 		$posiblesResponsables = DB::select('select * from sia_persona where status = 1');
-		return View::make('sistemas.sistemas', array('menu' => $menu, "dentroPeriodo" => FALSE, 'periodos' => $text_select_periodo, 'ur_selected' => 0, 'opcionesPregunta' => $opcionesPregunta, 'sistemas' => $sistemas, "idPeriodoActual" => $periodo->id_periodo, 'posiblesResponsables' => $posiblesResponsables, 'modificarFuera' => parent::tienePermiso(11)));
+		return View::make('sistemas.sistemas', array('menu' => $menu, "dentroPeriodo" => FALSE, 'periodos' => $text_select_periodo, 'ur_selected' => 0, 'opcionesPregunta' => $opcionesPregunta, 'sistemas' => $sistemas, "idPeriodoActual" => $periodo->id_periodo, 'posiblesResponsables' => $posiblesResponsables, 'modificarFuera' => parent::tienePermiso('Modificar fuera del periodo')));
 	}
 
 	public function getConsultasistemas($tipo, $period, $selectFiltro, $respuestaFiltro, $comparador) {
-		if (!parent::tienePermiso(9)) {
+		if (!parent::tienePermiso('Consultas')) {
 			return Redirect::to('inicio');
 		}
 
