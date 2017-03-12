@@ -24,6 +24,7 @@
         {!! Html::style('css/header-inicio.css') !!}
         {!! Html::style('css/dataTables.bootstrap.css') !!}
         {!! Html::style('css/chosen.css') !!}
+        {!! Html::style('css/select2.css') !!}
         @show
     </head>
     <body class="skin-purple-light sidebar-mini">
@@ -112,6 +113,7 @@
         {!! Html::script('js/bootstrap-spinner.js') !!}
         {!! Html::script('js/chosen.jquery.min.js') !!}
         {!! Html::script('js/d3.v3.min.js') !!}
+        {!! Html::script('js/select2.js') !!}
         @section('recursosExtra')
 
         @show
