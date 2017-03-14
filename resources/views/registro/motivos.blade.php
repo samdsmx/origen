@@ -9,7 +9,7 @@
 
     <div class="form-group col-md-12">
         <label for="estadoCivil">PSICOLOGICO:</label>
-        <select name="estadoCivil" class="form-control" style="width: 100%;">
+        <select name="estadoCivil" multiple class="form-control js-example-basic-multiple">
          <option>-</option>
          <option value="Soltera">Soltera</option>
          <option value="Divorciada">Divorciada</option>
@@ -23,7 +23,7 @@
 
     <div class="form-group col-md-12">
         <label for="estadoCivil">LEGAL:</label>
-        <select name="estadoCivil" class="form-control" style="width: 100%;">
+        <select name="estadoCivil" multiple class="form-control js-example-basic-multiple">
          <option>-</option>
          <option value="Soltera">Soltera</option>
          <option value="Divorciada">Divorciada</option>
@@ -37,7 +37,7 @@
 
     <div class="form-group col-md-12">
         <label for="estadoCivil">MEDICO:</label>
-        <select name="estadoCivil" class="form-control" style="width: 100%;">
+        <select name="estadoCivil" multiple class="form-control js-example-basic-multiple">
          <option>-</option>
          <option value="Soltera">Soltera</option>
          <option value="Divorciada">Divorciada</option>
@@ -51,7 +51,7 @@
 
     <div class="form-group col-md-12">
         <label for="estadoCivil">OTROS:</label>
-        <select name="estadoCivil" class="form-control" style="width: 100%;">
+        <select name="estadoCivil" multiple class="form-control js-example-basic-multiple">
          <option>-</option>
          <option value="Soltera">Soltera</option>
          <option value="Divorciada">Divorciada</option>
@@ -65,7 +65,7 @@
 
     <div class="form-group col-md-12">
         <label for="estadoCivil">TIPO DE VIOLENCIA:</label>
-        <select name="estadoCivil" class="form-control" style="width: 100%;">
+        <select name="estadoCivil" multiple class="form-control js-example-basic-multiple">
          <option>-</option>
          <option value="Soltera">Soltera</option>
          <option value="Divorciada">Divorciada</option>
@@ -79,7 +79,7 @@
 
     <div class="form-group col-md-12">
         <label for="estadoCivil">MODALIDAD DE VIOLENCIA:</label>
-        <select name="estadoCivil" class="form-control" style="width: 100%;">
+        <select name="estadoCivil" multiple class="form-control js-example-basic-multiple">
          <option>-</option>
          <option value="Soltera">Soltera</option>
          <option value="Divorciada">Divorciada</option>
@@ -92,3 +92,4 @@
     </div>
 
 </div>
+

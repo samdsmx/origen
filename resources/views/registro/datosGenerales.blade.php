@@ -6,6 +6,8 @@
 </div>
 
 <div class="box-body">
+
+
     <div class="form-group col-md-6">
       <label for="nombre">Nombre:</label>
       <input type="text" class="form-control" id="nombre" placeholder="Nombre completo">
@@ -30,14 +32,16 @@
         </select>
     </div>
 
-    <div class="form-group col-md-2">
+
+
+    <div class="form-group col-md-3">
       <label for="genero">Genero:</label>
       <div class="radio">
-        <label class="col-sm-6" style="display:table;" >
+        <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
           <input type="radio" name="genero" id="genero1" value="f" checked>
           Femenino
         </label>
-        <label class="col-sm-6">
+        <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
           <input type="radio" name="genero" id="genero2" value="m">
           Masculino
         </label>
@@ -46,7 +50,7 @@
 
     <div class="form-group col-md-5">
         <label for="estudios">Nivel de estudios:</label>
-        <select name="estudios" class="form-control" style="width: 100%;">
+        <select name="estudios" class="form-control">
             <option selected="">-</option>
             <option>Analfabeta</option>
             <option>Primaria</option>
@@ -58,9 +62,9 @@
         </select>
     </div>
 
-    <div class="form-group col-md-5">
+    <div class="form-group col-md-4">
         <label for="religion">Religión:</label>
-        <select name="religion" class="form-control" style="width: 100%;">
+        <select name="religion" class="form-control">
          <option>-</option>
          <option selected="">Catolica</option>
          <option>Musulmana</option>
@@ -74,14 +78,15 @@
         </select>
     </div>
 
-    <div class="form-group col-md-2">
-      <label for="lengua">¿Habla alguna lengua indigena?</label>
+
+    <div class="form-group col-md-3">
+      <label for="lengua" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">¿Habla alguna lengua indigena?</label>
       <div class="radio">
-        <label class="col-sm-6" style="display:table;">
+        <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
           <input type="radio" name="lengua" id="lengua1" value="f" checked>
           No
         </label>
-        <label class="col-sm-6">
+        <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
           <input type="radio" name="lengua" id="lengua2" value="m">
           Si
         </label>
@@ -103,7 +108,7 @@
       </select>
     </div>
 
-    <div class="form-group col-md-5">
+    <div class="form-group col-md-4">
       <label for="VivesCon">Vives con...</label>
       <select name="VivesCon" class="form-control" style="width: 100%;">
             <option>Sola</option>

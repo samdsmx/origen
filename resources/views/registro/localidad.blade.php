@@ -2,11 +2,11 @@
 
                           <h3 class="box-title col-sm-3">Localidad</h3>
                           
-                          <label class="col-sm-3" style="display:table;">
+                          <label class="col-sm-3" style="white-space: nowrap; overflow: hidden;">
                             <input type="radio" name="Localidad" value="Mexico" onchange="changePais('forma');" checked>
                             México
                           </label>
-                          <label class="col-sm-3">
+                          <label class="col-sm-3" style="white-space: nowrap; overflow: hidden;">
                             <input type="radio" name="Localidad" value="Otro" onchange="changePais('forma');">
                             Otro
                           </label>
@@ -19,7 +19,7 @@
 
                         <div class="box-body">
 
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-4" style="white-space: nowrap;">
                                 <label for="edad">Codigo Postal:</label>
                                 <input type="number" class="form-control" placeholder="#####">
                             </div>
@@ -65,7 +65,7 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label for="edad">Delegación o Municipio:</label>
+                                <label for="edad" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Delegación o Municipio:</label>
                                 <input type="text" class="form-control">
                             </div>
 

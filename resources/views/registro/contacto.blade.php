@@ -16,7 +16,7 @@
     </div>
 
     <div class="form-group col-md-5">
-        <label for="edad">Correo Electronico:</label>
+        <label for="edad" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Correo Electronico:</label>
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
             <input type="email" class="form-control" placeholder="Email">
@@ -24,7 +24,7 @@
     </div>
 
     <div class="form-group col-md-3">
-        <label for="medioContacto">Medio de contacto:</label>
+        <label for="medioContacto" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Medio de contacto:</label>
         <select name="medioContacto" class="form-control">
             <option selected="">Teléfono</option>
             <option>Chat</option>

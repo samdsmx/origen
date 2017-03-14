@@ -32,7 +32,7 @@ Bienvenido
     ?>
 
     <div class="row">
-        <div class="col-md-3 col-sm-12 col-xs-12">
+        <div class="col-xs-12 col-sm-12 col-md-3">
             <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="fa fa-line-chart"></i></span>
                 <div class="info-box-content" style="padding: 0px 10px !important;">
@@ -44,7 +44,7 @@ Bienvenido
             </div>
         </div>
 
-        <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="col-xs-12 col-sm-12 col-md-7">
           <div class="info-box">
             <span class="info-box-icon bg-red"><i class="fa fa-exclamation-triangle"></i></span>
             <div class="info-box-content" style="padding: 0px 10px !important;">
@@ -52,6 +52,7 @@ Bienvenido
             </div>
           </div>
         </div>
+
 
       </div>
 

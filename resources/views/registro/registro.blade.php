@@ -21,7 +21,7 @@ Registro
 
 @section('cuerpo')
 <section class="content-header">
-    <h1 style="color:#605ca8;font-weight: bolder;text-align:center;">
+    <h1 style="color:#605ca8;font-weight: bolder;text-align:center;float:inherit;" class="col-md-10 col-sm-12 col-xs-12">
         <?
             $fun=getdate();
             if($fun['hours']>=6&&$fun['hours']<=12)print("BUENOS DIAS, ");
@@ -31,8 +31,9 @@ Registro
         ?>
         BIENVENIDA(O) A LA LÍNEA DE AYUDA ORIGEN, TE ATIENDE 
         {!! Auth::user()->persona->nombres." ".Auth::user()->persona->primer_apellido." ".Auth::user()->persona->segundo_apellido !!} 
-        <br/>¿EN QUE TE PUEDO APOYAR?
+         ¿EN QUE TE PUEDO APOYAR?
     </h1>
+
     <ol class="breadcrumb">
         <li><a href="{!! url('inicio') !!}"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#">Registro</a></li>
@@ -97,8 +98,8 @@ Registro
       </div>
 
       <h4 style="color:#605ca8; font-weight:bold; text-align:center;">
-          Te recuerdo que mi nombre es {!! Auth::user()->persona->nombres." ".Auth::user()->persona->primer_apellido." ".Auth::user()->persona->segundo_apellido !!} no dudes en marcar las veces que sea necesario. Nuestro horario es de Lunes a Viernes de 8:00 A.M. a 8:00 P.M. <br/>
-          Te comento que de acuerdo a la ley de protección de datos personales, puedes conocer nuestro aviso de privacidad a través de nuestra página de internet en www.origenac.org. <br/>
+          Te atendio {!! Auth::user()->persona->nombres." ".Auth::user()->persona->primer_apellido." ".Auth::user()->persona->segundo_apellido !!} no dudes en marcar las veces que sea necesario. Nuestro horario es de Lunes a Viernes de 8:00am a 8:00pm <br/>
+          De acuerdo a la ley de protección de datos personales puedes conocer nuestro aviso de privacidad en nuestra página www.origenac.org<br/>
           Esta es tu línea amiga, gratuita y confidencial. Estamos para escucharte.
       </h4>
 
@@ -119,6 +120,11 @@ Registro
 
   $(document).ready(function() {
     $(".select2").select2();
+    $('.js-example-basic-multiple').select2();
+    $(".js-example-tokenizer").select2({
+      tags: true,
+      tokenSeparators: [',']
+      });
 
     $('input').iCheck({
       checkboxClass: 'icheckbox_flat-orange',
@@ -126,6 +132,7 @@ Registro
     });
 
   });
+
 
     var startDate = new Date();
 
