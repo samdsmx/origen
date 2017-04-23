@@ -4,6 +4,8 @@ https://www.apachefriends.org/download.html   XAMPP + PHP 7
 
 Enable openssl extension
 
+Enable php short open tag
+
 git clone
 
 composer update
