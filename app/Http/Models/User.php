@@ -13,9 +13,9 @@ class User extends Model implements  AuthenticatableContract, CanResetPasswordCo
   
     use Authenticatable, CanResetPassword;
 
-    protected $table = 'sia_usuario';
+    protected $table = 'consejeros';
     protected $primaryKey = 'id_usuario';
-    protected $fillable = ['id_persona', 'usuario', 'password', 'status'];
+    protected $fillable = ['id_persona', 'nombre', 'password', 'status', 'acceso'];
     protected $hidden = ['password', 'remember_token'];
     public $timestamp = true;
     
@@ -34,7 +34,7 @@ class User extends Model implements  AuthenticatableContract, CanResetPasswordCo
     
     public static function validarDuplicidad($datos,$usuario,$persona){
         $msg = array();
-        $msg += BaseController::existe("User", "usuario", $datos["usuario"], $usuario->usuario);
+        $msg += BaseController::existe("User", "nombre", $datos["nombre"], $usuario->nombre);
         $msg += BaseController::existe("siaPersonaModel", "curp", $datos["curp"], $persona->curp);
         $msg += BaseController::existe("siaPersonaModel", "correo", $datos["correo"], $persona->correo);
         return $msg;

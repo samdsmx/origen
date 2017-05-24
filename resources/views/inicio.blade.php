@@ -26,7 +26,7 @@ Bienvenido
     </ol>
 </section>
 <section class="content">
-    <?
+    <?php
     $llamadasMes=0;
     $misAtendidas=0;
     ?>
