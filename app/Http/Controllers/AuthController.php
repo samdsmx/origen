@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
+
 use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator, Mail;
 
 class AuthController extends BaseController {
 
 	public function login() {
-		$user_data = array(
-		    'usuario' => Request::get('usuario'),
+                $user_data = array(
+		    'nombre' => Request::get('usuario'),
 		    'password' => Request::get('password'),
 		    'status' => 1
 		);
 		$user_data1 = array(
-		    'usuario' => Request::get('usuario'),
+		    'nombre' => Request::get('usuario'),
 		    'password' => Request::get('password'),
 		);
-		if (Auth::attempt($user_data)) {
+    		if (Auth::attempt($user_data)) {
 			return Redirect::to('inicio');
 		} else {
 			if (Auth::validate($user_data1)) {
@@ -29,11 +30,11 @@ class AuthController extends BaseController {
 
     public function recover() {
         $correo= Request::get('correo');
-        $usuario = DB::select("select p.*, s.usuario, s.password, s.status from sia_persona p, sia_usuario s where p.correo = '".$correo."' and s.id_persona = p.id_persona");
+        $usuario = DB::select("select p.*, s.nombre, s.password, s.status from sia_persona p, consejeros s where p.correo = '".$correo."' and s.id_persona = p.id_persona");
         if ($usuario != null && $usuario[0]->status == 1){
               $codigo= substr($usuario[0]->password,-6);
-              $data = ['name' => $usuario[0]->nombres, 'lastname' => $usuario[0]->primer_apellido.' '.$usuario[0]->segundo_apellido, 'user' => $usuario[0]->usuario, 'email' => $correo, 'code' => $codigo];
-              $usu = User::where('usuario', '=',  $usuario[0]->usuario)->first();
+              $data = ['name' => $usuario[0]->nombres, 'lastname' => $usuario[0]->primer_apellido.' '.$usuario[0]->segundo_apellido, 'user' => $usuario[0]->nombre, 'email' => $correo, 'code' => $codigo];
+              $usu = User::where('nombre', '=',  $usuario[0]->nombre)->first();
               $usu->password = $codigo;
               $usu->save();
               Mail::send('emails.enviarUsuarioAPeticion', $data, function ($message) use ($correo) {

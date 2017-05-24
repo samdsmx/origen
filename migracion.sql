@@ -18,8 +18,8 @@
 -- Create schema sia
 --
 
-CREATE DATABASE IF NOT EXISTS sia;
-USE sia;
+CREATE DATABASE IF NOT EXISTS origen;
+USE origen;
 
 --
 -- Definition of table `sia_aso_persona_sistema`
