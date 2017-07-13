@@ -22,7 +22,7 @@ Registro
 @section('cuerpo')
 <section class="content-header">
     <h1 style="color:#605ca8;font-weight: bolder;text-align:center;float:inherit;" class="col-md-10 col-sm-12 col-xs-12">
-        <?
+        <?php
             $fun=getdate();
             if($fun['hours']>=6&&$fun['hours']<=12)print("BUENOS DIAS, ");
             if($fun['hours']>=13&&$fun['hours']<=18)print("BUENAS TARDES, ");
@@ -130,6 +130,26 @@ Registro
       checkboxClass: 'icheckbox_flat-orange',
       radioClass: 'iradio_flat-orange'
     });
+    
+    if( $('#Mexico').is(':checked')) {
+        $('#cp').focusout( function() {
+            var cp = $("#cp").val();
+            $.ajax({
+                type: 'POST', 
+                url: 'Registro/buscarcp', 
+                data: {cp: cp},
+                success: function(response){
+                    $("#Estado").val(response["estado"]);
+                    $("#Colonia").val(response["asentamiento"]);
+                    $("#Municipio").val(response["municipio"]);
+                    
+                }, 
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("Error en el servidor");
+                }
+            });
+        }); 
+    }
 
   });
 

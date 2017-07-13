@@ -11,6 +11,46 @@
 |
 */
 
+// Funcion de carga de catalogo estados
+function getEstadosArray(){
+    $estados = [ 
+        'AGUASCALIENTES' => 'AGUASCALIENTES',
+        'BAJA CALIFORNIA' => 'BAJA CALIFORNIA',
+        'BAJA CALIFORNIA SUR' => 'BAJA CALIFORNIA SUR',
+        'COAHUILA' => 'COAHUILA',
+        'CHIHUAHUA' => 'CHIHUAHUA',
+        'COLIMA' => 'COLIMA',
+        'CAMPECHE' => 'CAMPECHE',
+        'CHIAPAS' => 'CHIAPAS',
+        'CIUDAD DE MÉXICO' => 'CIUDAD DE MÉXICO',
+        'DURANGO' => 'DURANGO',
+        'GUERRERO' => 'GUERRERO',
+        'GUANAJUATO' => 'GUANAJUATO',
+        'HIDALGO' => 'HIDALGO',
+        'JALISCO' => 'JALISCO',
+        'MICHOACÁN' => 'MICHOACÁN',
+        'MORELOS' => 'MORELOS',
+        'MÉXICO' => 'MÉXICO',
+        'NAYARIT' => 'NAYARIT',
+        'NUEVO LEÓN' => 'NUEVO LEON',
+        'OAXACA' => 'OAXACA',
+        'PUEBLA' => 'PUEBLA',
+        'QUERÉTARO' => 'QUERÉTARO',
+        'QUINTANA ROO' => 'QUINTANA ROO',
+        'SINALOA' => 'SINALOA',
+        'SAN LUIS POTOSÍ' => 'SAN LUIS POTOSÍ',
+        'SONORA' => 'SONORA',
+        'TAMAULIPAS' => 'TAMAULIPAS',
+        'TABASCO' => 'TABASCO',
+        'TLAXCALA' => 'TLAXCALA',
+        'VERACRUZ' => 'VERACRUZ',
+        'YUCATÁN' => 'YUCATÁN',
+        'ZACATECAS' => 'ZACATECAS',
+        'EXTRANGERO' => 'EXTRANGERO'
+    ];
+    return $estados;
+}
+
 Route::get('/', function () {
     if (Auth::guest()) {
         return \Redirect::to('index');
@@ -36,7 +76,7 @@ Route::group(array('before' => 'auth'), function() {
     Route::controller('MisSistemas', 'App\Http\Controllers\MisSistemasController');
     Route::controller('Periodos', 'App\Http\Controllers\PeriodosController');
     Route::controller('Grupos', 'App\Http\Controllers\GruposController');
-	Route::controller('Registro', 'App\Http\Controllers\RegistroController');
+    Route::controller('Registro', 'App\Http\Controllers\RegistroController');
 
     Route::get('CrearSistemaMio', 'App\Http\Controllers\MisSistemasController@crearSistema');
     Route::get('ActualizaMiSistema/{id}/{nombre}', 'App\Http\Controllers\MisSistemasController@actualizarSistema');
