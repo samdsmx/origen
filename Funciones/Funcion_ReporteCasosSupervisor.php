@@ -288,6 +288,26 @@ if ($Sesion){
 					$CadBusqueda .="AND l.AyudaMedica <> \"\" ";
 					$criterio.="AyudaMedica = Todos";
 					}
+			} 
+		if (count($AyudaNutricional)>0 && $AyudaNutricional[0] <> "-"){
+			if ($AyudaNutricional[0] <> "Todos"){
+				$CadBusqueda .="AND (";
+				$criterio.="AyudaNutricional = ";					
+				for ($i=0;$i<count($AyudaNutricional);$i++){
+					$CadBusqueda .="l.AyudaNutricional LIKE \"%$AyudaNutricional[$i]%\" ";
+					$criterio.="$AyudaNutricional[$i] ";						
+					if ($i<count($AyudaNutricional)-1){
+						$CadBusqueda .="OR ";
+						$criterio.="o ";
+						}
+					}
+				$CadBusqueda .=") ";
+				$criterio.="<br>";
+				}
+				else{
+					$CadBusqueda .="AND l.AyudaNutricional <> \"\" ";
+					$criterio.="AyudaNutricional = Todos";
+					}
 			} 			
 		if (count($AyudaOtros)>0 && $AyudaOtros[0] <> "-"){
 			if ($AyudaOtros[0] <> "Todos"){
@@ -402,6 +422,7 @@ if ($Sesion){
 	$psicologico=CuentaAyuda("AyudaPsicologico");
 	$legal=CuentaAyuda("AyudaLegal");
 	$medico=CuentaAyuda("AyudaMedica");
+	$nutricional=CuentaAyuda("AyudaNutricional");
 	$otros=CuentaAyuda("AyudaOtros");
 	$TipoViol=CuentaAyuda("TipoViolencia");
 	$ModalidadViol=CuentaAyuda("ModalidadViolencia");
@@ -419,6 +440,7 @@ if ($Sesion){
 	$TotalAyuP=MuestraAyuda("AyudaPsicologico");
 	$TotalAyuL=MuestraAyuda("AyudaLegal");
 	$TotalAyuM=MuestraAyuda("AyudaMedica");
+	$TotalAyuN=MuestraAyuda("AyudaNutricional");
 	$TotalAyuO=MuestraAyuda("AyudaOtros");
 	$TotalTViol=MuestraAyuda("TipoViolencia");
 	$TotalMViol=MuestraAyuda("ModalidadViolencia");

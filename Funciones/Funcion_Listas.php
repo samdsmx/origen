@@ -24,6 +24,9 @@ function ListaUsuarios(){
 		if($Tipo == 'AYUDAMEDICA'){
 			$Medicos .= "<OPTION VALUE='$Nombre'>$Nombre".chr(10);
 			}
+		if($Tipo == 'AYUDANUTRICIONAL'){
+			$Nutricional .= "<OPTION VALUE='$Nombre'>$Nombre".chr(10);
+			}
 		if($Tipo == 'AYUDAOTROS'){
 			$Otros .= "<OPTION VALUE='$Nombre'>$Nombre".chr(10);
 			}
