@@ -294,7 +294,7 @@
 	</div>
 
 	<!Por Estado Civil>	
-	<div style="float: left; width:48%;padding:5px;">
+	<div style="float: left; width:48%;padding:5px;clear: both;">
 		<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 			<tr>
 				<td bgcolor="#FFFFFF">
@@ -726,7 +726,7 @@
 					<p>
 					<font face="Arial" color="#D80808">
 						<p><font face="Arial" color="#D80808">
-							<select multiple size=6 name=AyudaMedica[]>
+							<select multiple size=6 style="width: 100%" name=AyudaMedica[]>
 								<option value="-" selected="true">-
 								<option value="Todos">Todos
 									<? 
@@ -785,7 +785,45 @@
 		</table>
 	</div>
 
-	<div style="float: left; width:100%;padding:5px;">
+	<div style="float: left; width:48%;padding:5px;">
+		<!motivo especifico nutricional>
+		<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+			<tr>
+				<td bgcolor="#FFFFFF">
+					<p><font face="Arial" color="#D80808">Nutricional</font></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+					<font face="Arial" color="#D80808">
+						<p><font face="Arial" color="#D80808">
+							<select multiple size=6 name=AyudaNutricional[]>
+								<option value="-" selected="true">-
+								<option value="Todos">Todos
+									<? 
+									include("Datos_Comunicacion.php");
+									$sql ="select * from campos where Tipo = 'AyudaNutricional' ORDER BY Nombre ASC";
+									$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+									$total_found = @mysql_num_rows($total_result);
+									$i=1;
+									while ($row = mysql_fetch_array($total_result)){
+									$Nombre=$row['Nombre'];
+									$Tipo=$row['Tipo'];
+										echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre;
+									$i=$i+1;
+									}
+									?>
+							</select>
+							</font></p>
+					</font>
+					</P>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div style="float: left; width:100%;padding:5px;clear: both;">
 		<!Palabra>
 		<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 			<tr>

@@ -82,7 +82,7 @@ echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&da
 <?echo "<TD>$TotalEstadoCivil</TD>";?>
 
 <TR><TD COLSPAN=13><CENTER>Lengua Indigena</CENTER></TD></TR>
-<?echo "<TD>$LenguaIndigena</TD>";?>
+<?echo "<TD>$TotalLenguaIndigena</TD>";?>
 
 <TR><TD COLSPAN=13><CENTER>Religion</CENTER></TD></TR>
 <?echo "<TD>$TotalReligion</TD>";?>
@@ -154,8 +154,8 @@ echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&da
 <TR><TD COLSPAN=13><CENTER>
 <?
 $Nom="Informacion prestada";
-$data="Psicologico,Legal,Medico";
-$datag=$psicologico.",".$legal.",".$medico;
+$data="Psicologico,Legal,Medico,Nutricional";
+$datag=$psicologico.",".$legal.",".$medico.",".$nutricional;
 echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
 ?>
 </CENTER></TD></TR> 
