@@ -168,6 +168,10 @@ if ($Sesion){
 			$CadBusqueda .="AND c.Sexo = \"$Sexo\" ";
 			$criterio.="Genero = $Sexo<BR>";					
 			}
+		if ($LenguaIndigena <> "-"){
+			$CadBusqueda .="AND c.LenguaIndigena = \"$LenguaIndigena\" ";
+			$criterio.="LenguaIndigena = $LenguaIndigena<BR>";					
+			}
 		if ($MedioContacto <> "-"){
 			$CadBusqueda .="AND c.MedioContacto like \"%$MedioContacto%\" ";
 			$criterio.="MedioContacto = $MedioContacto<BR>";					
@@ -222,6 +226,20 @@ if ($Sesion){
 				$CadBusqueda .="c.EstadoCivil LIKE \"%$EstadoCivil[$i]%\" ";
 				$criterio.="$EstadoCivil[$i] ";
 				if ($i<count($EstadoCivil)-1){
+					$CadBusqueda .="OR ";
+					$criterio.="o ";
+					}
+				}
+			$CadBusqueda .=") ";
+			$criterio.="<br>";
+			}
+		if (count($NivelEstudios)>0 && $NivelEstudios[0] <> "-"){
+			$CadBusqueda .="AND (";
+			$criterio.="NivelEstudios = ";					
+			for ($i=0;$i<count($NivelEstudios);$i++){
+				$CadBusqueda .="c.NivelEstudios LIKE \"%$NivelEstudios[$i]%\" ";
+				$criterio.="$NivelEstudios[$i] ";
+				if ($i<count($NivelEstudios)-1){
 					$CadBusqueda .="OR ";
 					$criterio.="o ";
 					}
@@ -333,7 +351,7 @@ if ($Sesion){
 	include("Datos_Comunicacion.php");
 	$sql ="Drop Table Reporte";
 	$total_result = @mysql_query($sql, $connection);
-	$sql ="Create table Reporte select l.*, c.Edad,c.Religion,c.Sexo,c.Municipio,c.EstadoCivil,c.Estado,c.Ocupacion,c.ComoTeEnteraste,c.MedioContacto,c.CP from Casos c, Llamadas l where c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda";
+	$sql ="Create table Reporte select l.*, c.Edad,c.Religion,c.NivelEstudios,c.Sexo,c.Municipio,c.EstadoCivil,c.LenguaIndigena,c.Estado,c.Ocupacion,c.ComoTeEnteraste,c.MedioContacto,c.CP from Casos c, Llamadas l where c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda";
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	mysql_close($connection);
 
@@ -417,6 +435,15 @@ if ($Sesion){
 
 	//Ocupacion
 	$TotalOcu=Muestra("Ocupacion","");
+
+	//Estado Civil
+	$TotalEstadoCivil=Muestra("EstadoCivil","");
+
+	//Nivel de estudios
+	$TotalNivelEstudios=Muestra("NivelEstudios","");
+
+	//Lengua Indigena
+	$TotalLenguaIndigena=Muestra("LenguaIndigena","");
 
 	//Informacion Prestada
 	$psicologico=CuentaAyuda("AyudaPsicologico");
