@@ -13,41 +13,12 @@
 
 // Funcion de carga de catalogo estados
 function getEstadosArray(){
-    $estados = [ 
-        'AGUASCALIENTES' => 'AGUASCALIENTES',
-        'BAJA CALIFORNIA' => 'BAJA CALIFORNIA',
-        'BAJA CALIFORNIA SUR' => 'BAJA CALIFORNIA SUR',
-        'COAHUILA' => 'COAHUILA',
-        'CHIHUAHUA' => 'CHIHUAHUA',
-        'COLIMA' => 'COLIMA',
-        'CAMPECHE' => 'CAMPECHE',
-        'CHIAPAS' => 'CHIAPAS',
-        'CIUDAD DE MÉXICO' => 'CIUDAD DE MÉXICO',
-        'DURANGO' => 'DURANGO',
-        'GUERRERO' => 'GUERRERO',
-        'GUANAJUATO' => 'GUANAJUATO',
-        'HIDALGO' => 'HIDALGO',
-        'JALISCO' => 'JALISCO',
-        'MICHOACÁN' => 'MICHOACÁN',
-        'MORELOS' => 'MORELOS',
-        'MÉXICO' => 'MÉXICO',
-        'NAYARIT' => 'NAYARIT',
-        'NUEVO LEÓN' => 'NUEVO LEON',
-        'OAXACA' => 'OAXACA',
-        'PUEBLA' => 'PUEBLA',
-        'QUERÉTARO' => 'QUERÉTARO',
-        'QUINTANA ROO' => 'QUINTANA ROO',
-        'SINALOA' => 'SINALOA',
-        'SAN LUIS POTOSÍ' => 'SAN LUIS POTOSÍ',
-        'SONORA' => 'SONORA',
-        'TAMAULIPAS' => 'TAMAULIPAS',
-        'TABASCO' => 'TABASCO',
-        'TLAXCALA' => 'TLAXCALA',
-        'VERACRUZ' => 'VERACRUZ',
-        'YUCATÁN' => 'YUCATÁN',
-        'ZACATECAS' => 'ZACATECAS',
-        'EXTRANGERO' => 'EXTRANGERO'
-    ];
+    $states = DB::table('catalogoCP')->select('estado')->groupby('estado')->get();
+    $estados = array();
+    foreach($states as $estado){
+        $estados[ strtoupper( strtr( $estado->estado, "áéíóú", "ÁÉÍÓÚ" ) ) ] = strtoupper( strtr( $estado->estado, "áéíóú", "ÁÉÍÓÚ" ) );
+    }
+    $estados["EXTRANJERO"] = "EXTRANJERO";
     return $estados;
 }
 

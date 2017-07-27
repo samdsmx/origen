@@ -27,7 +27,7 @@
                             <div class="form-group col-md-8">
                                 <label for="edad">Entidad:</label>
                                 <select name="Estado" id="Estado" class="form-control" onchange="changeEstado('forma');">
-                                    <option value="0"></option>
+                                    <option value="0">-</option>
                                     @foreach ($estados as $k => $v)
                                         <option value="{{$k}}">{{$v}}</option>
                                     @endforeach

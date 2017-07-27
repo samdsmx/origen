@@ -34,6 +34,15 @@ class RegistroController extends BaseController {
         $mv = camposModel::where([['activo', '=', '1'], ['Tipo', '=', 'ModalidadViolencia' ]])->get()->toArray();
         return $mv;
     }
+    function obtenerCTEnteraste(){
+        $cte = camposModel::where([['activo', '=', '1'], ['Tipo', '=', 'ComoTeEnteraste' ]])->get()->toArray();
+        return $cte;
+    }
+    function obtenerCLegal(){
+        $cte = camposModel::where([['activo', '=', '1'], ['Tipo', '=', 'CanaLegal' ]])->get()->toArray();
+        return $cte;
+    }
+    
     public function getIndex() {
         if (!parent::tienePermiso('Registro')){
             return Redirect::to('inicio');
@@ -41,7 +50,7 @@ class RegistroController extends BaseController {
         $menu = parent::createMenu();
         return View::make('registro.registro', array('menu' => $menu, 'estados'=> getEstadosArray(), 'mpsicologicos' => $this->obtenerMPsicologicos(),
             'mlegales' => $this->obtenerMLegal(), 'mMed' => $this->obtenerMMedico(), 'mOtr' => $this->obtenerMOtros(), 'tv' => $this->obtenerTViolencia(),
-            'mv' => $this->obtenerMViolencia()));
+            'mv' => $this->obtenerMViolencia(), 'cte' => $this->obtenerCTEnteraste(), 'cleg' => $this->obtenerCLegal()));
     }    
     
     public function postBuscarcp(){
