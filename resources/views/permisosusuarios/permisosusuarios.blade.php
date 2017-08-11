@@ -37,16 +37,16 @@ Periodos
                     <table id="tablaUsuariosUnidad" class="table table-bordered table-striped table-dataTable text-center" cellspacing="0" width="100%">
                         <thead>
                         <th class="alert-info col-md-1">SELECCIONAR</th>
-                        <th class="alert-info col-md-2">UNIDAD</th>
+                        
                         <th class="alert-info col-md-2">USUARIO</th>
                         <th class="alert-info">PERMISOS</th>
                         </thead>
                         <tbody>
                             @foreach($usuarios as $usu)
                             <tr>
-                                <td style="vertical-align: middle"><input type="checkbox" value="{!! $usu->id_usuario.','.$usu->usuario !!}" name="usuarios[]"/></td>
-                                <td style="vertical-align: middle">{!! $usu->nombre_corto !!}</td>
-                                <td style="vertical-align: middle">{!! $usu->usuario !!}</td>
+                                <td style="vertical-align: middle"><input type="checkbox" value="{!! $usu->id_usuario.','.$usu->nombre !!}" name="usuarios[]"/></td>
+                                
+                                <td style="vertical-align: middle">{!! $usu->nombre !!}</td>
                                 <td style="vertical-align: middle; text-align: left;">
                                     <ul id="grupoMedios{!! $usu->id_usuario !!}">
                                         @foreach(explode(',',$usu->permisos) as $actividad)     

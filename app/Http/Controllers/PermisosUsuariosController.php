@@ -12,7 +12,7 @@ class PermisosUsuariosController extends BaseController {
         }
         $menu = parent::createMenu();
         $usUr = DB::select(
-                        'select u.id_usuario, u.usuario, ur.nombre_corto, '
+                        'select u.id_usuario, u.nombre, '
                         . 'group_concat('
                         . 'CONCAT_WS(\'|\',COALESCE(act.nombre,\'\'),'
                         . 'COALESCE(DATE_FORMAT(aso.fecha_inicio, \'%y-%m-%d\' ),\' --- \' ),'
@@ -20,14 +20,13 @@ class PermisosUsuariosController extends BaseController {
                         . 'COALESCE(aso.id_usuario_actividad,\'\'),COALESCE(act.status,\'\')'
                         . ')'
                         . ' order by act.id_actividad asc ) permisos ' .
-                        'from sia_usuario u ' .
+                        'from consejeros u ' .
                         'join sia_persona p on u.id_persona = p.id_persona ' .
-                        'join sia_cat_unidad_responsable ur on p.id_unidad_responsable = ur.id_unidad_responsable ' .
                         'left join sia_aso_usuario_actividad aso on u.id_usuario = aso.id_usuario and aso.status = 1 ' .
                         'left join sia_cat_actividad act on act.id_actividad = aso.id_actividad ' .
                         'where u.status = 1 ' .
                         'group by u.id_usuario ' .
-                        'order by ur.nombre_corto asc ' 
+                        '' 
         );
         $actividades = siaActividadModel::select('id_actividad', 'nombre', 'descripcion')->where('status', '=', 1)->get();
         self::var_error_log($actividades->toArray());
