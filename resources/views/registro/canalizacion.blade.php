@@ -9,10 +9,12 @@
 
     <div class="form-group col-md-6">
         <label for="edad">Abogado:</label>
-        <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-            <input type="text" class="form-control" placeholder="####-####">
-        </div>
+        <select name="estadoCivil" multiple class="form-control js-example-basic-multiple">
+            <option value="0">-</option>
+            @foreach ($cleg as $v)
+                <option value="{{$v['Nombre']}}">{{$v['Nombre']}}</option>
+            @endforeach
+        </select>
     </div>
 
     <div class="form-group col-md-6">

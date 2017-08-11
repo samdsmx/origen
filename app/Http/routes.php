@@ -11,6 +11,17 @@
 |
 */
 
+// Funcion de carga de catalogo estados
+function getEstadosArray(){
+    $states = DB::table('catalogoCP')->select('estado')->groupby('estado')->get();
+    $estados = array();
+    foreach($states as $estado){
+        $estados[ strtoupper( strtr( $estado->estado, "áéíóú", "ÁÉÍÓÚ" ) ) ] = strtoupper( strtr( $estado->estado, "áéíóú", "ÁÉÍÓÚ" ) );
+    }
+    $estados["EXTRANJERO"] = "EXTRANJERO";
+    return $estados;
+}
+
 Route::get('/', function () {
     if (Auth::guest()) {
         return \Redirect::to('index');
@@ -36,7 +47,7 @@ Route::group(array('before' => 'auth'), function() {
     Route::controller('MisSistemas', 'App\Http\Controllers\MisSistemasController');
     Route::controller('Periodos', 'App\Http\Controllers\PeriodosController');
     Route::controller('Grupos', 'App\Http\Controllers\GruposController');
-	Route::controller('Registro', 'App\Http\Controllers\RegistroController');
+    Route::controller('Registro', 'App\Http\Controllers\RegistroController');
 
     Route::get('CrearSistemaMio', 'App\Http\Controllers\MisSistemasController@crearSistema');
     Route::get('ActualizaMiSistema/{id}/{nombre}', 'App\Http\Controllers\MisSistemasController@actualizarSistema');
