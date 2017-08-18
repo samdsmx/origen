@@ -196,6 +196,26 @@ if ($Sesion){
 					$CadBusqueda .="AND l.AyudaMedica <> \"\" ";
 					$criterio.="AyudaMedica = Todos";
 					}
+			}
+		if (count($AyudaNutricional)>0 && $AyudaNutricional[0] <> "-"){
+			if ($AyudaNutricional[0] <> "Todos"){
+				$CadBusqueda .="AND (";
+				$criterio.="AyudaNutricional = ";					
+				for ($i=0;$i<count($AyudaNutricional);$i++){
+					$CadBusqueda .="l.AyudaNutricional LIKE '%".rs($AyudaNutricional[$i])."%' ";
+					$criterio.="$AyudaNutricional[$i] ";						
+					if ($i<count($AyudaNutricional)-1){
+						$CadBusqueda .="OR ";
+						$criterio.="o ";
+						}
+					}
+				$CadBusqueda .=") ";
+				$criterio.="<br>";
+				}
+				else{
+					$CadBusqueda .="AND l.AyudaNutricional <> \"\" ";
+					$criterio.="AyudaNutricional = Todos";
+					}
 			} 			
 		if (count($AyudaOtros)>0 && $AyudaOtros[0] <> "-"){
 			if ($AyudaOtros[0] <> "Todos"){

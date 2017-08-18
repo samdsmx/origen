@@ -24,6 +24,7 @@ if ($Sesion){
 	$AyudaPsicologico=$row['AyudaPsicologico'];
 	$AyudaLegal=$row['AyudaLegal'];
 	$AyudaMedica=$row['AyudaMedica'];
+	$AyudaNutricional=$row['AyudaNutricional'];
 	$AyudaOtros=$row['AyudaOtros'];
 	$TipoViolencia=$row['TipoViolencia'];
 	$ModalidadViolencia=$row['ModalidadViolencia'];
@@ -42,6 +43,7 @@ if ($Sesion){
 		$AyudaPsicologico = SacaElementos($AyudaPsicologico);
 		$AyudaLegal = SacaElementos($AyudaLegal);
 		$AyudaMedica = SacaElementos($AyudaMedica);
+		$AyudaNutricional = SacaElementos($AyudaNutricional);
 		$AyudaOtros = SacaElementos($AyudaOtros);
 		$TipoViolencia = SacaElementos($TipoViolencia);
 		$ModalidadViolencia = SacaElementos($ModalidadViolencia);
