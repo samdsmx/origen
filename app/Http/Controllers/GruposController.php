@@ -11,11 +11,9 @@ class GruposController extends BaseController {
             return Redirect::to('inicio');
         }
         $menu = parent::createMenu();
-        $grupos = DB::select(
-                        'select c.* ' .
-                        'from campos c ' .
-                        'order by c.Tipo ASC');
-        return View::make('grupos.grupos', array('menu' => $menu, 'grupos' => $grupos));
+        $tipos = DB::select('select Tipo from campos group by Tipo order by Tipo ASC');
+        $grupos = DB::select("select c.* from campos c where c.Tipo = '" . $tipos[0]->Tipo . "' order by c.Tipo ASC");
+        return View::make('grupos.grupos', array('menu' => $menu, 'grupos' => $grupos, 'tipos' => $tipos));
     }
 
     public function postBuscar() {

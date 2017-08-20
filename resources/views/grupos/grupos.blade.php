@@ -34,10 +34,22 @@ Grupos
         <div class="col-md-12">
             <div class="box">
                 <div class="box-body">
+                   
                     <table id="tablaGrupos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
                         <div class="col-md-6" style="padding: 0px; text-align: center;">
-                            <button id="abrirModal" type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#modalRegistroGrupo" ><span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Campo</button>
+                            <button id="abrirModal" type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modalRegistroGrupo" ><span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Campo</button>
+                            <div class="col-md-1"><label for="tipo">Tipo:</label></div>
+                            <div class="col-md-3">
+                                <select name="tipo" class="form-control">
+                                    @foreach($tipos as $tipo)
+                                        <option value="{!! $tipo->Tipo !!}">{!! $tipo->Tipo !!}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
+                    
+    
+
                         <thead>
                         <th class="alert-info col-md-5">TIPO</th>
                         <th class="alert-info col-md-5">DESCRIPCION</th>
