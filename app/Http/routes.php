@@ -40,11 +40,9 @@ Route::group(array('before' => 'auth'), function() {
     Route::controller('Actividades', 'App\Http\Controllers\ActividadesController');
     Route::controller('PermisosUsuarios', 'App\Http\Controllers\PermisosUsuariosController');
     Route::controller('ActividadesUsuario', 'App\Http\Controllers\ActividadesUsuarioController');
-    Route::controller('Propiedades', 'App\Http\Controllers\PropiedadesController');
     Route::controller('UnidadesResponsables', 'App\Http\Controllers\UnidadesResponsablesController');
     Route::controller('Consultas', 'App\Http\Controllers\ConsultasController');
     Route::controller('Reportes', 'App\Http\Controllers\ReportesController');
-    Route::controller('MisSistemas', 'App\Http\Controllers\MisSistemasController');
     Route::controller('Periodos', 'App\Http\Controllers\PeriodosController');
     Route::controller('Grupos', 'App\Http\Controllers\GruposController');
     Route::controller('Registro', 'App\Http\Controllers\RegistroController');
