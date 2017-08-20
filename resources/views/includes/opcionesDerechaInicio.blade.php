@@ -1,6 +1,7 @@
 <li class="dropdown user user-menu">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <span>{!! Auth::user()->usuario !!}</span>
+        <span>{!! Auth::user()->nombre !!} &nbsp; </span>
+        <i class='fa fa-user-circle fa-lg'></i>
     </a>
     <ul class="dropdown-menu">
         <li class="user-header">
