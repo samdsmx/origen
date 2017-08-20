@@ -22,10 +22,10 @@ Grupos
 @section('cuerpo')
 @include('grupos.modalRegistro')
 <section class="content-header">
-    <h1 style="color:#605ca8;font-weight: bolder;">Gestión de las Secciones del Cuestionario.</h1>
+    <h1 style="color:#605ca8;font-weight: bolder;">Gestión de Catalogos.</h1>
     <ol class="breadcrumb">
         <li><a href="{!! url('inicio') !!}"><i class="fa fa-home"></i> Inicio</a></li>
-        <li><a href="#">Gestión de secciones del cuestionario</a></li>
+        <li><a href="#">Catalogos</a></li>
     </ol>
 </section>
 <section class="content">
@@ -36,32 +36,30 @@ Grupos
                 <div class="box-body">
                     <table id="tablaGrupos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
                         <div class="col-md-6" style="padding: 0px; text-align: center;">
-                            <button id="abrirModal" type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#modalRegistroGrupo" ><span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Grupo</button>
+                            <button id="abrirModal" type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#modalRegistroGrupo" ><span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Campo</button>
                         </div>
                         <thead>
-                        <th class="alert-info col-md-9">GRUPO</th>
-                        <th class="alert-info col-md-1">ORDEN</th>
+                        <th class="alert-info col-md-5">TIPO</th>
+                        <th class="alert-info col-md-5">DESCRIPCION</th>
                         <th class="alert-info col-md-1">ESTATUS</th>
                         <th class="alert-info col-md-1">OPERACIONES</th>
                         </thead>
                         <tbody>
                             @foreach($grupos as $grupo)
                             <tr>
-                                <td style="vertical-align: middle;">{!! $grupo->grupo !!}</td>
-                                <td style="vertical-align: middle;">{!! $grupo->orden == "" ? "<i>Default</i>" : $grupo->orden !!}</td>
+                                <td style="vertical-align: middle;">{!! $grupo->Tipo !!}</td>
+                                <td style="vertical-align: middle;">{!! $grupo->Nombre !!}</td>
                                 <td>
                                     <h4>
-                                        <a href="{!! url('/Grupos/cambia/'.$grupo->id_grupo)!!}" type="button" class="btn label {!! $grupo->status ? 'label-info' : 'label-danger' !!}">
-                                            {!! $grupo->status ? 'ACTIVO' : 'INACTIVO' !!}
+                                        <a href="{!! url('/Grupos/cambia/'.$grupo->Tipo)!!}" type="button" class="btn label {!! $grupo->activo ? 'label-info' : 'label-danger' !!}">
+                                            {!! $grupo->activo ? 'ACTIVO' : 'INACTIVO' !!}
                                         </a>
                                     </h4>
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <button type="button" class="btn bg-olive updateGroup" data-toggle="modal" data-target="#modalRegistroGrupo" data-id="{!!$grupo->id_grupo!!}"><i class="fa fa-edit"></i></button>
-                                        @if ( empty($grupo->conPropiedad) )
-                                        <button type="button" class="btn bg-red-gradient deleteGroupModal" data-toggle="modal" data-target="#modalConfirma" data-id="{!!$grupo->id_grupo!!}"><i class="fa fa-trash"></i></button>
-                                        @endif
+                                        <button type="button" class="btn bg-olive updateGroup" data-toggle="modal" data-target="#modalRegistroGrupo" data-id="{!!$grupo->Tipo!!}"><i class="fa fa-edit"></i></button>
+                                        <button type="button" class="btn bg-red-gradient deleteGroupModal" data-toggle="modal" data-target="#modalConfirma" data-id="{!!$grupo->Tipo!!}"><i class="fa fa-trash"></i></button>
                                     </div>
                                 </td>
                             </tr>

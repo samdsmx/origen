@@ -43,7 +43,6 @@ Route::group(array('before' => 'auth'), function() {
     Route::controller('UnidadesResponsables', 'App\Http\Controllers\UnidadesResponsablesController');
     Route::controller('Consultas', 'App\Http\Controllers\ConsultasController');
     Route::controller('Reportes', 'App\Http\Controllers\ReportesController');
-    Route::controller('Periodos', 'App\Http\Controllers\PeriodosController');
     Route::controller('Grupos', 'App\Http\Controllers\GruposController');
     Route::controller('Registro', 'App\Http\Controllers\RegistroController');
 

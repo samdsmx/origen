@@ -7,15 +7,14 @@ use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator;
 class GruposController extends BaseController {
 
     public function getIndex() {
-        if (!parent::tienePermiso('Secciones del cuestionario')) {
+        if (!parent::tienePermiso('Catalogos')) {
             return Redirect::to('inicio');
         }
         $menu = parent::createMenu();
         $grupos = DB::select(
-                        'select g.*, p.id_grupo conPropiedad ' .
-                        'from sia_cat_grupo g ' .
-                        'left join sia_cat_propiedad p on p.id_grupo = g.id_grupo group by g.id_grupo ' .
-                        'order by -g.orden DESC, g.grupo ASC');
+                        'select c.* ' .
+                        'from campos c ' .
+                        'order by c.Tipo ASC');
         return View::make('grupos.grupos', array('menu' => $menu, 'grupos' => $grupos));
     }
 
