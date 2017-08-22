@@ -140,7 +140,7 @@ Registro
                 data: {cp: cp},
                 success: function(response){
                     $("#Estado").val(response["estado"]);
-                    $("#Colonia").val(response["asentamiento"]);
+                    $("#Colonia").val(response["colonia"]);
                     $("#Municipio").val(response["municipio"]);
                     
                 }, 

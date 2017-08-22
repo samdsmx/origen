@@ -95,7 +95,7 @@ Sistemas
                             <tr>
                                 <td class="nombreSistema" style="vertical-align: middle;" title="{!! $sistema->Sistema !!}">{!! ($sistema->nombreCompleto)?$sistema->nombreCompleto:'Sin nombre' !!}</td>
                                 <td style="vertical-align: middle;">{!! $sistema->periodo !!}</td>
-                                <td style="vertical-align: middle; {!! (($sistema->observacion != "Baja" && ($idPeriodoActual!=$sistema->id_periodo || strpos($sistema->fase,'Incom')))?'color:red;':'') !!} ">{!!($idPeriodoActual==$sistema->id_periodo || $sistema->observacion == "Baja")?$sistema->fase:"Pendiente" !!}</td>
+                                <td style="vertical-align: middle;"> {!! (($sistema->observacion != "Baja" && ($idPeriodoActual!=$sistema->id_periodo || strpos($sistema->fase,'Incom')))?'color:red;':'') !!} ">{!!($idPeriodoActual==$sistema->id_periodo || $sistema->observacion == "Baja")?$sistema->fase:"Pendiente" !!}</td>
                                 <td style="vertical-align: middle;">{!! (($sistema->observacion == "Baja")?'<span title="'.$sistema->nota.'">'.$sistema->observacion.'</span>':$sistema->observacion) !!}</td>
                                 <td style="vertical-align: middle;">
                                     <i class="btn fa fa-users botonUsuarios" value="{!!$sistema->id_sistema.'/'.$sistema->owner!!}" data-toggle="tooltip" data-html="html" data-placement="left" title="Responsable{!!(strpos($sistema->owner, ',') > 0 ? 's':'')!!}" 

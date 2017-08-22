@@ -48,6 +48,7 @@ Route::group(array('before' => 'auth'), function() {
     Route::controller('Periodos', 'App\Http\Controllers\PeriodosController');
     Route::controller('Grupos', 'App\Http\Controllers\GruposController');
     Route::controller('Registro', 'App\Http\Controllers\RegistroController');
+    Route::controller('Organismos', 'App\Http\Controllers\OrganismosController');
 
     Route::get('CrearSistemaMio', 'App\Http\Controllers\MisSistemasController@crearSistema');
     Route::get('ActualizaMiSistema/{id}/{nombre}', 'App\Http\Controllers\MisSistemasController@actualizarSistema');

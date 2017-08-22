@@ -29,7 +29,7 @@
                                 <select name="Estado" id="Estado" class="form-control" onchange="changeEstado('forma');">
                                     <option value="0">-</option>
                                     @foreach ($estados as $k => $v)
-                                        <option value="{{$k}}">{{$v}}</option>
+                                        <option value="{{$v}}">{{$v}}</option>
                                     @endforeach
                                 </select>
                             </div>

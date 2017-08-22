@@ -56,16 +56,17 @@ class RegistroController extends BaseController {
     public function postBuscarcp(){
         if(Request::ajax()){
             $cp = Request::get('cp');
+            error_log($cp);
             $direccion = catalogocpModel::where('cp', '=', $cp)->get()->toArray();
             $direccion = $direccion[0];
             
             $direccion['estado'] = strtr($direccion['estado'], "áéíóú", "ÁÉÍÓÚ");
             $direccion['municipio'] = strtr($direccion['municipio'], "áéíóú", "ÁÉÍÓÚ");
-            $direccion['asentamiento'] = strtr($direccion['asentamiento'], "áéíóú", "ÁÉÍÓÚ");
+            $direccion['colonia'] = strtr($direccion['colonia'], "áéíóú", "ÁÉÍÓÚ");
             
             $direccion['estado'] = strtoupper($direccion['estado']);
             $direccion['municipio'] = strtoupper($direccion['municipio']);
-            $direccion['asentamiento'] = strtoupper($direccion['asentamiento']);
+            $direccion['colonia'] = strtoupper($direccion['colonia']);
             
             if($direccion){
                 return Response::json($direccion);
