@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use View, Session, Request, Redirect, Response, App\Http\Models\organismosModel, App\Http\Models\camposModel;
 
 class OrganismosController extends BaseController {
@@ -49,6 +50,40 @@ class OrganismosController extends BaseController {
             }
         }
         return $direccion;
+    }
+    
+    public function postRegistraorganismo(){
+        if( !Request::ajax() ){
+            return;
+        }
+        
+        $datos = Request::all();
+        $validator = organismosModel::validar($datos);
+        if ($validator->fails()) {
+            return Response::json(array('errors' => $validator->errors()->toArray()));
+        }
+        try{
+            $organismo = new organismosModel();
+            $organismo->Tema = $datos["tema"];
+            $organismo->Objetivo = $datos["objetivo"];
+            $organismo->Institucion = $datos["institucion"];
+            $organismo->Estado = $datos["estado"];
+            $organismo->Direccion = $datos["direccion"];
+            $organismo->Referencia = $datos["referencia"];
+            $organismo->Telefono = $datos["telefono"];
+            $organismo->Email = $datos["email"];
+            $organismo->Observaciones = $datos["observaciones"];
+            $organismo->Requisitos = $datos["requisitos"];
+            $organismo->HorariosCostos = $datos["hycostos"];
+            
+            $organismo->save();
+            
+        } catch(\Exception $e){
+            error_log($e->getMessage());
+        }
+        
+        Session::flash('mensaje', 'Organismo Actualizado');
+        
     }
     
     

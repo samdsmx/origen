@@ -1,5 +1,5 @@
 <div class="modal fade bs-example-modal-md" id="modalRegistroOrganismo" tabindex="-1" role="dialog" aria-hidden="true">
-    {!! Form::open(array('id' => 'registraUR')) !!}
+    {!! Form::open(array('id' => 'registraOrganismo', 'method'=>'post')) !!}
     <div class="modal-dialog modal-md" >
         <div class="modal-content" style="background: transparent" >
             <div class="modal-header" 
@@ -18,7 +18,7 @@
                 <input type="hidden" value="" name ="id_organismo" id="id_organismo" />
                 
                 <div class="form-group col-md-6">
-                    <label for="tema">Tema:</label>
+                    <label for="tema">*Tema:</label>
                     <select name="tema" id="tema" multiple class="form-control js-example-basic-multiple col-lg-12" >
                         @foreach ($catalogo_tema as $t)
                             <option value="{{$t['Nombre']}}">{{$t['Nombre']}}</option>
@@ -32,13 +32,13 @@
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="institucion">Institucion:</label>
+                    <label for="institucion">*Institucion:</label>
                     {!! Form::text('institucion', '',  array('class' => 'form-control', 'id' => 'institucion')) !!}
                 </div>
                 
                 <div class="form-group col-md-6">
                     <label for="estado">Estado:</label>
-                    <select name="Estado" id="Estado" class="form-control">
+                    <select name="estado" id="estado" class="form-control">
                         <option value="-1">-</option>
                         @foreach ($estados as $k => $v)
                             <option value="{{$v}}">{{$v}}</option>
@@ -47,43 +47,43 @@
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="direccion">Direccion:</label>
+                    <label for="direccion">*Direccion:</label>
                     {!! Form::textarea('direccion', '', array('id' => 'direccion', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="direccion">Referencia:</label>
+                    <label for="referencia">Referencia:</label>
                     {!! Form::textarea('referencia', '', array('id' => 'referencia', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="direccion">Telefono:</label>
+                    <label for="telefono">*Telefono:</label>
                     {!! Form::text('telefono', '', array('id' => 'telefono', 'class' => 'form-control' )) !!}
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="direccion">Email:</label>
+                    <label for="email">Email:</label>
                     {!! Form::text('email', '', array('id' => 'email', 'class' => 'form-control' )) !!}
                 </div>
                 
                 <div class="form-group col-md-12">
-                    <label for="objetivo">Observaciones:</label>
+                    <label for="observaciones">Observaciones:</label>
                     {!! Form::textarea('observaciones', '', array('id' => 'observaciones', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="direccion">Requisistos:</label>
-                    {!! Form::textarea('requisistos', '', array('id' => 'requisistos', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
+                    <label for="requisitos">Requisistos:</label>
+                    {!! Form::textarea('requisitos', '', array('id' => 'requisitos', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="direccion">Horarios y Costos:</label>
+                    <label for="hycostos">Horarios y Costos:</label>
                     {!! Form::textarea('hycostos', '', array('id' => 'hycostos', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
                 </div>
             </div>
             <div class="modal-footer" style="background: #ffffff;">
                 {!! Form::reset('Borrar', array('class' => 'btn btn-primary', 'id' => "resetear")) !!}
-                {!! Form::submit('Guardar', array('class' => 'btn btn-success', 'id' => 'registraOrganismo')) !!}
+                {!! Form::submit('Guardar', array('class' => 'btn btn-success', 'id' => 'btnRegistraOrganismo')) !!}
             </div>
         </div>
     </div>

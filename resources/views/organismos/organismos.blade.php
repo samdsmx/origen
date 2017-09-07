@@ -213,7 +213,6 @@ Sistemas
 		$('#buscarResponsable').addClass('hidden');
 		$('#modalResponsableAgregar').removeClass('hidden');
 	}
-		
 </script>
 <script>
     $(".select2").select2();
