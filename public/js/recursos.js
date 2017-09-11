@@ -110,6 +110,32 @@ $('#registraUsuario').submit(function(e) {
     });
 });
 
+$('#registraOrganismo').submit(function(e) {
+    e.preventDefault();
+    var data = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        url: "Organismos/registraorganismo",
+        data: data,
+        success: function(response) {
+            $('div').removeClass('has-error');
+            $('input').removeAttr("title");
+            if (response.errors) {
+                $.each(response.errors, function(index, error) {
+                    $("#d" + index).addClass("has-error");
+                    $("#" + index).attr("title", error);
+                });
+            } else {
+                $('html, body').animate({scrollTop: 0}, 'fast');
+                location.reload();
+            }
+        },
+        error: function(xhr, status, error) {
+            alert(xhr);
+        }
+    });
+});
+
 
 
 $(document).ready(function() {
