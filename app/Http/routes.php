@@ -21,6 +21,18 @@ function getEstadosArray(){
     $estados["EXTRANJERO"] = "EXTRANJERO";
     return $estados;
 }
+function getDelegacionesArray( $estado="0" ){
+    if ( $estado == "0" ) {
+        $municipios = DB::table('catalogoCP')->distinct()->select('municipio')->groupby('municipio')->get();
+    } else {
+        $municipios = DB::table('catalogoCP')->distinct()->select('municipio')->where('estado', '=', $estado)->groupby('municipio')->get();
+    }
+    $delegaciones = array();
+    foreach ($municipios as $m){
+        $delegaciones[ strtoupper( strtr( $m->municipio, "áéíóú", "ÁÉÍÓÚ" ) ) ] = strtoupper( strtr( $m->municipio, "áéíóú", "ÁÉÍÓÚ" ) );
+    }
+    return $delegaciones;
+}
 
 Route::get('/', function () {
     if (Auth::guest()) {

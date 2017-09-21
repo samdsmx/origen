@@ -131,16 +131,40 @@ Registro
       radioClass: 'iradio_flat-orange'
     });
     
+    $("#Estado").change( function(){
+        var estado = $(this).val();
+        $.ajax({
+            type: 'POST', 
+            url: 'Registro/buscardelegacion', 
+            data: { estado: estado }, 
+            success: function( response ){
+                var opciones = '';
+                $("#Municipio").find('option')
+                        .remove()
+                        .end()
+                        .append('<option value="0">-</option>')
+                        .val('0');
+                $.each( response, function( key, value ){
+                    opciones += '<option value='+key+'>'+value+'</option>';
+                }); 
+                $("#Municipio").append(opciones);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("Error en el servidor");
+            }
+        });
+    }); 
+    
     if( $('#Mexico').is(':checked')) {
         $('#cp').focusout( function() {
             var cp = $("#cp").val();
             $.ajax({
                 type: 'POST', 
                 url: 'Registro/buscarcp', 
-                data: {cp: cp},
+                data: { cp: cp },
                 success: function(response){
                     $("#Estado").val(response["estado"]);
-                    $("#Colonia").val(response["asentamiento"]);
+                    $("#Colonia").val(response["colonia"]);
                     $("#Municipio").val(response["municipio"]);
                     
                 }, 

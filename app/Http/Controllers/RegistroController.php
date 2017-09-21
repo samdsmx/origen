@@ -48,24 +48,38 @@ class RegistroController extends BaseController {
             return Redirect::to('inicio');
             }
         $menu = parent::createMenu();
-        return View::make('registro.registro', array('menu' => $menu, 'estados'=> getEstadosArray(), 'mpsicologicos' => $this->obtenerMPsicologicos(),
+        return View::make('registro.registro', array('menu' => $menu, 'estados'=> getEstadosArray(), 'delegaciones' => getDelegacionesArray(),'mpsicologicos' => $this->obtenerMPsicologicos(),
             'mlegales' => $this->obtenerMLegal(), 'mMed' => $this->obtenerMMedico(), 'mOtr' => $this->obtenerMOtros(), 'tv' => $this->obtenerTViolencia(),
             'mv' => $this->obtenerMViolencia(), 'cte' => $this->obtenerCTEnteraste(), 'cleg' => $this->obtenerCLegal()));
-    }    
+    }
+    
+    public function postBuscardelegacion(){
+        if( Request::ajax() ){
+            $estado = Request::get('estado');
+            return getDelegacionesArray($estado);
+        }
+    }
     
     public function postBuscarcp(){
         if(Request::ajax()){
             $cp = Request::get('cp');
+            if( $cp == "" ){
+                $direccion = array();
+                $direccion['estado'] = 0;
+                $direccion['municipio']=0;
+                $direccion['asentamiento']="";
+                return Response::json($direccion);
+            }
             $direccion = catalogocpModel::where('cp', '=', $cp)->get()->toArray();
             $direccion = $direccion[0];
             
             $direccion['estado'] = strtr($direccion['estado'], "áéíóú", "ÁÉÍÓÚ");
             $direccion['municipio'] = strtr($direccion['municipio'], "áéíóú", "ÁÉÍÓÚ");
-            $direccion['asentamiento'] = strtr($direccion['asentamiento'], "áéíóú", "ÁÉÍÓÚ");
+            $direccion['colonia'] = strtr($direccion['colonia'], "áéíóú", "ÁÉÍÓÚ");
             
             $direccion['estado'] = strtoupper($direccion['estado']);
             $direccion['municipio'] = strtoupper($direccion['municipio']);
-            $direccion['asentamiento'] = strtoupper($direccion['asentamiento']);
+            $direccion['colonia'] = strtoupper($direccion['colonia']);
             
             if($direccion){
                 return Response::json($direccion);

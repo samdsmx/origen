@@ -13,7 +13,9 @@
                           
 
                           <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
                           </div>
                         </div>
 
@@ -25,8 +27,8 @@
                             </div>
 
                             <div class="form-group col-md-8">
-                                <label for="edad">Entidad:</label>
-                                <select name="Estado" id="Estado" class="form-control" onchange="changeEstado('forma');">
+                                <label for="Estado">Estado:</label>
+                                <select name="Estado" id="Estado" class="form-control">
                                     <option value="0">-</option>
                                     @foreach ($estados as $k => $v)
                                         <option value="{{$k}}">{{$v}}</option>
@@ -35,8 +37,16 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label for="edad" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Delegación o Municipio:</label>
-                                <input name="Municipio" id="Municipio" type="text" class="form-control">
+                                <label for="delegacion" 
+                                       style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    Delegación o Municipio:
+                                </label>
+                                <select name="Municipio" id="Municipio" class="form-control" onchange="changeDelegacion()">
+                                    <option value="0">-</option>
+                                    @foreach ( $delegaciones as $k => $v )
+                                        <option value="{{$k}}">{{$v}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group col-md-6">
