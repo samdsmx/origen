@@ -34,6 +34,21 @@ function getDelegacionesArray( $estado="0" ){
     return $delegaciones;
 }
 
+function getColoniasArray( $estado="0", $delegacion="0" ){
+    if( $delegacion == "0" && $estado == "0" ){
+        $cols = DB::table('catalogoCP')->distinct()->select('colonia')->groupby('colonia')->get();
+    } else if( $estado != "0" && $delegacion != "0" ){
+        $cols = DB::table('catalogoCP')->distinct()->select('colonia')->where('estado', '=', $estado)->where('municipio', '=', $delegacion)->groupby('colonia')->get();
+    } else {
+        return array();
+    }
+    $colonias = array();
+    foreach( $cols as $c ){
+        $colonias[ strtoupper( strtr( $c->colonia, "áéíóú", "ÁÉÍÓÚ" ) ) ] = strtoupper( strtr( $c->colonia, "áéíóú", "ÁÉÍÓÚ" ) );
+    }
+    return $colonias;
+}
+
 Route::get('/', function () {
     if (Auth::guest()) {
         return \Redirect::to('index');

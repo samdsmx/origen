@@ -37,21 +37,20 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label for="delegacion" 
+                                <label for="Municipio" 
                                        style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                     Delegación o Municipio:
                                 </label>
-                                <select name="Municipio" id="Municipio" class="form-control" onchange="changeDelegacion()">
+                                <select name="Municipio" id="Municipio" class="form-control">
                                     <option value="0">-</option>
-                                    @foreach ( $delegaciones as $k => $v )
-                                        <option value="{{$k}}">{{$v}}</option>
-                                    @endforeach
                                 </select>
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label for="edad">Colonia:</label>
-                                <input name="Colonia" id="Colonia" type="text" class="form-control">
+                                <label for="Colonia">Colonia:</label>
+                                <select name="Colonia" id="Colonia" class="form-control">
+                                    <option value="0">-</option>
+                                </select>
                             </div>                                                                                    
 
                         </div>
