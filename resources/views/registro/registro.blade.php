@@ -151,9 +151,8 @@ Registro
                 data: { estado: estado }, 
                 success: function( response ){
                     var opciones = '';
-                    
                     $.each( response, function( key, value ){
-                        opciones += '<option value='+key+'>'+value+'</option>';
+                        opciones += '<option value="'+key+'">'+value+'</option>';
                     }); 
                     $("#Municipio").append(opciones);
                 },
@@ -186,7 +185,7 @@ Registro
                             .append('<option value="0">-</option>')
                             .val('0');
                     $.each( response, function( key, value ){
-                        opciones += '<option value='+key+'>'+value+'</option>';
+                        opciones += '<option value="'+key+'">'+value+'</option>';
                     }); 
                     $("#Colonia").append(opciones);
                 },
@@ -208,6 +207,12 @@ Registro
                 url: 'Registro/buscarcodigopostal', 
                 data: { estado: estado, municipio: municipio, colonia:colonia }, 
                 success: function( response ){
+                    response = response.toString();
+                    var cadenaCeros = '';
+                    for( i=response.length; i < 5; i++ ){
+                        cadenaCeros +="0"+cadenaCeros;
+                    }
+                    response = cadenaCeros+response;
                     $("#cp").val( response );
                 },
                 error: function(jqXHR, textStatus, errorThrown) {

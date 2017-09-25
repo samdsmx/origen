@@ -29,8 +29,9 @@ function getDelegacionesArray( $estado="0" ){
     }
     $delegaciones = array();
     foreach ($municipios as $m){
-        $delegaciones[ strtoupper( strtr( $m->municipio, "áéíóú", "ÁÉÍÓÚ" ) ) ] = strtoupper( strtr( $m->municipio, "áéíóú", "ÁÉÍÓÚ" ) );
+        $delegaciones[ strtoupper( strtr( $m->municipio, "áéíóúñ", "ÁÉÍÓÚÑ" ) ) ] = strtoupper( strtr( $m->municipio, "áéíóú", "ÁÉÍÓÚ" ) );
     }
+    
     return $delegaciones;
 }
 

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use View, Session, Request, Redirect, Response, App\Http\Models\catalogocpModel, App\Http\Models\camposModel;
+use View, Session, Request, Redirect, Response, App\Http\Models\catalogocpModel, App\Http\Models\camposModel, 
+        Illuminate\Support\Facades\DB;
 
 class RegistroController extends BaseController {
 
@@ -48,8 +49,7 @@ class RegistroController extends BaseController {
             return Redirect::to('inicio');
             }
         $menu = parent::createMenu();
-        return View::make('registro.registro', array('menu' => $menu, 'estados'=> getEstadosArray(),
-            'delegaciones' => getDelegacionesArray(), 'colonias' => getColoniasArray(),'mpsicologicos' => $this->obtenerMPsicologicos(),            
+        return View::make('registro.registro', array('menu' => $menu, 'estados'=> getEstadosArray(), 'mpsicologicos' => $this->obtenerMPsicologicos(),            
             'mlegales' => $this->obtenerMLegal(), 'mMed' => $this->obtenerMMedico(), 'mOtr' => $this->obtenerMOtros(), 'tv' => $this->obtenerTViolencia(),
             'mv' => $this->obtenerMViolencia(), 'cte' => $this->obtenerCTEnteraste(), 'cleg' => $this->obtenerCLegal()));
     }
@@ -74,11 +74,11 @@ class RegistroController extends BaseController {
             $estado = Request::get('estado');
             $municipio = Request::get('municipio');
             $colonia = Request::get('colonia');
-            return $this->buscarCodigoPostal($estado, $municipio, $colonia);
+            return $this->buscarCodigoPostalPorCampos($estado, $municipio, $colonia);
         }
     }
     
-    function buscarCodigoPostal($estado="0", $municipio="0", $colonia="0"){
+    function buscarCodigoPostalPorCampos($estado="0", $municipio="0", $colonia="0"){
         $cp ='';
         if( $estado == "0" || $municipio == "0" || $colonia == "0" ){
             return "";
@@ -88,6 +88,7 @@ class RegistroController extends BaseController {
             // Suponemos que solo hay un codigo postal por cada colonia
             $cp = $c->cp;
         }
+         return Response::json( $cp );
     }
     
     public function postBuscarcp(){
