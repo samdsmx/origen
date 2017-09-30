@@ -56,7 +56,16 @@ Sistemas
                                 <td style="vertical-align: middle;">{!! $organismo['Direccion'] !!}</td>
                                 <td style="vertical-align: middle;">{!! $organismo['Telefono'] !!}</td>
                                 <td style="vertical-align: middle;">{!! $organismo['Email'] !!}</td>
-                                <td style="vertical-align: middle;"></td>
+                                <td style="vertical-align: middle;">
+                                    <button type="button" class="btn btn-danger btn-flat deleteOrganismoModal"
+                                            data-toogle="modal" data-target="#modalConfirma" data-id={!! echo $organismo['ID'] !!}>
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                    <button type="button" class="btn bg-red-gradient 
+                                            deleteUsuarioModal" data-toggle="modal" 
+                                            data-target="#modalConfirma" data-id="65">
+                                        <i class="fa fa-trash"></i></button>
+                                </td>
                             </tr>
                             @endforeach
                             

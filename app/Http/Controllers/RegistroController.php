@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use View, Session, Request, Redirect, Response, App\Http\Models\catalogocpModel, App\Http\Models\camposModel;
+use View, Session, Request, Redirect, Response, App\Http\Models\catalogocpModel, App\Http\Models\camposModel, 
+        Illuminate\Support\Facades\DB;
 
 class RegistroController extends BaseController {
 
@@ -48,24 +49,68 @@ class RegistroController extends BaseController {
             return Redirect::to('inicio');
             }
         $menu = parent::createMenu();
-        return View::make('registro.registro', array('menu' => $menu, 'estados'=> getEstadosArray(), 'mpsicologicos' => $this->obtenerMPsicologicos(),
+        return View::make('registro.registro', array('menu' => $menu, 'estados'=> getEstadosArray(), 'mpsicologicos' => $this->obtenerMPsicologicos(),            
             'mlegales' => $this->obtenerMLegal(), 'mMed' => $this->obtenerMMedico(), 'mOtr' => $this->obtenerMOtros(), 'tv' => $this->obtenerTViolencia(),
             'mv' => $this->obtenerMViolencia(), 'cte' => $this->obtenerCTEnteraste(), 'cleg' => $this->obtenerCLegal()));
-    }    
+    }
+    
+    public function postBuscardelegacion(){
+        if( Request::ajax() ){
+            $estado = Request::get('estado');
+            return getDelegacionesArray($estado);
+        }
+    }
+    
+    public function postBuscarcolonia(){
+        if( Request::ajax() ){
+            $municipio = Request::get('municipio');
+            $estado = Request::get('estado');
+            return getColoniasArray($estado, $municipio);    
+        }
+    }
+    
+    public function postBuscarcodigopostal(){
+        if( Request::ajax() ){
+            $estado = Request::get('estado');
+            $municipio = Request::get('municipio');
+            $colonia = Request::get('colonia');
+            return $this->buscarCodigoPostalPorCampos($estado, $municipio, $colonia);
+        }
+    }
+    
+    function buscarCodigoPostalPorCampos($estado="0", $municipio="0", $colonia="0"){
+        $cp ='';
+        if( $estado == "0" || $municipio == "0" || $colonia == "0" ){
+            return "";
+        }
+        $busquedaCodigo = DB::table('catalogoCP')->select('cp')->where('estado', '=', $estado)->where('municipio', '=', $municipio)->where('colonia', '=', $colonia)->get();
+        foreach ( $busquedaCodigo as $c ){
+            // Suponemos que solo hay un codigo postal por cada colonia
+            $cp = $c->cp;
+        }
+         return Response::json( $cp );
+    }
     
     public function postBuscarcp(){
-        if(Request::ajax()){
+        if( Request::ajax() ){
             $cp = Request::get('cp');
+            if( $cp == "" ){
+                $direccion = array();
+                $direccion['estado'] = 0;
+                $direccion['municipio']=0;
+                $direccion['asentamiento']=0;
+                return Response::json($direccion);
+            }
             $direccion = catalogocpModel::where('cp', '=', $cp)->get()->toArray();
             $direccion = $direccion[0];
             
             $direccion['estado'] = strtr($direccion['estado'], "áéíóú", "ÁÉÍÓÚ");
             $direccion['municipio'] = strtr($direccion['municipio'], "áéíóú", "ÁÉÍÓÚ");
-            $direccion['asentamiento'] = strtr($direccion['asentamiento'], "áéíóú", "ÁÉÍÓÚ");
+            $direccion['colonia'] = strtr($direccion['colonia'], "áéíóú", "ÁÉÍÓÚ");
             
             $direccion['estado'] = strtoupper($direccion['estado']);
             $direccion['municipio'] = strtoupper($direccion['municipio']);
-            $direccion['asentamiento'] = strtoupper($direccion['asentamiento']);
+            $direccion['colonia'] = strtoupper($direccion['colonia']);
             
             if($direccion){
                 return Response::json($direccion);

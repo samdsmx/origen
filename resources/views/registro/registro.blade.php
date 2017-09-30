@@ -131,24 +131,125 @@ Registro
       radioClass: 'iradio_flat-orange'
     });
     
+    $("#Estado").change( function(){
+        $("#cp").val("");
+        $("#Municipio").find('option')
+                .remove()
+                .end()
+                .append('<option value="0">-</option>')
+                .val('0');
+        $("#Colonia").find('option')
+                .remove()
+                .end()
+                .append('<option value="0">-</option>')
+                .val('0');
+        var estado = $(this).val();
+        if( estado != "0" ){
+            $.ajax({
+                type: 'POST', 
+                url: 'Registro/buscardelegacion', 
+                data: { estado: estado }, 
+                success: function( response ){
+                    var opciones = '';
+                    $.each( response, function( key, value ){
+                        opciones += '<option value="'+key+'">'+value+'</option>';
+                    }); 
+                    $("#Municipio").append(opciones);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("Error en el servidor");
+                }
+            });
+        }
+    });
+    
+    $("#Municipio").change( function(){
+        $("#cp").val("");
+        $("#Colonia").find('option')
+                .remove()
+                .end()
+                .append('<option value="0">-</option>')
+                .val('0');
+        var municipio = $(this).val();
+        var estado = $("#Estado").val();
+        if( municipio !== "0" ){
+            $.ajax({
+                type: 'POST', 
+                url: 'Registro/buscarcolonia', 
+                data: { municipio: municipio, estado: estado }, 
+                success: function( response ){
+                    var opciones = '';
+                    $("#Colonia").find('option')
+                            .remove()
+                            .end()
+                            .append('<option value="0">-</option>')
+                            .val('0');
+                    $.each( response, function( key, value ){
+                        opciones += '<option value="'+key+'">'+value+'</option>';
+                    }); 
+                    $("#Colonia").append(opciones);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("Error en el servidor");
+                }
+            });
+        }
+    });
+    
+    $("#Colonia").change( function(){
+        $("#cp").val("");
+        var municipio = $("#Municipio").val();
+        var estado = $("#Estado").val();
+        var colonia = $(this).val();
+        if( colonia !== "0" ){
+            $.ajax({
+                type: 'POST', 
+                url: 'Registro/buscarcodigopostal', 
+                data: { estado: estado, municipio: municipio, colonia:colonia }, 
+                success: function( response ){
+                    response = response.toString();
+                    var cadenaCeros = '';
+                    for( i=response.length; i < 5; i++ ){
+                        cadenaCeros +="0"+cadenaCeros;
+                    }
+                    response = cadenaCeros+response;
+                    $("#cp").val( response );
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("Error en el servidor");
+                }
+            });
+        }
+    });
+    
+    
     if( $('#Mexico').is(':checked')) {
         $('#cp').focusout( function() {
             var cp = $("#cp").val();
             $.ajax({
                 type: 'POST', 
                 url: 'Registro/buscarcp', 
-                data: {cp: cp},
-                success: function(response){
+                data: { cp: cp },
+                success: function( response ){
                     $("#Estado").val(response["estado"]);
-                    $("#Colonia").val(response["asentamiento"]);
+                    $("#Municipio").find('option')
+                            .remove()
+                            .end()
+                            .append('<option value="0">-</option>');
+                    $("#Municipio").append('<option value="'+response["municipio"]+'">'+response["municipio"]+'</option>');
                     $("#Municipio").val(response["municipio"]);
-                    
+                    $("#Colonia").find('option')
+                            .remove()
+                            .end()
+                            .append('<option value="0">-</option>');
+                    $("#Colonia").append('<option value="'+response["colonia"]+'">'+response["colonia"]+'</option>');
+                    $("#Colonia").val(response["colonia"]);
                 }, 
                 error: function(jqXHR, textStatus, errorThrown) {
                     alert("Error en el servidor");
                 }
             });
-        }); 
+        });
     }
 
   });

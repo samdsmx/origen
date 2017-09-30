@@ -21,6 +21,34 @@ function getEstadosArray(){
     $estados["EXTRANJERO"] = "EXTRANJERO";
     return $estados;
 }
+function getDelegacionesArray( $estado="0" ){
+    if ( $estado == "0" ) {
+        $municipios = DB::table('catalogoCP')->distinct()->select('municipio')->groupby('municipio')->get();
+    } else {
+        $municipios = DB::table('catalogoCP')->distinct()->select('municipio')->where('estado', '=', $estado)->groupby('municipio')->get();
+    }
+    $delegaciones = array();
+    foreach ($municipios as $m){
+        $delegaciones[ strtoupper( strtr( $m->municipio, "áéíóúñ", "ÁÉÍÓÚÑ" ) ) ] = strtoupper( strtr( $m->municipio, "áéíóú", "ÁÉÍÓÚ" ) );
+    }
+    
+    return $delegaciones;
+}
+
+function getColoniasArray( $estado="0", $delegacion="0" ){
+    if( $delegacion == "0" && $estado == "0" ){
+        $cols = DB::table('catalogoCP')->distinct()->select('colonia')->groupby('colonia')->get();
+    } else if( $estado != "0" && $delegacion != "0" ){
+        $cols = DB::table('catalogoCP')->distinct()->select('colonia')->where('estado', '=', $estado)->where('municipio', '=', $delegacion)->groupby('colonia')->get();
+    } else {
+        return array();
+    }
+    $colonias = array();
+    foreach( $cols as $c ){
+        $colonias[ strtoupper( strtr( $c->colonia, "áéíóú", "ÁÉÍÓÚ" ) ) ] = strtoupper( strtr( $c->colonia, "áéíóú", "ÁÉÍÓÚ" ) );
+    }
+    return $colonias;
+}
 
 Route::get('/', function () {
     if (Auth::guest()) {
