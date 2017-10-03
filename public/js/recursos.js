@@ -59,7 +59,7 @@ function updateUser(id) {
     $('input').removeAttr("title");
     $.ajax({
         type: 'POST',
-        url: 'ActividadesUsuario/buscar',
+        url: 'Usuarios/buscar',
         data: {id_user: id},
         success: function(response) {
             var usu = response.usuario;
@@ -89,7 +89,7 @@ $('#registraUsuario').submit(function(e) {
     var data = $(this).serialize();
     $.ajax({
         type: 'POST',
-        url: "ActividadesUsuario/registrausuario",
+        url: "Usuarios/registrausuario",
         data: data,
         success: function(response) {
             $('div').removeClass('has-error');

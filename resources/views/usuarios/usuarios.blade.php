@@ -21,10 +21,10 @@ Usuarios
 
 @section('cuerpo')
 <section class="content-header">
-    <h1 style="color:#605ca8; font-weight: bolder">Gestión de Usuarios del SIA</h1>
+    <h1 style="color:#605ca8; font-weight: bolder">Gestión de Usuarios</h1>
     <ol class="breadcrumb">
         <li><a href="{!! url('inicio') !!}"><i class="fa fa-home"></i> Inicio</a></li>
-        <li><a href="#">Gestión de Usuarios del SIA</a></li>
+        <li><a href="#">Gestión de Usuarios</a></li>
     </ol>
 </section>
 <section class="content">
@@ -38,25 +38,21 @@ Usuarios
                             <button id="abrirModal" type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#modalRegistroUsuario" ><span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Usuario</button>
                         </div>
                         <thead>
-                        <th class="alert-info col-md-1">USUARIO</th>
-                        <th class="alert-info col-md-4">NOMBRE</th>
-                        <th class="alert-info col-md-5">UNIDAD RESPONSABLE</th>
-                        <th class="alert-info col-md-1">ESTATUS</th>
-                        <th class="alert-info col-md-1">OPERACIONES</th>
+                            <th class="alert-info col-md-1">USUARIO</th>
+                            <th class="alert-info col-md-4">NOMBRE</th>
+                            <th class="alert-info col-md-1">ESTATUS</th>
+                            <th class="alert-info col-md-1">OPERACIONES</th>
                         </thead>
                         <tbody>
                             @foreach($usuarios as $usuario)
                             <tr>
                                 <td style="vertical-align: middle;">{!! $usuario->usuario !!}</td>
                                 <td style="vertical-align: middle;">{!! $usuario->nombre !!}</td>
-                                <td style="vertical-align: middle;">{!! $usuario->unidad !!}</td>
-                                <td style="vertical-align: middle;"><h4><a href="{!! url('/ActividadesUsuario/cambia/'.$usuario->id_usuario)!!}" type="button" class="btn label {!! $usuario->status ? 'label-info' : 'label-danger' !!}">{!! $usuario->status ? 'ACTIVO' : 'INACTIVO' !!}</a></h4></td>
+                                <td style="vertical-align: middle;"><h4><a href="{!! url('/Usuarios/cambia/'.$usuario->id_usuario)!!}" type="button" class="btn label {!! $usuario->status ? 'label-info' : 'label-danger' !!}">{!! $usuario->status ? 'ACTIVO' : 'INACTIVO' !!}</a></h4></td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn bg-olive open-UserUpdaterModal" data-toggle="modal" data-target="#modalRegistroUsuario" data-id="{!!$usuario->id_usuario!!}"><i class='fa fa-edit'></i></button>
-                                        @if ( empty($usuario->conRespuesta))
                                         <button type="button" class="btn bg-red-gradient deleteUsuarioModal" data-toggle="modal" data-target="#modalConfirma" data-id="{!!$usuario->id_usuario!!}"><i class="fa fa-trash"></i></button>
-                                        @endif   
                                     </div>
                                 </td>
                             </tr>    
@@ -83,7 +79,7 @@ Usuarios
         order: [[0, "asc"]],
         language: dataTablesSpanish,
         sDom: 'Rfrt <"col-md-12" <"col-md-4 pull-left"i> <"paginacion" <"opcionPaginacion"l> p > >',
-        columnDefs: [{orderable: false, targets: [4]}]
+        columnDefs: [{orderable: false, targets: [3]}]
     });
 
     $("#tablaUsuarios").on("click", ".open-UserUpdaterModal", function() {
@@ -95,7 +91,7 @@ Usuarios
         $("#modalConfirmaId").attr("value", $(this).data('id'));
         $("#formConfirma").submit(function(e) {
             e.preventDefault();
-            borrarRegistro($(this).serialize(), 'ActividadesUsuario/eliminar');
+            borrarRegistro($(this).serialize(), 'Usuarios/eliminar');
         });
     });
 
