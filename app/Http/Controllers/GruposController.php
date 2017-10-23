@@ -12,8 +12,23 @@ class GruposController extends BaseController {
         }
         $menu = parent::createMenu();
         $tipos = DB::select('select Tipo from campos group by Tipo order by Tipo ASC');
-        $grupos = DB::select("select c.* from campos c where c.Tipo = '" . $tipos[0]->Tipo . "' order by c.Tipo ASC");
+        $grupos = DB::select("select c.* from campos c where c.Tipo = '" . $tipos[0]->Tipo . "' order by c.Nombre ASC");
         return View::make('grupos.grupos', array('menu' => $menu, 'grupos' => $grupos, 'tipos' => $tipos));
+    }
+
+    public function postFiltro() {
+        if (Request::ajax()) {
+            $menu = parent::createMenu();
+            $tipos = DB::select('select Tipo from campos group by Tipo order by Tipo ASC');
+            $grupos = DB::select("select c.* from campos c where c.Tipo = '" . Request::get('tipo'). "' order by c.Nombre ASC");
+            if ($grupos) {               
+                return Redirect::to('Grupos')->with('mensajeError', 'Error al buscar la sección/grupo')->with('tituloMensaje', '¡Error!');
+                // $view = View::make('grupos.grupos', array('menu' => $menu, 'grupos' => $grupos, 'tipos' => $tipos));
+                // return $view->renderSections()['tableContent'];
+            } else {
+                return Redirect::to('Grupos')->with('mensajeError', 'Error al buscar la sección/grupo')->with('tituloMensaje', '¡Error!');
+            }
+        }
     }
 
     public function postBuscar() {

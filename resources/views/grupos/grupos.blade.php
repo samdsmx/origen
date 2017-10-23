@@ -38,9 +38,9 @@ Grupos
                     <table id="tablaGrupos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
                         <div class="col-md-6" style="padding: 0px; text-align: center;">
                             <button id="abrirModal" type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modalRegistroGrupo" ><span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Campo</button>
-                            <div class="col-md-1"><label for="tipo">Tipo:</label></div>
+                            <div class="col-md-1" style="line-height: 33px;"><label for="tipo">Tipo:</label></div>
                             <div class="col-md-3">
-                                <select name="tipo" class="form-control">
+                                <select name="tipo" class="form-control" onchange="filtro();" >
                                     @foreach($tipos as $tipo)
                                         <option value="{!! $tipo->Tipo !!}">{!! $tipo->Tipo !!}</option>
                                     @endforeach
@@ -56,27 +56,29 @@ Grupos
                         <th class="alert-info col-md-1">ESTATUS</th>
                         <th class="alert-info col-md-1">OPERACIONES</th>
                         </thead>
-                        <tbody>
-                            @foreach($grupos as $grupo)
-                            <tr>
-                                <td style="vertical-align: middle;">{!! $grupo->Tipo !!}</td>
-                                <td style="vertical-align: middle;">{!! $grupo->Nombre !!}</td>
-                                <td>
-                                    <h4>
-                                        <a href="{!! url('/Grupos/cambia/'.$grupo->Tipo)!!}" type="button" class="btn label {!! $grupo->activo ? 'label-info' : 'label-danger' !!}">
-                                            {!! $grupo->activo ? 'ACTIVO' : 'INACTIVO' !!}
-                                        </a>
-                                    </h4>
-                                </td>
-                                <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn bg-olive updateGroup" data-toggle="modal" data-target="#modalRegistroGrupo" data-id="{!!$grupo->Tipo!!}"><i class="fa fa-edit"></i></button>
-                                        <button type="button" class="btn bg-red-gradient deleteGroupModal" data-toggle="modal" data-target="#modalConfirma" data-id="{!!$grupo->Tipo!!}"><i class="fa fa-trash"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
+                        @section('tableContent')
+                            <tbody>
+                                @foreach($grupos as $grupo)
+                                <tr>
+                                    <td style="vertical-align: middle;">{!! $grupo->Tipo !!}</td>
+                                    <td style="vertical-align: middle;">{!! $grupo->Nombre !!}</td>
+                                    <td>
+                                        <h4>
+                                            <a href="{!! url('/Grupos/cambia/'.$grupo->Tipo)!!}" type="button" class="btn label {!! $grupo->activo ? 'label-info' : 'label-danger' !!}">
+                                                {!! $grupo->activo ? 'ACTIVO' : 'INACTIVO' !!}
+                                            </a>
+                                        </h4>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn bg-olive updateGroup" data-toggle="modal" data-target="#modalRegistroGrupo" data-id="{!!$grupo->Tipo!!}"><i class="fa fa-edit"></i></button>
+                                            <button type="button" class="btn bg-red-gradient deleteGroupModal" data-toggle="modal" data-target="#modalConfirma" data-id="{!!$grupo->Tipo!!}"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        @show
                     </table>
                 </div>
             </div>
@@ -143,6 +145,27 @@ Grupos
             borrarRegistro($(this).serialize(), 'Grupos/eliminar');
         });
     });
+
+    function filtro() {
+        var tipo = document.getElementsByName('tipo')[0].value;
+        alert(tipo);
+        $.ajax({
+            type: "POST",
+            url: 'Grupos/filtro',
+            data: {tipo: tipo},
+            success: function(response) {
+                
+                
+                //$('#tableContent').empty().append($(response)); 
+                $("#tableContent").html(grupos);
+                
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("Error en el servidor");
+            }
+        });
+    }
+
 
 </script>
 @stop

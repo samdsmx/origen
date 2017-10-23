@@ -86,7 +86,7 @@
                         @endif
                     </div>
                     <div id="dialog" title=""></div>
-                    @include('actividadesusuario.modalRegistro')
+                    @include('usuarios.modalRegistro')
                     @include('layouts.modalConfirma')
                     @yield('cuerpo')
                 </div>

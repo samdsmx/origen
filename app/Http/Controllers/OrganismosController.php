@@ -13,7 +13,7 @@ class OrganismosController extends BaseController {
     }
 
     public function obtenerOrganismosAll(){
-        $organismos = organismosModel::select('Tema', 'Institucion', 'Estado',
+        $organismos = organismosModel::select('ID', 'Tema', 'Institucion', 'Estado',
                 'Direccion', 'Telefono', 'Email')->get()->toArray();
         return $organismos;
     }
