@@ -42,17 +42,21 @@ Registro
 <section class="content">
     <div id="panel-table">
         
-      {!! Form::open() !!}
+      {!! Form::open( array( 'id'=>'registrollamada', 'method'=>'POST' ) ) !!}
 
       <div class="col-md-12" >
           <div class="col-md-3">
              <label for="nombre">Consejera: </label>&nbsp;<small>{!! Auth::user()->persona->nombres." ".Auth::user()->persona->primer_apellido." ".Auth::user()->persona->segundo_apellido !!}</small>
           </div>
           <div class="col-md-3">
-             <label for="nombre">Fecha:</label>&nbsp;<small><? $FechaActual=date("d/m/Y"); echo $FechaActual; ?></small>
+             <label for="actual">Fecha:</label>&nbsp;
+             <small><?php $FechaActual=date("d/m/Y"); echo $FechaActual; ?></small>
+             <input type="hidden" name="fechaActual" value="<?php echo $FechaActual; ?>">
           </div>
           <div class="col-md-3">
-             <label for="nombre">Hora de Inicio:</label>&nbsp;<small><? $HoraActual=date("h:i A"); echo $HoraActual; ?></small>
+             <label for="nombre">Hora de Inicio:</label>&nbsp;
+             <small><?php $HoraActual=date("G:i:s"); echo $HoraActual; ?></small>
+             <input type="hidden" name="horaInicio" value="<?php echo $HoraActual;?>">
           </div>
           <div class="col-md-3">
              <label for="nombre">Duración:</label>&nbsp;<small id="timer_div">0 Min.</small>
@@ -104,7 +108,7 @@ Registro
       </h4>
 
       <div style="text-align:center;">
-        <button type="button" class="btn btn-app bg-olive"><i class='fa fa-save'></i> Registrar</button>
+          <button type="submit" class="btn btn-app bg-olive"><i class='fa fa-save'></i> Registrar</button>
       </div>
 
       {!! Form::close()!!}
@@ -117,8 +121,6 @@ Registro
 {!! Html::script('js/bootstrap-editable.js') !!}
 {!! Html::style('css/bootstrap-editable.css') !!}
 <script>
-
-  $(document).ready(function() {
     $(".select2").select2();
     $('.js-example-basic-multiple').select2();
     $(".js-example-tokenizer").select2({
@@ -251,8 +253,22 @@ Registro
             });
         });
     }
-
-  });
+    
+    $("#registrollamada").submit( function( e ) {
+        e.preventDefault();
+        var data = $(this).serialize();
+        $.ajax({
+           type: "POST", 
+           url: "Registro/registrarllamada",
+           data : data, 
+           success: function( response ){
+               alert( "orale pues" );
+           },
+           error: function( jqXHR, textStatus, errorThrown ){
+               
+           }
+        });
+    }); 
 
 
     var startDate = new Date();
@@ -263,6 +279,8 @@ Registro
         var diffMin = Math.ceil(timeDiff / 60000); 
         document.getElementById('timer_div').innerHTML = diffMin + " Min."
     }, 60000);
+    
+    
 
 </script>
 @stop

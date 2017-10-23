@@ -23,7 +23,7 @@
 
                             <div class="form-group col-md-4" style="white-space: nowrap;">
                                 <label for="CP">Codigo Postal:</label>
-                                <input type="number" class="form-control" id="cp" placeholder="#####">
+                                <input type="number" class="form-control" id="cp" name="cp" placeholder="#####">
                             </div>
 
                             <div class="form-group col-md-8">

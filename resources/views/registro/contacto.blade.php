@@ -11,7 +11,7 @@
         <label for="edad">Teléfono:</label>
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-            <input type="text" class="form-control" placeholder="####-####">
+            <input type="text" id="telefono" name="telefono" class="form-control" placeholder="####-####">
         </div>
     </div>
 
@@ -19,16 +19,16 @@
         <label for="edad" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Correo Electronico:</label>
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-            <input type="email" class="form-control" placeholder="Email">
+            <input type="email" id="correo" name="correo" class="form-control" placeholder="Email">
         </div>
     </div>
 
     <div class="form-group col-md-3">
         <label for="medioContacto" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Medio de contacto:</label>
         <select name="medioContacto" class="form-control">
-            <option selected="">Teléfono</option>
-            <option>Chat</option>
-            <option>Mail</option>
+            <option value="telefono" selected="true">Teléfono</option>
+            <option value="chat" >Chat</option>
+            <option value="correo" >Mail</option>
         </select>
     </div>                            
 
@@ -36,7 +36,8 @@
         <label for="enteraste">Como te enteraste:</label>
         <div class="row">
           <div class="col-md-8">
-            <select name="enteraste" class="form-control" onchange="rellenaMedios('forma');" >
+            <!-- <select name="enteraste" class="form-control" onchange="rellenaMedios('forma');" > -->
+            <select name="enteraste" class="form-control" >
                 <option value="0">-</option>
                 @foreach ($cte as $v)
                     <option value="{{$v['Nombre']}}">{{$v['Nombre']}}</option>

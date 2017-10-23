@@ -18,8 +18,8 @@
     </div>
 
     <div class="form-group col-md-12">
-        <label for="estadoCivil">LEGAL:</label>
-        <select name="estadoCivil" multiple class="form-control js-example-basic-multiple">
+        <label for="mlegal">LEGAL:</label>
+        <select name="mlegal" id="mlegal" multiple class="form-control js-example-basic-multiple">
             <option value="0">-</option>
             @foreach ($mlegales as $v)
                 <option value="{{$v['Nombre']}}">{{$v['Nombre']}}</option>
@@ -28,8 +28,8 @@
     </div>
 
     <div class="form-group col-md-12">
-        <label for="estadoCivil">MEDICO:</label>
-        <select name="estadoCivil" multiple class="form-control js-example-basic-multiple">
+        <label for="mmedico">MEDICO:</label>
+        <select name="mmedico" id="mmedico" multiple class="form-control js-example-basic-multiple">
             <option value="0">-</option>
             @foreach ($mMed as $v)
                 <option value="{{$v['Nombre']}}">{{$v['Nombre']}}</option>
@@ -38,8 +38,8 @@
     </div>                          
 
     <div class="form-group col-md-12">
-        <label for="estadoCivil">OTROS:</label>
-        <select name="estadoCivil" multiple class="form-control js-example-basic-multiple">
+        <label for="motros">OTROS:</label>
+        <select name="motros" id="motros" multiple class="form-control js-example-basic-multiple">
             <option value="0">-</option>
             @foreach ($mOtr as $v)
                 <option value="{{$v['Nombre']}}">{{$v['Nombre']}}</option>
@@ -48,8 +48,8 @@
     </div>
 
     <div class="form-group col-md-12">
-        <label for="estadoCivil">TIPO DE VIOLENCIA:</label>
-        <select name="estadoCivil" multiple class="form-control js-example-basic-multiple">
+        <label for="tviolencia">TIPO DE VIOLENCIA:</label>
+        <select name="tviolencia" multiple class="form-control js-example-basic-multiple">
             <option value="0">-</option>
             @foreach ($tv as $v)
                 <option value="{{$v['Nombre']}}">{{$v['Nombre']}}</option>
@@ -58,8 +58,8 @@
     </div>
 
     <div class="form-group col-md-12">
-        <label for="estadoCivil">MODALIDAD DE VIOLENCIA:</label>
-        <select name="estadoCivil" multiple class="form-control js-example-basic-multiple">
+        <label for="modviolencia">MODALIDAD DE VIOLENCIA:</label>
+        <select name="modviolencia" multiple class="form-control js-example-basic-multiple">
             <option value="0">-</option>
             @foreach ($mv as $v)
                 <option value="{{$v['Nombre']}}">{{$v['Nombre']}}</option>
