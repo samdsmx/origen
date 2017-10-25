@@ -67,8 +67,7 @@ Route::group(array('before' => 'auth'), function() {
     Route::get('logout', 'App\Http\Controllers\AuthController@logout');
     Route::controller('Actividades', 'App\Http\Controllers\ActividadesController');
     Route::controller('PermisosUsuarios', 'App\Http\Controllers\PermisosUsuariosController');
-    Route::controller('ActividadesUsuario', 'App\Http\Controllers\ActividadesUsuarioController');
-    Route::controller('UnidadesResponsables', 'App\Http\Controllers\UnidadesResponsablesController');
+    Route::controller('Usuarios', 'App\Http\Controllers\UsuariosController');
     Route::controller('Consultas', 'App\Http\Controllers\ConsultasController');
     Route::controller('Reportes', 'App\Http\Controllers\ReportesController');
     Route::controller('Grupos', 'App\Http\Controllers\GruposController');

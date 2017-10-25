@@ -4,29 +4,26 @@ namespace App\Http\Controllers;
 
 use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator;
 
-class ActividadesUsuarioController extends BaseController {
+class UsuariosController extends BaseController {
 
     public function getIndex() {
         if (!parent::tienePermiso('Usuarios')) {
             return Redirect::to('inicio');
         }
         $menu = parent::createMenu();
-        $datos = DB::select('select u.id_usuario, u.usuario, concat(p.nombres,\' \', p.primer_apellido, \' \', p.segundo_apellido) nombre, ur.nombre_ur unidad, u.status, r.id_persona + ps.id_persona conRespuesta  ' .
-                        'from sia_usuario u ' .
-                        'join sia_persona p on  p.id_persona = u.id_persona ' .
-                        'join sia_cat_unidad_responsable ur on ur.id_unidad_responsable = p.id_unidad_responsable ' .
-                        'left join sia_respuesta r on r.id_persona = p.id_persona ' .
-                        'left join sia_aso_persona_sistema ps on ps.id_persona = p.id_persona ' .
-                        'group by p.id_persona');
-        $urs = siaUnidadResponsableModel::where('status', '=', 1)->orderBy('nombre_ur', 'asc')->get();
-        return View::make('actividadesusuario.actividadesusuario', array('menu' => $menu, 'usuarios' => $datos, 'urs' => $urs));
+        $datos = DB::select('select '.
+            'u.id_usuario, u.nombre usuario, concat(p.nombres,\' \', p.primer_apellido, \' \', p.segundo_apellido) nombre, u.status '.
+            'from consejeros u ' .
+            'join sia_persona p on p.id_persona = u.id_persona ' .
+            'group by p.id_persona');
+        return View::make('usuarios.usuarios', array('menu' => $menu, 'usuarios' => $datos));
     }
 
     public function getCambia($id) {
         $usuario = User::find($id);
         $usuario->status = ($usuario->status - 1) * -1;
         $usuario->save();
-        return Redirect::to('ActividadesUsuario');
+        return Redirect::to('Usuarios');
     }
 
     public function postBuscar() {
