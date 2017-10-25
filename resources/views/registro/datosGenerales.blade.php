@@ -10,12 +10,12 @@
 
     <div class="form-group col-md-6">
       <label for="nombre">Nombre:</label>
-      <input type="text" class="form-control" id="nombre" placeholder="Nombre completo">
+      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre completo">
     </div>
 
     <div class="form-group col-md-2">
       <label for="edad">Edad:</label>
-      <input type="number" class="form-control" id="edad" placeholder="Edad en años" >
+      <input type="number" class="form-control" id="edad" name="edad" placeholder="Edad en años" >
     </div>
 
     <div class="form-group col-md-4">
@@ -83,11 +83,11 @@
       <label for="lengua" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">¿Habla alguna lengua indigena?</label>
       <div class="radio">
         <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
-          <input type="radio" name="lengua" id="lengua1" value="f" checked>
+          <input type="radio" name="lengua" id="lengua1" value="no" checked>
           No
         </label>
         <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
-          <input type="radio" name="lengua" id="lengua2" value="m">
+          <input type="radio" name="lengua" id="lengua2" value="si">
           Si
         </label>
       </div>
