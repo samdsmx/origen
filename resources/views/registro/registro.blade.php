@@ -20,6 +20,7 @@ Registro
 @stop
 
 @section('cuerpo')
+@include('registro.modalResponseRegistro')
 <section class="content-header">
     <h1 style="color:#605ca8;font-weight: bolder;text-align:center;float:inherit;" class="col-md-10 col-sm-12 col-xs-12">
         <?php
@@ -59,7 +60,7 @@ Registro
              <input type="hidden" name="horaInicio" value="<?php echo $HoraActual;?>">
           </div>
           <div class="col-md-3">
-             <label for="nombre">Duración:</label>&nbsp;<small id="timer_div">0 Min.</small>
+              <label for="duracion">Duración:</label>&nbsp;<small id="timer_div">0 Min.</small>
           </div>
       </div>
       <br/>
@@ -256,19 +257,29 @@ Registro
     
     $("#registrollamada").submit( function( e ) {
         e.preventDefault();
-        var data = $(this).serialize();
+        var data = $(this).serialize()+'&duracion='+$('#timer_div').text();
         $.ajax({
            type: "POST", 
            url: "Registro/registrarllamada",
            data : data, 
            success: function( response ){
-               alert( "orale pues" );
+               $('#modalResponseRegistro').addClass( response.claseResponse );
+               $('#modalTitulo').text( response.titulo );
+               $('#modalContent').text( response.contenido );
+               $('#modalResponseRegistro').modal('show');
            },
            error: function( jqXHR, textStatus, errorThrown ){
-               
+               $('#modalResponseRegistro').addClass( "modal-danger" );
+               $('#modalTitulo').text( "Error en el servidor" );
+               $('#modalContent').text( "A ocurrido un error en el servidor: "+errorThrown );
+               $('#modalResponseRegistro').modal('show');
            }
         });
     }); 
+    
+    $('#cerrarModal').click(function(){
+        window.location.href="<?php echo url('inicio'); ?>";
+    });
 
 
     var startDate = new Date();

@@ -123,56 +123,74 @@ class RegistroController extends BaseController {
     
     function postRegistrarllamada(){
         if( Request::ajax() ){
-            $datos = Request::all();
-            $caso = new casosModel();
-            $caso->Nombre = $datos['nombre'];
-            $caso->Edad = $datos['edad'];
-            $caso->EstadoCivil = $datos['estadoCivil'];
-            $caso->Telefono = $datos['telefono'];
-            $caso->Municipio = $datos['Municipio'];
-            $caso->Estado = $datos['Estado'];
-            $caso->Ocupacion = $datos['ocupacion'];
-            $caso->Religion = $datos['religion'];
-            $caso->ComoTeEnteraste = $datos['enteraste'];
-            $caso->PosibleSolucion = $datos['utilidad'];
-            $caso->Estatus = '1';
-            $caso->Sexo = $datos['genero'];
-            $caso->NivelEstudios = $datos['estudios'];
-            $caso->LenguaIndigena = $datos['lengua'];
-            $caso->CP = $datos['cp'];
-            $caso->Colonia = $datos['Colonia'];
-            $caso->CorreoElectronico = $datos['correo'];
-            $caso->MedioContacto = $datos['medioContacto'];
-            $caso->Pais = 'Mexico';
-            $caso->save();
-            // Llamadas
-            $llamada = new llamadasModel();
-            $llamada->IDCaso = $caso->IDCaso;
-            $llamada->LlamadaNo = 1;
-            // Formateamos la hora
-            $date = $datos['fechaActual'];
-            $date = preg_replace('#(\d{2})/(\d{2})/(\d{4})#', '$3-$2-$1', $date);
-            $llamada->FechaLlamada = $date;
-            unset( $date );
-            // Obtenemos el usuario
-            $user = Auth::user();
-            $llamada->Consejera = $user->nombre;
-            unset( $user );
-            $llamada->Horainicio = $datos['horaInicio'];
-            $llamada->Horatermino = date("G:i:s");
-            $llamada->ComentariosAdicionales = $datos['motivoLlamada'];
-            $llamada->AyudaPsicologico = $datos['mpsicologico'];
-            $llamada->AyudaLegal = $datos['mlegal'];
-            $llamada->AyudaMedica = $datos['mmedico'];
-            $llamada->AyudaOtros = $datos['motros'];
-            $llamada->DesarrolloCaso = $datos['desaCaso'];
-            $llamada->CanaLegal = $datos['canaLegal'];
-            $llamada->CanaOtro = $datos['canaOtro'];
-//            $llamada->Duracion = $datos['duracion'];
-            $llamada->Acceso = 1;
-            $llamada->TipoViolencia = $datos['tviolencia'];
-            $llamada->ModalidadViolencia = $datos['modviolencia'];
-            $llamada->save();
+            $respuesta = array();
+            try{
+                $datos = Request::all();
+                $caso = new casosModel();
+                $caso->Nombre = $datos['nombre'];
+                $caso->Edad = $datos['edad'];
+                $caso->EstadoCivil = $datos['estadoCivil'];
+                $caso->Telefono = $datos['telefono'];
+                $caso->Municipio = $datos['Municipio'];
+                $caso->Estado = $datos['Estado'];
+                $caso->Ocupacion = $datos['ocupacion'];
+                $caso->Religion = $datos['religion'];
+                $caso->ComoTeEnteraste = $datos['enteraste'];
+                $caso->PosibleSolucion = $datos['utilidad'];
+                $caso->Estatus = '1';
+                // Horas invertidas
+                $tiempo = $datos['duracion'];
+                $tiempo = explode(" ", $tiempo);
+                $tiempo = $tiempo[0]; // n minutos
+                $tiempo = ceil( $tiempo/60 ); // horas
+                $caso->HorasInvertidas = $tiempo;
+                $caso->Sexo = $datos['genero'];
+                $caso->NivelEstudios = $datos['estudios'];
+                $caso->LenguaIndigena = $datos['lengua'];
+                $caso->CP = $datos['cp'];
+                $caso->Colonia = $datos['Colonia'];
+                $caso->CorreoElectronico = $datos['correo'];
+                $caso->MedioContacto = $datos['medioContacto'];
+                $caso->Pais = 'Mexico';
+                $caso->save();
+                // Llamadas
+                $llamada = new llamadasModel();
+                $llamada->IDCaso = $caso->IDCaso;
+                $llamada->LlamadaNo = 1;
+                // Formateamos la hora
+                $date = $datos['fechaActual'];
+                $date = preg_replace('#(\d{2})/(\d{2})/(\d{4})#', '$3-$2-$1', $date);
+                $llamada->FechaLlamada = $date;
+                unset( $date );
+                // Obtenemos el usuario
+                $user = Auth::user();
+                $llamada->Consejera = $user->nombre;
+                unset( $user );
+                $llamada->Horainicio = $datos['horaInicio'];
+                $llamada->Horatermino = date("G:i:s");
+                $llamada->ComentariosAdicionales = $datos['motivoLlamada'];
+                $llamada->AyudaPsicologico = $datos['mpsicologico'];
+                $llamada->AyudaLegal = $datos['mlegal'];
+                $llamada->AyudaMedica = $datos['mmedico'];
+                $llamada->AyudaOtros = $datos['motros'];
+                $llamada->DesarrolloCaso = $datos['desaCaso'];
+                $llamada->CanaLegal = $datos['canaLegal'];
+                $llamada->CanaOtro = $datos['canaOtro'];
+                $llamada->Duracion = $tiempo;
+                $llamada->Acceso = 1;
+                $llamada->TipoViolencia = $datos['tviolencia'];
+                $llamada->ModalidadViolencia = $datos['modviolencia'];
+                $llamada->save();
+                $respuesta['claseResponse'] = 'modal-success';
+                $respuesta['titulo'] = 'Registro correcto';
+                $respuesta['contenido'] = 'Se ha registrado la llamada correctamente';
+                return Response::json($respuesta);
+            } catch (Exception $e){
+                $respuesta['claseResponse'] = 'modal-danger';
+                $respuesta['titulo'] = 'Error en el servidor';
+                $respuesta['contenido'] = 'A ocurrido un error en el servidor: '.$e->getMessage();                
+                return Response::json($respuesta);
+            }
         }
     }
     
