@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator;
+use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator, App\Http\Models\camposModel;
 
 class BaseController extends Controller {
 
@@ -77,6 +77,10 @@ class BaseController extends Controller {
             }
         }
         return $menu;
+    }
+
+    public function obtenerCampos($tipo){
+        return camposModel::where([['activo', '=', '1'], ['Tipo', '=', $tipo ]])->get()->toArray();
     }
 
 }

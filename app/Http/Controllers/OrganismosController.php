@@ -7,11 +7,6 @@ use View, Session, Request, Redirect, Response, App\Http\Models\organismosModel,
 
 class OrganismosController extends BaseController {
     
-    function obtenerTema(){
-        $ctema = camposModel::where([['activo', '=', '1'], ['Tipo', '=', 'Tema' ]])->get()->toArray();
-        return $ctema;
-    }
-
     public function obtenerOrganismosAll(){
         $organismos = organismosModel::select('ID', 'Tema', 'Institucion', 'Estado',
                 'Direccion', 'Telefono', 'Email')->get()->toArray();
@@ -26,7 +21,7 @@ class OrganismosController extends BaseController {
         return View::make('organismos.organismos', array('menu' => $menu, 
             'organismos' => $this->obtenerOrganismosAll(), 
             'estados' => getEstadosArray(), 
-            'catalogo_tema' => $this->obtenerTema()));
+            'catalogo_tema' => parent::obtenerCampos('Tema')));
     }    
     
     public function postBuscarcp(){

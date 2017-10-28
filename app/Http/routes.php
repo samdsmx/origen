@@ -21,6 +21,7 @@ function getEstadosArray(){
     $estados["EXTRANJERO"] = "EXTRANJERO";
     return $estados;
 }
+
 function getDelegacionesArray( $estado="0" ){
     if ( $estado == "0" ) {
         $municipios = DB::table('catalogoCP')->distinct()->select('municipio')->groupby('municipio')->get();

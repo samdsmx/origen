@@ -23,7 +23,8 @@
     </div>
 
     <div class="form-group col-md-12">
-        <label for="CanaOtro">Otro:</label>
+        <button type="button" class="btn bg-gray-gradient" data-toggle="modal" data-target="#modalRegistroOrganismo"><i class="fa fa-search"></i></button>
+        <label for="CanaOtro">Organismo:</label>
         <textarea name="CanaOtro" id="CanaOtro" class="form-control" rows="3" cols="25" placeholder="..." wrap="hard"></textarea>
     </div>
 

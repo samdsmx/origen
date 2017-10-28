@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Auth, View, Session, Request, Redirect, Response, App\Http\Models\catalogocpModel, App\Http\Models\camposModel, 
+use Auth, View, Session, Request, Redirect, Response, App\Http\Models\catalogocpModel, 
         Illuminate\Support\Facades\DB, App\Http\Models\casosModel, App\Http\Models\llamadasModel;
 
 class RegistroController extends BaseController {
-
-    function obtenerCampos($tipo){
-        return camposModel::where([['activo', '=', '1'], ['Tipo', '=', $tipo ]])->get()->toArray();
-    }
 
     public function getIndex() {
         if (!parent::tienePermiso('Registro')){
@@ -17,14 +13,15 @@ class RegistroController extends BaseController {
         }
         $menu = parent::createMenu();
         return View::make('registro.registro', array('menu' => $menu, 'estados'=> getEstadosArray(), 
-            'mpsicologicos' => $this->obtenerCampos('AYUDAPSICOLOGICO'),            
-            'mlegales' => $this->obtenerCampos('AYUDALEGAL'),
-            'mMed' => $this->obtenerCampos('AYUDAMEDICA'),
-            'mOtr' => $this->obtenerCampos('AYUDAOTROS'),
-            'tv' => $this->obtenerCampos('TipoViolencia'),
-            'mv' => $this->obtenerCampos('ModalidadViolencia'), 
-            'cte' => $this->obtenerCampos('ComoTeEnteraste'),
-            'cleg' => $this->obtenerCampos('CanaLegal')));
+            'catalogo_tema' => parent::obtenerCampos('Tema'),
+            'mpsicologicos' => parent::obtenerCampos('AYUDAPSICOLOGICO'),            
+            'mlegales' => parent::obtenerCampos('AYUDALEGAL'),
+            'mMed' => parent::obtenerCampos('AYUDAMEDICA'),
+            'mOtr' => parent::obtenerCampos('AYUDAOTROS'),
+            'tv' => parent::obtenerCampos('TipoViolencia'),
+            'mv' => parent::obtenerCampos('ModalidadViolencia'), 
+            'cte' => parent::obtenerCampos('ComoTeEnteraste'),
+            'cleg' => parent::obtenerCampos('CanaLegal')));
     }
     
     public function postBuscardelegacion(){
