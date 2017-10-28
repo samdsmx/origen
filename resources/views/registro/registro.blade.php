@@ -20,7 +20,7 @@ Registro
 @stop
 
 @section('cuerpo')
-@include('organismos.modalRegistro')
+@include('organismos.modalBusqueda')
 <section class="content-header">
     <h1 style="color:#605ca8;font-weight: bolder;text-align:center;float:inherit;" class="col-md-10 col-sm-12 col-xs-12">
         <?php

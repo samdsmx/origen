@@ -32,12 +32,13 @@ Sistemas
         <div class="col-md-12">
             <div class="box">
                 <div class="box-body">
+                    @include('organismos.busqueda')
+                    <table id="tablaOrganismos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
                     <div class="col-md-6" style="padding: 0px; text-align: center;">
                         <button id="abrirModal" type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#modalRegistroOrganismo" >
                             <span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Organismo
                         </button>
                     </div>
-                    <table id="tablaOrganismos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
                         <thead>
                         <th class="alert-info col-md-3">TEMA</th>
                         <th class="alert-info col-md-2">INSTITUCI&Oacute;N</th>
