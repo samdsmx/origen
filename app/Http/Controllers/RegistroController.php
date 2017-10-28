@@ -7,73 +7,46 @@ use Auth, View, Session, Request, Redirect, Response, App\Http\Models\catalogocp
 
 class RegistroController extends BaseController {
 
-    function obtenerMPsicologicos(){
-        $psi = camposModel::where([['activo', '=', '1'], ['Tipo', '=', 'AYUDAPSICOLOGICO' ]])->get()->toArray();
-        return $psi;
+    function obtenerCampos($tipo){
+        return camposModel::where([['activo', '=', '1'], ['Tipo', '=', $tipo ]])->get()->toArray();
     }
-    
-    function obtenerMLegal(){
-        $leg = camposModel::where([['activo', '=', '1'], ['Tipo', '=', 'AYUDALEGAL' ]])->get()->toArray();
-        return $leg;
-    }
-    
-    function obtenerMMedico(){
-        $med = camposModel::where([['activo', '=', '1'], ['Tipo', '=', 'AYUDAMEDICA' ]])->get()->toArray();
-        return $med;
-    }
-    
-    function obtenerMOtros(){
-        $otr = camposModel::where([['activo', '=', '1'], ['Tipo', '=', 'AYUDAOTROS' ]])->get()->toArray();
-        return $otr;
-    }
-    function obtenerTViolencia(){
-        $tv = camposModel::where([['activo', '=', '1'], ['Tipo', '=', 'TipoViolencia' ]])->get()->toArray();
-        return $tv;
-    }
-    //ModalidadViolencia
-    function obtenerMViolencia(){
-        $mv = camposModel::where([['activo', '=', '1'], ['Tipo', '=', 'ModalidadViolencia' ]])->get()->toArray();
-        return $mv;
-    }
-    function obtenerCTEnteraste(){
-        $cte = camposModel::where([['activo', '=', '1'], ['Tipo', '=', 'ComoTeEnteraste' ]])->get()->toArray();
-        return $cte;
-    }
-    function obtenerCLegal(){
-        $cte = camposModel::where([['activo', '=', '1'], ['Tipo', '=', 'CanaLegal' ]])->get()->toArray();
-        return $cte;
-    }
-    
+
     public function getIndex() {
         if (!parent::tienePermiso('Registro')){
             return Redirect::to('inicio');
-            }
+        }
         $menu = parent::createMenu();
-        return View::make('registro.registro', array('menu' => $menu, 'estados'=> getEstadosArray(), 'mpsicologicos' => $this->obtenerMPsicologicos(),            
-            'mlegales' => $this->obtenerMLegal(), 'mMed' => $this->obtenerMMedico(), 'mOtr' => $this->obtenerMOtros(), 'tv' => $this->obtenerTViolencia(),
-            'mv' => $this->obtenerMViolencia(), 'cte' => $this->obtenerCTEnteraste(), 'cleg' => $this->obtenerCLegal()));
+        return View::make('registro.registro', array('menu' => $menu, 'estados'=> getEstadosArray(), 
+            'mpsicologicos' => $this->obtenerCampos('AYUDAPSICOLOGICO'),            
+            'mlegales' => $this->obtenerCampos('AYUDALEGAL'),
+            'mMed' => $this->obtenerCampos('AYUDAMEDICA'),
+            'mOtr' => $this->obtenerCampos('AYUDAOTROS'),
+            'tv' => $this->obtenerCampos('TipoViolencia'),
+            'mv' => $this->obtenerCampos('ModalidadViolencia'), 
+            'cte' => $this->obtenerCampos('ComoTeEnteraste'),
+            'cleg' => $this->obtenerCampos('CanaLegal')));
     }
     
     public function postBuscardelegacion(){
         if( Request::ajax() ){
-            $estado = Request::get('estado');
+            $estado = Request::get('Estado');
             return getDelegacionesArray($estado);
         }
     }
     
     public function postBuscarcolonia(){
         if( Request::ajax() ){
-            $municipio = Request::get('municipio');
-            $estado = Request::get('estado');
+            $municipio = Request::get('Municipio');
+            $estado = Request::get('Estado');
             return getColoniasArray($estado, $municipio);    
         }
     }
     
     public function postBuscarcodigopostal(){
         if( Request::ajax() ){
-            $estado = Request::get('estado');
-            $municipio = Request::get('municipio');
-            $colonia = Request::get('colonia');
+            $estado = Request::get('Estado');
+            $municipio = Request::get('Municipio');
+            $colonia = Request::get('Colonia');
             return $this->buscarCodigoPostalPorCampos($estado, $municipio, $colonia);
         }
     }
@@ -93,12 +66,12 @@ class RegistroController extends BaseController {
     
     public function postBuscarcp(){
         if( Request::ajax() ){
-            $cp = Request::get('cp');
+            $cp = Request::get('CP');
             if( $cp == "" ){
                 $direccion = array();
                 $direccion['estado'] = 0;
                 $direccion['municipio']=0;
-                $direccion['asentamiento']=0;
+                $direccion['colonia']=0;
                 return Response::json($direccion);
             }
             $direccion = catalogocpModel::where('cp', '=', $cp)->get()->toArray();
@@ -121,77 +94,38 @@ class RegistroController extends BaseController {
         return $direccion;
     }
     
-    function postRegistrarllamada(){
-        if( Request::ajax() ){
-            $respuesta = array();
-            try{
-                $datos = Request::all();
-                $caso = new casosModel();
-                $caso->Nombre = $datos['nombre'];
-                $caso->Edad = $datos['edad'];
-                $caso->EstadoCivil = $datos['estadoCivil'];
-                $caso->Telefono = $datos['telefono'];
-                $caso->Municipio = $datos['Municipio'];
-                $caso->Estado = $datos['Estado'];
-                $caso->Ocupacion = $datos['ocupacion'];
-                $caso->Religion = $datos['religion'];
-                $caso->ComoTeEnteraste = $datos['enteraste'];
-                $caso->PosibleSolucion = $datos['utilidad'];
-                $caso->Estatus = '1';
-                // Horas invertidas
-                $tiempo = $datos['duracion'];
-                $tiempo = explode(" ", $tiempo);
-                $tiempo = $tiempo[0]; // n minutos
-                $tiempo = ceil( $tiempo/60 ); // horas
-                $caso->HorasInvertidas = $tiempo;
-                $caso->Sexo = $datos['genero'];
-                $caso->NivelEstudios = $datos['estudios'];
-                $caso->LenguaIndigena = $datos['lengua'];
-                $caso->CP = $datos['cp'];
-                $caso->Colonia = $datos['Colonia'];
-                $caso->CorreoElectronico = $datos['correo'];
-                $caso->MedioContacto = $datos['medioContacto'];
-                $caso->Pais = 'Mexico';
-                $caso->save();
-                // Llamadas
-                $llamada = new llamadasModel();
-                $llamada->IDCaso = $caso->IDCaso;
-                $llamada->LlamadaNo = 1;
-                // Formateamos la hora
-                $date = $datos['fechaActual'];
-                $date = preg_replace('#(\d{2})/(\d{2})/(\d{4})#', '$3-$2-$1', $date);
-                $llamada->FechaLlamada = $date;
-                unset( $date );
-                // Obtenemos el usuario
-                $user = Auth::user();
-                $llamada->Consejera = $user->nombre;
-                unset( $user );
-                $llamada->Horainicio = $datos['horaInicio'];
-                $llamada->Horatermino = date("G:i:s");
-                $llamada->ComentariosAdicionales = $datos['motivoLlamada'];
-                $llamada->AyudaPsicologico = $datos['mpsicologico'];
-                $llamada->AyudaLegal = $datos['mlegal'];
-                $llamada->AyudaMedica = $datos['mmedico'];
-                $llamada->AyudaOtros = $datos['motros'];
-                $llamada->DesarrolloCaso = $datos['desaCaso'];
-                $llamada->CanaLegal = $datos['canaLegal'];
-                $llamada->CanaOtro = $datos['canaOtro'];
-                $llamada->Duracion = $tiempo;
-                $llamada->Acceso = 1;
-                $llamada->TipoViolencia = $datos['tviolencia'];
-                $llamada->ModalidadViolencia = $datos['modviolencia'];
-                $llamada->save();
-                $respuesta['claseResponse'] = 'modal-success';
-                $respuesta['titulo'] = 'Registro correcto';
-                $respuesta['contenido'] = 'Se ha registrado la llamada correctamente';
-                return Response::json($respuesta);
-            } catch (Exception $e){
-                $respuesta['claseResponse'] = 'modal-danger';
-                $respuesta['titulo'] = 'Error en el servidor';
-                $respuesta['contenido'] = 'A ocurrido un error en el servidor: '.$e->getMessage();                
-                return Response::json($respuesta);
-            }
+    public function postRegistrarllamada(){
+        if (!Request::ajax()) {
+            return;
         }
+        $datos = Request::all();
+        $datos['motivos'] = isset($datos['AyudaPsicologico']) || isset($datos['AyudaLegal']) || isset($datos['AyudaMedica']) || isset($datos['AyudaOtros']);          
+        $validatorCasos = casosModel::validar($datos);
+        $validatorLlamadas = llamadasModel::validar($datos);
+        if ($validatorCasos->fails() || $validatorLlamadas->fails()) {
+            $errors = array_merge($validatorLlamadas->errors()->toArray() , $validatorCasos->errors()->toArray());
+            return Response::json(array('mensaje'=> 'Error al procesar algunos campos' , 'errors' => $errors));
+        }
+        $duracion = ceil( explode(" ", $datos['duracion'])[0]/60 );
+
+        $caso = new casosModel();
+        $datos['Estatus'] = '1';
+        $datos['HorasInvertidas'] = $duracion;
+        $caso->fill($datos);
+        $caso->save();
+
+        $llamada = new llamadasModel();
+        $llamada->IDCaso = $caso->IDCaso;
+        $llamada->LlamadaNo = 1;
+        $llamada->FechaLlamada = preg_replace('#(\d{2})/(\d{2})/(\d{4})#', '$3-$2-$1', $datos['fechaActual']);
+        $llamada->Consejera = Auth::user()->nombre;
+        $llamada->Horatermino = date("G:i:s");
+        $llamada->Duracion = $duracion;
+        $llamada->Acceso = 1;
+        $llamada->fill($datos);
+        $llamada->save();
+
+        Session::flash('mensaje', 'Se ha registrado la llamada correctamente. Caso #'.$caso->IDCaso);
     }
     
 

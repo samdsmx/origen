@@ -7,20 +7,19 @@
 
 <div class="box-body">
 
-
-    <div class="form-group col-md-6">
-      <label for="nombre">Nombre:</label>
-      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre completo">
+    <div id="dNombre" class="form-group col-md-6">
+      <label for="Nombre">Nombre:</label>
+      <input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Nombre completo">
     </div>
 
     <div class="form-group col-md-2">
-      <label for="edad">Edad:</label>
-      <input type="number" class="form-control" id="edad" name="edad" placeholder="Edad en años" >
+      <label for="Edad">Edad:</label>
+      <input type="number" class="form-control" name="Edad" placeholder="Edad en años" >
     </div>
 
     <div class="form-group col-md-4">
-        <label for="estadoCivil">Estado Civil:</label>
-        <select name="estadoCivil" class="form-control" style="width: 100%;">
+        <label for="EstadoCivil">Estado Civil:</label>
+        <select name="EstadoCivil" class="form-control" style="width: 100%;">
          <option>-</option>
          <option value="Soltera">Soltera</option>
          <option value="Divorciada">Divorciada</option>
@@ -32,26 +31,24 @@
         </select>
     </div>
 
-
-
     <div class="form-group col-md-3">
-      <label for="genero">Genero:</label>
+      <label for="Sexo">Genero:</label>
       <div class="radio">
         <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
-          <input type="radio" name="genero" id="genero1" value="f" checked>
+          <input type="radio" name="Sexo" value="f" checked>
           Femenino
         </label>
         <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
-          <input type="radio" name="genero" id="genero2" value="m">
+          <input type="radio" name="Sexo" value="m">
           Masculino
         </label>
       </div>
     </div>
 
     <div class="form-group col-md-5">
-        <label for="estudios">Nivel de estudios:</label>
-        <select name="estudios" class="form-control">
-            <option selected="">-</option>
+        <label for="NivelEstudios">Nivel de estudios:</label>
+        <select name="NivelEstudios" class="form-control">
+            <option selected>-</option>
             <option>Analfabeta</option>
             <option>Primaria</option>
             <option>Secundaria</option>
@@ -63,10 +60,10 @@
     </div>
 
     <div class="form-group col-md-4">
-        <label for="religion">Religión:</label>
-        <select name="religion" class="form-control">
-         <option>-</option>
-         <option selected="">Catolica</option>
+        <label for="Religion">Religión:</label>
+        <select name="Religion" class="form-control">
+         <option selected>-</option>
+         <option>Catolica</option>
          <option>Musulmana</option>
          <option>Judia</option>
          <option>Pentecostes</option>
@@ -78,26 +75,25 @@
         </select>
     </div>
 
-
     <div class="form-group col-md-3">
-      <label for="lengua" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">¿Habla alguna lengua indigena?</label>
+      <label for="LenguaIndigena" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">¿Habla alguna lengua indigena?</label>
       <div class="radio">
         <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
-          <input type="radio" name="lengua" id="lengua1" value="no" checked>
+          <input type="radio" name="LenguaIndigena" value="no" checked>
           No
         </label>
         <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
-          <input type="radio" name="lengua" id="lengua2" value="si">
+          <input type="radio" name="LenguaIndigena" value="si">
           Si
         </label>
       </div>
     </div>
 
     <div class="form-group col-md-5">
-      <label for="ocupacion">Ocupación:</label>
-      <select name="ocupacion" class="form-control" style="width: 100%;" onchange="showfield(this.options[this.selectedIndex].value)">
-        <option>-</option>
-        <option selected="">Ama de casa</option>
+      <label for="Ocupacion">Ocupación:</label>
+      <select name="Ocupacion" class="form-control" style="width: 100%;" onchange="showfield(this.options[this.selectedIndex].value)">
+        <option selected>-</option>
+        <option>Ama de casa</option>
         <option>Empleada</option>
         <option>Empleada Domestica</option>
         <option>Negocio propio</option>
@@ -114,7 +110,7 @@
             <option>Sola</option>
             <option>Padres</option>
             <option>Pareja</option>
-            <option selected="">Familia</option>
+            <option selected>Familia</option>
             <option>Hijos</option>
             <option>Padre</option>
             <option>Madre</option>

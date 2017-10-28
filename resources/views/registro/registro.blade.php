@@ -57,7 +57,7 @@ Registro
           <div class="col-md-3">
              <label for="nombre">Hora de Inicio:</label>&nbsp;
              <small><?php $HoraActual=date("G:i:s"); echo $HoraActual; ?></small>
-             <input type="hidden" name="horaInicio" value="<?php echo $HoraActual;?>">
+             <input type="hidden" name="Horainicio" value="<?php echo $HoraActual;?>">
           </div>
           <div class="col-md-3">
               <label for="duracion">Duración:</label>&nbsp;<small id="timer_div">0 Min.</small>
@@ -118,6 +118,7 @@ Registro
 </section>
 
 @stop
+
 @section('recursosExtra')
 {!! Html::script('js/bootstrap-editable.js') !!}
 {!! Html::style('css/bootstrap-editable.css') !!}
@@ -135,7 +136,7 @@ Registro
     });
     
     $("#Estado").change( function(){
-        $("#cp").val("");
+        $("#CP").val("");
         $("#Municipio").find('option')
                 .remove()
                 .end()
@@ -151,7 +152,7 @@ Registro
             $.ajax({
                 type: 'POST', 
                 url: 'Registro/buscardelegacion', 
-                data: { estado: estado }, 
+                data: { Estado: estado }, 
                 success: function( response ){
                     var opciones = '';
                     $.each( response, function( key, value ){
@@ -167,7 +168,7 @@ Registro
     });
     
     $("#Municipio").change( function(){
-        $("#cp").val("");
+        $("#CP").val("");
         $("#Colonia").find('option')
                 .remove()
                 .end()
@@ -179,7 +180,7 @@ Registro
             $.ajax({
                 type: 'POST', 
                 url: 'Registro/buscarcolonia', 
-                data: { municipio: municipio, estado: estado }, 
+                data: { Municipio: municipio, Estado: estado }, 
                 success: function( response ){
                     var opciones = '';
                     $("#Colonia").find('option')
@@ -200,7 +201,7 @@ Registro
     });
     
     $("#Colonia").change( function(){
-        $("#cp").val("");
+        $("#CP").val("");
         var municipio = $("#Municipio").val();
         var estado = $("#Estado").val();
         var colonia = $(this).val();
@@ -208,7 +209,7 @@ Registro
             $.ajax({
                 type: 'POST', 
                 url: 'Registro/buscarcodigopostal', 
-                data: { estado: estado, municipio: municipio, colonia:colonia }, 
+                data: { Estado: estado, Municipio: municipio, Colonia: colonia }, 
                 success: function( response ){
                     response = response.toString();
                     var cadenaCeros = '';
@@ -216,7 +217,7 @@ Registro
                         cadenaCeros +="0"+cadenaCeros;
                     }
                     response = cadenaCeros+response;
-                    $("#cp").val( response );
+                    $("#CP").val( response );
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     alert("Error en el servidor");
@@ -227,13 +228,14 @@ Registro
     
     
     if( $('#Mexico').is(':checked')) {
-        $('#cp').focusout( function() {
-            var cp = $("#cp").val();
+        $('#CP').focusout( function() {
+            var cp = $("#CP").val();
             $.ajax({
                 type: 'POST', 
                 url: 'Registro/buscarcp', 
-                data: { cp: cp },
+                data: { CP: cp },
                 success: function( response ){
+                    console.log(response);
                     $("#Estado").val(response["estado"]);
                     $("#Municipio").find('option')
                             .remove()
@@ -254,28 +256,13 @@ Registro
             });
         });
     }
-    
-    $("#registrollamada").submit( function( e ) {
+
+    $('#registrollamada').submit(function(e) {
         e.preventDefault();
         var data = $(this).serialize()+'&duracion='+$('#timer_div').text();
-        $.ajax({
-           type: "POST", 
-           url: "Registro/registrarllamada",
-           data : data, 
-           success: function( response ){
-               $('#modalResponseRegistro').addClass( response.claseResponse );
-               $('#modalTitulo').text( response.titulo );
-               $('#modalContent').text( response.contenido );
-               $('#modalResponseRegistro').modal('show');
-           },
-           error: function( jqXHR, textStatus, errorThrown ){
-               $('#modalResponseRegistro').addClass( "modal-danger" );
-               $('#modalTitulo').text( "Error en el servidor" );
-               $('#modalContent').text( "A ocurrido un error en el servidor: "+errorThrown );
-               $('#modalResponseRegistro').modal('show');
-           }
-        });
-    }); 
+        guardarFormulario(data, 'Registro/registrarllamada');
+    });
+
     
     $('#cerrarModal').click(function(){
         window.location.href="<?php echo url('inicio'); ?>";

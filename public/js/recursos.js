@@ -3,6 +3,7 @@ $.ajaxSetup({
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
 });
+
 function mostrarMensaje(mensaje, clase) {
     clase = (typeof (clase) !== 'undefined' ? clase : "alert-danger");
     $("#mensajeVista").html(mensaje);
@@ -27,9 +28,10 @@ function guardarFormulario(data, url) {
                     $("#d" + index).addClass("has-error");
                     $("#" + index).attr("title", error);
                 });
-            } else {
+                mostrarMensaje(response.mensaje);
                 $('html, body').animate({scrollTop: 0}, 'fast');
-                location.reload();
+            } else {
+                window.location="inicio";
             }
         },
         error: function(xhr, status, error) {

@@ -8,36 +8,35 @@
 <div class="box-body">
 
     <div class="form-group col-md-4">
-        <label for="edad">Teléfono:</label>
+        <label for="Telefono">Teléfono:</label>
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-            <input type="text" id="telefono" name="telefono" class="form-control" placeholder="####-####">
+            <input type="text" name="Telefono" class="form-control" placeholder="####-####">
         </div>
     </div>
 
     <div class="form-group col-md-5">
-        <label for="edad" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Correo Electronico:</label>
+        <label for="CorreoElectronico" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Correo Electronico:</label>
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-            <input type="email" id="correo" name="correo" class="form-control" placeholder="Email">
+            <input type="email" name="CorreoElectronico" class="form-control" placeholder="Email">
         </div>
     </div>
 
     <div class="form-group col-md-3">
-        <label for="medioContacto" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Medio de contacto:</label>
-        <select name="medioContacto" class="form-control">
-            <option value="telefono" selected="true">Teléfono</option>
-            <option value="chat" >Chat</option>
-            <option value="correo" >Mail</option>
+        <label for="MedioContacto" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Medio de contacto:</label>
+        <select name="MedioContacto" class="form-control">
+            <option value="telefono" selected>Teléfono</option>
+            <option value="chat">Chat</option>
+            <option value="correo">Mail</option>
         </select>
     </div>                            
 
     <div class="form-group col-md-9">
-        <label for="enteraste">Como te enteraste:</label>
+        <label for="ComoTeEnteraste">Como te enteraste:</label>
         <div class="row">
           <div class="col-md-8">
-            <!-- <select name="enteraste" class="form-control" onchange="rellenaMedios('forma');" > -->
-            <select name="enteraste" class="form-control" >
+            <select name="ComoTeEnteraste" class="form-control" onchange="rellenaMedios('forma');" >
                 <option value="0">-</option>
                 @foreach ($cte as $v)
                     <option value="{{$v['Nombre']}}">{{$v['Nombre']}}</option>
