@@ -19,32 +19,18 @@ class OrganismosController extends BaseController {
             }
         $menu = parent::createMenu();
         return View::make('organismos.organismos', array('menu' => $menu, 
-            'organismos' => $this->obtenerOrganismosAll(), 
+            'organismos' => [], 
             'estados' => getEstadosArray(), 
             'catalogo_tema' => parent::obtenerCampos('Tema')));
     }    
     
-    public function postBuscarcp(){
-        if(Request::ajax()){
-            $cp = Request::get('cp');
-            $direccion = catalogocpModel::where('cp', '=', $cp)->get()->toArray();
-            $direccion = $direccion[0];
-            
-            $direccion['estado'] = strtr($direccion['estado'], "áéíóú", "ÁÉÍÓÚ");
-            $direccion['municipio'] = strtr($direccion['municipio'], "áéíóú", "ÁÉÍÓÚ");
-            $direccion['asentamiento'] = strtr($direccion['asentamiento'], "áéíóú", "ÁÉÍÓÚ");
-            
-            $direccion['estado'] = strtoupper($direccion['estado']);
-            $direccion['municipio'] = strtoupper($direccion['municipio']);
-            $direccion['asentamiento'] = strtoupper($direccion['asentamiento']);
-            
-            if($direccion){
-                return Response::json($direccion);
-            }else{
-                Session::flash('mensajeError', 'Error al buscar la direccion');
-            }
+    public function postBuscar(){
+        if (!Request::ajax()) {
+            return;
         }
-        return $direccion;
+        $datos = Request::all();
+        console.log($datos);
+        return Response::json($datos);
     }
     
     public function postRegistraorganismo(){

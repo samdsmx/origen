@@ -16,7 +16,6 @@ Registro
 @stop
 
 @section('encabezado')
-
 @stop
 
 @section('cuerpo')
@@ -262,13 +261,7 @@ Registro
         var data = $(this).serialize()+'&duracion='+$('#timer_div').text();
         guardarFormulario(data, 'Registro/registrarllamada');
     });
-
-    
-    $('#cerrarModal').click(function(){
-        window.location.href="<?php echo url('inicio'); ?>";
-    });
-
-
+   
     var startDate = new Date();
 
     var interval = setInterval(function() {
@@ -277,8 +270,6 @@ Registro
         var diffMin = Math.ceil(timeDiff / 60000); 
         document.getElementById('timer_div').innerHTML = diffMin + " Min."
     }, 60000);
-    
-    
 
 </script>
 @stop

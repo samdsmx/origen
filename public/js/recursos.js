@@ -138,11 +138,17 @@ $('#registraOrganismo').submit(function(e) {
     });
 });
 
-
-
 $(document).ready(function() {
     $("#panel-messages").fadeTo(3000, 500).slideUp(500, function() {
         $("#panel-messages").hide();
+    });
+
+    $('#buscaOrganismos').submit(function(e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+        alert('buscarOrganismo');
+        console.log(data);
+        //guardarFormulario(data, 'Registro/registrarllamada');
     });
 
     $("#fecha_inicio").datepicker({

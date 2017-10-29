@@ -8,12 +8,11 @@
                     <span aria-hidden="true">&times;</span>
                     <span class="sr-only">Cerrar</span>
                 </button>
-                <h4 class="modal-title" id="registroLabel" 
-                    style="color: #ffffff; text-align: center; font-weight: bolder;">
+                <h4 class="modal-title" id="registroLabel" style="color: #ffffff; text-align: center; font-weight: bolder;">
                     Organismos
                 </h4>
             </div>
-             @include('organismos.busqueda')
+            @include('organismos.busqueda')
         </div>
     </div>
 </div>

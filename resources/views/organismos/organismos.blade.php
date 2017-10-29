@@ -97,7 +97,7 @@ Sistemas
             url: 'Consultas/obtenerlistado/' + tipo + '/' + id,
             success: function(data) {
                 if (data == 'error') {
-                    mostrarMensajeError('Ha ocurrido un error debido a que la informaci√≥n introducida no es correcta. Vuelva a intentarlo m√°s tarde.');
+                    mostrarMensajeError('Ha ocurrido un error debido a que la informaciÛn introducida no es correcta. Vuelva a intentarlo m·s tarde.');
                     console.log('data = error');
                 }
                 else {
@@ -109,17 +109,11 @@ Sistemas
                 }
             },
             error: function(xhr) {
-                mostrarMensajeError("Ocurrio un error en el servidor. Intente de nuevo m√°s tarde, y si persiste, por favor contacte con el administrador del sistema.");
+                mostrarMensajeError("Ocurrio un error en el servidor. Intente de nuevo m·s tarde, y si persiste, por favor contacte con el administrador del sistema.");
             }
         });
     }*/
-    function mostrarMensajeError(mensaje) {
-        $('#panel-messages').attr('style', 'vertical-align: middle; font-size: 20px; text-align: center; font-weight: bolder; opacity: 500; display: block;');
-        $('#panel-messages').html('<div class="alert alert-danger" style="border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-left-radius: 10px; border-bottom-right-radius:10px;">' + mensaje + '</div>');
-        setTimeout(function() {
-            $('#panel-messages').toggle();
-        }, 3000);
-    }
+
     $('#tablaSistemas').on('click', '.botonUsuarios', function() {
         var contenido = $(this).attr('data-content').trim().split('<p>');
 		var sistema = $(this).parent().parent().children('.nombreSistema').text();
@@ -143,10 +137,12 @@ Sistemas
 			eliminarPersona(this);
 		});	
 	});
+	
 	$('#modalResponsableAgregar').click(function(){
 		$('#buscarResponsable').removeClass('hidden');
 		$(this).addClass('hidden');
 	});
+
 	$('#modalResponsableEnviar').click(function(){
 		var usuario = $('#modalResponsableCandidato').val();
 		var sistema = $('#modalResponsableISistema').val();
@@ -219,9 +215,9 @@ Sistemas
 		$('#buscarResponsable').addClass('hidden');
 		$('#modalResponsableAgregar').removeClass('hidden');
 	}
-</script>
-<script>
+
     $(".select2").select2();
     $('.js-example-basic-multiple').select2();
+
 </script>
 @stop
