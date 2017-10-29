@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator;
 
-class GruposController extends BaseController {
+class CatalogosController extends BaseController {
 
     public function getIndex() {
         if (!parent::tienePermiso('Catalogos')) {
@@ -12,23 +12,23 @@ class GruposController extends BaseController {
         }
         $menu = parent::createMenu();
         $tipos = DB::select('select Tipo from campos group by Tipo order by Tipo ASC');
-        $grupos = DB::select("select c.* from campos c where c.Tipo = '" . $tipos[0]->Tipo . "' order by c.Nombre ASC");
-        return View::make('grupos.grupos', array('menu' => $menu, 'grupos' => $grupos, 'tipos' => $tipos));
+        $campos = parent::obtenerCampos($tipos[0]->Tipo);
+        return View::make('catalogos.catalogos', array('menu' => $menu, 'campos' => $campos, 'tipos' => $tipos));
     }
 
     public function postFiltro() {
-        if (Request::ajax()) {
-            $menu = parent::createMenu();
-            $tipos = DB::select('select Tipo from campos group by Tipo order by Tipo ASC');
-            $grupos = DB::select("select c.* from campos c where c.Tipo = '" . Request::get('tipo'). "' order by c.Nombre ASC");
-            if ($grupos) {               
-                return Redirect::to('Grupos')->with('mensajeError', 'Error al buscar la sección/grupo')->with('tituloMensaje', '¡Error!');
-                // $view = View::make('grupos.grupos', array('menu' => $menu, 'grupos' => $grupos, 'tipos' => $tipos));
-                // return $view->renderSections()['tableContent'];
-            } else {
-                return Redirect::to('Grupos')->with('mensajeError', 'Error al buscar la sección/grupo')->with('tituloMensaje', '¡Error!');
-            }
+        if (!Request::ajax()) {
+            return;
         }
+        $datos = Request::all();
+        $campos = parent::obtenerCampos($datos['tipo']);
+        if ($campos) {               
+            $view = View::make('catalogos.catalogos', array('menu' => [], 'campos' => $campos, 'tipos' => []));
+            return $view->renderSections()['tableContent'];
+        } else {
+            return Redirect::to('Catalogos')->with('mensajeError', 'Error al buscar la sección/grupo');
+        }
+        return;
     }
 
     public function postBuscar() {

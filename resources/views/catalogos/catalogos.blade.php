@@ -20,7 +20,7 @@ Grupos
 @stop
 
 @section('cuerpo')
-@include('grupos.modalRegistro')
+@include('catalogos.modalRegistro')
 <section class="content-header">
     <h1 style="color:#605ca8;font-weight: bolder;">Gestión de Catalogos.</h1>
     <ol class="breadcrumb">
@@ -34,52 +34,52 @@ Grupos
         <div class="col-md-12">
             <div class="box">
                 <div class="box-body">
-                   
-                    <table id="tablaGrupos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
-                        <div class="col-md-6" style="padding: 0px; text-align: center;">
-                            <button id="abrirModal" type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modalRegistroGrupo" ><span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Campo</button>
-                            <div class="col-md-1" style="line-height: 33px;"><label for="tipo">Tipo:</label></div>
-                            <div class="col-md-3">
-                                <select name="tipo" class="form-control" onchange="filtro();" >
-                                    @foreach($tipos as $tipo)
-                                        <option value="{!! $tipo->Tipo !!}">{!! $tipo->Tipo !!}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                    <div class="col-md-6" style="padding: 0px; text-align: center;">
+                        <button id="abrirModal" type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modalRegistroGrupo" ><span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Campo</button>
+                        <div class="col-md-1" style="line-height: 33px;"><label for="tipo">Tipo:</label></div>
+                        <div class="col-md-3">
+                            <select name="tipo" class="form-control" onchange="filtro();" >
+                                @foreach($tipos as $tipo)
+                                    <option value="{!! $tipo->Tipo !!}">{!! $tipo->Tipo !!}</option>
+                                @endforeach
+                            </select>
                         </div>
-                    
-    
+                    </div>
 
-                        <thead>
-                        <th class="alert-info col-md-5">TIPO</th>
-                        <th class="alert-info col-md-5">DESCRIPCION</th>
-                        <th class="alert-info col-md-1">ESTATUS</th>
-                        <th class="alert-info col-md-1">OPERACIONES</th>
-                        </thead>
-                        @section('tableContent')
+                    @section('tableContent')
+                    <section id="tableContent">
+                    <table id="tablaCampos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
+                            <thead>
+                                <th class="alert-info col-md-5">TIPO</th>
+                                <th class="alert-info col-md-5">DESCRIPCION</th>
+                                <th class="alert-info col-md-1">ESTATUS</th>
+                                <th class="alert-info col-md-1">OPERACIONES</th>
+                            </thead>
+                            
                             <tbody>
-                                @foreach($grupos as $grupo)
+                                @foreach($campos as $campo)
                                 <tr>
-                                    <td style="vertical-align: middle;">{!! $grupo->Tipo !!}</td>
-                                    <td style="vertical-align: middle;">{!! $grupo->Nombre !!}</td>
+                                    <td style="vertical-align: middle;">{!! $campo['Tipo'] !!}</td>
+                                    <td style="vertical-align: middle;">{!! $campo['Nombre'] !!}</td>
                                     <td>
                                         <h4>
-                                            <a href="{!! url('/Grupos/cambia/'.$grupo->Tipo)!!}" type="button" class="btn label {!! $grupo->activo ? 'label-info' : 'label-danger' !!}">
-                                                {!! $grupo->activo ? 'ACTIVO' : 'INACTIVO' !!}
+                                            <a href="{!! url('/campos/cambia/'.$campo['Tipo'])!!}" type="button" class="btn label {!! $campo['activo'] ? 'label-info' : 'label-danger' !!}">
+                                                {!! $campo['activo'] ? 'ACTIVO' : 'INACTIVO' !!}
                                             </a>
                                         </h4>
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <button type="button" class="btn bg-olive updateGroup" data-toggle="modal" data-target="#modalRegistroGrupo" data-id="{!!$grupo->Tipo!!}"><i class="fa fa-edit"></i></button>
-                                            <button type="button" class="btn bg-red-gradient deleteGroupModal" data-toggle="modal" data-target="#modalConfirma" data-id="{!!$grupo->Tipo!!}"><i class="fa fa-trash"></i></button>
+                                            <button type="button" class="btn bg-olive updateGroup" data-toggle="modal" data-target="#modalRegistroCampo" data-id="{!!$campo['Tipo']!!}"><i class="fa fa-edit"></i></button>
+                                            <button type="button" class="btn bg-red-gradient deleteGroupModal" data-toggle="modal" data-target="#modalConfirma" data-id="{!!$campo['Tipo']!!}"><i class="fa fa-trash"></i></button>
                                         </div>
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
-                        @show
-                    </table>
+                        </table>
+                        </section>
+                        @show  
                 </div>
             </div>
         </div>
@@ -89,7 +89,8 @@ Grupos
 @stop
 @section('recursosExtra')
 <script>
-    $('#tablaGrupos').DataTable({
+
+    var propiedadesTabla = {
         scrollX: false,
         responsive: true,
         searching: true,
@@ -97,7 +98,9 @@ Grupos
         paging: false,
         info: true,
         language: dataTablesSpanish
-    });
+        }
+
+    $('#tablaCampos').DataTable(propiedadesTabla);
 
     $("#abrirModal").click(function() {
         $('div').removeClass('has-error');
@@ -148,17 +151,13 @@ Grupos
 
     function filtro() {
         var tipo = document.getElementsByName('tipo')[0].value;
-        alert(tipo);
         $.ajax({
             type: "POST",
-            url: 'Grupos/filtro',
+            url: 'Catalogos/filtro',
             data: {tipo: tipo},
             success: function(response) {
-                
-                
-                //$('#tableContent').empty().append($(response)); 
-                $("#tableContent").html(grupos);
-                
+                $('#tableContent').html(response);  
+                $('#tablaCampos').DataTable(propiedadesTabla);           
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert("Error en el servidor");
