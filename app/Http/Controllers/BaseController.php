@@ -80,7 +80,7 @@ class BaseController extends Controller {
     }
 
     public function obtenerCampos($tipo){
-        return camposModel::where([['activo', '=', '1'], ['Tipo', '=', $tipo ]])->get()->toArray();
+        return camposModel::where([['activo', '=', '1'], ['Tipo', '=', $tipo ]])->orderBy('Nombre', 'asc')->get()->toArray();
     }
 
 }

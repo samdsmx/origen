@@ -13,33 +13,8 @@ class ConsultasController extends BaseController {
 			return Redirect::to('inicio');
 		}
 		$menu = parent::createMenu();
-		$periodo = siaPeriodoModel::where('status', '=', 1)->orderBy('fecha_inicio', 'desc')->first();
-		$text_select_periodo = "<select class=\"select2\" name=\"periodo_filter\" id=\"periodo_filter\" >";
-		$text_select_periodo.="<option value = \"0\">-- TODOS --</option>";
-		$periodos = siaPeriodoModel::orderBy('fecha_inicio', 'desc')->get();
-		$opcionesPregunta = DB::select('select p.id_propiedad, p.descripcion, p.id_tipo from sia_cat_propiedad p');
-		foreach ($periodos as $per) {
-			if ($periodo != null && $per->id_periodo == $periodo->id_periodo) {
-				$text_select_periodo.="<option value=\"" . $per->id_periodo . "\" selected >" . $per->comentarios . " (" . $per->fecha_inicio . " - " . $per->fecha_fin . ")</option>";
-			} else {
-				$text_select_periodo.="<option value=\"" . $per->id_periodo . "\">" . $per->comentarios . " (" . $per->fecha_inicio . " - " . $per->fecha_fin . ")</option>";
-			}
-		}
-		$text_select_periodo.="</select>";
-		$sistemas = DB::select('select T2.*, p.comentarios periodo, asp.id_observacion, asp.nota, o.descripcion observacion, r.valor Sistema, r2.valor nombreCompleto, asp.id_sistema_periodo
-            from 
-            (select s.id_sistema, s.id_fase, s.status, f.descripcion fase, max(asp.id_periodo) id_periodo, GROUP_CONCAT(DISTINCT CONCAT_WS(\'|\',ps.id_persona,concat(p.nombres,\' \', p.primer_apellido, \' \', p.segundo_apellido))) owner
-                from sia_sistema s
-                LEFT JOIN sia_aso_persona_sistema ps on ps.id_sistema = s.id_sistema
-                LEFT JOIN sia_persona p on p.id_persona = ps.id_persona, 
-                sia_aso_sistema_periodo asp, sia_cat_fase f
-                where f.id_fase = s.id_fase and asp.id_sistema = s.id_sistema group by s.id_sistema) T2,
-            sia_periodo p, sia_observacion o, sia_aso_sistema_periodo asp
-            LEFT JOIN sia_respuesta r on r.id_sistema_periodo = asp.id_sistema_periodo and r.id_propiedad = 6
-            LEFT JOIN sia_respuesta r2 on r2.id_sistema_periodo = asp.id_sistema_periodo and r2.id_propiedad = 5
-            where T2.id_periodo = p.id_periodo and asp.id_sistema=T2.id_sistema and asp.id_periodo = T2.id_periodo and o.id_observacion = asp.id_observacion');
-		$posiblesResponsables = DB::select('select * from sia_persona where status = 1');
-		return View::make('sistemas.sistemas', array('menu' => $menu, "dentroPeriodo" => FALSE, 'periodos' => $text_select_periodo, 'ur_selected' => 0, 'opcionesPregunta' => $opcionesPregunta, 'sistemas' => $sistemas, "idPeriodoActual" => $periodo->id_periodo, 'posiblesResponsables' => $posiblesResponsables, 'modificarFuera' => parent::tienePermiso('Modificar fuera del periodo')));
+		return View::make('consultas.casos', array('menu' => $menu, 'organismos' => []));	
+		//return View::make('consultas.llamadas', array('menu' => $menu, 'modificarFuera' => parent::tienePermiso('Modificar fuera del periodo')));
 	}
 
 	public function getConsultasistemas($tipo, $period, $selectFiltro, $respuestaFiltro, $comparador) {
