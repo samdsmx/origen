@@ -1,6 +1,6 @@
 @extends('layouts.baseInicio')
 @section('titulo')
-Grupos
+Catalogos
 @stop
 
 @section('tituloSistema')
@@ -59,19 +59,19 @@ Grupos
                             <tbody>
                                 @foreach($campos as $campo)
                                 <tr>
-                                    <td style="vertical-align: middle;">{!! $campo['Tipo'] !!}</td>
-                                    <td style="vertical-align: middle;">{!! $campo['Nombre'] !!}</td>
+                                    <td style="vertical-align: middle;">{!! $campo->Tipo !!}</td>
+                                    <td style="vertical-align: middle;">{!! $campo->Nombre !!}</td>
                                     <td>
                                         <h4>
-                                            <a href="{!! url('/campos/cambia/'.$campo['Tipo'])!!}" type="button" class="btn label {!! $campo['activo'] ? 'label-info' : 'label-danger' !!}">
-                                                {!! $campo['activo'] ? 'ACTIVO' : 'INACTIVO' !!}
+                                            <a href="{!! url('/Catalogos/cambia/'.$campo->Tipo.'/'.$campo->Nombre)!!}" type="button" class="btn label {!! $campo->activo ? 'label-info' : 'label-danger' !!}">
+                                                {!! $campo->activo ? 'ACTIVO' : 'INACTIVO' !!}
                                             </a>
                                         </h4>
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <button type="button" class="btn bg-olive updateGroup" data-toggle="modal" data-target="#modalRegistroCampo" data-id="{!!$campo['Tipo']!!}"><i class="fa fa-edit"></i></button>
-                                            <button type="button" class="btn bg-red-gradient deleteGroupModal" data-toggle="modal" data-target="#modalConfirma" data-id="{!!$campo['Tipo']!!}"><i class="fa fa-trash"></i></button>
+                                            <button type="button" class="btn bg-olive updateGroup" data-toggle="modal" data-target="#modalRegistroCampo" data-id="{!!$campo->Tipo!!}"><i class="fa fa-edit"></i></button>
+                                            <button type="button" class="btn bg-red-gradient deleteGroupModal" data-toggle="modal" data-target="#modalConfirma" data-id="{!!$campo->Tipo!!}"><i class="fa fa-trash"></i></button>
                                         </div>
                                     </td>
                                 </tr>
