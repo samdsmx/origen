@@ -19,7 +19,7 @@ class OrganismosController extends BaseController {
             }
         $menu = parent::createMenu();
         return View::make('organismos.organismos', array('menu' => $menu, 
-            'organismos' => [], 
+            'organismos' => $this->obtenerOrganismosAll(), 
             'estados' => getEstadosArray(), 
             'catalogo_tema' => parent::obtenerCampos('Tema')));
     }    
@@ -37,7 +37,6 @@ class OrganismosController extends BaseController {
         if( !Request::ajax() ){
             return;
         }
-        
         $datos = Request::all();
         $validator = organismosModel::validar($datos);
         if ($validator->fails()) {
@@ -58,12 +57,26 @@ class OrganismosController extends BaseController {
             $organismo->HorariosCostos = $datos["hycostos"];
             
             $organismo->save();
-            
         } catch(\Exception $e){
             error_log($e->getMessage());
         }
-        
         Session::flash('mensaje', 'Organismo Actualizado');
+    }
+    
+    public function postEliminarorganismo(){
+        if( !Request::ajax() ){
+            return;
+        }
+        $datos = Request::all();
+        try{
+            $organismo = organismosModel::where('ID', '=', $datos['id'])->get();
+            if( $organismo != null ){
+                $organismo->delete();
+            }
+        } catch(\Exception $e){
+            error_log($e->getMessage());
+        }
+        Session::flash('mensaje', 'Organismo Borrado');
         
     }
     

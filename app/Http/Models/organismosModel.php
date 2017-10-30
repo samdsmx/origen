@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class organismosModel extends Model{
     
     protected $table = 'organismos';
+    protected $primaryKey = 'ID';
     protected $fillable = ['Tema','Objetivo', 'Institución', 'Estado', 'Direccion', 'Referencia', 'Telefono', 'Email',
         'Observaciones', 'Requisitos', 'HorariosCostos'];
     

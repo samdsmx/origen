@@ -58,9 +58,9 @@ Sistemas
                                 <td style="vertical-align: middle;">{!! $organismo['Telefono'] !!}</td>
                                 <td style="vertical-align: middle;">{!! $organismo['Email'] !!}</td>
                                 <td style="vertical-align: middle;">
-                                    <button type="button" class="btn btn-danger btn-flat deleteOrganismoModal"
-                                            data-toogle="modal" data-target="#modalConfirma" data-id="{!! $organismo['ID'] !!}">
-                                        <i class="fa fa-trash"></i>
+                                    <button type="button" class="btn btn-danger eliminarOrganismo" 
+                                            data-toggle="modal" data-target="#modalConfirma" data-id="{!! $organismo['ID'] !!}">
+                                        <span class="fa fa-trash fa-lg"></span>&nbsp;
                                     </button>
                                 </td>
                             </tr>
@@ -97,7 +97,7 @@ Sistemas
             url: 'Consultas/obtenerlistado/' + tipo + '/' + id,
             success: function(data) {
                 if (data == 'error') {
-                    mostrarMensajeError('Ha ocurrido un error debido a que la información introducida no es correcta. Vuelva a intentarlo más tarde.');
+                    mostrarMensajeError('Ha ocurrido un error debido a que la informaciï¿½n introducida no es correcta. Vuelva a intentarlo mï¿½s tarde.');
                     console.log('data = error');
                 }
                 else {
@@ -109,7 +109,7 @@ Sistemas
                 }
             },
             error: function(xhr) {
-                mostrarMensajeError("Ocurrio un error en el servidor. Intente de nuevo más tarde, y si persiste, por favor contacte con el administrador del sistema.");
+                mostrarMensajeError("Ocurrio un error en el servidor. Intente de nuevo mï¿½s tarde, y si persiste, por favor contacte con el administrador del sistema.");
             }
         });
     }*/
@@ -180,6 +180,21 @@ Sistemas
 		$('#buscarResponsable').addClass('hidden');
 		$('#modalResponsableAgregar').removeClass('hidden');
 	});
+        
+        $('.eliminarOrganismo').click( function(){
+            var id = $(this).data('id');
+            $('#modalConfirmaTitle').text("Borrar Organismo");
+            $("#modalConfirmaId").attr("value", id);
+            $('#btnModalConfirma_Continuar').removeAttr("data-toggle");
+            $('#btnModalConfirma_Continuar').removeAttr("data-target");
+            $('#btnModalConfirma_Continuar').removeAttr("data-id");
+            $('#btnModalConfirma_Continuar').removeAttr("data-dismiss");
+            $('#btnModalConfirma_Continuar').attr("type", "submit");
+            $("#formConfirma").submit(function(e) {
+                e.preventDefault();
+                borrarRegistro($(this).serialize(), 'Organismos/eliminarorganismo');
+            });
+        } );
 
 	function eliminarPersona(objeto){
 		var usuario = $(objeto).parent().parent().children('.responsable').attr('value');
