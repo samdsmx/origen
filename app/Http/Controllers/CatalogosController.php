@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator;
+use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator, App\Http\Models\camposModel;
 
-class GruposController extends BaseController {
+class CatalogosController extends BaseController {
 
     public function getIndex() {
         if (!parent::tienePermiso('Catalogos')) {
@@ -12,23 +12,23 @@ class GruposController extends BaseController {
         }
         $menu = parent::createMenu();
         $tipos = DB::select('select Tipo from campos group by Tipo order by Tipo ASC');
-        $grupos = DB::select("select c.* from campos c where c.Tipo = '" . $tipos[0]->Tipo . "' order by c.Nombre ASC");
-        return View::make('grupos.grupos', array('menu' => $menu, 'grupos' => $grupos, 'tipos' => $tipos));
+        $campos = DB::select('select * from campos where Tipo = "'. $tipos[0]->Tipo .'" order by Nombre ASC');
+        return View::make('catalogos.catalogos', array('menu' => $menu, 'campos' => $campos, 'tipos' => $tipos));
     }
 
     public function postFiltro() {
-        if (Request::ajax()) {
-            $menu = parent::createMenu();
-            $tipos = DB::select('select Tipo from campos group by Tipo order by Tipo ASC');
-            $grupos = DB::select("select c.* from campos c where c.Tipo = '" . Request::get('tipo'). "' order by c.Nombre ASC");
-            if ($grupos) {               
-                return Redirect::to('Grupos')->with('mensajeError', 'Error al buscar la sección/grupo')->with('tituloMensaje', '¡Error!');
-                // $view = View::make('grupos.grupos', array('menu' => $menu, 'grupos' => $grupos, 'tipos' => $tipos));
-                // return $view->renderSections()['tableContent'];
-            } else {
-                return Redirect::to('Grupos')->with('mensajeError', 'Error al buscar la sección/grupo')->with('tituloMensaje', '¡Error!');
-            }
+        if (!Request::ajax()) {
+            return;
         }
+        $datos = Request::all();
+        $campos = DB::select('select * from campos where Tipo = "'. $datos['tipo'] .'" order by Nombre ASC');
+        if ($campos) {               
+            $view = View::make('catalogos.catalogos', array('menu' => [], 'campos' => $campos, 'tipos' => []));
+            return $view->renderSections()['tableContent'];
+        } else {
+            return Redirect::to('Catalogos')->with('mensajeError', 'Error al buscar la sección/grupo');
+        }
+        return;
     }
 
     public function postBuscar() {
@@ -54,17 +54,10 @@ class GruposController extends BaseController {
         }
     }
 
-    public function getCambia($id) {
-        $grupo = siaGrupoModel::find($id);
-        $propiedades = siaPropiedadModel::where('id_grupo', '=', $grupo->id_grupo)->where('status', '=', 1)->get();
-        if (sizeof($propiedades) == 0) {
-            $grupo->status = ($grupo->status - 1) * -1;
-            $grupo->save();
-            Session::flash('mensaje', 'Estatus modificado con éxito');
-        } else {
-            Session::flash('mensajeError', 'No se puede cambiar el estado del grupo porque tiene propiedades activas asignadas');
-        }
-        return Redirect::to('Grupos');
+    public function getCambia($tipo, $nombre) {
+        DB::select('UPDATE campos SET activo = ((activo - 1) * -1) WHERE Nombre = "'.$nombre.'" AND Tipo = "'.$tipo.'" ');
+        Session::flash('mensaje', 'Estatus modificado con éxito');
+        return Redirect::to('Catalogos');
     }
 
     public function postRegistragrupo() {

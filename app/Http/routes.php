@@ -71,7 +71,7 @@ Route::group(array('before' => 'auth'), function() {
     Route::controller('Usuarios', 'App\Http\Controllers\UsuariosController');
     Route::controller('Consultas', 'App\Http\Controllers\ConsultasController');
     Route::controller('Reportes', 'App\Http\Controllers\ReportesController');
-    Route::controller('Grupos', 'App\Http\Controllers\GruposController');
+    Route::controller('Catalogos', 'App\Http\Controllers\CatalogosController');
     Route::controller('Registro', 'App\Http\Controllers\RegistroController');
     Route::controller('Organismos', 'App\Http\Controllers\OrganismosController');
 
