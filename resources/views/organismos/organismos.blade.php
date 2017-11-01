@@ -97,7 +97,7 @@ Sistemas
             url: 'Consultas/obtenerlistado/' + tipo + '/' + id,
             success: function(data) {
                 if (data == 'error') {
-                    mostrarMensajeError('Ha ocurrido un error debido a que la informaci�n introducida no es correcta. Vuelva a intentarlo m�s tarde.');
+                    mostrarMensajeError('Ha ocurrido un error debido a que la información introducida no es correcta. Vuelva a intentarlo m�s tarde.');
                     console.log('data = error');
                 }
                 else {
@@ -109,7 +109,7 @@ Sistemas
                 }
             },
             error: function(xhr) {
-                mostrarMensajeError("Ocurrio un error en el servidor. Intente de nuevo m�s tarde, y si persiste, por favor contacte con el administrador del sistema.");
+                mostrarMensajeError("Ocurrio un error en el servidor. Intente de nuevo más tarde, y si persiste, por favor contacte con el administrador del sistema.");
             }
         });
     }*/
