@@ -97,7 +97,7 @@ Sistemas
             url: 'Consultas/obtenerlistado/' + tipo + '/' + id,
             success: function(data) {
                 if (data == 'error') {
-                    mostrarMensajeError('Ha ocurrido un error debido a que la información introducida no es correcta. Vuelva a intentarlo m�s tarde.');
+                    mostrarMensajeError('Ha ocurrido un error debido a que la información introducida no es correcta. Vuelva a intentarlo más tarde.');
                     console.log('data = error');
                 }
                 else {
