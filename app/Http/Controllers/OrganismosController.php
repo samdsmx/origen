@@ -69,7 +69,7 @@ class OrganismosController extends BaseController {
         }
         $datos = Request::all();
         try{
-            $organismo = organismosModel::where('ID', '=', $datos['id'])->get();
+            $organismo = organismosModel::find($datos['modalConfirmaId']);
             if( $organismo != null ){
                 $organismo->delete();
             }
