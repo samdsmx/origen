@@ -24,13 +24,13 @@ class OrganismosController extends BaseController {
             'catalogo_tema' => parent::obtenerCampos('Tema')));
     }    
     
-    public function postBuscar(){
+    public function postBuscarorganismo(){
         if (!Request::ajax()) {
             return;
         }
         $datos = Request::all();
-        console.log($datos);
-        return Response::json($datos);
+        $organismo = organismosModel::find($datos['id']);
+        return Response::json($organismo);
     }
     
     public function postRegistraorganismo(){
@@ -44,17 +44,17 @@ class OrganismosController extends BaseController {
         }
         try{
             $organismo = new organismosModel();
-            $organismo->Tema = $datos["tema"];
-            $organismo->Objetivo = $datos["objetivo"];
-            $organismo->Institucion = $datos["institucion"];
-            $organismo->Estado = $datos["estado"];
-            $organismo->Direccion = $datos["direccion"];
-            $organismo->Referencia = $datos["referencia"];
-            $organismo->Telefono = $datos["telefono"];
-            $organismo->Email = $datos["email"];
-            $organismo->Observaciones = $datos["observaciones"];
-            $organismo->Requisitos = $datos["requisitos"];
-            $organismo->HorariosCostos = $datos["hycostos"];
+            $organismo->Tema = $datos["Tema"];
+            $organismo->Objetivo = $datos["Objetivo"];
+            $organismo->Institucion = $datos["Institucion"];
+            $organismo->Estado = $datos["Estado"];
+            $organismo->Direccion = $datos["Direccion"];
+            $organismo->Referencia = $datos["Referencia"];
+            $organismo->Telefono = $datos["Telefono"];
+            $organismo->Email = $datos["Email"];
+            $organismo->Observaciones = $datos["Observaciones"];
+            $organismo->Requisitos = $datos["Requisitos"];
+            $organismo->HorariosCostos = $datos["HorariosCostos"];
             
             $organismo->save();
         } catch(\Exception $e){

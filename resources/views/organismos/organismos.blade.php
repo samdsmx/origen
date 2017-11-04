@@ -118,7 +118,7 @@ Sistemas
      });
      }*/
 
-    $('#tablaSistemas').on('click', '.botonUsuarios', function () {
+    /*$('#tablaSistemas').on('click', '.botonUsuarios', function () {
         var contenido = $(this).attr('data-content').trim().split('<p>');
         var sistema = $(this).parent().parent().children('.nombreSistema').text();
         var isistema = $(this).attr('value').split('/');
@@ -140,7 +140,7 @@ Sistemas
         $('.eliminarPersona').click(function () {
             eliminarPersona(this);
         });
-    });
+    });*/
 
     $('#modalResponsableAgregar').click(function () {
         $('#buscarResponsable').removeClass('hidden');
@@ -180,7 +180,6 @@ Sistemas
                 alert("An error occured: " + xhr.status + " " + xhr.statusText);
             }
         });
-
         $('#buscarResponsable').addClass('hidden');
         $('#modalResponsableAgregar').removeClass('hidden');
     });
@@ -200,7 +199,27 @@ Sistemas
                 borrarRegistro($(this).serialize(), 'Organismos/eliminarorganismo');
             });
         } else if ($(this).hasClass('modificarOrganismo')) {
-
+            $.ajax({
+                type: 'POST',
+                url: 'Organismos/buscarorganismo',
+                data: {'id':id},
+                success: function(response) {
+                    $.each( response, function( llave, valor ) {
+                        if( llave == 'Tema' ){
+                            var arreglo = [];
+                            $.each(valor.split('\n'), function(k,v){
+                                $('.js-example-basic-multiple').select2('val', v);
+                            });
+                            alert ($('#Tema').val());
+                        }else{
+                            $('#'+llave).val(valor);
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    alert("Error en el servidor");
+                }
+            });
         }
     });
 
