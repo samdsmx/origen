@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Validator;
-use View, Session, Request, Redirect, Response, App\Http\Models\organismosModel, App\Http\Models\camposModel;
+use DB, View, Session, Request, Redirect, Response, App\Http\Models\organismosModel, App\Http\Models\camposModel;
 
 class OrganismosController extends BaseController {
     
     public function obtenerOrganismosAll(){
         $organismos = organismosModel::select('ID', 'Tema', 'Institucion', 'Estado',
-                'Direccion', 'Telefono', 'Email')->get()->toArray();
+                'Direccion', 'Telefono', 'Email')->get();
         return $organismos;
     }
     
@@ -33,6 +33,57 @@ class OrganismosController extends BaseController {
         return Response::json($organismo);
     }
     
+    public function postBuscarorganismos(){
+        if (!Request::ajax()) {
+            return;
+        }
+        $whereStatement = [];
+        $datos = Request::all();
+        if( isset($datos['tema']) ){
+            $tema_busqueda='(';
+            foreach( explode('\n', $datos['tema']) as $llave => $tema ){
+                if($llave == 0){
+                    $tema_busqueda.=' Tema = "'.$datos['tema'].'" ';
+                } else {
+                    $tema_busqueda.=' OR Tema = "'.$datos['tema'].'" ';
+                }
+            }
+            $tema_busqueda.=')';
+            $whereStatement[] = $tema_busqueda;
+        }
+        if( isset( $datos['objetivo'] ) ){
+            $objetivo_bus='Objetivo = "'.$datos['objetivo'].'"';
+            $whereStatement[] = $objetivo_bus;
+        }
+        if( isset( $datos['institucion'] ) ){
+            $instituto_bus='Institucion = "'.$datos['institucion'].'"';
+            $whereStatement[] = $instituto_bus;
+        }
+        if( isset( $datos['estado'] ) ){
+            $estado_bus='Estado = "'.$datos['estado'].'"';
+            $whereStatement[] = $estado_bus;
+        }
+        $sql = 'SELECT * FROM organismos';
+        foreach($whereStatement as $ind => $sta){
+            if( $ind ==0 ){
+                $sql.=' WHERE '.$sta.' ';
+            } else {
+                $sql.=' AND '.$sta.' ';
+            }
+        }
+        $organismos = DB::select($sql);
+        if($organismos){
+            $view = View::make( 'organismos.organismos', array( 'menu' => [], 
+                    'organismos' => $organismos, 
+                    'estados' => getEstadosArray(), 
+                    'catalogo_tema' => parent::obtenerCampos('Tema') ) );
+            return $view->renderSections()['tableContent'];
+        } else {
+            return Redirect::to('Organismos')->with('mensajeError', 'Error al buscar organismos');
+        }
+        return;
+    }
+    
     public function postRegistraorganismo(){
         if( !Request::ajax() ){
             return;
@@ -43,7 +94,11 @@ class OrganismosController extends BaseController {
             return Response::json(array('errors' => $validator->errors()->toArray()));
         }
         try{
-            $organismo = new organismosModel();
+            if( isset( $datos['ID'] ) ){
+                $organismo = organismosModel::find( $datos['ID'] );
+            } else {
+                $organismo = new organismosModel();
+            }
             $organismo->Tema = $datos["Tema"];
             $organismo->Objetivo = $datos["Objetivo"];
             $organismo->Institucion = $datos["Institucion"];

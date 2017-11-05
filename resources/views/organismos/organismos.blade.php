@@ -33,45 +33,47 @@ Sistemas
             <div class="box">
                 <div class="box-body">
                     @include('organismos.busqueda')
-                    <table id="tablaOrganismos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
-                        <div class="col-md-6" style="padding: 0px; text-align: center;">
-                            <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#modalRegistroOrganismo" >
-                                <span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Organismo
-                            </button>
-                        </div>
-                        <thead>
-                        <th class="alert-info col-md-3">TEMA</th>
-                        <th class="alert-info col-md-2">INSTITUCI&Oacute;N</th>
-                        <th class="alert-info col-md-2">ESTADO</th>
-                        <th class="alert-info col-md-2">DIRECCI&Oacute;N</th>
-                        <th class="alert-info col-md-2">TEL&Eacute;FONO</th>
-                        <th class="alert-info col-md-2">EMAIL</th>
-                        <th class="alert-info col-md-2">ACCIONES</th>
-                        </thead>
-                        <tbody>
-                            @foreach($organismos as $organismo)
-                            <tr>
-                                <td style="vertical-align: middle;">{!! $organismo['Tema'] !!}</td>
-                                <td style="vertical-align: middle;">{!! $organismo['Institucion'] !!}</td>
-                                <td style="vertical-align: middle;">{!! $organismo['Estado'] !!}</td>
-                                <td style="vertical-align: middle;">{!! $organismo['Direccion'] !!}</td>
-                                <td style="vertical-align: middle;">{!! $organismo['Telefono'] !!}</td>
-                                <td style="vertical-align: middle;">{!! $organismo['Email'] !!}</td>
-                                <td style="vertical-align: middle;">
-                                    <button type="button" class="btn btn-danger eliminarOrganismo" 
-                                            data-toggle="modal" data-target="#modalConfirma" data-id="{!! $organismo['ID'] !!}">
-                                        <span class="fa fa-trash"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-success modificarOrganismo" 
-                                            data-toggle="modal" data-target="#modalRegistroOrganismo" data-id="{!! $organismo['ID'] !!}">
-                                        <span class="fa fa-pencil"></span>
-                                    </button>
-                                </td>
-                            </tr>
-                            @endforeach
+                    <section id="tableContent">
+                        <table id="tablaOrganismos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
+                            <div class="col-md-6" style="padding: 0px; text-align: center;">
+                                <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#modalRegistroOrganismo" >
+                                    <span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Organismo
+                                </button>
+                            </div>
+                            <thead>
+                            <th class="alert-info col-md-3">TEMA</th>
+                            <th class="alert-info col-md-2">INSTITUCI&Oacute;N</th>
+                            <th class="alert-info col-md-2">ESTADO</th>
+                            <th class="alert-info col-md-2">DIRECCI&Oacute;N</th>
+                            <th class="alert-info col-md-2">TEL&Eacute;FONO</th>
+                            <th class="alert-info col-md-2">EMAIL</th>
+                            <th class="alert-info col-md-2">ACCIONES</th>
+                            </thead>
+                            <tbody>
+                                @foreach($organismos as $organismo)
+                                <tr>
+                                    <td style="vertical-align: middle;">{!! $organismo->Tema !!}</td>
+                                    <td style="vertical-align: middle;">{!! $organismo->Institucion !!}</td>
+                                    <td style="vertical-align: middle;">{!! $organismo->Estado !!}</td>
+                                    <td style="vertical-align: middle;">{!! $organismo->Direccion !!}</td>
+                                    <td style="vertical-align: middle;">{!! $organismo->Telefono !!}</td>
+                                    <td style="vertical-align: middle;">{!! $organismo->Email !!}</td>
+                                    <td style="vertical-align: middle;">
+                                        <button type="button" class="btn btn-danger eliminarOrganismo" 
+                                                data-toggle="modal" data-target="#modalConfirma" data-id="{!! $organismo->ID !!}">
+                                            <span class="fa fa-trash"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-success modificarOrganismo" 
+                                                data-toggle="modal" data-target="#modalRegistroOrganismo" data-id="{!! $organismo->ID !!}">
+                                            <span class="fa fa-pencil"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                @endforeach
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </section>
                 </div>
             </div>
         </div>
@@ -81,8 +83,8 @@ Sistemas
 @section('recursosExtra')
 <script>
     $("i.fa").popover({'trigger': 'hover'});
-
-    $('#tablaOrganismos').DataTable({
+    
+    var propiedadesTabla = {
         scrollX: false,
         responsive: true,
         searching: true,
@@ -94,6 +96,10 @@ Sistemas
         language: dataTablesSpanish,
         sDom: 'Rfrt <"col-md-12" <"col-md-4 pull-left"i> <"paginacion" <"opcionPaginacion"l> p > >',
         columnDefs: [{orderable: false, targets: [3, 4]}]
+    }
+    
+    $('#tablaOrganismos').DataTable({
+        propiedadesTabla
     });
 
     /*function buscarInformacion(tipo, id) {
@@ -208,9 +214,10 @@ Sistemas
                         if( llave == 'Tema' ){
                             var arreglo = [];
                             $.each(valor.split('\n'), function(k,v){
-                                $('.js-example-basic-multiple').select2('val', v);
+                                arreglo.push( v.trim() );
                             });
-                            alert ($('#Tema').val());
+                            $('#Tema').val(arreglo);
+                            $('#Tema').trigger('change');
                         }else{
                             $('#'+llave).val(valor);
                         }
@@ -222,6 +229,22 @@ Sistemas
             });
         }
     });
+    
+    $('#buscaOrganismos').submit( function(e){
+        e.preventDefault();
+        $.ajax({
+                type: 'POST',
+                url: 'Organismos/buscarorganismos',
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('#tableContent').html(response);  
+                    $('#tablaCampos').DataTable(propiedadesTabla);
+                },
+                error: function(xhr, status, error) {
+                    alert("Error en el servidor");
+                }
+            });
+    } );
 
     function eliminarPersona(objeto) {
         var usuario = $(objeto).parent().parent().children('.responsable').attr('value');
