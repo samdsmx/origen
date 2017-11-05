@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Validator;
-use View, Session, Request, Redirect, Response, App\Http\Models\organismosModel, App\Http\Models\camposModel;
+use DB, View, Session, Request, Redirect, Response, App\Http\Models\organismosModel, App\Http\Models\camposModel;
 
 class OrganismosController extends BaseController {
     
@@ -19,51 +19,133 @@ class OrganismosController extends BaseController {
             }
         $menu = parent::createMenu();
         return View::make('organismos.organismos', array('menu' => $menu, 
-            'organismos' => [], 
+            'organismos' => $this->obtenerOrganismosAll(), 
             'estados' => getEstadosArray(), 
             'catalogo_tema' => parent::obtenerCampos('Tema')));
     }    
     
-    public function postBuscar(){
+    public function postBuscarorganismo(){
         if (!Request::ajax()) {
             return;
         }
         $datos = Request::all();
-        console.log($datos);
-        return Response::json($datos);
+        $organismo = organismosModel::find($datos['id']);
+        return Response::json($organismo);
+    }
+    
+    public function postBuscarorganismos(){
+        if (!Request::ajax()) {
+            return;
+        }
+        $whereStatement = [];
+        $datos = Request::all();
+        if( isset($datos['tema']) && $datos['tema'] != '' ){
+            $tema_busqueda='(';
+            foreach( explode('\n', $datos['tema']) as $llave => $tema ){
+                if($llave == 0){
+                    $tema_busqueda.=' Tema = "'.$datos['tema'].'" ';
+                } else {
+                    $tema_busqueda.=' OR Tema = "'.$datos['tema'].'" ';
+                }
+            }
+            $tema_busqueda.=')';
+            $whereStatement[] = $tema_busqueda;
+        }
+        if( isset( $datos['objetivo'] ) && $datos['objetivo'] != '' ){
+            $objetivo_bus='Objetivo = "'.$datos['objetivo'].'"';
+            $whereStatement[] = $objetivo_bus;
+        }
+        if( isset( $datos['institucion'] ) &&  $datos['institucion'] != '' ){
+            $instituto_bus='Institucion = "'.$datos['institucion'].'"';
+            $whereStatement[] = $instituto_bus;
+        }
+        if( isset( $datos['estado'] ) && $datos['estado'] != '' ){
+            $estado_bus='Estado = "'.$datos['estado'].'"';
+            $whereStatement[] = $estado_bus;
+        }
+        $sql = 'SELECT * FROM organismos';
+        foreach($whereStatement as $ind => $sta){
+            if( $ind ==0 ){
+                $sql.=' WHERE '.$sta.' ';
+            } else {
+                $sql.=' AND '.$sta.' ';
+            }
+        }
+        $organismos = DB::select($sql);
+        if($organismos){
+            $organismosArray = [];
+            foreach( $organismos as $organismo ){
+                $organismoArray = [];
+                $organismoArray['ID'] = $organismo->ID;
+                $organismoArray['Tema'] = $organismo->Tema;
+                $organismoArray['Objetivo'] = $organismo->Objetivo;
+                $organismoArray['Institucion'] = $organismo->Institucion;
+                $organismoArray['Estado'] = $organismo->Estado;
+                $organismoArray['Direccion'] = $organismo->Direccion;
+                $organismoArray['Referencia'] = $organismo->Referencia;
+                $organismoArray['Telefono'] = $organismo->Telefono;
+                $organismoArray['Email'] = $organismo->Email;
+                $organismosArray[] = $organismoArray;
+            }
+            $view = View::make( 'organismos.organismos', array( 'menu' => [], 
+                    'organismos' => $organismosArray, 
+                    'estados' => getEstadosArray(), 
+                    'catalogo_tema' => parent::obtenerCampos('Tema') ) );
+            return $view->renderSections()['tableContent'];
+        } else {
+            return Redirect::to('Organismos')->with('mensajeError', 'Error al buscar organismos');
+        }
+        return;
     }
     
     public function postRegistraorganismo(){
         if( !Request::ajax() ){
             return;
         }
-        
         $datos = Request::all();
         $validator = organismosModel::validar($datos);
         if ($validator->fails()) {
             return Response::json(array('errors' => $validator->errors()->toArray()));
         }
         try{
-            $organismo = new organismosModel();
-            $organismo->Tema = $datos["tema"];
-            $organismo->Objetivo = $datos["objetivo"];
-            $organismo->Institucion = $datos["institucion"];
-            $organismo->Estado = $datos["estado"];
-            $organismo->Direccion = $datos["direccion"];
-            $organismo->Referencia = $datos["referencia"];
-            $organismo->Telefono = $datos["telefono"];
-            $organismo->Email = $datos["email"];
-            $organismo->Observaciones = $datos["observaciones"];
-            $organismo->Requisitos = $datos["requisitos"];
-            $organismo->HorariosCostos = $datos["hycostos"];
+            if( isset( $datos['ID'] ) ){
+                $organismo = organismosModel::find( $datos['ID'] );
+            } else {
+                $organismo = new organismosModel();
+            }
+            $organismo->Tema = $datos["Tema"];
+            $organismo->Objetivo = $datos["Objetivo"];
+            $organismo->Institucion = $datos["Institucion"];
+            $organismo->Estado = $datos["Estado"];
+            $organismo->Direccion = $datos["Direccion"];
+            $organismo->Referencia = $datos["Referencia"];
+            $organismo->Telefono = $datos["Telefono"];
+            $organismo->Email = $datos["Email"];
+            $organismo->Observaciones = $datos["Observaciones"];
+            $organismo->Requisitos = $datos["Requisitos"];
+            $organismo->HorariosCostos = $datos["HorariosCostos"];
             
             $organismo->save();
-            
         } catch(\Exception $e){
             error_log($e->getMessage());
         }
-        
         Session::flash('mensaje', 'Organismo Actualizado');
+    }
+    
+    public function postEliminarorganismo(){
+        if( !Request::ajax() ){
+            return;
+        }
+        $datos = Request::all();
+        try{
+            $organismo = organismosModel::find($datos['modalConfirmaId']);
+            if( $organismo != null ){
+                $organismo->delete();
+            }
+        } catch(\Exception $e){
+            error_log($e->getMessage());
+        }
+        Session::flash('mensaje', 'Organismo Borrado');
         
     }
     

@@ -15,11 +15,11 @@
                 </h4>
             </div>
             <div class="modal-body" style="background: #ffffff; padding-bottom: 10px;">
-                <input type="hidden" value="" name ="id_organismo" id="id_organismo" />
+                <input type="hidden" value="" name ="ID" id="ID" />
                 
                 <div class="form-group col-md-6">
-                    <label for="tema">*Tema:</label>
-                    <select name="tema" id="tema" multiple class="form-control js-example-basic-multiple col-lg-12" >
+                    <label for="Tema">*Tema:</label>
+                    <select name="Tema" id="Tema" multiple class="form-control js-example-basic-multiple col-lg-12" >
                         @foreach ($catalogo_tema as $t)
                             <option value="{{$t['Nombre']}}">{{$t['Nombre']}}</option>
                         @endforeach
@@ -27,18 +27,18 @@
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="objetivo">Objetivo:</label>
-                    {!! Form::textarea('objetivo', '', array('id' => 'objetivo', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
+                    <label for="Objetivo">Objetivo:</label>
+                    {!! Form::textarea('Objetivo', '', array('id' => 'Objetivo', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="institucion">*Institucion:</label>
-                    {!! Form::text('institucion', '',  array('class' => 'form-control', 'id' => 'institucion')) !!}
+                    <label for="Institucion">*Institucion:</label>
+                    {!! Form::text('Institucion', '',  array('class' => 'form-control', 'id' => 'Institucion')) !!}
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="estado">Estado:</label>
-                    <select name="estado" id="estado" class="form-control">
+                    <label for="Estado">Estado:</label>
+                    <select name="Estado" id="Estado" class="form-control">
                         <option value="-1">-</option>
                         @foreach ($estados as $k => $v)
                             <option value="{{$v}}">{{$v}}</option>
@@ -47,38 +47,38 @@
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="direccion">*Direccion:</label>
-                    {!! Form::textarea('direccion', '', array('id' => 'direccion', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
+                    <label for="Direccion">*Direccion:</label>
+                    {!! Form::textarea('Direccion', '', array('id' => 'Direccion', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="referencia">Referencia:</label>
-                    {!! Form::textarea('referencia', '', array('id' => 'referencia', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
+                    <label for="Referencia">Referencia:</label>
+                    {!! Form::textarea('Referencia', '', array('id' => 'Referencia', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="telefono">*Telefono:</label>
-                    {!! Form::text('telefono', '', array('id' => 'telefono', 'class' => 'form-control' )) !!}
+                    <label for="Telefono">*Telefono:</label>
+                    {!! Form::text('Telefono', '', array('id' => 'Telefono', 'class' => 'form-control' )) !!}
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="email">Email:</label>
-                    {!! Form::text('email', '', array('id' => 'email', 'class' => 'form-control' )) !!}
+                    <label for="Email">Email:</label>
+                    {!! Form::text('Email', '', array('id' => 'Email', 'class' => 'form-control' )) !!}
                 </div>
                 
                 <div class="form-group col-md-12">
-                    <label for="observaciones">Observaciones:</label>
-                    {!! Form::textarea('observaciones', '', array('id' => 'observaciones', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
+                    <label for="Observaciones">Observaciones:</label>
+                    {!! Form::textarea('Observaciones', '', array('id' => 'Observaciones', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="requisitos">Requisistos:</label>
-                    {!! Form::textarea('requisitos', '', array('id' => 'requisitos', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
+                    <label for="Requisitos">Requisistos:</label>
+                    {!! Form::textarea('Requisitos', '', array('id' => 'Requisitos', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="hycostos">Horarios y Costos:</label>
-                    {!! Form::textarea('hycostos', '', array('id' => 'hycostos', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
+                    <label for="HorariosCostos">Horarios y Costos:</label>
+                    {!! Form::textarea('HorariosCostos', '', array('id' => 'HorariosCostos', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
                 </div>
             </div>
             <div class="modal-footer" style="background: #ffffff;">
