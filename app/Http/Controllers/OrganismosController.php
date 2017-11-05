@@ -9,7 +9,7 @@ class OrganismosController extends BaseController {
     
     public function obtenerOrganismosAll(){
         $organismos = organismosModel::select('ID', 'Tema', 'Institucion', 'Estado',
-                'Direccion', 'Telefono', 'Email')->get();
+                'Direccion', 'Telefono', 'Email')->get()->toArray();
         return $organismos;
     }
     
@@ -39,7 +39,7 @@ class OrganismosController extends BaseController {
         }
         $whereStatement = [];
         $datos = Request::all();
-        if( isset($datos['tema']) ){
+        if( isset($datos['tema']) && $datos['tema'] != '' ){
             $tema_busqueda='(';
             foreach( explode('\n', $datos['tema']) as $llave => $tema ){
                 if($llave == 0){
@@ -51,15 +51,15 @@ class OrganismosController extends BaseController {
             $tema_busqueda.=')';
             $whereStatement[] = $tema_busqueda;
         }
-        if( isset( $datos['objetivo'] ) ){
+        if( isset( $datos['objetivo'] ) && $datos['objetivo'] != '' ){
             $objetivo_bus='Objetivo = "'.$datos['objetivo'].'"';
             $whereStatement[] = $objetivo_bus;
         }
-        if( isset( $datos['institucion'] ) ){
+        if( isset( $datos['institucion'] ) &&  $datos['institucion'] != '' ){
             $instituto_bus='Institucion = "'.$datos['institucion'].'"';
             $whereStatement[] = $instituto_bus;
         }
-        if( isset( $datos['estado'] ) ){
+        if( isset( $datos['estado'] ) && $datos['estado'] != '' ){
             $estado_bus='Estado = "'.$datos['estado'].'"';
             $whereStatement[] = $estado_bus;
         }
@@ -73,8 +73,22 @@ class OrganismosController extends BaseController {
         }
         $organismos = DB::select($sql);
         if($organismos){
+            $organismosArray = [];
+            foreach( $organismos as $organismo ){
+                $organismoArray = [];
+                $organismoArray['ID'] = $organismo->ID;
+                $organismoArray['Tema'] = $organismo->Tema;
+                $organismoArray['Objetivo'] = $organismo->Objetivo;
+                $organismoArray['Institucion'] = $organismo->Institucion;
+                $organismoArray['Estado'] = $organismo->Estado;
+                $organismoArray['Direccion'] = $organismo->Direccion;
+                $organismoArray['Referencia'] = $organismo->Referencia;
+                $organismoArray['Telefono'] = $organismo->Telefono;
+                $organismoArray['Email'] = $organismo->Email;
+                $organismosArray[] = $organismoArray;
+            }
             $view = View::make( 'organismos.organismos', array( 'menu' => [], 
-                    'organismos' => $organismos, 
+                    'organismos' => $organismosArray, 
                     'estados' => getEstadosArray(), 
                     'catalogo_tema' => parent::obtenerCampos('Tema') ) );
             return $view->renderSections()['tableContent'];

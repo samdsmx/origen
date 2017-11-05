@@ -33,47 +33,49 @@ Sistemas
             <div class="box">
                 <div class="box-body">
                     @include('organismos.busqueda')
-                    <section id="tableContent">
-                        <table id="tablaOrganismos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
-                            <div class="col-md-6" style="padding: 0px; text-align: center;">
-                                <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#modalRegistroOrganismo" >
-                                    <span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Organismo
-                                </button>
-                            </div>
-                            <thead>
-                            <th class="alert-info col-md-3">TEMA</th>
-                            <th class="alert-info col-md-2">INSTITUCI&Oacute;N</th>
-                            <th class="alert-info col-md-2">ESTADO</th>
-                            <th class="alert-info col-md-2">DIRECCI&Oacute;N</th>
-                            <th class="alert-info col-md-2">TEL&Eacute;FONO</th>
-                            <th class="alert-info col-md-2">EMAIL</th>
-                            <th class="alert-info col-md-2">ACCIONES</th>
-                            </thead>
-                            <tbody>
-                                @foreach($organismos as $organismo)
-                                <tr>
-                                    <td style="vertical-align: middle;">{!! $organismo->Tema !!}</td>
-                                    <td style="vertical-align: middle;">{!! $organismo->Institucion !!}</td>
-                                    <td style="vertical-align: middle;">{!! $organismo->Estado !!}</td>
-                                    <td style="vertical-align: middle;">{!! $organismo->Direccion !!}</td>
-                                    <td style="vertical-align: middle;">{!! $organismo->Telefono !!}</td>
-                                    <td style="vertical-align: middle;">{!! $organismo->Email !!}</td>
-                                    <td style="vertical-align: middle;">
-                                        <button type="button" class="btn btn-danger eliminarOrganismo" 
-                                                data-toggle="modal" data-target="#modalConfirma" data-id="{!! $organismo->ID !!}">
-                                            <span class="fa fa-trash"></span>
-                                        </button>
-                                        <button type="button" class="btn btn-success modificarOrganismo" 
-                                                data-toggle="modal" data-target="#modalRegistroOrganismo" data-id="{!! $organismo->ID !!}">
-                                            <span class="fa fa-pencil"></span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                @endforeach
+                    @section('tableContent')
+                        <section id="tableContent">
+                            <table id="tablaOrganismos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
+                                <div class="col-md-6" style="padding: 0px; text-align: center;">
+                                    <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#modalRegistroOrganismo" >
+                                        <span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Organismo
+                                    </button>
+                                </div>
+                                <thead>
+                                <th class="alert-info col-md-3">TEMA</th>
+                                <th class="alert-info col-md-2">INSTITUCI&Oacute;N</th>
+                                <th class="alert-info col-md-2">ESTADO</th>
+                                <th class="alert-info col-md-2">DIRECCI&Oacute;N</th>
+                                <th class="alert-info col-md-2">TEL&Eacute;FONO</th>
+                                <th class="alert-info col-md-2">EMAIL</th>
+                                <th class="alert-info col-md-2">ACCIONES</th>
+                                </thead>
+                                <tbody>
+                                    @foreach($organismos as $organismo)
+                                    <tr>
+                                        <td style="vertical-align: middle;">{!! $organismo['Tema'] !!}</td>
+                                        <td style="vertical-align: middle;">{!! $organismo['Institucion'] !!}</td>
+                                        <td style="vertical-align: middle;">{!! $organismo['Estado'] !!}</td>
+                                        <td style="vertical-align: middle;">{!! $organismo['Direccion'] !!}</td>
+                                        <td style="vertical-align: middle;">{!! $organismo['Telefono'] !!}</td>
+                                        <td style="vertical-align: middle;">{!! $organismo['Email'] !!}</td>
+                                        <td style="vertical-align: middle;">
+                                            <button type="button" class="btn btn-danger eliminarOrganismo" 
+                                                    data-toggle="modal" data-target="#modalConfirma" data-id="{!! $organismo['ID'] !!}">
+                                                <span class="fa fa-trash"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-success modificarOrganismo" 
+                                                    data-toggle="modal" data-target="#modalRegistroOrganismo" data-id="{!! $organismo['ID'] !!}">
+                                                <span class="fa fa-pencil"></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
 
-                            </tbody>
-                        </table>
-                    </section>
+                                </tbody>
+                            </table>
+                        </section>
+                    @show
                 </div>
             </div>
         </div>
