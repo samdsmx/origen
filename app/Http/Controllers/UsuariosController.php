@@ -27,15 +27,14 @@ class UsuariosController extends BaseController {
     }
 
     public function postBuscar() {
-        if (Request::ajax()) {
-            $id = Request::get('id_user');
-            error_log($id);
-            $datos = DB::select('select u.id_usuario, p.nombres,  p.primer_apellido, p.segundo_apellido, p.curp, p.correo, p.telefono, p.id_unidad_responsable, ur.nombre_ur, u.usuario '
-                            . 'from sia_usuario u join sia_persona p on  p.id_persona = u.id_persona join sia_cat_unidad_responsable ur on '
-                            . 'ur.id_unidad_responsable = p.id_unidad_responsable where u.id_usuario = ' . $id);
-            if (sizeof($datos) > 0) {
-                return Response::json(array('usuario' => $datos[0]));
-            }
+        if (!Request::ajax()) {
+            return;
+        }
+        $id = Request::get('id_user');
+        $datos = DB::select('select u.id_usuario, p.nombres,  p.primer_apellido, p.segundo_apellido, p.curp, p.correo, p.telefono, u.nombre usuario '
+                        . 'from consejeros u join sia_persona p on  p.id_persona = u.id_persona where u.id_usuario = ' . $id);
+        if (sizeof($datos) > 0) {
+            return Response::json(array('usuario' => $datos[0]));
         }
     }
 
@@ -68,16 +67,17 @@ class UsuariosController extends BaseController {
         if ($validator->fails()) {
             return Response::json(array('errors' => $validator->errors()->toArray()));
         }
+        $msg = "";
         if (empty($datos["id_user"])) {
             $usuario = new User();
             $persona = new siaPersonaModel();
             $persona->status = 1;
             $usuario->status = 1;
+            $msg = User::validarDuplicidad($datos,$usuario,$persona);
         } else {
             $usuario = User::find($datos["id_user"]);
             $persona = siaPersonaModel::find($usuario->id_persona);
         }
-        $msg = User::validarDuplicidad($datos,$usuario,$persona);
         if (!empty($msg)) {
             return Response::json(array('errors' => $msg));
         }
@@ -87,10 +87,9 @@ class UsuariosController extends BaseController {
         $persona->curp = $datos["curp"];
         $persona->correo = $datos["correo"];
         $persona->telefono = $datos["telefono"];
-        $persona->id_unidad_responsable = $datos["ur"];
         $persona->save();
         $usuario->id_persona = $persona->id_persona;
-        $usuario->usuario = $datos["usuario"];
+        $usuario->nombre = $datos["usuario"];
         if ($datos['pass'] != null) {
             $usuario->password = $datos["pass"];
         }

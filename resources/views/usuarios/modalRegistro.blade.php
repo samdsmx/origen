@@ -11,17 +11,17 @@
                 <div class="row text-center">
                     <div class="col-lg-4">
                         <div class='form-group' id="dnombres">
-                            {!! Form::text("nombres", '' , array_merge(['class' => 'form-control', 'placeholder' => "Nombre(s)", "id" => "nombres"], [(!isset($urs)?'readonly':'')] )) !!}
+                            {!! Form::text("nombres", '' , array_merge(['class' => 'form-control', 'placeholder' => "Nombre(s)", "id" => "nombres"] )) !!}
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class='form-group' id="dapaterno">
-                            {!! Form::text("apaterno", '' , array_merge(['class' => 'form-control', 'placeholder' => "Apellido Paterno", "id" => "apaterno"], [(!isset($urs)?'readonly':'')] )) !!}
+                            {!! Form::text("apaterno", '' , array_merge(['class' => 'form-control', 'placeholder' => "Apellido Paterno", "id" => "apaterno"] )) !!}
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class='form-group' id="damaterno">
-                            {!! Form::text("amaterno", '' , array_merge(['class' => 'form-control', 'placeholder' => "Apellido Materno", "id" => "amaterno"], [(!isset($urs)?'readonly':'')] )) !!}
+                            {!! Form::text("amaterno", '' , array_merge(['class' => 'form-control', 'placeholder' => "Apellido Materno", "id" => "amaterno"] )) !!}
                         </div>
                     </div>
                 </div>
@@ -41,23 +41,6 @@
                             <input type="text" id="telefono"  name="telefono" class="form-control" placeholder="Telefono o extension" />
                         </div>
                     </div>
-                </div>
-                <div class="row text-center">
-                    <div class="col-lg-12">
-                        <div class='form-group' id="dur">
-                            @if ( isset($urs) )
-                                <select class="form-control" name="ur" id="ur">
-                                    <option id="-1" value="" selected label="-- Unidad Responsable --"/>
-                                    @foreach($urs as $ur)
-                                    <option id="ur{!!$ur->id_unidad_responsable!!}" value="{!!$ur->id_unidad_responsable!!}" label="{!!$ur->nombre_ur!!}"/>
-                                    @endforeach
-                                </select>
-                            @else
-                                <input type="text" id="urName" name="urName" class="form-control" disabled="true"/>
-                                <input type="hidden" name="ur" id="ur"/>
-                            @endif
-                        </div>
-                    </div>              
                 </div>
                 <div class="row text-center">
                     <div class="col-lg-6">

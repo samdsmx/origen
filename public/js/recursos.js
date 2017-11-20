@@ -72,11 +72,6 @@ function updateUser(id) {
             $('#curp').attr("value", usu.curp);
             $('#correo').attr("value", usu.correo);
             $('#telefono').attr("value", usu.telefono);
-            $("select#ur").find("option").removeAttr("selected");
-            $("select#ur").find("option#ur"+usu.id_unidad_responsable).attr("selected", true);
-            $('#ur').attr("value", usu.id_unidad_responsable);
-            $('#ur').val(usu.id_unidad_responsable);
-            $('#urName').attr("value", usu.nombre_ur);
             $('#usuario').attr("value", usu.usuario);
             $('.modal-title').text("Modificar usuario");
         },
