@@ -138,13 +138,22 @@ $(document).ready(function() {
         $("#panel-messages").hide();
     });
 
-    $('#buscaOrganismos').submit(function(e) {
+    $('#buscaOrganismos').submit( function(e){
         e.preventDefault();
-        var data = $(this).serialize();
-        alert('buscarOrganismo');
-        console.log(data);
-        //guardarFormulario(data, 'Registro/registrarllamada');
-    });
+        $.ajax({
+                type: 'POST',
+                url: 'Organismos/buscarorganismos',
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('#tableContent').html(response);  
+                    $('#tablaOrganismos').DataTable(propiedadesTabla);
+                    $("#tablaOrganismos").reload();
+                },
+                error: function(xhr, status, error) {
+                    alert("Error en el servidor");
+                }
+            });
+    } );
 
     $("#fecha_inicio").datepicker({
         changeMonth: true,

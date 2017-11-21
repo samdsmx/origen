@@ -231,22 +231,6 @@ Sistemas
             });
         }
     });
-    
-    $('#buscaOrganismos').submit( function(e){
-        e.preventDefault();
-        $.ajax({
-                type: 'POST',
-                url: 'Organismos/buscarorganismos',
-                data: $(this).serialize(),
-                success: function(response) {
-                    $('#tableContent').html(response);  
-                    $('#tablaCampos').DataTable(propiedadesTabla);
-                },
-                error: function(xhr, status, error) {
-                    alert("Error en el servidor");
-                }
-            });
-    } );
 
     function eliminarPersona(objeto) {
         var usuario = $(objeto).parent().parent().children('.responsable').attr('value');
