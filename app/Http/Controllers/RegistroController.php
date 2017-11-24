@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth, View, Session, Request, Redirect, Response, App\Http\Models\catalogocpModel, 
         Illuminate\Support\Facades\DB, App\Http\Models\casosModel, App\Http\Models\llamadasModel;
+use App\Http\Controllers\OrganismosController;
 
 class RegistroController extends BaseController {
 
@@ -45,6 +46,14 @@ class RegistroController extends BaseController {
             $municipio = Request::get('Municipio');
             $colonia = Request::get('Colonia');
             return $this->buscarCodigoPostalPorCampos($estado, $municipio, $colonia);
+        }
+    }
+    
+    public function postBuscarorganismo(){
+        if( Request::ajax() ){
+            $datos = Request::all();
+            $organismos = OrganismosController::obtenerOrganismos($datos);
+            
         }
     }
     

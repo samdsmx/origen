@@ -101,7 +101,7 @@ class OrganismosController extends BaseController {
         } else {
             $organismoArray = array();
         }
-        return $organismoArray;
+        return $organismosArray;
     }
     
     public function postBuscarorganismos(){
@@ -113,7 +113,7 @@ class OrganismosController extends BaseController {
         $view = View::make( 'organismos.organismos', array( 'menu' => [], 
                     'organismos' => $organismosArray, 
                     'estados' => getEstadosArray(), 
-                    'catalogo_tema' => parent::obtenerCampos('Tema') ) );
+                    'catalogo_tema' => parent::obtenerCampos('Tema')));
             return $view->renderSections()['tableContent']; 
     }
     
