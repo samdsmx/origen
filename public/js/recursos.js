@@ -155,6 +155,25 @@ $(document).ready(function() {
             });
     } );
     
+    var propiedadesTablaChica = {
+        scrollX: false,
+        responsive: true,
+        searching: false,
+        paging: true,
+        lengthMenu: [[5, 20, 200, 500], [5, 20, 200, 500]],
+        ordering: false,
+        info: true,
+        order: [[1, "desc"]],
+        language: dataTablesSpanish,
+        pageLength: 4,
+        sDom: 'Rfrt <"col-md-12" <"col-md-4 pull-left"i> <"paginacion" <"opcionPaginacion"l> p > >'
+    }
+    var tabla = $('#tablaBusquedaOrganismos').DataTable({
+        propiedadesTablaChica
+    });
+    
+    
+    
     $('#buscaOrganismosCanalizacion').submit( function(e){
         e.preventDefault();
         $.ajax({
@@ -162,19 +181,24 @@ $(document).ready(function() {
                 url: 'Registro/buscarorganismos',
                 data: $(this).serialize(),
                 success: function(response) {
-                    $('#tablaBusquedaOrganismos').show();
+                    $('#tablaMuestreo').show();
                     $.each(response, function(index, value){
-                        $('#contenidoBusquedaOrganismos').append('<tr>'+
-                                '<td>'+value['Tema']+'</td>'+
-                                '<td>'+value['Institucion']+'</td><td>'+value['Estado']+'</td><td></td></tr>');
+                        tabla.row.add([value['Tema'], value['Institucion'], value['Estado'],
+                            '<button type="button" class="btn btn-info addOrganismoCana" data-organismo="'+value['Institucion']+'"><span class="fa fa-plus-square"></span></button>' ]);
                     });
-                    $('#MSOrganismos-body').append('</table></div>');
+                    tabla.draw();
+                    $('.addOrganismoCana').click(function(e){
+                        var text = $(this).attr('data-organismo');
+                        $('#CanaOtro').append(text+';\n')
+                    });
                 },
                 error: function(xhr, status, error) {
                     alert("Error en el servidor");
                 }
             });
     } );
+    
+    
 
     $("#fecha_inicio").datepicker({
         changeMonth: true,

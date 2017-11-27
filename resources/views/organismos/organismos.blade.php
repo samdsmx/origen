@@ -72,6 +72,7 @@ Sistemas
                                             </button>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </section>

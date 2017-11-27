@@ -31,36 +31,15 @@
                 </select>
             </div>
         </div>
-        <div class="row">
-            <table id="tablaBusquedaOrganismos" class="table table-bordered table-striped table-dataTable text-center" style="display: none;">
+        <div class="row" id="tablaMuestreo" style="display: none;">
+            <table id="tablaBusquedaOrganismos" class="table table-bordered table-striped table-dataTable text-center">
                 <thead>
                     <th class="alert-info col-md-3">TEMA</th>
                     <th class="alert-info col-md-2">INSTITUCI&Oacute;N</th>
                     <th class="alert-info col-md-2">ESTADO</th>
                     <th class="alert-info col-md-2">ACCIONES</th>
                 </thead>
-                <tbody id="contenidoBusquedaOrganismos">
-                    <tr>
-                        <td style="vertical-align: middle;">{!! $organismo['Tema'] !!}</td>
-                        <td style="vertical-align: middle;">{!! $organismo['Institucion'] !!}</td>
-                        <td style="vertical-align: middle;">{!! $organismo['Estado'] !!}</td>
-                        <td style="vertical-align: middle;">{!! $organismo['Direccion'] !!}</td>
-                        <td style="vertical-align: middle;">{!! $organismo['Telefono'] !!}</td>
-                        <td style="vertical-align: middle;">{!! $organismo['Email'] !!}</td>
-                        <td style="vertical-align: middle;">
-                            <button type="button" class="btn btn-danger eliminarOrganismo" 
-                                    data-toggle="modal" data-target="#modalConfirma" data-id="{!! $organismo['ID'] !!}">
-                                <span class="fa fa-trash"></span>
-                            </button>
-                            <button type="button" class="btn btn-success modificarOrganismo" 
-                                    data-toggle="modal" data-target="#modalRegistroOrganismo" data-id="{!! $organismo['ID'] !!}">
-                                <span class="fa fa-pencil"></span>
-                            </button>
-                        </td>
-                    </tr>
-                    @endforeach
-
-                </tbody>
+                <tbody id="contenidoBusquedaOrganismos"></tbody>
             </table>
         </div>
     </div>
