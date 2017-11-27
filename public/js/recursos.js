@@ -154,6 +154,27 @@ $(document).ready(function() {
                 }
             });
     } );
+    
+    $('#buscaOrganismosCanalizacion').submit( function(e){
+        e.preventDefault();
+        $.ajax({
+                type: 'POST',
+                url: 'Registro/buscarorganismos',
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('#tablaBusquedaOrganismos').show();
+                    $.each(response, function(index, value){
+                        $('#contenidoBusquedaOrganismos').append('<tr>'+
+                                '<td>'+value['Tema']+'</td>'+
+                                '<td>'+value['Institucion']+'</td><td>'+value['Estado']+'</td><td></td></tr>');
+                    });
+                    $('#MSOrganismos-body').append('</table></div>');
+                },
+                error: function(xhr, status, error) {
+                    alert("Error en el servidor");
+                }
+            });
+    } );
 
     $("#fecha_inicio").datepicker({
         changeMonth: true,

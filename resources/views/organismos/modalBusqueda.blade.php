@@ -12,7 +12,9 @@
                     Organismos
                 </h4>
             </div>
-            @include('organismos.busqueda')
+            {!! Form::open(array('id' => 'buscaOrganismosCanalizacion', 'method'=>'POST')) !!}
+                @include('organismos.busqueda')
+            {!! Form::close() !!}
         </div>
     </div>
 </div>

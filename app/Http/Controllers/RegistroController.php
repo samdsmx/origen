@@ -49,13 +49,15 @@ class RegistroController extends BaseController {
         }
     }
     
-    public function postBuscarorganismo(){
-        if( Request::ajax() ){
-            $datos = Request::all();
-            $organismos = OrganismosController::obtenerOrganismos($datos);
-            
+    public function postBuscarorganismos(){
+        if (!Request::ajax()) {
+            return;
         }
+        $datos = Request::all();
+        $organismosArray = OrganismosController::obtenerOrganismos($datos);
+        return Response::json($organismosArray);
     }
+    
     
     function buscarCodigoPostalPorCampos($estado="0", $municipio="0", $colonia="0"){
         $cp ='';

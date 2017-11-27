@@ -35,7 +35,7 @@ class OrganismosController extends BaseController {
         return Response::json($organismo);
     }
     
-    public function obtenerOrganismos($datos){
+    public static function obtenerOrganismos($datos){
         $whereStatement = [];
         if( isset($datos['tema']) && $datos['tema'] != '' ){
             $tema_busqueda='(';
@@ -109,7 +109,7 @@ class OrganismosController extends BaseController {
             return;
         }
         $datos = Request::all();
-        $organismosArray = $this->obtenerOrganismos($datos);
+        $organismosArray = $this::obtenerOrganismos($datos);
         $view = View::make( 'organismos.organismos', array( 'menu' => [], 
                     'organismos' => $organismosArray, 
                     'estados' => getEstadosArray(), 
