@@ -13,6 +13,8 @@ class OrganismosController extends BaseController {
         return $organismos;
     }
     
+    
+    
     public function getIndex() {
         if (!parent::tienePermiso('Organismos')){
             return Redirect::to('inicio');
@@ -33,12 +35,8 @@ class OrganismosController extends BaseController {
         return Response::json($organismo);
     }
     
-    public function postBuscarorganismos(){
-        if (!Request::ajax()) {
-            return;
-        }
+    public static function obtenerOrganismos($datos){
         $whereStatement = [];
-        $datos = Request::all();
         if( isset($datos['tema']) && $datos['tema'] != '' ){
             $tema_busqueda='(';
             foreach( explode('\n', $datos['tema']) as $llave => $tema ){
@@ -52,14 +50,26 @@ class OrganismosController extends BaseController {
             $whereStatement[] = $tema_busqueda;
         }
         if( isset( $datos['objetivo'] ) && $datos['objetivo'] != '' ){
-            $objetivo_bus='Objetivo = "'.$datos['objetivo'].'"';
+            $objetivo_bus = '(';
+            $palabras = explode(' ', $datos['objetivo']);
+            foreach( $palabras as $i => $palabra){
+                if($palabra != ''){
+                    if( $i == 0 ){
+                        $objetivo_bus.=" Objetivo LIKE  '%".$palabra."%'";
+                    } else {
+                        $objetivo_bus.=" OR Objetivo LIKE  '%".$palabra."%'";
+                    }
+                }
+            }
+            $objetivo_bus .= ' )';
+            //$objetivo_bus='Objetivo = "'.$datos['objetivo'].'"';
             $whereStatement[] = $objetivo_bus;
         }
         if( isset( $datos['institucion'] ) &&  $datos['institucion'] != '' ){
             $instituto_bus='Institucion = "'.$datos['institucion'].'"';
             $whereStatement[] = $instituto_bus;
         }
-        if( isset( $datos['estado'] ) && $datos['estado'] != '' ){
+        if( isset( $datos['estado'] ) && $datos['estado'] != '-1' && $datos['estado']!='' ){
             $estado_bus='Estado = "'.$datos['estado'].'"';
             $whereStatement[] = $estado_bus;
         }
@@ -87,15 +97,24 @@ class OrganismosController extends BaseController {
                 $organismoArray['Email'] = $organismo->Email;
                 $organismosArray[] = $organismoArray;
             }
-            $view = View::make( 'organismos.organismos', array( 'menu' => [], 
+            
+        } else {
+            $organismoArray = array();
+        }
+        return $organismosArray;
+    }
+    
+    public function postBuscarorganismos(){
+        if (!Request::ajax()) {
+            return;
+        }
+        $datos = Request::all();
+        $organismosArray = $this::obtenerOrganismos($datos);
+        $view = View::make( 'organismos.organismos', array( 'menu' => [], 
                     'organismos' => $organismosArray, 
                     'estados' => getEstadosArray(), 
-                    'catalogo_tema' => parent::obtenerCampos('Tema') ) );
-            return $view->renderSections()['tableContent'];
-        } else {
-            return Redirect::to('Organismos')->with('mensajeError', 'Error al buscar organismos');
-        }
-        return;
+                    'catalogo_tema' => parent::obtenerCampos('Tema')));
+            return $view->renderSections()['tableContent']; 
     }
     
     public function postRegistraorganismo(){

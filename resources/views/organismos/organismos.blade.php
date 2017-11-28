@@ -32,7 +32,9 @@ Sistemas
         <div class="col-md-12">
             <div class="box">
                 <div class="box-body">
+                    {!! Form::open(array('id' => 'buscaOrganismos', 'method'=>'POST')) !!}
                     @include('organismos.busqueda')
+                    {!! Form::close() !!}
                     @section('tableContent')
                         <section id="tableContent">
                             <table id="tablaOrganismos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
@@ -71,7 +73,6 @@ Sistemas
                                         </td>
                                     </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                         </section>
@@ -231,22 +232,6 @@ Sistemas
             });
         }
     });
-    
-    $('#buscaOrganismos').submit( function(e){
-        e.preventDefault();
-        $.ajax({
-                type: 'POST',
-                url: 'Organismos/buscarorganismos',
-                data: $(this).serialize(),
-                success: function(response) {
-                    $('#tableContent').html(response);  
-                    $('#tablaCampos').DataTable(propiedadesTabla);
-                },
-                error: function(xhr, status, error) {
-                    alert("Error en el servidor");
-                }
-            });
-    } );
 
     function eliminarPersona(objeto) {
         var usuario = $(objeto).parent().parent().children('.responsable').attr('value');

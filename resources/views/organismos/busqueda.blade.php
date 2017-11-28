@@ -1,7 +1,7 @@
-{!! Form::open(array('id' => 'buscaOrganismos', 'method'=>'POST')) !!}
 
-        <div class="modal-body" style="background: #ffffff;">
 
+    <div class="modal-body" id="MSOrganismos-body" style="background: #ffffff;">
+        <div class="row">
             <div class="form-group col-md-6">
                 <label for="tema">Tema:</label>
                 <select name="tema" id="tema" multiple class="form-control js-example-basic-multiple" style="width:100%;" >
@@ -10,17 +10,17 @@
                     @endforeach
                 </select>
             </div>
-            
             <div class="form-group col-md-6">
                 <label for="objetivo">Palabras Clave:</label>
                 {!! Form::text('objetivo', '', array('id' => 'objetivo', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
             </div>
-            
+        </div>
+        <div class="row">
             <div class="form-group col-md-6">
                 <label for="institucion">Institucion:</label>
                 {!! Form::text('institucion', '',  array('class' => 'form-control', 'id' => 'institucion')) !!}
             </div>
-            
+
             <div class="form-group col-md-6">
                 <label for="estado">Estado:</label>
                 <select name="estado" id="estado" class="form-control">
@@ -30,12 +30,21 @@
                     @endforeach
                 </select>
             </div>
-       
         </div>
-
-        <div class="modal-footer" style="background: #ffffff;  border-top-color: #ffffff;">
-            {!! Form::reset('Limpiar', array('class' => 'btn btn-primary', 'id' => "resetear")) !!}
-            {!! Form::submit('Buscar', array('class' => 'btn btn-success', 'id' => 'btnBuscarOrganismos')) !!}
+        <div class="row" id="tablaMuestreo" style="display: none;">
+            <table id="tablaBusquedaOrganismos" class="table table-bordered table-striped table-dataTable text-center">
+                <thead>
+                    <th class="alert-info col-md-3">TEMA</th>
+                    <th class="alert-info col-md-2">INSTITUCI&Oacute;N</th>
+                    <th class="alert-info col-md-2">ESTADO</th>
+                    <th class="alert-info col-md-2">ACCIONES</th>
+                </thead>
+                <tbody id="contenidoBusquedaOrganismos"></tbody>
+            </table>
         </div>
+    </div>
+    <div class="modal-footer" style="background: #ffffff;  border-top-color: #ffffff;">
+        {!! Form::reset('Limpiar', array('class' => 'btn btn-primary', 'id' => "resetear")) !!}
+        {!! Form::submit('Buscar', array('class' => 'btn btn-success', 'id' => 'btnBuscarOrganismos')) !!}
+    </div>
 
-{!! Form::close() !!}
