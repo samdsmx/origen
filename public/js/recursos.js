@@ -172,7 +172,11 @@ $(document).ready(function() {
         propiedadesTablaChica
     });
     
-    
+    $(document).on('hide.bs.modal','#modalRegistroOrganismo', function(){
+       tabla.clear();
+       $('#buscaOrganismosCanalizacion').trigger('reset');
+       $('#tablaMuestreo').hide();
+    });
     
     $('#buscaOrganismosCanalizacion').submit( function(e){
         e.preventDefault();
