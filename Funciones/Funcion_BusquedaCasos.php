@@ -94,7 +94,7 @@ if ($Sesion){
 				}
 			$CadBusqueda .=") ";
 			$criterio.="<br>";
-			}  			
+			}
 		if (count($Municipio)>0 && $Municipio[0] <> "-"){
 			$CadBusqueda .="AND (";
 			$criterio.="Municipio = ";			
@@ -108,7 +108,7 @@ if ($Sesion){
 				}
 			$CadBusqueda .=") ";
 			$criterio.="<br>";
-			}  						
+			}  	
 		if (count($Estado)>0 && $Estado[0] <> "-"){
 			$CadBusqueda .="AND (";
 			$criterio.="Estado = ";				
@@ -122,7 +122,9 @@ if ($Sesion){
 				}
 			$CadBusqueda .=") ";
 			$criterio.="<br>";
-			} 				
+			}
+
+			 				
 		if (count($EstadoCivil)>0 && $EstadoCivil[0] <> "-"){
 			$CadBusqueda .="AND (";
 			$criterio.="EstadoCivil = ";					
