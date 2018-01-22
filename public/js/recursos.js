@@ -172,16 +172,38 @@ $(document).ready(function() {
         propiedadesTablaChica
     });
     
+    function resetForm(campos){
+        $.each(campos, function(index, c){
+            var campo = $('#'+c);
+            if( campo.get(0).nodeName == 'INPUT' ){
+                $("#"+c).val('');
+            } else if( campo.get(0).nodeName == 'SELECT') {
+                if( $("#"+c ).attr('multiple') ){
+                    $("#"+c+" option[value]").remove();
+                } else {
+                    $("#"+c+" option:selected").prop("selected", false);
+                }
+            }
+        });
+    }
     
-    
+    $(document).on('hide.bs.modal','#modalRegistroOrganismo', function(){
+        tabla.clear();
+//       $('#buscaOrganismosCanalizacion').trigger('reset');
+        resetForm(['tema','objetivo','institucion','estado']);
+        $('#tablaMuestreo').hide();
+    });
+
     $('#buscaOrganismosCanalizacion').submit( function(e){
         e.preventDefault();
+        $('#buscaOrganismosCanalizacion').trigger('reset');
         $.ajax({
                 type: 'POST',
                 url: 'Registro/buscarorganismos',
                 data: $(this).serialize(),
                 success: function(response) {
                     $('#tablaMuestreo').show();
+                    $('#buscaOrganismosCanalizacion').trigger('reset');
                     $.each(response, function(index, value){
                         tabla.row.add([value['Tema'], value['Institucion'], value['Estado'],
                             '<button type="button" class="btn btn-info addOrganismoCana" data-organismo="'+value['Institucion']+'"><span class="fa fa-plus-square"></span></button>' ]);
