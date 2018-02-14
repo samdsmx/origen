@@ -45,7 +45,9 @@ function ListaUsuarios(){
 		if($Tipo == 'ModalidadViolencia'){
 			$ModalidadViolencia.= "<OPTION VALUE='$Nombre'>$Nombre".chr(10);
 			}
-
+		if($Tipo == 'NivelViolencia'){
+			$NivelViolencia.= "<OPTION VALUE='$Nombre'>$Nombre".chr(10);
+			}
    		}
 	include("Paginas/Usuarios_Lista.html");
 	}

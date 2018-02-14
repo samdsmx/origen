@@ -35,6 +35,7 @@ if ($Sesion){
 		$AyudaOtros=$row['AyudaOtros'];
 		$TipoViolencia=$row['TipoViolencia'];
 		$ModalidadViolencia=$row['ModalidadViolencia'];
+		$NivelViolencia=$row['NivelViolencia'];		
 		$DesarrolloCaso=$row['DesarrolloCaso'];
 		$ComoTeEnteraste=$row['ComoTeEnteraste'];
 		$CanaLegal=$row['CanaLegal'];
@@ -55,6 +56,7 @@ if ($Sesion){
 		$AyudaOtros = SacaElementos($AyudaOtros);
 		$TipoViolencia = SacaElementos($TipoViolencia);
 		$ModalidadViolencia = SacaElementos($ModalidadViolencia);
+		$NivelViolencia = SacaElementos($NivelViolencia);
 		$Marcador='<FONT SIZE="1" FACE="Arial" COLOR="#000000"><B><U>X</U>_</B></FONT>';
 		include("Paginas/BuscaCasos_Detalles.html");
 		}

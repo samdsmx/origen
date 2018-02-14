@@ -585,13 +585,16 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
                   <TD BGCOLOR="#FFFFFF" colspan=2>
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>TIPO DE VIOLENCIA</B></FONT></CENTER>
                   </TD>
-                  <TD BGCOLOR="#FFFFFF" colspan=2>
+                  <TD BGCOLOR="#FFFFFF">
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>MODALIDAD DE VIOLENCIA</B></FONT></CENTER>
+                  </TD>
+                  <TD BGCOLOR="#FFFFFF" colspan=2>
+                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>NIVEL DE VIOLENCIA</B></FONT></CENTER>
                   </TD>
                </TR>
                <TR>
                
-<TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+<TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF" colspan=2>
   <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
    <? 
    include("Datos_Comunicacion.php");
@@ -636,6 +639,30 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
    ?>
    </FONT></P>
       </TD>
+
+<TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF" colspan=2>
+  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
+   <? 
+   include("Datos_Comunicacion.php");
+   $sql ="select * from campos where Tipo = 'NivelViolencia' ORDER BY Nombre ASC";
+   $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+   $total_found = @mysql_num_rows($total_result);
+   $i=1;
+   while ($row = mysql_fetch_array($total_result)){
+      $Nombre=$row['Nombre'];
+      $Tipo=$row['Tipo'];
+      if(!strstr($NivelViolencia, $Nombre)){
+            echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
+         }
+         else{
+            echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'" checked>'.$Nombre.'<BR>';
+            }
+      $i=$i+1;
+      }
+   ?>
+   </FONT></P>
+      </TD>
+
                </TR>
 
 

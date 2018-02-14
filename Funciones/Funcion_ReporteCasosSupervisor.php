@@ -453,6 +453,7 @@ if ($Sesion){
 	$otros=CuentaAyuda("AyudaOtros");
 	$TipoViol=CuentaAyuda("TipoViolencia");
 	$ModalidadViol=CuentaAyuda("ModalidadViolencia");
+	$NivelViol=CuentaAyuda("NivelViolencia");
 
 	//Estado
 	$TotalEst=Muestra("Estado","");
@@ -471,6 +472,7 @@ if ($Sesion){
 	$TotalAyuO=MuestraAyuda("AyudaOtros");
 	$TotalTViol=MuestraAyuda("TipoViolencia");
 	$TotalMViol=MuestraAyuda("ModalidadViolencia");
+	$TotalNViol=MuestraAyuda("NivelViolencia");
 
 	//ComoSeEntero
 	$TotalEnteraste=MuestraAyuda("ComoTeEnteraste");

@@ -20,5 +20,6 @@
 	$AYUDAOTROS=METEELEMENTOS($AYUDAOTROS);
 	$TipoViolencia=METEELEMENTOS($TipoViolencia);
 	$ModalidadViolencia=METEELEMENTOS($ModalidadViolencia);
+	$NivelViolencia=METEELEMENTOS($NivelViolencia);
 	include("Funciones/Funcion_RegistroLlamada.php");
 ?>
