@@ -17,6 +17,6 @@ chmod -R 755 storage
 
 (dentro de vagrant) php artisan cache:clear
 
-(fuera de vagrant) chmod -R 777 storage
+(fuera de vagrant) chmod -R 755 storage
 
 (dentro de vagrant) composer dump-autoload
