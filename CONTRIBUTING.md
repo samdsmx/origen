@@ -13,4 +13,10 @@ composer update
 chmod -R 755 bootstrap/cache
 chmod -R 755 storage
 
+## En caso de usar vagrant:
 
+(dentro de vagrant) php artisan cache:clear
+
+(fuera de vagrant) chmod -R 755 storage
+
+(dentro de vagrant) composer dump-autoload
