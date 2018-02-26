@@ -13,10 +13,6 @@ if ($Sesion){
 		if($CanaLegal)
 			$CanaLegal=$CanaLegal." (Voluntario)";
 		}
-/*	$ComentariosAdicionales=htmlentities($ComentariosAdicionales);
-	$DesarrolloCaso=htmlentities($DesarrolloCaso);
-	$CanaLegal=htmlentities($CanaLegal);
-	$CanaOtro=htmlentities($CanaOtro);*/
 	if($submit=="Modificar"){
 		if($Accion=="ModificaVarias"){
 			$sql = "UPDATE casos SET ";
@@ -290,7 +286,7 @@ if ($Sesion){
 				$row = mysql_fetch_array($result);
 			        $IDCaso=$row['IDCaso'];
 				}
-			$sql = "UPDATE casos SET TipoCaso='".rs($TipoCaso)."',PosibleSolucion='".rs($PosibleSolucion)."',Estatus='".rs($Estatus)."',HorasInvertidas='".rs($HorasInvertidas)."' where IDCaso='".rs($IDCaso)."'";
+			$sql = "UPDATE casos SET TipoCaso='".rs($TipoCaso)."',NivelViolencia='".rs($NivelViolencia)."',PosibleSolucion='".rs($PosibleSolucion)."',Estatus='".rs($Estatus)."',HorasInvertidas='".rs($HorasInvertidas)."' where IDCaso='".rs($IDCaso)."'";
 			$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 			$sql = "INSERT INTO Llamadas
 			(IDCaso,FechaLlamada,Consejera,HoraInicio,HoraTermino,ComentariosAdicionales,AyudaPsicologico,AyudaLegal,AyudaMedica,AyudaNutricional,AyudaOtros,DesarrolloCaso,CanaLegal,CanaOtro,LlamadaNo,Duracion,Acceso,TipoViolencia,ModalidadViolencia,Violentometro,AcudeInstitucion)

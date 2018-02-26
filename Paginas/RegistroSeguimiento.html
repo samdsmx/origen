@@ -11,6 +11,7 @@
 	$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$row = mysql_fetch_array($result);
 	$TipoCaso=$row['TipoCaso'];
+  $NivelViolencia=$row['NivelViolencia'];
 	$PosibleSolucion=$row['PosibleSolucion'];
 	$Estatus=$row['Estatus'];
       $sql ="SELECT SUM(duracion) FROM llamadas WHERE IDCaso='".rs($IDCaso)."'";
@@ -120,15 +121,6 @@ startclock();
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Objetivo</B></FONT></P></TD></TR>
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=text NAME=TipoCaso VALUE="<? echo $TipoCaso;?>" SIZE=40 MAXLENGTH=40></FONT></P></TD></TR>
 
-<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Nivel de violencia</B></FONT></P></TD></TR>
-<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
-	<select size="1" name="NivelViolencia">
-		<?echo "<OPTION SELECTED VALUE=".$NivelViolencia.">".$NivelViolencia;?>
-        <option>Bajo</option>
-        <option>Medio</option>
-        <option>Alto</option>
-    </select>
-</FONT></P></TD></TR>
 
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Acude a la institucion</B></FONT></P></TD></TR>
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
@@ -353,7 +345,14 @@ startclock();
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>MODALIDAD DE VIOLENCIA</B></FONT></CENTER>
                   </TD>
                    <TD BGCOLOR="#FFFFFF" colspan=2>
-                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>VIOLENTOMETRO</B></FONT></CENTER>
+                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>VIOLENTOMETRO</B>
+                        <select size="1" name="NivelViolencia">
+                            <?echo "<OPTION SELECTED VALUE=".$NivelViolencia.">".$NivelViolencia;?>
+                            <option>Bajo</option>
+                            <option>Medio</option>
+                            <option>Alto</option>
+                        </select>
+                      </FONT></CENTER>
                   </TD>
                </TR>
                <TR>

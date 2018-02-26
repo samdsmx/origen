@@ -274,29 +274,6 @@
                               <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $TipoCaso;?></FONT></P>
                            </TD>
                         </TR>
-
-						<TR>
-                           <TD BGCOLOR="#FFFFFF">
-                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Nivel de Violencia</B></FONT></P>
-                           </TD>
-                        </TR>
-                        <TR>
-                           <TD BGCOLOR="#FFFFFF">
-                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $NivelViolencia;?></FONT></P>
-                           </TD>
-                        </TR>
-						
-						<TR>
-                           <TD BGCOLOR="#FFFFFF">
-                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Acude a la institucion</B></FONT></P>
-                           </TD>
-                        </TR>
-                        <TR>
-                           <TD BGCOLOR="#FFFFFF">
-                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $AcudeInstitucion;?></FONT></P>
-                           </TD>
-                        </TR>
-
                         <TR>
                            <TD BGCOLOR="#FFFFFF">
                               <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Posible Solucion:</B></FONT></P>
@@ -373,7 +350,7 @@
                </TR>
 
 
-   <TR>
+               <TR>
                   <TD BGCOLOR="#FFFFFF" colspan=2>
                      <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>TIPO DE VIOLENCIA</B></FONT></CENTER>
                   </TD>
@@ -381,7 +358,7 @@
                      <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>MODALIDAD DE VIOLENCIA</B></FONT></CENTER>
                   </TD>
                   <TD BGCOLOR="#FFFFFF" colspan=2>
-                     <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>VIOLENTOMETRO</B></FONT></CENTER>
+                     <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>VIOLENTOMETRO</B> (<? echo $NivelViolencia;?>) </FONT></CENTER>
                   </TD>
                </TR>
 
@@ -473,6 +450,19 @@
 </P>
 </TD>
 </TR>
+
+<TR>
+   <TD BGCOLOR="#FFFFFF">
+      <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Acude a la institucion</B></FONT></P>
+   </TD>
+</TR>
+<TR>
+   <TD BGCOLOR="#FFFFFF">
+      <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($AcudeInstitucion) echo $AcudeInstitucion; else echo "--"; ?></FONT></P>
+   </TD>
+</TR>
+
+
 </TABLE>
 </TABLE>
 <BR>
