@@ -274,6 +274,29 @@
                               <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $TipoCaso;?></FONT></P>
                            </TD>
                         </TR>
+
+						<TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Nivel de Violencia</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $NivelViolencia;?></FONT></P>
+                           </TD>
+                        </TR>
+						
+						<TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Acude a la institucion</B></FONT></P>
+                           </TD>
+                        </TR>
+                        <TR>
+                           <TD BGCOLOR="#FFFFFF">
+                              <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $AcudeInstitucion;?></FONT></P>
+                           </TD>
+                        </TR>
+
                         <TR>
                            <TD BGCOLOR="#FFFFFF">
                               <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Posible Solucion:</B></FONT></P>
@@ -358,7 +381,7 @@
                      <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>MODALIDAD DE VIOLENCIA</B></FONT></CENTER>
                   </TD>
                   <TD BGCOLOR="#FFFFFF" colspan=2>
-                     <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>NIVEL DE VIOLENCIA</B></FONT></CENTER>
+                     <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>VIOLENTOMETRO</B></FONT></CENTER>
                   </TD>
                </TR>
 
@@ -368,13 +391,13 @@
                      <BR>
                      </U></FONT></P>
                   </TD>
-                  <TD VALIGN=top BGCOLOR="#FFFFFF">
+                  <TD VALIGN=top BGCOLOR="#FFFFFF" colspan=2>
                      <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $ModalidadViolencia; ?><BR>
                      <BR>
                      </FONT></P>
                   </TD>
                   <TD VALIGN=top BGCOLOR="#FFFFFF" colspan=2>
-                     <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $NivelViolencia; ?><BR>
+                     <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $Violentometro; ?><BR>
                      <BR>
                      </FONT></P>
                   </TD>
@@ -414,24 +437,20 @@
 <B><TABLE BORDER=0 BGCOLOR="#000000" CELLPADDING=3 WIDTH="100%">
 
 <TR>
-<TD BGCOLOR="#FFFFFF">
-<P><FONT SIZE="-2" FACE="Arial" COLOR="#000000">
-<B>Canalizaci&oacute;n Legal:</B>
-</FONT></P>
-</TD>
+	<TD BGCOLOR="#FFFFFF">
+		<P><FONT SIZE="-2" FACE="Arial" COLOR="#000000">
+		<B>Canalizaci&oacute;n Legal:</B>
+		</FONT></P>
+	</TD>
 </TR>
 <TR>
-<TD BGCOLOR="#FFFFFF">
-<P style="text-align:justify">
-<FONT SIZE="-2" FACE="Arial" COLOR="#000000">
-<? if($CanaLegal) echo $CanaLegal; else echo "--"; ?>
-<B>
-<BR>
-<BR>
-</B>
-</FONT>
-</P>
-</TD>
+	<TD BGCOLOR="#FFFFFF">
+		<P style="text-align:justify">
+		<FONT SIZE="-2" FACE="Arial" COLOR="#000000">
+		<? if($CanaLegal) echo $CanaLegal; else echo "--"; ?>
+		</FONT>
+		</P>
+	</TD>
 </TR>
 
 <TR>

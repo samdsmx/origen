@@ -444,6 +444,12 @@ if ($Sesion){
 
 	//Lengua Indigena
 	$TotalLenguaIndigena=Muestra("LenguaIndigena","");
+	
+	//Nivel de Violencia
+	$TotalNViol=Muestra("NivelViolencia","");
+
+	//Acude Institucion
+	$TotalAInst=Muestra("AcudeInstitucion","");
 
 	//Informacion Prestada
 	$psicologico=CuentaAyuda("AyudaPsicologico");
@@ -453,7 +459,7 @@ if ($Sesion){
 	$otros=CuentaAyuda("AyudaOtros");
 	$TipoViol=CuentaAyuda("TipoViolencia");
 	$ModalidadViol=CuentaAyuda("ModalidadViolencia");
-	$NivelViol=CuentaAyuda("NivelViolencia");
+	$Violentometro=CuentaAyuda("Violentometro");
 
 	//Estado
 	$TotalEst=Muestra("Estado","");
@@ -472,7 +478,7 @@ if ($Sesion){
 	$TotalAyuO=MuestraAyuda("AyudaOtros");
 	$TotalTViol=MuestraAyuda("TipoViolencia");
 	$TotalMViol=MuestraAyuda("ModalidadViolencia");
-	$TotalNViol=MuestraAyuda("NivelViolencia");
+	$TotalViolentometro=MuestraAyuda("Violentometro");
 
 	//ComoSeEntero
 	$TotalEnteraste=MuestraAyuda("ComoTeEnteraste");

@@ -120,6 +120,26 @@ startclock();
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Objetivo</B></FONT></P></TD></TR>
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=text NAME=TipoCaso VALUE="<? echo $TipoCaso;?>" SIZE=40 MAXLENGTH=40></FONT></P></TD></TR>
 
+<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Nivel de violencia</B></FONT></P></TD></TR>
+<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+	<select size="1" name="NivelViolencia">
+		<?echo "<OPTION SELECTED VALUE=".$NivelViolencia.">".$NivelViolencia;?>
+        <option>Bajo</option>
+        <option>Medio</option>
+        <option>Alto</option>
+    </select>
+</FONT></P></TD></TR>
+
+<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Acude a la institucion</B></FONT></P></TD></TR>
+<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+	<select size="1" name="AcudeInstitucion">
+		<?echo "<OPTION SELECTED VALUE=".$AcudeInstitucion.">".$AcudeInstitucion;?>
+        <option>Si</option>
+        <option>No</option>
+    </select>
+</FONT></P></TD></TR>
+
+
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>&iquest;Qu&eacute; tendr&iacute;a que pasar en esta llamada para saber que te fue de utilidad?</B></FONT></P></TD></TR>
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=text NAME=PosibleSolucion VALUE="<? echo $PosibleSolucion;?>" SIZE=40 MAXLENGTH=40></FONT></P></TD></TR>
 
@@ -333,7 +353,7 @@ startclock();
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>MODALIDAD DE VIOLENCIA</B></FONT></CENTER>
                   </TD>
                    <TD BGCOLOR="#FFFFFF" colspan=2>
-                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>NIVEL DE VIOLENCIA</B></FONT></CENTER>
+                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>VIOLENTOMETRO</B></FONT></CENTER>
                   </TD>
                </TR>
                <TR>
@@ -377,7 +397,7 @@ startclock();
   <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
   <? 
   include("Datos_Comunicacion.php");
-  $sql ="select * from campos where Tipo = 'NivelViolencia' and activo=1 ORDER BY Nombre ASC";
+  $sql ="select * from campos where Tipo = 'Violentometro' and activo=1 ORDER BY Nombre ASC";
   $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
   $total_found = @mysql_num_rows($total_result);
   $i=1;
