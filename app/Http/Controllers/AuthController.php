@@ -46,7 +46,7 @@ class AuthController extends BaseController {
             else{
                 return Redirect::to('index')->with('mensajeError', 'No existe un usuario con el correo '.$correo)->with('tituloMensaje', 'Correo no registrado.');
             }
-        
+
     }
 
     public function inicio() {
@@ -63,7 +63,12 @@ class AuthController extends BaseController {
     }
 
     public function logout() {
+			try{
         Auth::logout();
+			}catch(Exception $e) {
+				echo $e;
+			}
+
         return Redirect::to('index')->with('mensaje', 'Tu sesión ha sido cerrada.')->with('tituloMensaje', '¡Hasta luego!');
     }
 

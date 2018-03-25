@@ -15,7 +15,7 @@ Sistemas
 @include('includes.opcionesDerechaInicio')
 @stop
 
-@section('encabezado') 
+@section('encabezado')
 @stop
 
 @section('cuerpo')
@@ -53,26 +53,6 @@ Sistemas
                                 <th class="alert-info col-md-2">ACCIONES</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($organismos as $organismo)
-                                    <tr>
-                                        <td style="vertical-align: middle;">{!! $organismo['Tema'] !!}</td>
-                                        <td style="vertical-align: middle;">{!! $organismo['Institucion'] !!}</td>
-                                        <td style="vertical-align: middle;">{!! $organismo['Estado'] !!}</td>
-                                        <td style="vertical-align: middle;">{!! $organismo['Direccion'] !!}</td>
-                                        <td style="vertical-align: middle;">{!! $organismo['Telefono'] !!}</td>
-                                        <td style="vertical-align: middle;">{!! $organismo['Email'] !!}</td>
-                                        <td style="vertical-align: middle;">
-                                            <button type="button" class="btn btn-danger eliminarOrganismo" 
-                                                    data-toggle="modal" data-target="#modalConfirma" data-id="{!! $organismo['ID'] !!}">
-                                                <span class="fa fa-trash"></span>
-                                            </button>
-                                            <button type="button" class="btn btn-success modificarOrganismo" 
-                                                    data-toggle="modal" data-target="#modalRegistroOrganismo" data-id="{!! $organismo['ID'] !!}">
-                                                <span class="fa fa-pencil"></span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    @endforeach
                                 </tbody>
                             </table>
                         </section>
@@ -86,25 +66,61 @@ Sistemas
 @section('recursosExtra')
 <script>
     $("i.fa").popover({'trigger': 'hover'});
-    
+
     var propiedadesTabla = {
         scrollX: false,
         responsive: true,
         searching: true,
         paging: true,
+        language: dataTablesSpanish,
         lengthMenu: [[10, 20, 200], [10, 20, 200]],
         ordering: true,
         info: true,
         order: [[1, "desc"]],
-        language: dataTablesSpanish,
         sDom: 'Rfrt <"col-md-12" <"col-md-4 pull-left"i> <"paginacion" <"opcionPaginacion"l> p > >',
         columnDefs: [{orderable: false, targets: [3, 4]}]
     }
-    
-    $('#tablaOrganismos').DataTable({
-        propiedadesTabla
-    });
 
+    $('#tablaOrganismos').DataTable({
+        propiedadesTabla,
+        ajax: {
+            type: 'POST',
+            url: 'Organismos/organismosactuales',
+            data: {
+              'tamanio': 0,
+              'num_elementos': 0
+            },
+            dataSrc: function(data) {
+              var resultado = [];
+              console.log(data);
+              for(var i=0;i<data.length;i++) {
+                var ele = data[i];
+                var arrayInterno = [];
+                arrayInterno.push(ele.Tema);
+                arrayInterno.push(ele.Institucion);
+                arrayInterno.push(ele.Estado);
+                arrayInterno.push(ele.Direccion);
+                arrayInterno.push(ele.Telefono);
+                arrayInterno.push(ele.Email);
+                arrayInterno.push('<button type="button" class="btn btn-danger eliminarOrganismo"'
+                                                    +'data-toggle="modal" data-target="#modalConfirma" data-id="'+ele.ID+'">'
+                                                +'<span class="fa fa-trash"></span>'
+                                            +'</button>'
+                                            +'<button type="button" class="btn btn-success modificarOrganismo"'
+                                                    +'data-toggle="modal" data-target="#modalRegistroOrganismo" data-id="'+ele.ID+'">'
+                                                +'<span class="fa fa-pencil"></span>'
+                                            +'</button>');
+                resultado.push(arrayInterno);
+              }
+              console.log(resultado);
+              return resultado;
+            }
+        },
+      });
+
+
+    $(document).on('click','.paginate_button',function() {
+    });
     /*function buscarInformacion(tipo, id) {
      $.ajax({
      url: 'Consultas/obtenerlistado/' + tipo + '/' + id,
