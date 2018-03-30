@@ -90,11 +90,11 @@ Sistemas
               'tamanio': 0,
               'num_elementos': 0
             },
-            dataSrc: function(data) {
+            dataSrc: function(response) {
+              console.log(response);
               var resultado = [];
-              console.log(data);
-              for(var i=0;i<data.length;i++) {
-                var ele = data[i];
+              for(var i=0;i<response.length;i++) {
+                var ele = response[i];
                 var arrayInterno = [];
                 arrayInterno.push(ele.Tema);
                 arrayInterno.push(ele.Institucion);
@@ -112,7 +112,6 @@ Sistemas
                                             +'</button>');
                 resultado.push(arrayInterno);
               }
-              console.log(resultado);
               return resultado;
             }
         },

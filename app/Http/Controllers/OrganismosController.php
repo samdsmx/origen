@@ -7,7 +7,7 @@ use DB, View, Session, Request, Redirect, Response, App\Http\Models\organismosMo
 
 class OrganismosController extends BaseController {
 
-    public function obtenerOrganismosAll(){
+    public function obtenerOrganismosAll() {
         $organismos = organismosModel::select('ID', 'Tema', 'Institucion', 'Estado',
                 'Direccion', 'Telefono', 'Email')->get()->toArray();
         return $organismos;
@@ -50,15 +50,18 @@ class OrganismosController extends BaseController {
     public static function obtenerOrganismos($datos){
         $whereStatement = [];
         if( isset($datos['tema']) && $datos['tema'] != '' ){
-            $tema_busqueda='(';
-            foreach( explode('\n', $datos['tema']) as $llave => $tema ){
-                if($llave == 0){
-                    $tema_busqueda.=' Tema = "'.$datos['tema'].'" ';
-                } else {
-                    $tema_busqueda.=' OR Tema = "'.$datos['tema'].'" ';
-                }
-            }
-            $tema_busqueda.=')';
+            $tema_busqueda='(Tema like "';
+            //foreach( explode('\n', $datos['tema']) as $llave => $tema ){
+                //if($llave == 0){
+                    //$tema_busqueda.='%'.$datos['tema'];
+                    $tema_busqueda.= $datos['tema'];
+                /*} else {
+                    $tema_busqueda.=' AND Tema like "%'.$datos['tema'].'%" ';
+                }*/
+            //}
+
+
+            $tema_busqueda.='")';
             $whereStatement[] = $tema_busqueda;
         }
         if( isset( $datos['objetivo'] ) && $datos['objetivo'] != '' ){
@@ -93,7 +96,7 @@ class OrganismosController extends BaseController {
                 $sql.=' AND '.$sta.' ';
             }
         }
-        $organismos = DB::select($sql);
+        /*$organismos = DB::select($sql);
         if($organismos){
             $organismosArray = [];
             foreach( $organismos as $organismo ){
@@ -112,8 +115,9 @@ class OrganismosController extends BaseController {
 
         } else {
             $organismoArray = array();
-        }
-        return $organismosArray;
+        }*/
+        //return $organismosArray;
+        return $sql;
     }
 
     /*
@@ -134,11 +138,7 @@ class OrganismosController extends BaseController {
         }
         $datos = Request::all();
         $organismosArray = $this::obtenerOrganismos($datos);
-        $view = View::make( 'organismos.organismos', array( 'menu' => [],
-                    'organismos' => $organismosArray,
-                    'estados' => getEstadosArray(),
-                    'catalogo_tema' => parent::obtenerCampos('Tema')));
-            return $view->renderSections()['tableContent'];
+        return $organismosArray;
     }
 
     public function postRegistraorganismo(){

@@ -47,4 +47,3 @@
         {!! Form::reset('Limpiar', array('class' => 'btn btn-primary', 'id' => "resetear")) !!}
         {!! Form::submit('Buscar', array('class' => 'btn btn-success', 'id' => 'btnBuscarOrganismos')) !!}
     </div>
-
