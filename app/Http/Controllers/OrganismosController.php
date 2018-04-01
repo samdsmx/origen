@@ -51,16 +51,9 @@ class OrganismosController extends BaseController {
         $whereStatement = [];
         if( isset($datos['tema']) && $datos['tema'] != '' ){
             $tema_busqueda='(Tema like "';
-            //foreach( explode('\n', $datos['tema']) as $llave => $tema ){
-                //if($llave == 0){
-                    //$tema_busqueda.='%'.$datos['tema'];
-                    $tema_busqueda.= $datos['tema'];
-                /*} else {
-                    $tema_busqueda.=' AND Tema like "%'.$datos['tema'].'%" ';
-                }*/
-            //}
-
-
+            foreach( explode(',', $datos['tema']) as $llave => $tema ){
+                    $tema_busqueda.='%'.$tema;
+            }
             $tema_busqueda.='")';
             $whereStatement[] = $tema_busqueda;
         }
@@ -72,7 +65,7 @@ class OrganismosController extends BaseController {
                     if( $i == 0 ){
                         $objetivo_bus.=" Objetivo LIKE  '%".$palabra."%'";
                     } else {
-                        $objetivo_bus.=" OR Objetivo LIKE  '%".$palabra."%'";
+                        $objetivo_bus.=" AND Objetivo LIKE  '%".$palabra."%'";
                     }
                 }
             }
@@ -81,7 +74,7 @@ class OrganismosController extends BaseController {
             $whereStatement[] = $objetivo_bus;
         }
         if( isset( $datos['institucion'] ) &&  $datos['institucion'] != '' ){
-            $instituto_bus='Institucion = "'.$datos['institucion'].'"';
+            $instituto_bus='Institucion like "%'.$datos['institucion'].'%"';
             $whereStatement[] = $instituto_bus;
         }
         if( isset( $datos['estado'] ) && $datos['estado'] != '-1' && $datos['estado']!='' ){
@@ -96,9 +89,9 @@ class OrganismosController extends BaseController {
                 $sql.=' AND '.$sta.' ';
             }
         }
-        /*$organismos = DB::select($sql);
+        $organismos = DB::select($sql);
+        $organismosArray = [];
         if($organismos){
-            $organismosArray = [];
             foreach( $organismos as $organismo ){
                 $organismoArray = [];
                 $organismoArray['ID'] = $organismo->ID;
@@ -115,9 +108,8 @@ class OrganismosController extends BaseController {
 
         } else {
             $organismoArray = array();
-        }*/
-        //return $organismosArray;
-        return $sql;
+        }
+        return $organismosArray;
     }
 
     /*

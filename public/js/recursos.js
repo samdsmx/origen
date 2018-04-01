@@ -142,16 +142,25 @@ $(document).ready(function() {
         e.preventDefault();
         $("#tablaOrganismos").DataTable().clear().draw();
         var info = $(this).serialize();
-        console.log(info);
+        var infoParaEnviar = '';
+        var temaConcat = '';
+        var informacionDiv = info.split('&');
+        for(var i=0;i<informacionDiv.length;i++) {
+          var eleDiv = informacionDiv[i].split('=');
+          if(eleDiv[0] === 'tema') {
+            temaConcat += eleDiv[1] + ',';
+          } else {
+            infoParaEnviar += informacionDiv[i] + '&';
+          }
+        }
+        infoParaEnviar += 'tema='+temaConcat;
         $.ajax({
                 type: 'POST',
                 url: 'Organismos/buscarorganismos',
-                data: info,
+                data: infoParaEnviar,
                 success: function(response) {
-                  console.log(info);
-                  console.log(response);
-                    //$("#tablaOrganismos").reload();
-                    /*var resultado = [];
+                    $("#tablaOrganismos").DataTable().clear();
+                    var resultado = [];
                     for(var i=0;i<response.length;i++) {
                       var ele = response[i];
                       var arrayInterno = [];
@@ -171,7 +180,7 @@ $(document).ready(function() {
                                                                                                   +'</button>');
                       resultado.push(arrayInterno);
                 }
-                $("#tablaOrganismos").DataTable().rows.add(resultado).draw();*/
+                $("#tablaOrganismos").DataTable().rows.add(resultado).draw();
               },
                 error: function(xhr, status, error) {
                     alert("Error en el servidor");

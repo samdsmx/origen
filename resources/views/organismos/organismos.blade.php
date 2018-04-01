@@ -91,7 +91,6 @@ Sistemas
               'num_elementos': 0
             },
             dataSrc: function(response) {
-              console.log(response);
               var resultado = [];
               for(var i=0;i<response.length;i++) {
                 var ele = response[i];
