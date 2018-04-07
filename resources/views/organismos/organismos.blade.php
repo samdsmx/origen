@@ -36,13 +36,13 @@ Sistemas
                     @include('organismos.busqueda')
                     {!! Form::close() !!}
                     @section('tableContent')
+      <div class="col-md-6" style="padding-left: 40%; padding-right: 30%; text-align: center;">
+                                <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#modalRegistroOrganismo" >
+                                    <span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Organismo
+                                </button>
+                          </div>
                         <section id="tableContent">
-                            <table id="tablaOrganismos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
-                                <div class="col-md-6" style="padding: 0px; text-align: center;">
-                                    <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#modalRegistroOrganismo" >
-                                        <span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Organismo
-                                    </button>
-                                </div>
+                              <table id="tablaOrganismos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
                                 <thead>
                                 <th class="alert-info col-md-3">TEMA</th>
                                 <th class="alert-info col-md-2">INSTITUCI&Oacute;N</th>
@@ -69,10 +69,7 @@ Sistemas
 
     var propiedadesTabla = {
         scrollX: false,
-        responsive: true,
-        searching: true,
         paging: true,
-        language: dataTablesSpanish,
         lengthMenu: [[10, 20, 200], [10, 20, 200]],
         ordering: true,
         info: true,
@@ -83,6 +80,9 @@ Sistemas
 
     $('#tablaOrganismos').DataTable({
         propiedadesTabla,
+        language: dataTablesSpanish,
+        searching: true,
+        responsive: true,
         ajax: {
             type: 'POST',
             url: 'Organismos/organismosactuales',

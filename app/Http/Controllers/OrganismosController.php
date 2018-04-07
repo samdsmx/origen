@@ -10,7 +10,17 @@ class OrganismosController extends BaseController {
     public function obtenerOrganismosAll() {
         $organismos = organismosModel::select('ID', 'Tema', 'Institucion', 'Estado',
                 'Direccion', 'Telefono', 'Email')->get()->toArray();
-        return $organismos;
+        return $this->cambiarComasSaltos($organismos);
+    }
+
+    /*
+    Función que se encarga de cambiar las comas por <br>
+    */
+    public function cambiarComasSaltos($org) {
+        for($i=0;$i<count($org); $i++) {
+            $org[$i]['Tema'] = str_replace(',','<br>',$org[$i]['Tema']);
+        }
+        return $org;
     }
 
     /*
@@ -47,7 +57,7 @@ class OrganismosController extends BaseController {
         return Response::json($organismo);
     }
 
-    public static function obtenerOrganismos($datos){
+    public function obtenerOrganismos($datos){
         $whereStatement = [];
         if( isset($datos['tema']) && $datos['tema'] != '' ){
             $tema_busqueda='(Tema like "';
@@ -105,11 +115,10 @@ class OrganismosController extends BaseController {
                 $organismoArray['Email'] = $organismo->Email;
                 $organismosArray[] = $organismoArray;
             }
-
         } else {
             $organismoArray = array();
         }
-        return $organismosArray;
+        return $this->cambiarComasSaltos($organismosArray);
     }
 
     /*
@@ -148,7 +157,7 @@ class OrganismosController extends BaseController {
             } else {
                 $organismo = new organismosModel();
             }
-            $organismo->Tema = $datos["Tema"];
+            $organismo->Tema = $datos['Tema'];
             $organismo->Objetivo = $datos["Objetivo"];
             $organismo->Institucion = $datos["Institucion"];
             $organismo->Estado = $datos["Estado"];
@@ -159,12 +168,11 @@ class OrganismosController extends BaseController {
             $organismo->Observaciones = $datos["Observaciones"];
             $organismo->Requisitos = $datos["Requisitos"];
             $organismo->HorariosCostos = $datos["HorariosCostos"];
-
             $organismo->save();
+            Session::flash('mensaje', 'Organismo Actualizado');
         } catch(\Exception $e){
             error_log($e->getMessage());
         }
-        Session::flash('mensaje', 'Organismo Actualizado');
     }
 
     public function postEliminarorganismo(){
@@ -183,9 +191,4 @@ class OrganismosController extends BaseController {
         Session::flash('mensaje', 'Organismo Borrado');
 
     }
-
-
-
-
-
 }

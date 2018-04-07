@@ -4,6 +4,21 @@ $.ajaxSetup({
         }
 });
 
+function limpiarCampos() {
+  $('#ID').val('');
+  $('#Tema').val('');
+  $('#Objetivo').val('');
+  $('#Estado').val('-1');
+  $('#Institucion').val('');
+  $('#Direccion').val('');
+  $('#Referencia').val('');
+  $('#Telefono').val('');
+  $('#Email').val('');
+  $('#Observaciones').val('');
+  $('#Requisitos').val('');
+  $('#HorariosCostos').val('');
+}
+
 function mostrarMensaje(mensaje, clase) {
     clase = (typeof (clase) !== 'undefined' ? clase : "alert-danger");
     $("#mensajeVista").html(mensaje);
@@ -110,14 +125,28 @@ $('#registraUsuario').submit(function(e) {
 $('#registraOrganismo').submit(function(e) {
     e.preventDefault();
     var data = $(this).serialize();
+    var infoParaEnviar = '';
+    var temaConcat = '';
+    var informacionDiv = data.split('&');
+    for(var i=0;i<informacionDiv.length;i++) {
+      var eleDiv = informacionDiv[i].split('=');
+      if(eleDiv[0] === 'Tema') {
+        temaConcat += eleDiv[1] + ',';
+      } else {
+        infoParaEnviar += informacionDiv[i] + '&';
+      }
+    }
+    infoParaEnviar += 'Tema='+temaConcat;
+    console.log(infoParaEnviar);
     $.ajax({
         type: 'POST',
         url: "Organismos/registraorganismo",
-        data: data,
+        data: infoParaEnviar,
         success: function(response) {
             $('div').removeClass('has-error');
             $('input').removeAttr("title");
             if (response.errors) {
+              console.log(response.errors);
                 $.each(response.errors, function(index, error) {
                     $("#d" + index).addClass("has-error");
                     $("#" + index).attr("title", error);
