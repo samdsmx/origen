@@ -227,14 +227,17 @@ Sistemas
                 url: 'Organismos/buscarorganismo',
                 data: {'id':id},
                 success: function(response) {
+                  console.log(response);
                     $.each( response, function( llave, valor ) {
                         if( llave == 'Tema' ){
                             var arreglo = [];
-                            $.each(valor.split('\n'), function(k,v){
+                            $.each(valor.split(','), function(k,v){
                                 arreglo.push( v.trim() );
                             });
                             $('#Tema').val(arreglo);
                             $('#Tema').trigger('change');
+                        } else if(false) {
+
                         }else{
                             $('#'+llave).val(valor);
                         }
