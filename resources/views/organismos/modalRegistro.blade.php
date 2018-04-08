@@ -1,11 +1,16 @@
 <div class="modal fade bs-example-modal-md" id="modalRegistroOrganismo" tabindex="-1" role="dialog" aria-hidden="true">
     {!! Form::open(array('id' => 'registraOrganismo', 'method'=>'post')) !!}
     <div class="modal-dialog modal-md" >
+      <style media="screen">
+        .select2 {
+          width: 100%!important;
+        }
+      </style>
         <div class="modal-content" style="background: transparent" >
             <div class="modal-header"
                  style="background-color: #ff8018; border-top: 1px solid #fda65f;
                  border-bottom: 5px solid #fda65f; border-radius: 5px 5px 0 0;">
-                <button onclick="limpiarCampos()" type="button" class="close" data-dismiss="modal">
+                <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">&times;</span>
                     <span class="sr-only">Cerrar</span>
                 </button>

@@ -6,12 +6,12 @@ use Validator;
 use Illuminate\Database\Eloquent\Model;
 
 class organismosModel extends Model{
-    
+
     protected $table = 'organismos';
     protected $primaryKey = 'ID';
     protected $fillable = ['Tema','Objetivo', 'Institución', 'Estado', 'Direccion', 'Referencia', 'Telefono', 'Email',
         'Observaciones', 'Requisitos', 'HorariosCostos'];
-    
+
     public static function validar($datos){
         $rules = array();
         $rules['Tema'] = "required";
@@ -25,7 +25,7 @@ class organismosModel extends Model{
         $messages['Telefono.requided'] = "El Telefono es obligatorio";
         $messages['Telefono.numeric'] = "El Telefono debe contener valores numéricos";
         $messages['Telefono.min'] = "El Telefono debe contener al menos 8 digitos";
-        
+
         return Validator::make($datos, $rules, $messages);
     }
 }

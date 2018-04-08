@@ -6,7 +6,9 @@ $.ajaxSetup({
 
 function limpiarCampos() {
   $('#ID').val('');
-  $('#Tema').val('');
+  $('.select2-selection__rendered').children().each(function() {
+    $(this).replaceWith('');
+  });
   $('#Objetivo').val('');
   $('#Estado').val('-1');
   $('#Institucion').val('');
@@ -143,6 +145,7 @@ $('#registraOrganismo').submit(function(e) {
         url: "Organismos/registraorganismo",
         data: infoParaEnviar,
         success: function(response) {
+          console.log(response);
             $('div').removeClass('has-error');
             $('input').removeAttr("title");
             if (response.errors) {
@@ -249,10 +252,19 @@ $(document).ready(function() {
         });
     }
 
+    $('#resetear').click(function() {
+      limpiarCampos();
+    });
+
+    $('#resetearBusqueda').click(function() {
+      limpiarCampos();
+    });
+
     $(document).on('hide.bs.modal','#modalRegistroOrganismo', function(){
         tabla.clear();
 //       $('#buscaOrganismosCanalizacion').trigger('reset');
-        resetForm(['tema','objetivo','institucion','estado']);
+        //resetForm(['tema','objetivo','institucion','estado']);
+        limpiarCampos();
         $('#tablaMuestreo').hide();
     });
 

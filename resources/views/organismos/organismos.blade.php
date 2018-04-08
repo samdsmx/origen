@@ -227,7 +227,6 @@ Sistemas
                 url: 'Organismos/buscarorganismo',
                 data: {'id':id},
                 success: function(response) {
-                  console.log(response);
                     $.each( response, function( llave, valor ) {
                         if( llave == 'Tema' ){
                             var arreglo = [];
