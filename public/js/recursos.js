@@ -4,6 +4,23 @@ $.ajaxSetup({
         }
 });
 
+function limpiarCampos() {
+  $('#ID').val('');
+  $('.select2-selection__rendered').children().each(function() {
+    $(this).replaceWith('');
+  });
+  $('#Objetivo').val('');
+  $('#Estado').val('-1');
+  $('#Institucion').val('');
+  $('#Direccion').val('');
+  $('#Referencia').val('');
+  $('#Telefono').val('');
+  $('#Email').val('');
+  $('#Observaciones').val('');
+  $('#Requisitos').val('');
+  $('#HorariosCostos').val('');
+}
+
 function mostrarMensaje(mensaje, clase) {
     clase = (typeof (clase) !== 'undefined' ? clase : "alert-danger");
     $("#mensajeVista").html(mensaje);
@@ -110,14 +127,29 @@ $('#registraUsuario').submit(function(e) {
 $('#registraOrganismo').submit(function(e) {
     e.preventDefault();
     var data = $(this).serialize();
+    var infoParaEnviar = '';
+    var temaConcat = '';
+    var informacionDiv = data.split('&');
+    for(var i=0;i<informacionDiv.length;i++) {
+      var eleDiv = informacionDiv[i].split('=');
+      if(eleDiv[0] === 'Tema') {
+        temaConcat += eleDiv[1] + ',';
+      } else {
+        infoParaEnviar += informacionDiv[i] + '&';
+      }
+    }
+    infoParaEnviar += 'Tema='+temaConcat;
+    console.log(infoParaEnviar);
     $.ajax({
         type: 'POST',
         url: "Organismos/registraorganismo",
-        data: data,
+        data: infoParaEnviar,
         success: function(response) {
+          console.log(response);
             $('div').removeClass('has-error');
             $('input').removeAttr("title");
             if (response.errors) {
+              console.log(response.errors);
                 $.each(response.errors, function(index, error) {
                     $("#d" + index).addClass("has-error");
                     $("#" + index).attr("title", error);
@@ -140,21 +172,54 @@ $(document).ready(function() {
 
     $('#buscaOrganismos').submit( function(e){
         e.preventDefault();
+        $("#tablaOrganismos").DataTable().clear().draw();
+        var info = $(this).serialize();
+        var infoParaEnviar = '';
+        var temaConcat = '';
+        var informacionDiv = info.split('&');
+        for(var i=0;i<informacionDiv.length;i++) {
+          var eleDiv = informacionDiv[i].split('=');
+          if(eleDiv[0] === 'tema') {
+            temaConcat += eleDiv[1] + ',';
+          } else {
+            infoParaEnviar += informacionDiv[i] + '&';
+          }
+        }
+        infoParaEnviar += 'tema='+temaConcat;
         $.ajax({
                 type: 'POST',
                 url: 'Organismos/buscarorganismos',
-                data: $(this).serialize(),
+                data: infoParaEnviar,
                 success: function(response) {
-                    $('#tableContent').html(response);  
-                    $('#tablaOrganismos').DataTable(propiedadesTabla);
-                    $("#tablaOrganismos").reload();
-                },
+                    $("#tablaOrganismos").DataTable().clear();
+                    var resultado = [];
+                    for(var i=0;i<response.length;i++) {
+                      var ele = response[i];
+                      var arrayInterno = [];
+                      arrayInterno.push(ele.Tema);
+                      arrayInterno.push(ele.Institucion);
+                      arrayInterno.push(ele.Estado);
+                      arrayInterno.push(ele.Direccion);
+                      arrayInterno.push(ele.Telefono);
+                      arrayInterno.push(ele.Email);
+                      arrayInterno.push('<button type="button" class="btn btn-danger eliminarOrganismo"'
+                                                                      +'data-toggle="modal" data-target="#modalConfirma" data-id="'+ele.ID+'">'
+                                                                  +'<span class="fa fa-trash"></span>'
+                                                                                +'</button>'
+                                                                                +'<button type="button" class="btn btn-success modificarOrganismo"'
+                                                                                        +'data-toggle="modal" data-target="#modalRegistroOrganismo" data-id="'+ele.ID+'">'
+                                                                                    +'<span class="fa fa-pencil"></span>'
+                                                                                                  +'</button>');
+                      resultado.push(arrayInterno);
+                }
+                $("#tablaOrganismos").DataTable().rows.add(resultado).draw();
+              },
                 error: function(xhr, status, error) {
                     alert("Error en el servidor");
                 }
             });
     } );
-    
+
     var propiedadesTablaChica = {
         scrollX: false,
         responsive: true,
@@ -171,7 +236,7 @@ $(document).ready(function() {
     var tabla = $('#tablaBusquedaOrganismos').DataTable({
         propiedadesTablaChica
     });
-    
+
     function resetForm(campos){
         $.each(campos, function(index, c){
             var campo = $('#'+c);
@@ -186,11 +251,20 @@ $(document).ready(function() {
             }
         });
     }
-    
+
+    $('#resetear').click(function() {
+      limpiarCampos();
+    });
+
+    $('#resetearBusqueda').click(function() {
+      limpiarCampos();
+    });
+
     $(document).on('hide.bs.modal','#modalRegistroOrganismo', function(){
         tabla.clear();
 //       $('#buscaOrganismosCanalizacion').trigger('reset');
-        resetForm(['tema','objetivo','institucion','estado']);
+        //resetForm(['tema','objetivo','institucion','estado']);
+        limpiarCampos();
         $('#tablaMuestreo').hide();
     });
 
@@ -219,8 +293,8 @@ $(document).ready(function() {
                 }
             });
     } );
-    
-    
+
+
 
     $("#fecha_inicio").datepicker({
         changeMonth: true,

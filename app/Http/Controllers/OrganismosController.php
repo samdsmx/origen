@@ -6,26 +6,48 @@ use Validator;
 use DB, View, Session, Request, Redirect, Response, App\Http\Models\organismosModel, App\Http\Models\camposModel;
 
 class OrganismosController extends BaseController {
-    
-    public function obtenerOrganismosAll(){
+
+    public function obtenerOrganismosAll() {
         $organismos = organismosModel::select('ID', 'Tema', 'Institucion', 'Estado',
                 'Direccion', 'Telefono', 'Email')->get()->toArray();
-        return $organismos;
+        return $this->cambiarComasSaltos($organismos);
     }
-    
-    
-    
+
+    /*
+    Función que se encarga de cambiar las comas por <br>
+    */
+    public function cambiarComasSaltos($org) {
+        for($i=0;$i<count($org); $i++) {
+            $org[$i]['Tema'] = str_replace(',','<br>',$org[$i]['Tema']);
+        }
+        return $org;
+    }
+
+    /*
+    Fuńcion que se encarga de regresar la lista paginada de organismos
+    $num_pagina, la página a mostrar de los elementos
+    $num_elementos: El número de elementos que se quiere regresar de la lista.
+      Si el número es igual a cero, muestra todos los elementos
+    */
+    public function organismosPaginados($num_pagina,$num_elementos) {
+        $lista_organismos = $this->obtenerOrganismosAll();
+        if($num_elementos==0){
+          return $lista_organismos;
+        }
+        $organismoPag = array_slice($lista_organismos,($num_pagina * $num_elementos),$num_elementos);
+        return $organismoPag;
+    }
+
     public function getIndex() {
         if (!parent::tienePermiso('Organismos')){
             return Redirect::to('inicio');
             }
         $menu = parent::createMenu();
-        return View::make('organismos.organismos', array('menu' => $menu, 
-            'organismos' => $this->obtenerOrganismosAll(), 
-            'estados' => getEstadosArray(), 
+        return View::make('organismos.organismos', array('menu' => $menu,
+            'estados' => getEstadosArray(),
             'catalogo_tema' => parent::obtenerCampos('Tema')));
-    }    
-    
+    }
+
     public function postBuscarorganismo(){
         if (!Request::ajax()) {
             return;
@@ -34,19 +56,15 @@ class OrganismosController extends BaseController {
         $organismo = organismosModel::find($datos['id']);
         return Response::json($organismo);
     }
-    
-    public static function obtenerOrganismos($datos){
+
+    public function obtenerOrganismos($datos){
         $whereStatement = [];
         if( isset($datos['tema']) && $datos['tema'] != '' ){
-            $tema_busqueda='(';
-            foreach( explode('\n', $datos['tema']) as $llave => $tema ){
-                if($llave == 0){
-                    $tema_busqueda.=' Tema = "'.$datos['tema'].'" ';
-                } else {
-                    $tema_busqueda.=' OR Tema = "'.$datos['tema'].'" ';
-                }
+            $tema_busqueda='(Tema like "';
+            foreach( explode(',', $datos['tema']) as $llave => $tema ){
+                    $tema_busqueda.='%'.$tema;
             }
-            $tema_busqueda.=')';
+            $tema_busqueda.='")';
             $whereStatement[] = $tema_busqueda;
         }
         if( isset( $datos['objetivo'] ) && $datos['objetivo'] != '' ){
@@ -57,7 +75,7 @@ class OrganismosController extends BaseController {
                     if( $i == 0 ){
                         $objetivo_bus.=" Objetivo LIKE  '%".$palabra."%'";
                     } else {
-                        $objetivo_bus.=" OR Objetivo LIKE  '%".$palabra."%'";
+                        $objetivo_bus.=" AND Objetivo LIKE  '%".$palabra."%'";
                     }
                 }
             }
@@ -66,7 +84,7 @@ class OrganismosController extends BaseController {
             $whereStatement[] = $objetivo_bus;
         }
         if( isset( $datos['institucion'] ) &&  $datos['institucion'] != '' ){
-            $instituto_bus='Institucion = "'.$datos['institucion'].'"';
+            $instituto_bus='Institucion like "%'.$datos['institucion'].'%"';
             $whereStatement[] = $instituto_bus;
         }
         if( isset( $datos['estado'] ) && $datos['estado'] != '-1' && $datos['estado']!='' ){
@@ -82,8 +100,8 @@ class OrganismosController extends BaseController {
             }
         }
         $organismos = DB::select($sql);
+        $organismosArray = [];
         if($organismos){
-            $organismosArray = [];
             foreach( $organismos as $organismo ){
                 $organismoArray = [];
                 $organismoArray['ID'] = $organismo->ID;
@@ -97,26 +115,33 @@ class OrganismosController extends BaseController {
                 $organismoArray['Email'] = $organismo->Email;
                 $organismosArray[] = $organismoArray;
             }
-            
         } else {
             $organismoArray = array();
         }
-        return $organismosArray;
+        return $this->cambiarComasSaltos($organismosArray);
     }
-    
+
+    /*
+    Función que se encarga de regresar la lista de organismos según el tamaño y
+    el número de elementos solicitados (tamaño,num_elementos)
+    */
+    public function postOrganismosactuales() {
+      if(!Request::ajax()) {
+        return;
+      }
+      $data = Request::all();
+      return $this->organismosPaginados($data["tamanio"],$data["num_elementos"]);
+    }
+
     public function postBuscarorganismos(){
         if (!Request::ajax()) {
             return;
         }
         $datos = Request::all();
         $organismosArray = $this::obtenerOrganismos($datos);
-        $view = View::make( 'organismos.organismos', array( 'menu' => [], 
-                    'organismos' => $organismosArray, 
-                    'estados' => getEstadosArray(), 
-                    'catalogo_tema' => parent::obtenerCampos('Tema')));
-            return $view->renderSections()['tableContent']; 
+        return $organismosArray;
     }
-    
+
     public function postRegistraorganismo(){
         if( !Request::ajax() ){
             return;
@@ -132,7 +157,7 @@ class OrganismosController extends BaseController {
             } else {
                 $organismo = new organismosModel();
             }
-            $organismo->Tema = $datos["Tema"];
+            $organismo->Tema = $datos['Tema'];
             $organismo->Objetivo = $datos["Objetivo"];
             $organismo->Institucion = $datos["Institucion"];
             $organismo->Estado = $datos["Estado"];
@@ -143,14 +168,13 @@ class OrganismosController extends BaseController {
             $organismo->Observaciones = $datos["Observaciones"];
             $organismo->Requisitos = $datos["Requisitos"];
             $organismo->HorariosCostos = $datos["HorariosCostos"];
-            
             $organismo->save();
+            Session::flash('mensaje', 'Organismo Actualizado');
         } catch(\Exception $e){
             error_log($e->getMessage());
         }
-        Session::flash('mensaje', 'Organismo Actualizado');
     }
-    
+
     public function postEliminarorganismo(){
         if( !Request::ajax() ){
             return;
@@ -165,11 +189,6 @@ class OrganismosController extends BaseController {
             error_log($e->getMessage());
         }
         Session::flash('mensaje', 'Organismo Borrado');
-        
-    }
-    
-    
-    
-    
 
+    }
 }

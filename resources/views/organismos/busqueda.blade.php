@@ -3,8 +3,8 @@
     <div class="modal-body" id="MSOrganismos-body" style="background: #ffffff;">
         <div class="row">
             <div class="form-group col-md-6">
-                <label for="tema">Tema:</label>
-                <select name="tema" id="tema" multiple class="form-control js-example-basic-multiple" style="width:100%;" >
+                <label for="temaBus">Tema:</label>
+                <select name="tema" id="temaBus" multiple class="form-control js-example-basic-multiple" style="width:100%;" >
                     @foreach ($catalogo_tema as $t)
                         <option value="{{$t['Nombre']}}">{{$t['Nombre']}}</option>
                     @endforeach
@@ -44,7 +44,6 @@
         </div>
     </div>
     <div class="modal-footer" style="background: #ffffff;  border-top-color: #ffffff;">
-        {!! Form::reset('Limpiar', array('class' => 'btn btn-primary', 'id' => "resetear")) !!}
+        {!! Form::reset('Limpiar', array('class' => 'btn btn-primary', 'id' => "resetearBusqueda")) !!}
         {!! Form::submit('Buscar', array('class' => 'btn btn-success', 'id' => 'btnBuscarOrganismos')) !!}
     </div>
-

@@ -15,7 +15,7 @@ Sistemas
 @include('includes.opcionesDerechaInicio')
 @stop
 
-@section('encabezado') 
+@section('encabezado')
 @stop
 
 @section('cuerpo')
@@ -36,13 +36,13 @@ Sistemas
                     @include('organismos.busqueda')
                     {!! Form::close() !!}
                     @section('tableContent')
+      <div class="col-md-6" style="padding-left: 40%; padding-right: 30%; text-align: center;">
+                                <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#modalRegistroOrganismo" >
+                                    <span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Organismo
+                                </button>
+                          </div>
                         <section id="tableContent">
-                            <table id="tablaOrganismos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
-                                <div class="col-md-6" style="padding: 0px; text-align: center;">
-                                    <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#modalRegistroOrganismo" >
-                                        <span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Organismo
-                                    </button>
-                                </div>
+                              <table id="tablaOrganismos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
                                 <thead>
                                 <th class="alert-info col-md-3">TEMA</th>
                                 <th class="alert-info col-md-2">INSTITUCI&Oacute;N</th>
@@ -53,26 +53,6 @@ Sistemas
                                 <th class="alert-info col-md-2">ACCIONES</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($organismos as $organismo)
-                                    <tr>
-                                        <td style="vertical-align: middle;">{!! $organismo['Tema'] !!}</td>
-                                        <td style="vertical-align: middle;">{!! $organismo['Institucion'] !!}</td>
-                                        <td style="vertical-align: middle;">{!! $organismo['Estado'] !!}</td>
-                                        <td style="vertical-align: middle;">{!! $organismo['Direccion'] !!}</td>
-                                        <td style="vertical-align: middle;">{!! $organismo['Telefono'] !!}</td>
-                                        <td style="vertical-align: middle;">{!! $organismo['Email'] !!}</td>
-                                        <td style="vertical-align: middle;">
-                                            <button type="button" class="btn btn-danger eliminarOrganismo" 
-                                                    data-toggle="modal" data-target="#modalConfirma" data-id="{!! $organismo['ID'] !!}">
-                                                <span class="fa fa-trash"></span>
-                                            </button>
-                                            <button type="button" class="btn btn-success modificarOrganismo" 
-                                                    data-toggle="modal" data-target="#modalRegistroOrganismo" data-id="{!! $organismo['ID'] !!}">
-                                                <span class="fa fa-pencil"></span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    @endforeach
                                 </tbody>
                             </table>
                         </section>
@@ -86,25 +66,59 @@ Sistemas
 @section('recursosExtra')
 <script>
     $("i.fa").popover({'trigger': 'hover'});
-    
+
     var propiedadesTabla = {
         scrollX: false,
-        responsive: true,
-        searching: true,
         paging: true,
         lengthMenu: [[10, 20, 200], [10, 20, 200]],
         ordering: true,
         info: true,
         order: [[1, "desc"]],
-        language: dataTablesSpanish,
         sDom: 'Rfrt <"col-md-12" <"col-md-4 pull-left"i> <"paginacion" <"opcionPaginacion"l> p > >',
         columnDefs: [{orderable: false, targets: [3, 4]}]
     }
-    
-    $('#tablaOrganismos').DataTable({
-        propiedadesTabla
-    });
 
+    $('#tablaOrganismos').DataTable({
+        propiedadesTabla,
+        language: dataTablesSpanish,
+        searching: true,
+        responsive: true,
+        ajax: {
+            type: 'POST',
+            url: 'Organismos/organismosactuales',
+            data: {
+              'tamanio': 0,
+              'num_elementos': 0
+            },
+            dataSrc: function(response) {
+              var resultado = [];
+              for(var i=0;i<response.length;i++) {
+                var ele = response[i];
+                var arrayInterno = [];
+                arrayInterno.push(ele.Tema);
+                arrayInterno.push(ele.Institucion);
+                arrayInterno.push(ele.Estado);
+                arrayInterno.push(ele.Direccion);
+                arrayInterno.push(ele.Telefono);
+                arrayInterno.push(ele.Email);
+                arrayInterno.push('<button type="button" class="btn btn-danger eliminarOrganismo"'
+                                                    +'data-toggle="modal" data-target="#modalConfirma" data-id="'+ele.ID+'">'
+                                                +'<span class="fa fa-trash"></span>'
+                                            +'</button>'
+                                            +'<button type="button" class="btn btn-success modificarOrganismo"'
+                                                    +'data-toggle="modal" data-target="#modalRegistroOrganismo" data-id="'+ele.ID+'">'
+                                                +'<span class="fa fa-pencil"></span>'
+                                            +'</button>');
+                resultado.push(arrayInterno);
+              }
+              return resultado;
+            }
+        },
+      });
+
+
+    $(document).on('click','.paginate_button',function() {
+    });
     /*function buscarInformacion(tipo, id) {
      $.ajax({
      url: 'Consultas/obtenerlistado/' + tipo + '/' + id,
@@ -216,11 +230,13 @@ Sistemas
                     $.each( response, function( llave, valor ) {
                         if( llave == 'Tema' ){
                             var arreglo = [];
-                            $.each(valor.split('\n'), function(k,v){
+                            $.each(valor.split(','), function(k,v){
                                 arreglo.push( v.trim() );
                             });
                             $('#Tema').val(arreglo);
                             $('#Tema').trigger('change');
+                        } else if(false) {
+
                         }else{
                             $('#'+llave).val(valor);
                         }

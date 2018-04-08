@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Auth, View, Session, Request, Redirect, Response, App\Http\Models\catalogocpModel, 
+use Auth, View, Session, Request, Redirect, Response, App\Http\Models\catalogocpModel,
         Illuminate\Support\Facades\DB, App\Http\Models\casosModel, App\Http\Models\llamadasModel;
 use App\Http\Controllers\OrganismosController;
 
@@ -13,33 +13,33 @@ class RegistroController extends BaseController {
             return Redirect::to('inicio');
         }
         $menu = parent::createMenu();
-        return View::make('registro.registro', array('menu' => $menu, 'estados'=> getEstadosArray(), 
+        return View::make('registro.registro', array('menu' => $menu, 'estados'=> getEstadosArray(),
             'catalogo_tema' => parent::obtenerCampos('Tema'),
-            'mpsicologicos' => parent::obtenerCampos('AYUDAPSICOLOGICO'),            
+            'mpsicologicos' => parent::obtenerCampos('AYUDAPSICOLOGICO'),
             'mlegales' => parent::obtenerCampos('AYUDALEGAL'),
             'mMed' => parent::obtenerCampos('AYUDAMEDICA'),
             'mOtr' => parent::obtenerCampos('AYUDAOTROS'),
             'tv' => parent::obtenerCampos('TipoViolencia'),
-            'mv' => parent::obtenerCampos('ModalidadViolencia'), 
+            'mv' => parent::obtenerCampos('ModalidadViolencia'),
             'cte' => parent::obtenerCampos('ComoTeEnteraste'),
             'cleg' => parent::obtenerCampos('CanaLegal')));
     }
-    
+
     public function postBuscardelegacion(){
         if( Request::ajax() ){
             $estado = Request::get('Estado');
             return getDelegacionesArray($estado);
         }
     }
-    
+
     public function postBuscarcolonia(){
         if( Request::ajax() ){
             $municipio = Request::get('Municipio');
             $estado = Request::get('Estado');
-            return getColoniasArray($estado, $municipio);    
+            return getColoniasArray($estado, $municipio);
         }
     }
-    
+
     public function postBuscarcodigopostal(){
         if( Request::ajax() ){
             $estado = Request::get('Estado');
@@ -48,7 +48,7 @@ class RegistroController extends BaseController {
             return $this->buscarCodigoPostalPorCampos($estado, $municipio, $colonia);
         }
     }
-    
+
     public function postBuscarorganismos(){
         if (!Request::ajax()) {
             return;
@@ -57,21 +57,21 @@ class RegistroController extends BaseController {
         $organismosArray = OrganismosController::obtenerOrganismos($datos);
         return Response::json($organismosArray);
     }
-    
-    
+
+
     function buscarCodigoPostalPorCampos($estado="0", $municipio="0", $colonia="0"){
         $cp ='';
         if( $estado == "0" || $municipio == "0" || $colonia == "0" ){
             return "";
         }
-        $busquedaCodigo = DB::table('catalogoCP')->select('cp')->where('estado', '=', $estado)->where('municipio', '=', $municipio)->where('colonia', '=', $colonia)->get();
+        $busquedaCodigo = DB::table('catalogocp')->select('cp')->where('estado', '=', $estado)->where('municipio', '=', $municipio)->where('colonia', '=', $colonia)->get();
         foreach ( $busquedaCodigo as $c ){
             // Suponemos que solo hay un codigo postal por cada colonia
             $cp = $c->cp;
         }
          return Response::json( $cp );
     }
-    
+
     public function postBuscarcp(){
         if( Request::ajax() ){
             $cp = Request::get('CP');
@@ -84,15 +84,15 @@ class RegistroController extends BaseController {
             }
             $direccion = catalogocpModel::where('cp', '=', $cp)->get()->toArray();
             $direccion = $direccion[0];
-            
+
             $direccion['estado'] = strtr($direccion['estado'], "áéíóú", "ÁÉÍÓÚ");
             $direccion['municipio'] = strtr($direccion['municipio'], "áéíóú", "ÁÉÍÓÚ");
             $direccion['colonia'] = strtr($direccion['colonia'], "áéíóú", "ÁÉÍÓÚ");
-            
+
             $direccion['estado'] = strtoupper($direccion['estado']);
             $direccion['municipio'] = strtoupper($direccion['municipio']);
             $direccion['colonia'] = strtoupper($direccion['colonia']);
-            
+
             if($direccion){
                 return Response::json($direccion);
             }else{
@@ -101,13 +101,13 @@ class RegistroController extends BaseController {
         }
         return $direccion;
     }
-    
+
     public function postRegistrarllamada(){
         if (!Request::ajax()) {
             return;
         }
         $datos = Request::all();
-        $datos['motivos'] = isset($datos['AyudaPsicologico']) || isset($datos['AyudaLegal']) || isset($datos['AyudaMedica']) || isset($datos['AyudaOtros']);          
+        $datos['motivos'] = isset($datos['AyudaPsicologico']) || isset($datos['AyudaLegal']) || isset($datos['AyudaMedica']) || isset($datos['AyudaOtros']);
         $validatorCasos = casosModel::validar($datos);
         $validatorLlamadas = llamadasModel::validar($datos);
         if ($validatorCasos->fails() || $validatorLlamadas->fails()) {
@@ -135,6 +135,6 @@ class RegistroController extends BaseController {
 
         Session::flash('mensaje', 'Se ha registrado la llamada correctamente. Caso #'.$caso->IDCaso);
     }
-    
+
 
 }

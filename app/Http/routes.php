@@ -1,4 +1,4 @@
-<?php
+  <?php
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +13,7 @@
 
 // Funcion de carga de catalogo estados
 function getEstadosArray(){
-    $states = DB::table('catalogoCP')->select('estado')->groupby('estado')->get();
+    $states = DB::table('catalogocp')->select('estado')->groupby('estado')->get();
     $estados = array();
     foreach($states as $estado){
         $estados[ strtoupper( strtr( $estado->estado, "áéíóú", "ÁÉÍÓÚ" ) ) ] = strtoupper( strtr( $estado->estado, "áéíóú", "ÁÉÍÓÚ" ) );
@@ -24,23 +24,23 @@ function getEstadosArray(){
 
 function getDelegacionesArray( $estado="0" ){
     if ( $estado == "0" ) {
-        $municipios = DB::table('catalogoCP')->distinct()->select('municipio')->groupby('municipio')->get();
+        $municipios = DB::table('catalogocp')->distinct()->select('municipio')->groupby('municipio')->get();
     } else {
-        $municipios = DB::table('catalogoCP')->distinct()->select('municipio')->where('estado', '=', $estado)->groupby('municipio')->get();
+        $municipios = DB::table('catalogocp')->distinct()->select('municipio')->where('estado', '=', $estado)->groupby('municipio')->get();
     }
     $delegaciones = array();
     foreach ($municipios as $m){
         $delegaciones[ strtoupper( strtr( $m->municipio, "áéíóúñ", "ÁÉÍÓÚÑ" ) ) ] = strtoupper( strtr( $m->municipio, "áéíóú", "ÁÉÍÓÚ" ) );
     }
-    
+
     return $delegaciones;
 }
 
 function getColoniasArray( $estado="0", $delegacion="0" ){
     if( $delegacion == "0" && $estado == "0" ){
-        $cols = DB::table('catalogoCP')->distinct()->select('colonia')->groupby('colonia')->get();
+        $cols = DB::table('catalogocp')->distinct()->select('colonia')->groupby('colonia')->get();
     } else if( $estado != "0" && $delegacion != "0" ){
-        $cols = DB::table('catalogoCP')->distinct()->select('colonia')->where('estado', '=', $estado)->where('municipio', '=', $delegacion)->groupby('colonia')->get();
+        $cols = DB::table('catalogocp')->distinct()->select('colonia')->where('estado', '=', $estado)->where('municipio', '=', $delegacion)->groupby('colonia')->get();
     } else {
         return array();
     }
@@ -51,7 +51,7 @@ function getColoniasArray( $estado="0", $delegacion="0" ){
     return $colonias;
 }
 
-Route::get('/', function () {
+Route::any('/', function () {
     if (Auth::guest()) {
         return \Redirect::to('index');
     } else {
@@ -64,7 +64,7 @@ Route::post('login', array('uses' => 'App\Http\Controllers\AuthController@login'
 Route::post('recover', array('uses' => 'App\Http\Controllers\AuthController@recover'));
 
 Route::group(array('before' => 'auth'), function() {
-    Route::get('inicio', 'App\Http\Controllers\AuthController@inicio');
+    Route::any('inicio', 'App\Http\Controllers\AuthController@inicio');
     Route::get('logout', 'App\Http\Controllers\AuthController@logout');
     Route::controller('Actividades', 'App\Http\Controllers\ActividadesController');
     Route::controller('PermisosUsuarios', 'App\Http\Controllers\PermisosUsuariosController');
@@ -86,29 +86,29 @@ function fechaLarga($fecha){
 	$mes = $dividido[1];
 	$ano = $dividido[0];
 	if($mes == 1){
-		$mes = "Enero";		
+		$mes = "Enero";
 	}else if($mes == 2){
 		$mes = "Febrero";
 	}else if($mes == 3){
-		$mes = "Marzo";		
+		$mes = "Marzo";
 	}else if($mes == 4){
-		$mes = "Abril";			
+		$mes = "Abril";
 	}else if($mes == 5){
-		$mes = "Mayo";	
+		$mes = "Mayo";
 	}else if($mes == 6){
-		$mes = "Junio";			
+		$mes = "Junio";
 	}else if($mes == 7){
-		$mes = "Julio";	
+		$mes = "Julio";
 	}else if($mes == 8){
 		$mes = "Agosto";
 	}else if($mes == 9){
-		$mes = "Septiembre";	
+		$mes = "Septiembre";
 	}else if($mes == 10){
-		$mes = "Octubre";	
+		$mes = "Octubre";
 	}else if($mes == 11){
-		$mes = "Noviembre";	
+		$mes = "Noviembre";
 	}else if($mes == 12){
-		$mes = "Diciembre";	
+		$mes = "Diciembre";
 	}
 	return $dia." de ".$mes." ".$ano;
 }
