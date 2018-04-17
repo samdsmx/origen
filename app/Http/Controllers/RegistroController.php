@@ -54,8 +54,8 @@ class RegistroController extends BaseController {
             return;
         }
         $datos = Request::all();
-        $organismosArray = OrganismosController::obtenerOrganismos($datos);
-        return Response::json($organismosArray);
+        $organismosArray = app('App\Http\Controllers\OrganismosController')->obtenerOrganismos($datos);
+        return $organismosArray;
     }
 
 

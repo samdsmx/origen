@@ -3,6 +3,26 @@ $.ajaxSetup({
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
 });
+/**
+ * Función que se encarga de cambiar el formulario que se pase para
+ * concatenar múltiples temas.
+ * Regresa la petición corregida
+ */
+function cambiarPeticionMultiplesTemas(peticion) {
+    var peticionCorrecta = '';
+    var temaConcat = '';
+    var informacionDiv = peticion.split('&');
+    for(var i=0;i<informacionDiv.length;i++) {
+      var eleDiv = informacionDiv[i].split('=');
+      if(eleDiv[0] === 'tema') {
+        temaConcat += eleDiv[1] + ',';
+      } else {
+        peticionCorrecta += informacionDiv[i] + '&';
+      }
+    }
+    peticionCorrecta += 'tema='+temaConcat;
+    return peticionCorrecta;
+}
 
 function limpiarCampos() {
   $('#ID').val('');
@@ -127,19 +147,7 @@ $('#registraUsuario').submit(function(e) {
 $('#registraOrganismo').submit(function(e) {
     e.preventDefault();
     var data = $(this).serialize();
-    var infoParaEnviar = '';
-    var temaConcat = '';
-    var informacionDiv = data.split('&');
-    for(var i=0;i<informacionDiv.length;i++) {
-      var eleDiv = informacionDiv[i].split('=');
-      if(eleDiv[0] === 'Tema') {
-        temaConcat += eleDiv[1] + ',';
-      } else {
-        infoParaEnviar += informacionDiv[i] + '&';
-      }
-    }
-    infoParaEnviar += 'Tema='+temaConcat;
-    console.log(infoParaEnviar);
+    var infoParaEnviar = cambiarPeticionMultiplesTemas(data);
     $.ajax({
         type: 'POST',
         url: "Organismos/registraorganismo",
@@ -174,18 +182,7 @@ $(document).ready(function() {
         e.preventDefault();
         $("#tablaOrganismos").DataTable().clear().draw();
         var info = $(this).serialize();
-        var infoParaEnviar = '';
-        var temaConcat = '';
-        var informacionDiv = info.split('&');
-        for(var i=0;i<informacionDiv.length;i++) {
-          var eleDiv = informacionDiv[i].split('=');
-          if(eleDiv[0] === 'tema') {
-            temaConcat += eleDiv[1] + ',';
-          } else {
-            infoParaEnviar += informacionDiv[i] + '&';
-          }
-        }
-        infoParaEnviar += 'tema='+temaConcat;
+        var infoParaEnviar = cambiarPeticionMultiplesTemas(info);
         $.ajax({
                 type: 'POST',
                 url: 'Organismos/buscarorganismos',
@@ -223,18 +220,22 @@ $(document).ready(function() {
     var propiedadesTablaChica = {
         scrollX: false,
         responsive: true,
-        searching: false,
-        paging: true,
-        lengthMenu: [[5, 20, 200, 500], [5, 20, 200, 500]],
+
+
+       
         ordering: false,
         info: true,
         order: [[1, "desc"]],
-        language: dataTablesSpanish,
-        pageLength: 4,
-        sDom: 'Rfrt <"col-md-12" <"col-md-4 pull-left"i> <"paginacion" <"opcionPaginacion"l> p > >'
-    }
+
+
+      }
     var tabla = $('#tablaBusquedaOrganismos').DataTable({
-        propiedadesTablaChica
+        searching: false,
+        paging: true,
+        pageLength: 2,
+        bLengthChange : false,
+        language: dataTablesSpanish,
+        sDom: 'Rfrt <"col-md-12" <"col-md-4 pull-left"i> <"paginacion" <"opcionPaginacion"l> p > >'
     });
 
     function resetForm(campos){
@@ -270,14 +271,18 @@ $(document).ready(function() {
 
     $('#buscaOrganismosCanalizacion').submit( function(e){
         e.preventDefault();
-        $('#buscaOrganismosCanalizacion').trigger('reset');
+        //$('#buscaOrganismosCanalizacion').trigger('reset');
+        info = $(this).serialize();
+        var informacionEnv = cambiarPeticionMultiplesTemas(info);
+        console.log(informacionEnv);
         $.ajax({
                 type: 'POST',
                 url: 'Registro/buscarorganismos',
-                data: $(this).serialize(),
+                data: informacionEnv,
                 success: function(response) {
+                    console.log(response);
                     $('#tablaMuestreo').show();
-                    $('#buscaOrganismosCanalizacion').trigger('reset');
+                    //$('#buscaOrganismosCanalizacion').trigger('reset');
                     $.each(response, function(index, value){
                         tabla.row.add([value['Tema'], value['Institucion'], value['Estado'],
                             '<button type="button" class="btn btn-info addOrganismoCana" data-organismo="'+value['Institucion']+'"><span class="fa fa-plus-square"></span></button>' ]);

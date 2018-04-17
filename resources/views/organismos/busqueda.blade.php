@@ -31,8 +31,12 @@
                 </select>
             </div>
         </div>
+        <div class="modal-footer" style="background: #ffffff;  border-top-color: #ffffff;">
+            {!! Form::reset('Limpiar', array('class' => 'btn btn-primary', 'id' => "resetearBusqueda")) !!}
+            {!! Form::submit('Buscar', array('class' => 'btn btn-success', 'id' => 'btnBuscarOrganismos')) !!}
+        </div>
         <div class="row" id="tablaMuestreo" style="display: none;">
-            <table id="tablaBusquedaOrganismos" class="table table-bordered table-striped table-dataTable text-center">
+            <table id="tablaBusquedaOrganismos" style="padding-left:5%;" class="table table-bordered table-striped table-dataTable text-center">
                 <thead>
                     <th class="alert-info col-md-3">TEMA</th>
                     <th class="alert-info col-md-2">INSTITUCI&Oacute;N</th>
@@ -42,8 +46,8 @@
                 <tbody id="contenidoBusquedaOrganismos"></tbody>
             </table>
         </div>
+        <style>
+
+        </style>
     </div>
-    <div class="modal-footer" style="background: #ffffff;  border-top-color: #ffffff;">
-        {!! Form::reset('Limpiar', array('class' => 'btn btn-primary', 'id' => "resetearBusqueda")) !!}
-        {!! Form::submit('Buscar', array('class' => 'btn btn-success', 'id' => 'btnBuscarOrganismos')) !!}
-    </div>
+

@@ -1,5 +1,5 @@
-<div class="modal fade bs-example-modal-md" id="modalRegistroOrganismo" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-md" >
+<div class="modal fade bs-example-modal-lg" id="modalRegistroOrganismo" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" >
         <div class="modal-content" style="background: transparent" >
             <div class="modal-header" 
                  style="background-color: #ff8018; border-top: 1px solid #fda65f; 
