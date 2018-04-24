@@ -32,28 +32,14 @@ Sistemas
             <div class="box">
                 <div class="box-body">
                     @include('consultas.busqueda')
-                    <table id="tablaOrganismos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
+                    <table id="tablaCasos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
                         <thead>
                         <th class="alert-info col-md-3">FECHA</th>
                         <th class="alert-info col-md-2">NOMBRE</th>
                         <th class="alert-info col-md-2">CONSEJERA</th>
                         <th class="alert-info col-md-2">ACCIONES</th>
                         </thead>
-                        <tbody>
-                            @foreach($organismos as $organismo)
-                            <tr>
-                                <td style="vertical-align: middle;">{!! $organismo['Tema'] !!}</td>
-                                <td style="vertical-align: middle;">{!! $organismo['Institucion'] !!}</td>
-                                <td style="vertical-align: middle;">{!! $organismo['Estado'] !!}</td>
-                                <td style="vertical-align: middle;">
-                                    <button type="button" class="btn btn-danger btn-flat deleteOrganismoModal"
-                                            data-toogle="modal" data-target="#modalConfirma" data-id="{!! $organismo['ID'] !!}">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            @endforeach
-                            
+                        <tbody>                            
                         </tbody>
                     </table>
                 </div>
@@ -66,146 +52,44 @@ Sistemas
 <script>
     $("i.fa").popover({'trigger': 'hover'});
 
-    $('#tablaOrganismos').DataTable({
-        scrollX: false,
+    $('#tablaCasos').DataTable({
+       scrollX: false,
         responsive: true,
         searching: true,
         paging: true,
         lengthMenu: [[10, 20, 200], [10, 20, 200]],
         ordering: true,
         info: true,
-        order: [[1, "desc"]],
+        order: [[0, "desc"]],
         language: dataTablesSpanish,
-        sDom: 'Rfrt <"col-md-12" <"col-md-4 pull-left"i> <"paginacion" <"opcionPaginacion"l> p > >',
-        columnDefs: [{orderable: false, targets: [3, 4]}]
-    });
-
-    /*function buscarInformacion(tipo, id) {
-        $.ajax({
-            url: 'Consultas/obtenerlistado/' + tipo + '/' + id,
-            success: function(data) {
-                if (data == 'error') {
-                    mostrarMensajeError('Ha ocurrido un error debido a que la información introducida no es correcta. Vuelva a intentarlo más tarde.');
-                    console.log('data = error');
-                }
-                else {
-                    var cantidad = data.length;
-                    $('#textoOpcionPregunta').html('Respuesta: <select name="respuesta_filter" id="inputTextOpcionPregunta"><select>');
-                    for (var i = 0; i < cantidad; i++) {
-                        $('#inputTextOpcionPregunta').append('<option value="' + data[i].id + '">' + data[i].valor + '</option>');
-                    }
-                }
+		ajax: {
+            type: 'POST',
+            url: 'Consultas/casosllamadas',
+            data: {
+              'tamanio': 0,
+              'num_elementos': 0
             },
-            error: function(xhr) {
-                mostrarMensajeError("Ocurrio un error en el servidor. Intente de nuevo más tarde, y si persiste, por favor contacte con el administrador del sistema.");
+            dataSrc: function(response) {
+				console.log(response);
+              var resultado = [];
+              for(var i=0;i<response.length;i++) {
+                var ele = response[i];
+                var arrayInterno = [];
+                arrayInterno.push(ele.FechaLlamada);
+                arrayInterno.push(ele.Nombre);
+                arrayInterno.push(ele.nombres+' '+ele.primer_apellido+' '+ele.segundo_apellido);
+				arrayInterno.push('<input type="hidden" class="datosCaso" value="'+ele.IDCaso+'/'+ele.LlamadaNo+'"/>'
+										+'<button type="button" style="margin-right:10%;" class="btn btn-warning verLlamada">'
+                                        +'<span class="fa fa-eye"></span>'
+                                        +'</button> '
+                                        +'<button type="button" class="btn btn-success llamadaSeguimiento">'
+                                        +'<span class="fa fa-plus"></span>'
+                                        +'</button>');
+                resultado.push(arrayInterno);
+              }
+              return resultado;
             }
-        });
-    }*/
-
-    $('#tablaSistemas').on('click', '.botonUsuarios', function() {
-        var contenido = $(this).attr('data-content').trim().split('<p>');
-		var sistema = $(this).parent().parent().children('.nombreSistema').text();
-		var isistema = $(this).attr('value').split('/');
-		$('#buscarResponsable').addClass('hidden');
-		$('#modalResponsableAgregar').removeClass('hidden');
-		$('#modalResponsableSistema').text(sistema);
-		$('#modalResponsableCandidato').val('0');
-		$('#modalResponsableISistema').val(isistema[0]);
-		$('#modalResponsablePersonas').html('');
-		var j = 0;
-		for(var i=1; i<contenido.length;i++){
-			var multiValorificado = isistema[1].split(',');
-			var valorificado = multiValorificado[j].split('|');
-			var texto = contenido[i].split('</p>');
-			$('#modalResponsablePersonas').append('<tr><td class="responsable" value="'+valorificado[0]+'" >'+texto[0]+'</td><td style="padding-left: 100%;"><span class="eliminarPersona  btn btn-link" style="margin-left: 20%;"><i class="fa fa-times" aria-hidden="true"></i></span></td></tr>');
-			j++;
-		}
-		$("#modalResponsable").modal(); 
-		$('.eliminarPersona').click(function(){
-			eliminarPersona(this);
-		});	
-	});
-	
-	$('#modalResponsableAgregar').click(function(){
-		$('#buscarResponsable').removeClass('hidden');
-		$(this).addClass('hidden');
-	});
-
-	$('#modalResponsableEnviar').click(function(){
-		var usuario = $('#modalResponsableCandidato').val();
-		var sistema = $('#modalResponsableISistema').val();
-			$.ajax({url: "Consultas/agregar-responsable/"+usuario+'/'+sistema, 
-				success: function(data){
-					if(data[0] == 'error'){
-						$('#modalResponsableMensaje').removeClass('hidden');	
-						$('#modalResponsableMensaje').addClass('alert alert-danger');	
-						$('#modalResponsableMensaje').text(data[1]);
-						setTimeout(function(){
-						$('#modalResponsableMensaje').addClass('hidden');	
-						$('#modalResponsableMensaje').removeClass('alert alert-danger');	
-						},4000);
-					}else if(data[0]=='exito'){
-						$('#modalResponsableMensaje').removeClass('hidden');	
-						$('#modalResponsableMensaje').addClass('alert alert-success');	
-						$('#modalResponsableMensaje').text(data[1]);	
-						$('#modalResponsablePersonas').append('<tr><td class="responsable" value="'+data[3]+'" >'+data[2]+'</td><td style="padding-left: 100%;"><span class="eliminarPersona btn btn-link" style="margin-left: 20%;"><i class="fa fa-times" aria-hidden="true"></i></span></td></tr>');
-						$('.eliminarPersona').click(function(){
-							eliminarPersona(this);
-						});	
-						setTimeout(function(){
-						$('#modalResponsableMensaje').addClass('hidden');	
-						$('#modalResponsableMensaje').removeClass('alert alert-success');	
-						},4000);
-					}else{
-
-					}
-				},
-				error: function(xhr){
-            				alert("An error occured: " + xhr.status + " " + xhr.statusText);
-        			}
-			});
-
-		$('#buscarResponsable').addClass('hidden');
-		$('#modalResponsableAgregar').removeClass('hidden');
-	});
-
-	function eliminarPersona(objeto){
-		var usuario = $(objeto).parent().parent().children('.responsable').attr('value');
-		var sistema = $('#modalResponsableISistema').val();
-			$.ajax({url: "Consultas/eliminar-responsable/"+usuario+'/'+sistema, 
-				success: function(data){
-					if(data[0] == 'error'){
-						$('#modalResponsableMensaje').removeClass('hidden');	
-						$('#modalResponsableMensaje').addClass('alert alert-danger');	
-						$('#modalResponsableMensaje').text(data[1]);
-						setTimeout(function(){
-						$('#modalResponsableMensaje').addClass('hidden');	
-						$('#modalResponsableMensaje').removeClass('alert alert-danger');	
-						},4000);
-					}else if(data[0]=='exito'){
-						$('#modalResponsableMensaje').removeClass('hidden');	
-						$('#modalResponsableMensaje').addClass('alert alert-success');	
-						$('#modalResponsableMensaje').text(data[1]);	
-						$(objeto).parent().parent().empty();
-						setTimeout(function(){
-						$('#modalResponsableMensaje').addClass('hidden');	
-						$('#modalResponsableMensaje').removeClass('alert alert-success');	
-						},4000);
-					}else{
-
-					}
-				},
-				error: function(xhr){
-            				alert("An error occured: " + xhr.status + " " + xhr.statusText);
-        			}
-			});
-
-		$('#buscarResponsable').addClass('hidden');
-		$('#modalResponsableAgregar').removeClass('hidden');
-	}
-
-    $(".select2").select2();
-    $('.js-example-basic-multiple').select2();
-
+        },
+    });
 </script>
 @stop

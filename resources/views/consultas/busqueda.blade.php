@@ -2,24 +2,31 @@
 
         <div class="modal-body" style="background: #ffffff;">
 
-            <div class="form-group col-md-3">
-                <label for="clave">Clave:</label>
-                {!! Form::text('clave', '', array('id' => 'clave', 'class' => 'form-control', 'style' => 'resize : none;', 'rows' => '3' )) !!}
-            </div>
-            
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-4">
                 <label for="nombre">Nombre:</label>
                 {!! Form::text('nombre', '',  array('class' => 'form-control', 'id' => 'nombre')) !!}
             </div>
 
-            <div class="form-group col-md-3">
-                <label for="telefono">Telefono:</label>
-                {!! Form::text('telefono', '',  array('class' => 'form-control', 'id' => 'telefono')) !!}
+            <div class="form-group col-md-4">
+                <label for="telefono">Motivos (psicológico, legal, etc):</label>
+                {!! Form::text('motivos', '',  array('class' => 'form-control', 'id' => 'motivos')) !!}
             </div>     
 
-            <div class="form-group col-md-3">
-                <label for="fecha">Fecha:</label>
-                {!! Form::text('fecha', '',  array('class' => 'form-control', 'id' => 'fecha')) !!}
+            <div class="form-group col-md-4">
+                <label for="telefono">Edad:</label>
+                {!! Form::text('edad', '',  array('class' => 'form-control', 'id' => 'edad')) !!}
+            </div>     
+
+            <div class="form-group col-md-6">
+                <label for="fecha">De la fecha:</label>
+                {!! Form::text('fechaInicial', '',  array('class' => 'form-control', 'id' => 'fechaInicial')) !!}
+                {!! Form::checkbox('multiplesFechas', 'true',  array('class' => 'form-control', 'id' => 'multiplesFechas',)) !!}
+                <label for="fecha">Quiero un rango de fechas:</label>
+            </div>     
+
+            <div class="form-group col-md-6">
+                <label for="fecha">Hasta la fecha:</label>
+                {!! Form::text('fechaFinal', '',  array('class' => 'form-control', 'id' => 'fechaFinal')) !!}
             </div>     
       
         </div>
