@@ -3,6 +3,11 @@
         <div class="modal-body" style="background: #ffffff;">
 
             <div class="form-group col-md-4">
+                <label for="telefono">ID de caso:</label>
+                {!! Form::text('edad', '',  array('class' => 'form-control', 'id' => 'edad')) !!}
+            </div>     
+
+            <div class="form-group col-md-4">
                 <label for="nombre">Nombre:</label>
                 {!! Form::text('nombre', '',  array('class' => 'form-control', 'id' => 'nombre')) !!}
             </div>
@@ -13,8 +18,7 @@
             </div>     
 
             <div class="form-group col-md-4">
-                <label for="telefono">Edad:</label>
-                {!! Form::text('edad', '',  array('class' => 'form-control', 'id' => 'edad')) !!}
+                <label for="consejera">Consejera:</label>
             </div>     
 
             <div class="form-group col-md-6">

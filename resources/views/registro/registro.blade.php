@@ -271,5 +271,12 @@ Registro
         document.getElementById('timer_div').innerHTML = diffMin + " Min."
     }, 60000);
 
+    $('#ComoTeEnteraste').change(function() {
+        if(this.value === 'Otros') {
+            $('#otrosEnteraste').css('display','block');
+        } else {
+            $('#otrosEnteraste').css('display','none');
+        }
+    });
 </script>
 @stop

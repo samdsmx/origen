@@ -62,6 +62,8 @@ function guardarFormulario(data, url) {
             $('input').removeAttr("title");
             if (response.errors) {
                 $.each(response.errors, function(index, error) {
+                    console.log(index);
+                    console.log(error);
                     $("#d" + index).addClass("has-error");
                     $("#" + index).attr("title", error);
                 });
@@ -290,7 +292,9 @@ $(document).ready(function() {
                     tabla.draw();
                     $('.addOrganismoCana').click(function(e){
                         var text = $(this).attr('data-organismo');
-                        $('#CanaOtro').append(text+';\n')
+                        var valor_anterior = $('#CanaOtro').val();
+                        $('#CanaOtro').val(valor_anterior + text+';\n')
+                        console.log($('#CanaOtro').val());
                     });
                 },
                 error: function(xhr, status, error) {

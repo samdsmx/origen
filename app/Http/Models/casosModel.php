@@ -5,6 +5,7 @@ namespace App\Http\Models;
 use Validator;
 use Illuminate\Database\Eloquent\Model;
 
+
 class casosModel extends Model{
     
     protected $table = 'casos';
@@ -17,10 +18,17 @@ class casosModel extends Model{
 
     public static function validar($datos) {
         $rules = array(
-            'Nombre' => "required"
+            'Nombre' => "required",
+            'ComoTeEnteraste' => [
+                "required",
+                "notIn:0"
+            ]
+
         );
         $messages = array(
-            'Nombre.required' => "El nombre es obligatorio"
+            'Nombre.required' => "El nombre es obligatorio",
+            'ComoTeEnteraste.required' => "Indicar como se enteró es obligatorio",
+            'ComoTeEnteraste.not_in' => "Indicar como se enteró es obligatorio"
         );
         return Validator::make($datos, $rules, $messages);
     }
