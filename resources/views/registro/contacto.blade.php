@@ -32,28 +32,20 @@
         </select>
     </div>                            
 
-    <div class="form-group col-md-9">
+    <div class="form-group col-md-9" id="dComoTeEnteraste">
         <label for="ComoTeEnteraste">Como te enteraste:</label>
         <div class="row">
-          <div class="col-md-8">
-            <select name="ComoTeEnteraste" class="form-control" onchange="rellenaMedios('forma');" >
+          <div class="col-md-12">
+            <select name="ComoTeEnteraste" id="ComoTeEnteraste" class="form-control" >
                 <option value="0">-</option>
                 @foreach ($cte as $v)
                     <option value="{{$v['Nombre']}}">{{$v['Nombre']}}</option>
                 @endforeach
             </select>
           </div>
-          <div class="col-md-4">
-            <select name="enteraste2" class="form-control" disabled>
-              <option value="">-</option>
-            </select>
+          <div class="col-md-12" style="margin-top: 5%;">
+            <input type="text" class="form-control" style="display:none;" id="otrosEnteraste" name="otrosEnteraste">
           </div>
         </div>
     </div>
-
-    <div class="form-group col-md-3">
-      <label for="otrosEnteraste">Otros:</label>
-      <input type="text" class="form-control" name="otrosEnteraste">
-    </div>
-
 </div>
