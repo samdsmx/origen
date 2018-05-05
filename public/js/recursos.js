@@ -41,6 +41,23 @@ function limpiarCampos() {
   $('#HorariosCostos').val('');
 }
 
+function limpiarCampos() {
+  $('#ID').val('');
+  $('.select2-selection__rendered').children().each(function() {
+    $(this).replaceWith('');
+  });
+  $('#Objetivo').val('');
+  $('#Estado').val('-1');
+  $('#Institucion').val('');
+  $('#Direccion').val('');
+  $('#Referencia').val('');
+  $('#Telefono').val('');
+  $('#Email').val('');
+  $('#Observaciones').val('');
+  $('#Requisitos').val('');
+  $('#HorariosCostos').val('');
+}
+
 function mostrarMensaje(mensaje, clase) {
     clase = (typeof (clase) !== 'undefined' ? clase : "alert-danger");
     $("#mensajeVista").html(mensaje);
