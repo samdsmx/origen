@@ -78,7 +78,7 @@ Sistemas
                 var ele = response[i];
                 var arrayInterno = [];
                 arrayInterno.push(ele.IDCaso);
-                arrayInterno.push(ele.FechaLlamada);
+                arrayInterno.push('<strong>'+ele.FechaLlamada+'</strong><br>'+ele.Horainicio);
                 arrayInterno.push(ele.Nombre);
                 arrayInterno.push(ele.Telefono);
                 arrayInterno.push(ele.nombres+' '+ele.primer_apellido+' '+ele.segundo_apellido);
