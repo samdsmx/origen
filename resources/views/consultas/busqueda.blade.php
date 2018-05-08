@@ -2,23 +2,31 @@
 
         <div class="modal-body" style="background: #ffffff;">
 
-            <div class="form-group col-md-4">
-                <label for="telefono">ID de caso:</label>
-                {!! Form::text('edad', '',  array('class' => 'form-control', 'id' => 'edad')) !!}
+            <div class="form-group col-md-3">
+                <label for="id">ID de caso:</label>
+                {!! Form::text('id', '',  array('class' => 'form-control', 'id' => 'id')) !!}
             </div>     
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
                 <label for="nombre">Nombre:</label>
                 {!! Form::text('nombre', '',  array('class' => 'form-control', 'id' => 'nombre')) !!}
             </div>
 
-            <div class="form-group col-md-4">
-                <label for="telefono">Motivos (psicológico, legal, etc):</label>
+            <div class="form-group col-md-3">
+                <label for="motivos">Motivos (psicológico, legal, etc):</label>
                 {!! Form::text('motivos', '',  array('class' => 'form-control', 'id' => 'motivos')) !!}
             </div>     
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
                 <label for="consejera">Consejera:</label>
+                <select name="consejera" id="consejera" class="form-control">
+                    <option value="-1">-</option>
+                    @foreach($consejeras as $v)
+                    <option value="{!! $v->id_persona !!}"> 
+                        {!! $v->nombres!!} {!!$v->primer_apellido !!} {!!$v->segundo_apellido!!} 
+                    </option>
+                    @endforeach
+                </select>
             </div>     
 
             <div class="form-group col-md-6">

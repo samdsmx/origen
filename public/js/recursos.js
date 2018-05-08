@@ -6,15 +6,17 @@ $.ajaxSetup({
 /**
  * Función que se encarga de cambiar el formulario que se pase para
  * concatenar múltiples temas.
+ * peticion: es la petición que se va a enviar sin modificar
+ * campo: el campo que se va a modificar
  * Regresa la petición corregida
  */
-function cambiarPeticionMultiplesTemas(peticion) {
+function cambiarPeticionMultiplesTemas(peticion,campo) {
     var peticionCorrecta = '';
     var temaConcat = '';
     var informacionDiv = peticion.split('&');
     for(var i=0;i<informacionDiv.length;i++) {
       var eleDiv = informacionDiv[i].split('=');
-      if(eleDiv[0] === 'tema') {
+      if(eleDiv[0] === campo) {
         temaConcat += eleDiv[1] + ',';
       } else {
         peticionCorrecta += informacionDiv[i] + '&';
@@ -22,23 +24,6 @@ function cambiarPeticionMultiplesTemas(peticion) {
     }
     peticionCorrecta += 'tema='+temaConcat;
     return peticionCorrecta;
-}
-
-function limpiarCampos() {
-  $('#ID').val('');
-  $('.select2-selection__rendered').children().each(function() {
-    $(this).replaceWith('');
-  });
-  $('#Objetivo').val('');
-  $('#Estado').val('-1');
-  $('#Institucion').val('');
-  $('#Direccion').val('');
-  $('#Referencia').val('');
-  $('#Telefono').val('');
-  $('#Email').val('');
-  $('#Observaciones').val('');
-  $('#Requisitos').val('');
-  $('#HorariosCostos').val('');
 }
 
 function limpiarCampos() {
@@ -166,7 +151,7 @@ $('#registraUsuario').submit(function(e) {
 $('#registraOrganismo').submit(function(e) {
     e.preventDefault();
     var data = $(this).serialize();
-    var infoParaEnviar = cambiarPeticionMultiplesTemas(data);
+    var infoParaEnviar = cambiarPeticionMultiplesTemas(data,'tema');
     $.ajax({
         type: 'POST',
         url: "Organismos/registraorganismo",
@@ -201,7 +186,7 @@ $(document).ready(function() {
         e.preventDefault();
         $("#tablaOrganismos").DataTable().clear().draw();
         var info = $(this).serialize();
-        var infoParaEnviar = cambiarPeticionMultiplesTemas(info);
+        var infoParaEnviar = cambiarPeticionMultiplesTemas(info,'tema');
         $.ajax({
                 type: 'POST',
                 url: 'Organismos/buscarorganismos',
@@ -292,7 +277,7 @@ $(document).ready(function() {
         e.preventDefault();
         //$('#buscaOrganismosCanalizacion').trigger('reset');
         info = $(this).serialize();
-        var informacionEnv = cambiarPeticionMultiplesTemas(info);
+        var informacionEnv = cambiarPeticionMultiplesTemas(info,'tema');
         console.log(informacionEnv);
         $.ajax({
                 type: 'POST',
@@ -313,6 +298,38 @@ $(document).ready(function() {
                         $('#CanaOtro').val(valor_anterior + text+';\n')
                         console.log($('#CanaOtro').val());
                     });
+                },
+                error: function(xhr, status, error) {
+                    alert("Error en el servidor");
+                }
+            });
+    } );
+
+
+    $('#buscaCasos').submit( function(e){
+        e.preventDefault();
+        info = $(this).serialize();
+        var informacionEnv = cambiarPeticionMultiplesTemas(info,'motivos');
+        console.log(informacionEnv);
+        $.ajax({
+                type: 'POST',
+                url: 'Consultas/consultarllamadas',
+                data: informacionEnv,
+                success: function(response) {
+                    console.log(response);
+                    /*$('#tablaMuestreo').show();
+                    //$('#buscaOrganismosCanalizacion').trigger('reset');
+                    $.each(response, function(index, value){
+                        tabla.row.add([value['Tema'], value['Institucion'], value['Estado'],
+                            '<button type="button" class="btn btn-info addOrganismoCana" data-organismo="'+value['Institucion']+'"><span class="fa fa-plus-square"></span></button>' ]);
+                    });
+                    tabla.draw();
+                    $('.addOrganismoCana').click(function(e){
+                        var text = $(this).attr('data-organismo');
+                        var valor_anterior = $('#CanaOtro').val();
+                        $('#CanaOtro').val(valor_anterior + text+';\n')
+                        console.log($('#CanaOtro').val());
+                    });*/
                 },
                 error: function(xhr, status, error) {
                     alert("Error en el servidor");

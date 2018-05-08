@@ -9,6 +9,35 @@ use Excel;
 
 
 class ConsultasController extends BaseController {
+	
+	public function postConsultarllamadas(){
+        if (!Request::ajax()) {
+            return;
+        }
+		$datos = Request::all();
+		$resultados = $this->obtenerLlamadas($datos);
+		return $resultados;
+    }
+
+    public function obtenerLlamadas($datos){
+ 		$llamadas_casos = DB::table('llamadas')
+						->join('casos','casos.IDCaso','=','llamadas.IDCaso')
+						->join('consejeros','llamadas.Consejera','=','consejeros.nombre')
+						->join('sia_persona','consejeros.id_persona','=','sia_persona.id_persona')
+						->select('casos.*','llamadas.*')
+						->select('casos.IDCaso','casos.Telefono','Horainicio','LlamadaNo','casos.Nombre','FechaLlamada','nombres','primer_apellido','segundo_apellido')
+						->get();
+						//->toSql();
+		return $llamadas_casos;
+    }
+
+
+
+	public function obtenerConsejerasAll() {
+		$consejeras = DB::table('sia_persona')->select('id_persona','primer_apellido'
+			,'segundo_apellido','nombres')->get();
+		return $consejeras;
+	}
 
 	/**
 	 * Función que se encarga de obtener todas las llamadas de la base
@@ -19,7 +48,7 @@ class ConsultasController extends BaseController {
 						->join('consejeros','llamadas.Consejera','=','consejeros.nombre')
 						->join('sia_persona','consejeros.id_persona','=','sia_persona.id_persona')
 						->select('casos.*','llamadas.*')
-						->select('casos.IDCaso','casos.Telefono','LlamadaNo','casos.Nombre','FechaLlamada','nombres','primer_apellido','segundo_apellido')
+						->select('casos.IDCaso','casos.Telefono','Horainicio','LlamadaNo','casos.Nombre','FechaLlamada','nombres','primer_apellido','segundo_apellido')
 						->get();
 						//->toSql();
 		return $llamadas_casos;
@@ -43,7 +72,8 @@ class ConsultasController extends BaseController {
 			return Redirect::to('inicio');
 		}
 		$menu = parent::createMenu();
-		return View::make('consultas.casos', array('menu' => $menu, 'organismos' => []));	
+		$consejeras = $this->obtenerConsejerasAll();
+		return View::make('consultas.casos', array('menu' => $menu, 'consejeras' => $consejeras));	
 		//return View::make('consultas.llamadas', array('menu' => $menu, 'modificarFuera' => parent::tienePermiso('Modificar fuera del periodo')));
 	}
 
