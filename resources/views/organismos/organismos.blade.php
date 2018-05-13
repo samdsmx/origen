@@ -37,9 +37,6 @@ Sistemas
                     {!! Form::close() !!}
                     @section('tableContent')
       <div class="col-md-6" style="padding-left: 40%; padding-right: 30%; text-align: center;">
-                                <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#modalRegistroOrganismo" >
-                                    <span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Organismo
-                                </button>
                           </div>
                         <section id="tableContent">
                               <table id="tablaOrganismos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
@@ -83,38 +80,7 @@ Sistemas
         language: dataTablesSpanish,
         searching: true,
         responsive: true,
-        ajax: {
-            type: 'POST',
-            url: 'Organismos/organismosactuales',
-            data: {
-              'tamanio': 0,
-              'num_elementos': 0
-            },
-            dataSrc: function(response) {
-              var resultado = [];
-              for(var i=0;i<response.length;i++) {
-                var ele = response[i];
-                var arrayInterno = [];
-                arrayInterno.push(ele.Tema);
-                arrayInterno.push(ele.Institucion);
-                arrayInterno.push(ele.Estado);
-                arrayInterno.push(ele.Direccion);
-                arrayInterno.push(ele.Telefono);
-                arrayInterno.push(ele.Email);
-                arrayInterno.push('<button type="button" class="btn btn-danger eliminarOrganismo"'
-                                                    +'data-toggle="modal" data-target="#modalConfirma" data-id="'+ele.ID+'">'
-                                                +'<span class="fa fa-trash"></span>'
-                                            +'</button>'
-                                            +'<button type="button" class="btn btn-success modificarOrganismo"'
-                                                    +'data-toggle="modal" data-target="#modalRegistroOrganismo" data-id="'+ele.ID+'">'
-                                                +'<span class="fa fa-pencil"></span>'
-                                            +'</button>');
-                resultado.push(arrayInterno);
-              }
-              return resultado;
-            }
-        },
-      });
+    });
 
 
     $(document).on('click','.paginate_button',function() {
@@ -241,6 +207,7 @@ Sistemas
                             $('#'+llave).val(valor);
                         }
                     });
+                    $('#tablaOrganismos').css('display','block');
                 },
                 error: function(xhr, status, error) {
                     alert("Error en el servidor");

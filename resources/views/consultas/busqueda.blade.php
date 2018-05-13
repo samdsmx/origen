@@ -14,7 +14,11 @@
 
             <div class="form-group col-md-3">
                 <label for="motivos">Motivos (psicológico, legal, etc):</label>
-                {!! Form::text('motivos', '',  array('class' => 'form-control', 'id' => 'motivos')) !!}
+                <select name="motivos" id="motivos" multiple class="form-control js-example-basic-multiple" style="width:100%;" >
+                    @foreach ($motivos as $motivo)
+                        <option value="{{ $motivo->Nombre }}">{{ $motivo->Nombre }}</option>
+                    @endforeach
+                </select>
             </div>     
 
             <div class="form-group col-md-3">
@@ -32,8 +36,6 @@
             <div class="form-group col-md-6">
                 <label for="fecha">De la fecha:</label>
                 {!! Form::text('fechaInicial', '',  array('class' => 'form-control', 'id' => 'fechaInicial')) !!}
-                {!! Form::checkbox('multiplesFechas', 'true',  array('class' => 'form-control', 'id' => 'multiplesFechas',)) !!}
-                <label for="fecha">Quiero un rango de fechas:</label>
             </div>     
 
             <div class="form-group col-md-6">

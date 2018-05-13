@@ -26,20 +26,16 @@ Bienvenido
     </ol>
 </section>
 <section class="content">
-    <?php
-    $llamadasMes=0;
-    $misAtendidas=0;
-    ?>
 
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-3">
+        <div class="col-xs-12 col-sm-12 col-md-4">
             <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="fa fa-line-chart"></i></span>
                 <div class="info-box-content" style="padding: 0px 10px !important;">
                   <span class="info-box-text">En este mes se han recibido</span>
-                  <span class="info-box-number">{!! $llamadasMes !!}<small> llamadas</small></span>
+                  <span class="info-box-number">{!! $llamadasMes[0]->cuenta !!}<small> llamadas</small></span>
                   <span class="info-box-text"> y tu has atendido </span>
-                  <span class="info-box-number">{!! $misAtendidas !!}<small> llamadas</small></span>
+                  <span class="info-box-number">{!! $misAtendidas[0]->cuenta !!}<small> llamadas</small></span>
                 </div>
             </div>
         </div>
