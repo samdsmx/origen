@@ -54,6 +54,8 @@ Sistemas
 <script>
     $("i.fa").popover({'trigger': 'hover'});
 
+    $('.js-example-basic-multiple').select2();
+
     $('#tablaCasos').DataTable({
        scrollX: false,
         responsive: true,
@@ -64,36 +66,6 @@ Sistemas
         info: true,
         order: [[0, "desc"]],
         language: dataTablesSpanish,
-		ajax: {
-            type: 'POST',
-            url: 'Consultas/casosllamadas',
-            data: {
-              'tamanio': 0,
-              'num_elementos': 0
-            },
-            dataSrc: function(response) {
-				console.log(response);
-              var resultado = [];
-              for(var i=0;i<response.length;i++) {
-                var ele = response[i];
-                var arrayInterno = [];
-                arrayInterno.push(ele.IDCaso);
-                arrayInterno.push('<strong>'+ele.FechaLlamada+'</strong><br>'+ele.Horainicio);
-                arrayInterno.push(ele.Nombre);
-                arrayInterno.push(ele.Telefono);
-                arrayInterno.push(ele.nombres+' '+ele.primer_apellido+' '+ele.segundo_apellido);
-				arrayInterno.push('<input type="hidden" class="datosCaso" value="'+ele.IDCaso+'/'+ele.LlamadaNo+'"/>'
-										+'<button type="button" style="margin-right:10%;" class="btn btn-warning verLlamada">'
-                                        +'<span class="fa fa-eye"></span>'
-                                        +'</button> '
-                                        +'<button type="button" class="btn btn-success llamadaSeguimiento">'
-                                        +'<span class="fa fa-plus"></span>'
-                                        +'</button>');
-                resultado.push(arrayInterno);
-              }
-              return resultado;
-            }
-        },
     });
 </script>
 @stop

@@ -7,11 +7,6 @@ use DB, View, Session, Request, Redirect, Response, App\Http\Models\organismosMo
 
 class OrganismosController extends BaseController {
 
-    public function obtenerOrganismosAll() {
-        $organismos = organismosModel::select('ID', 'Tema', 'Institucion', 'Estado',
-                'Direccion', 'Telefono', 'Email')->get()->toArray();
-        return $this->cambiarComasSaltos($organismos);
-    }
 
     /*
     Función que se encarga de cambiar las comas por <br>
@@ -29,14 +24,6 @@ class OrganismosController extends BaseController {
     $num_elementos: El número de elementos que se quiere regresar de la lista.
       Si el número es igual a cero, muestra todos los elementos
     */
-    public function organismosPaginados($num_pagina,$num_elementos) {
-        $lista_organismos = $this->obtenerOrganismosAll();
-        if($num_elementos==0){
-          return $lista_organismos;
-        }
-        $organismoPag = array_slice($lista_organismos,($num_pagina * $num_elementos),$num_elementos);
-        return $organismoPag;
-    }
 
     public function getIndex() {
         if (!parent::tienePermiso('Organismos')){
@@ -119,18 +106,6 @@ class OrganismosController extends BaseController {
             $organismoArray = array();
         }
         return $this->cambiarComasSaltos($organismosArray);
-    }
-
-    /*
-    Función que se encarga de regresar la lista de organismos según el tamaño y
-    el número de elementos solicitados (tamaño,num_elementos)
-    */
-    public function postOrganismosactuales() {
-      if(!Request::ajax()) {
-        return;
-      }
-      $data = Request::all();
-      return $this->organismosPaginados($data["tamanio"],$data["num_elementos"]);
     }
 
     public function postBuscarorganismos(){

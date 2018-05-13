@@ -54,8 +54,19 @@ class AuthController extends BaseController {
             return View::make('index');
         }
         if (Auth::user()->status == 1) {
+            $mes = intval(date('m'));
+            $llamadasMes = DB::table('llamadas')->
+                select(DB::raw('count(IDCaso) as cuenta'))
+                ->whereMonth('FechaLlamada','=',$mes)
+                ->get();
             $menu = parent::createMenu();
-            return View::make('inicio', array('menu' => $menu));
+            $misAtendidas = DB::table('llamadas')->
+                select(DB::raw('count(IDCaso) as cuenta'))
+                ->whereMonth('FechaLlamada','=',$mes)
+                ->where('Consejera', DB::raw('"'.Auth::user()->nombre.'"'))
+                ->get();
+            return View::make('inicio', array('menu' => $menu, 
+                'llamadasMes' => $llamadasMes, 'misAtendidas' => $misAtendidas));
         } else {
             Auth::logout();
             return View::make('index');

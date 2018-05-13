@@ -308,6 +308,7 @@ $(document).ready(function() {
 
     $('#buscaCasos').submit( function(e){
         e.preventDefault();
+        $("#tablaCasos").DataTable().clear().draw();
         info = $(this).serialize();
         var informacionEnv = cambiarPeticionMultiplesTemas(info,'motivos');
         console.log(informacionEnv);
@@ -317,19 +318,25 @@ $(document).ready(function() {
                 data: informacionEnv,
                 success: function(response) {
                     console.log(response);
-                    /*$('#tablaMuestreo').show();
-                    //$('#buscaOrganismosCanalizacion').trigger('reset');
-                    $.each(response, function(index, value){
-                        tabla.row.add([value['Tema'], value['Institucion'], value['Estado'],
-                            '<button type="button" class="btn btn-info addOrganismoCana" data-organismo="'+value['Institucion']+'"><span class="fa fa-plus-square"></span></button>' ]);
-                    });
-                    tabla.draw();
-                    $('.addOrganismoCana').click(function(e){
-                        var text = $(this).attr('data-organismo');
-                        var valor_anterior = $('#CanaOtro').val();
-                        $('#CanaOtro').val(valor_anterior + text+';\n')
-                        console.log($('#CanaOtro').val());
-                    });*/
+                  var resultado = [];
+                   for(var i=0;i<response.length;i++) {
+                     var ele = response[i];
+                     var arrayInterno = [];
+                     arrayInterno.push(ele.IDCaso);
+                     arrayInterno.push('<strong>'+ele.FechaLlamada+'</strong><br>'+ele.Horainicio);
+                     arrayInterno.push(ele.Nombre);
+                     arrayInterno.push(ele.Telefono);
+                     arrayInterno.push(ele.nombres+' '+ele.primer_apellido+' '+ele.segundo_apellido);
+			         arrayInterno.push('<input type="hidden" class="datosCaso" value="'+ele.IDCaso+'/'+ele.LlamadaNo+'"/>'
+										+'<button type="button" style="margin-right:10%;" class="btn btn-warning verLlamada">'
+                                        +'<span class="fa fa-eye"></span>'
+                                        +'</button> '
+                                        +'<button type="button" class="btn btn-success llamadaSeguimiento">'
+                                        +'<span class="fa fa-plus"></span>'
+                                        +'</button>');
+                     resultado.push(arrayInterno);
+                    }
+                $("#tablaCasos").DataTable().rows.add(resultado).draw();
                 },
                 error: function(xhr, status, error) {
                     alert("Error en el servidor");
