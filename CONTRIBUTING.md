@@ -13,6 +13,9 @@ composer update
 chmod -R 755 bootstrap/cache
 chmod -R 755 storage
 
+cp .env.example .env
+php artisan key:generate
+
 ## En caso de usar vagrant:
 
 (dentro de vagrant) php artisan cache:clear
