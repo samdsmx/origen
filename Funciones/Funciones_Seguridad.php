@@ -5,9 +5,9 @@ function Autentifica($Nombre, $Password, $Estado){
 	$Password=crypt($Nombre,$Password);
 	$ip = substr($_SERVER['REMOTE_ADDR'],0,3); 
 	if ($ip!="192" && $ip!="127")
-		$sql ="SELECT NivelSeguridad FROM Consejeros WHERE Nombre='".rs($Nombre)."' AND Password='".rs($Password)."' AND Acceso > 1";
+		$sql ="SELECT NivelSeguridad FROM Consejeros WHERE Nombre='".rs($Nombre)."' AND Password2='".rs($Password)."' AND Acceso > 1";
 		else
-			$sql ="SELECT NivelSeguridad FROM Consejeros WHERE Nombre='".rs($Nombre)."' AND Password='".rs($Password)."'";
+			$sql ="SELECT NivelSeguridad FROM Consejeros WHERE Nombre='".rs($Nombre)."' AND Password2='".rs($Password)."'";
 
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);

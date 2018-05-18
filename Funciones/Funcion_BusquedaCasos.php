@@ -8,7 +8,7 @@ if ($Sesion){
 		$CadBusqueda="";
 		$SecureCad=base64_decode($Sesion);
 		list($Nombre_Consejera, $Password)= split("@", $SecureCad);
-		$sql ="SELECT Acceso FROM Consejeros WHERE Nombre='".rs($Nombre_Consejera)."' AND Password='".rs($Password)."'";
+		$sql ="SELECT Acceso FROM Consejeros WHERE Nombre='".rs($Nombre_Consejera)."' AND Password2='".rs($Password)."'";
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$row = mysql_fetch_array($total_result);
 		$access=$row['Acceso'];

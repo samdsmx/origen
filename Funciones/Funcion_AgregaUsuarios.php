@@ -9,7 +9,7 @@ if (RevisarNombre($Nombre)=="OK"){
 		if ($casos)
 			$acceso+=1;
 		include("Datos_Comunicacion.php");
-		$sql = "INSERT INTO consejeros(Nombre,Password,NivelSeguridad,Acceso)
+		$sql = "INSERT INTO consejeros(Nombre,Password2,NivelSeguridad,Acceso)
 		VALUES
 		('".rs($Nombre)."','".cod($Nombre,$Password)."','".rs($NivelSeguridad)."','".rs($acceso)."')";
 		echo $sql."<br/>";

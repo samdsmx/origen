@@ -2,11 +2,11 @@
 if ($Sesion){
 	if ($Nombre){
 		include("Datos_Comunicacion.php");
-		$sql ="SELECT Nombre, Password, NivelSeguridad, Acceso FROM Consejeros WHERE Nombre = '".rs($Nombre)."'";
+		$sql ="SELECT Nombre, Password2, NivelSeguridad, Acceso FROM Consejeros WHERE Nombre = '".rs($Nombre)."'";
 		$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		while ($row = mysql_fetch_array($result))	{
 			$Nombre=$row['Nombre'];
-			$Password=$row['Password'];
+			$Password=$row['Password2'];
 			$NivelSeguridad=$row['NivelSeguridad'];
 			$acceso=$row['Acceso'];
 			}
