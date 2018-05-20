@@ -14,7 +14,7 @@ class UsuariosController extends BaseController {
         $datos = DB::select('select '.
             'u.id_usuario, u.nombre usuario, concat(p.nombres,\' \', p.primer_apellido, \' \', p.segundo_apellido) nombre, u.status '.
             'from consejeros u ' .
-            'join sia_persona p on p.id_persona = u.id_persona ' .
+            'join persona p on p.id_persona = u.id_persona ' .
             'group by p.id_persona');
         return View::make('usuarios.usuarios', array('menu' => $menu, 'usuarios' => $datos));
     }
@@ -32,7 +32,7 @@ class UsuariosController extends BaseController {
         }
         $id = Request::get('id_user');
         $datos = DB::select('select u.id_usuario, p.nombres,  p.primer_apellido, p.segundo_apellido, p.curp, p.correo, p.telefono, u.nombre usuario '
-                        . 'from consejeros u join sia_persona p on  p.id_persona = u.id_persona where u.id_usuario = ' . $id);
+                        . 'from consejeros u join persona p on  p.id_persona = u.id_persona where u.id_usuario = ' . $id);
         if (sizeof($datos) > 0) {
             return Response::json(array('usuario' => $datos[0]));
         }
@@ -45,11 +45,11 @@ class UsuariosController extends BaseController {
         $mensaje = "";
         $usuario = User::find(Request::get('modalConfirmaId'));
         if ($usuario) {
-            $usuAct = siaAsoUsuarioActividadModel::where('id_usuario', '=', $usuario->id_usuario)->get();
+            $usuAct = usuarioActividadModel::where('id_usuario', '=', $usuario->id_usuario)->get();
             foreach ($usuAct as $ua) {
                 $ua->delete();
             }
-            $persona = siaPersonaModel::find($usuario->id_persona);
+            $persona = personaModel::find($usuario->id_persona);
             $usuario->delete();
             $persona->delete();
             Session::flash('mensaje', 'Usuario eliminado' . $mensaje);
@@ -70,13 +70,13 @@ class UsuariosController extends BaseController {
         $msg = "";
         if (empty($datos["id_user"])) {
             $usuario = new User();
-            $persona = new siaPersonaModel();
+            $persona = new personaModel();
             $persona->status = 1;
             $usuario->status = 1;
             $msg = User::validarDuplicidad($datos,$usuario,$persona);
         } else {
             $usuario = User::find($datos["id_user"]);
-            $persona = siaPersonaModel::find($usuario->id_persona);
+            $persona = personaModel::find($usuario->id_persona);
         }
         if (!empty($msg)) {
             return Response::json(array('errors' => $msg));

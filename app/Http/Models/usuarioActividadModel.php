@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
 
-class siaAsoUsuarioActividadModel extends Model{
+class usuarioActividadModel extends Model{
     
-    protected $table = 'sia_aso_usuario_actividad';
+    protected $table = 'usuario_actividad';
     protected $primaryKey = 'id_usuario_actividad';
     protected $fillable = ['fecha_inicio', 'fecha_fin', 'id_usuario', 'id_actividad'];
     
@@ -15,6 +15,6 @@ class siaAsoUsuarioActividadModel extends Model{
     }
     
     public function actividad(){
-        return $this->belongsTo('App\Http\Controllers\siaActividadModel', 'id_actividad');
+        return $this->belongsTo('App\Http\Controllers\actividadModel', 'id_actividad');
     }
 }

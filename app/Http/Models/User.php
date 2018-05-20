@@ -20,7 +20,7 @@ class User extends Model implements  AuthenticatableContract, CanResetPasswordCo
     public $timestamp = true;
     
     public function persona(){
-        return $this->belongsTo('App\Http\Controllers\siaPersonaModel', 'id_persona');
+        return $this->belongsTo('App\Http\Controllers\personaModel', 'id_persona');
     }
        
     public static function validar($datos){
@@ -35,8 +35,8 @@ class User extends Model implements  AuthenticatableContract, CanResetPasswordCo
     public static function validarDuplicidad($datos,$usuario,$persona){
         $msg = array();
         $msg += BaseController::existe("User", "nombre", $datos["usuario"], $usuario->nombre);
-        $msg += BaseController::existe("siaPersonaModel", "curp", $datos["curp"], $persona->curp);
-        $msg += BaseController::existe("siaPersonaModel", "correo", $datos["correo"], $persona->correo);
+        $msg += BaseController::existe("personaModel", "curp", $datos["curp"], $persona->curp);
+        $msg += BaseController::existe("personaModel", "correo", $datos["correo"], $persona->correo);
         return $msg;
         } 
     

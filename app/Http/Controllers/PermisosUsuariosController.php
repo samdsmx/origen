@@ -21,14 +21,14 @@ class PermisosUsuariosController extends BaseController {
                         . ')'
                         . ' order by act.id_actividad asc ) permisos ' .
                         'from consejeros u ' .
-                        'join sia_persona p on u.id_persona = p.id_persona ' .
-                        'left join sia_aso_usuario_actividad aso on u.id_usuario = aso.id_usuario and aso.status = 1 ' .
-                        'left join sia_cat_actividad act on act.id_actividad = aso.id_actividad ' .
+                        'join persona p on u.id_persona = p.id_persona ' .
+                        'left join usuario_actividad aso on u.id_usuario = aso.id_usuario and aso.status = 1 ' .
+                        'left join actividad act on act.id_actividad = aso.id_actividad ' .
                         'where u.status = 1 ' .
                         'group by u.id_usuario ' .
                         '' 
         );
-        $actividades = siaActividadModel::select('id_actividad', 'nombre', 'descripcion')->where('status', '=', 1)->get();
+        $actividades = actividadModel::select('id_actividad', 'nombre', 'descripcion')->where('status', '=', 1)->get();
         self::var_error_log($actividades->toArray());
         return View::make('permisosusuarios.permisosusuarios', array('menu' => $menu, "usuarios" => $usUr, "actividades" => $actividades->toArray()));
     }
@@ -44,7 +44,7 @@ class PermisosUsuariosController extends BaseController {
     public function postQuitapermiso() {
         if (Request::ajax()) {
             $datosForm = Request::all();
-            $permiso = siaAsoUsuarioActividadModel::where('id_usuario_actividad', '=', $datosForm['id'])->first();
+            $permiso = usuarioActividadModel::where('id_usuario_actividad', '=', $datosForm['id'])->first();
             $hoy = new DateTime('today');
             $creado = new DateTime($permiso->created_at);
             $interval = $creado->diff($hoy);
@@ -79,9 +79,9 @@ class PermisosUsuariosController extends BaseController {
             $usuarios = $todos["usuarios"];
             foreach ($usuarios as $usu) {
                 $u = explode(',', $usu);
-                $permUs = siaAsoUsuarioActividadModel::where('status', '=', 1)->where("id_usuario", '=', $u[0])->where('id_actividad', '=', $todos["permiso"])->get();
+                $permUs = usuarioActividadModel::where('status', '=', 1)->where("id_usuario", '=', $u[0])->where('id_actividad', '=', $todos["permiso"])->get();
                 if (sizeof($permUs) == 0) {
-                    $permUs = new siaAsoUsuarioActividadModel ();
+                    $permUs = new usuarioActividadModel ();
                     $permUs->id_usuario = intval($u[0]);
                     $permUs->id_actividad = intval($todos["permiso"]);
                     $permUs->status = 1;

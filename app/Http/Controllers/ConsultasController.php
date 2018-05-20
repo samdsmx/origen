@@ -37,7 +37,7 @@ class ConsultasController extends BaseController {
  		$llamadas_casos = DB::table('llamadas')
 						->join('casos','casos.IDCaso','=','llamadas.IDCaso')
 						->join('consejeros','llamadas.Consejera','=','consejeros.nombre')
-						->join('sia_persona','consejeros.id_persona','=','sia_persona.id_persona')
+						->join('persona','consejeros.id_persona','=','persona.id_persona')
 						->select('casos.*','llamadas.*')
 						->select('casos.IDCaso','casos.Telefono','Horainicio','LlamadaNo','casos.Nombre','FechaLlamada','nombres','primer_apellido','segundo_apellido')
 						->get();
@@ -48,7 +48,7 @@ class ConsultasController extends BaseController {
 
 
 	public function obtenerConsejerasAll() {
-		$consejeras = DB::table('sia_persona')->select('id_persona','primer_apellido'
+		$consejeras = DB::table('persona')->select('id_persona','primer_apellido'
 			,'segundo_apellido','nombres')->get();
 		return $consejeras;
 	}
@@ -60,8 +60,7 @@ class ConsultasController extends BaseController {
 
 		$text_select_periodo = "<select class=\"select2\" name=\"periodo_filter\" id=\"periodo_filter\" >";
 		$text_select_periodo.="<option value = \"0\">-- TODOS --</option>";
-		$periodos = siaPeriodoModel::orderBy('fecha_inicio', 'desc')->get();
-		$opcionesPregunta = DB::select('select p.id_propiedad, p.descripcion, p.id_tipo from sia_cat_propiedad p');
+		$opcionesPregunta = DB::select('select p.id_propiedad, p.descripcion, p.id_tipo from propiedad p');
 		foreach ($periodos as $per) {
 			if ($periodo != null && $per->id_periodo == $periodo->id_periodo) {
 				$text_select_periodo.="<option value=\"" . $per->id_periodo . "\" selected >" . $per->comentarios . " (" . $per->fecha_inicio . " - " . $per->fecha_fin . ")</option>";
@@ -72,32 +71,9 @@ class ConsultasController extends BaseController {
 		$text_select_periodo.="</select>";
 
 
-		$condiciones = "where 1 = 1 ";
-		if ($period > 0) {
-			$condiciones .= "and sasp.id_periodo = " . $period . " ";
-		}
-		if ($tipo >= 1 && $tipo <= 5) {
-			$condiciones .= "and sasp.id_observacion = " + $tipo + " ";
-		}
-
-		if ($selectFiltro != 0) {
-			if ($comparador == 0) {
-				$comparador = "=";
-			}
-			$condiciones .= " and sr.id_respuesta = " . $selectFiltro . " and sr.valor " . $comparador . " '" . $respuestaFiltro . "'";
-		}
+	
 		$menu = parent::createMenu();
-		$periodo = siaPeriodoModel::where('status', '=', 1)->orderBy('fecha_inicio', 'desc')->first();
 		$dentroDelPeriodo = !($periodo == null || strtotime("now") < strtotime($periodo->fecha_inicio) || strtotime("now") > strtotime($periodo->fecha_fin));
-		$sistemas = DB::select('select T2.*, p.comentarios periodo, asp.id_observacion, asp.nota, o.descripcion observacion, r.valor Sistema, r2.valor nombreCompleto, asp.id_sistema_periodo
-            from (select s.id_sistema, s.id_fase, s.status, f.descripcion fase, max(asp.id_periodo) id_periodo
-                from sia_sistema s, sia_aso_persona_sistema ps, sia_aso_sistema_periodo asp, sia_cat_fase f
-                where f.id_fase = s.id_fase and asp.id_sistema = s.id_sistema and s.id_sistema = ps.id_sistema and ps.id_persona = ' . Auth::user()->persona->id_persona /* 11 */ .
-				' group by id_sistema) T2,
-            sia_periodo p, sia_observacion o, sia_aso_sistema_periodo asp
-            LEFT JOIN sia_respuesta r on r.id_sistema_periodo = asp.id_sistema_periodo and r.id_propiedad = 6
-            LEFT JOIN sia_respuesta r2 on r2.id_sistema_periodo = asp.id_sistema_periodo and r2.id_propiedad = 5
-            where T2.id_periodo = p.id_periodo and asp.id_sistema=T2.id_sistema and asp.id_periodo = T2.id_periodo and o.id_observacion = asp.id_observacion');
 		return View::make('sistemas.sistemas', array('menu' => $menu, "dentroPeriodo" => TRUE, 'periodos' => $text_select_periodo, 'ur_selected' => 0, 'opcionesPregunta' => $opcionesPregunta, 'sistemas' => null));
 	}
 
@@ -138,18 +114,7 @@ class ConsultasController extends BaseController {
 		return Excel::create('reporteGeneral', function($excel) {
 				$excel->setCreator('Centro Nacional de Calculo');
 
-				$sistemas = DB::select('select T2.*, p.comentarios periodo, asp.id_observacion, asp.nota, o.descripcion observacion, r.valor Sistema, r2.valor nombreCompleto, asp.id_sistema_periodo
-            from 
-            (select s.id_sistema, s.id_fase, s.status, f.descripcion fase, max(asp.id_periodo) id_periodo, GROUP_CONCAT(DISTINCT CONCAT_WS(\'|\',ps.id_persona,concat(p.nombres,\' \', p.primer_apellido, \' \', p.segundo_apellido))) owner
-                from sia_sistema s
-                LEFT JOIN sia_aso_persona_sistema ps on ps.id_sistema = s.id_sistema
-                LEFT JOIN sia_persona p on p.id_persona = ps.id_persona, 
-                sia_aso_sistema_periodo asp, sia_cat_fase f
-                where f.id_fase = s.id_fase and asp.id_sistema = s.id_sistema group by s.id_sistema) T2,
-            sia_periodo p, sia_observacion o, sia_aso_sistema_periodo asp
-            LEFT JOIN sia_respuesta r on r.id_sistema_periodo = asp.id_sistema_periodo and r.id_propiedad = 6
-            LEFT JOIN sia_respuesta r2 on r2.id_sistema_periodo = asp.id_sistema_periodo and r2.id_propiedad = 5
-            where T2.id_periodo = p.id_periodo and asp.id_sistema=T2.id_sistema and asp.id_periodo = T2.id_periodo and o.id_observacion = asp.id_observacion');
+				$sistemas = DB::select('select 5');
 				
 				$excel->sheet("reporte", function($sheet) use ($sistemas) {
 
@@ -199,12 +164,10 @@ class ConsultasController extends BaseController {
 	}
 
 	public function getCrearpdf($id) {
-		$grupos = DB::select('select * from sia_cat_grupo scg left join sia_cat_propiedad scp on scg.id_grupo = scp.id_grupo '
-				. 'left join sia_respuesta sr on scp.id_propiedad = sr.id_propiedad '
-				. 'where sr.id_sistema_periodo = ' . $id . ' order by scg.id_grupo');
+		$grupos = DB::select('select 5');
 		$fecha = getdate();
-		$periodo = DB::select("select * from sia_periodo where status = 1");
-		$sistema = DB::select("select scf.descripcion fase, so.descripcion observacion from sia_aso_sistema_periodo sasp right join sia_sistema ss on sasp.id_sistema = ss.id_sistema right join sia_observacion so on sasp.id_observacion = so.id_observacion right join sia_cat_fase scf on ss.id_fase = scf.id_fase where sasp.id_sistema_periodo = " . $id);
+		$periodo = DB::select("select 5");
+		$sistema = DB::select("select 5");
 		$view = View::make('formato',  array('propiedadesRes' => $grupos, 'fecha' => $fecha, 'autor' => Auth::user(), 'periodo' => $periodo, 'sistema' => $sistema))->render();
 //		$pdf = App::make('dompdf.wrapper');
 		$pdf = PDF::loadHTML($view);
@@ -222,18 +185,15 @@ class ConsultasController extends BaseController {
 	}
 
 	private function consultaRespuestas($id_sistema_periodo) {
-		$respuestas = DB::select("SELECT p.descripcion propiedad, r.valor respuesta
-                 FROM sia_respuesta r, sia_cat_propiedad p
-                 WHERE p.id_propiedad = r.id_propiedad and r.id_sistema_periodo = " . $id_sistema_periodo);
+		$respuestas = DB::select("SELECT 5");
 		return $respuestas;
 	}
 
 	public function verSistema($id) {
 		$menu = parent::createMenu();
 		$id = intval($id);
-		$sistemaPeriodo = siaAsoSistemaPeriodoModel::where('id_sistema', '=', $id)->orderBy('id_sistema_periodo', 'desc')->first(); // Mejorar para consultar de diferentes periodos
+		// Mejorar para consultar de diferentes periodos
 		$secciones = parent::obtieneRespuestas($sistemaPeriodo->id_sistema_periodo);
-		$grupos = siaGrupoModel::select('id_grupo', 'grupo')->where('status', '=', 1)->orderBy('orden', 'asc')->orderBy('grupo', 'asc')->get();
 		return View::make('sistemas.ver', array('pantallas' => $secciones, 'id_sistema' => $id, 'menu' => $menu, 'grupos' => $grupos));
 	}
 
@@ -248,7 +208,7 @@ class ConsultasController extends BaseController {
 
 	public function getObtenerlistado($tipo, $info) {
 		if (is_numeric($tipo) && is_numeric($info)) {
-			$busqueda = DB::select('select id_respuesta_predefinida id, valor from sia_cat_respuestas_predefinidas where id_propiedad = ' . $info);
+			$busqueda = DB::select('select 5');
 			if (sizeof($busqueda) > 0) {
 				return $busqueda;
 			} else {
@@ -270,11 +230,10 @@ class ConsultasController extends BaseController {
 				$respuesta[] = 'error';
 				$respuesta[] = 'Sistema invalido o inexistente.';
 			} else {
-				$persona = siaPersonaModel::find($usuario);
-				$sistemas = siaSistemaModel::find($sistema);
-				$existenciaPrevia = DB::select("select * from sia_aso_persona_sistema where id_persona=" . $usuario . " and id_sistema=" . $sistema);
+				$persona = personaModel::find($usuario);
+				$existenciaPrevia = DB::select("select 5");
 				if (sizeof($persona) > 0 && sizeof($sistemas) > 0 && sizeof($existenciaPrevia) == 0) {
-					$sistemaPersona = new siaAsoPersonaSistemaModel();
+					$sistemaPersona = new personaSistemaModel();
 					$sistemaPersona->id_sistema = $sistema;
 					$sistemaPersona->id_persona = $usuario;
 					$sistemaPersona->status = 1;
@@ -312,10 +271,9 @@ class ConsultasController extends BaseController {
 				$respuesta[] = 'error';
 				$respuesta[] = 'Sistema invalido o inexistente.';
 			} else {
-				$persona = siaPersonaModel::find($usuario);
-				$sistemas = siaSistemaModel::find($sistema);
+				$persona = personaModel::find($usuario);
+				$sistemas = sistemaModel::find($sistema);
 				if (sizeof($persona) > 0 && sizeof($sistemas) > 0) {
-					DB::delete("delete from sia_aso_persona_sistema where id_sistema=" . $sistema . " and id_persona=" . $usuario);
 					$respuesta[] = 'exito';
 					$respuesta[] = 'Usuario eliminado con éxito.';
 				} else {

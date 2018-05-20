@@ -419,7 +419,7 @@ Sistemas
     }
     $('#tipoTodoGraficas').val(1);
             $('#switchGraficas').val('1');
-            if ($('#medidoGraficas').val() == 'sia_cat_propiedad:descripcion'){
+            if ($('#medidoGraficas').val() == 'propiedad:descripcion'){
     if ($('#filtroGraficas').is(':checked')){
     $('#filtroGraficas').trigger('click');
     }
@@ -905,10 +905,10 @@ Sistemas
 
     $('#medidoGraficas').change(function(){
     var valor = $('#medidoGraficas option:selected').val();
-            if (valor == "sia_respuesta:valor"){
+            if (valor == "respuesta:valor"){
     $('#adicionalGraficas').attr('style', 'margin-top:15px; margin-bottom:15px;display:block;');
             $('#filtroGraficas').parent('p').attr('style', 'display:block;');
-    } else if (valor == "sia_cat_propiedad:descripcion"){
+    } else if (valor == "propiedad:descripcion"){
     $('#adicionalGraficas').attr('style', 'margin-top:15px; margin-bottom:15px;display:block;');
             $('#filtroGraficas').parent('p').attr('style', 'display:none;');
             if ($('#filtroGraficas').is(':checked')){

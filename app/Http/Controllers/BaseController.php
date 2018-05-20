@@ -28,8 +28,8 @@ class BaseController extends Controller {
         if (Auth::guest()){
             return false;
         }
-        $actividad = siaActividadModel::where('nombre', '=', $nombre)->where('status', '=', 1)->first();
-        $permiso = siaAsoUsuarioActividadModel::where('id_usuario', '=', Auth::user()->id_usuario)->where('id_actividad', '=', $actividad->id_actividad)->where('status', '=', 1)->first();
+        $actividad = actividadModel::where('nombre', '=', $nombre)->where('status', '=', 1)->first();
+        $permiso = usuarioActividadModel::where('id_usuario', '=', Auth::user()->id_usuario)->where('id_actividad', '=', $actividad->id_actividad)->where('status', '=', 1)->first();
         if ($actividad && $permiso) {
             $inicio = null;
             $fin = null;
@@ -53,8 +53,8 @@ class BaseController extends Controller {
     protected function createMenu() {
         $usuario = Auth::user();
         $menu = array();
-        $actividadesUsuario = DB::select('select ua.fecha_inicio, ua.fecha_fin, a.nombre, a.descripcion, a.icono, a.url, a.color from sia_cat_actividad a '
-                        . 'join sia_aso_usuario_actividad ua on ua.id_actividad = a.id_actividad where ua.id_usuario = ' . $usuario->id_usuario . ' and ua.status = 1 and a.status = 1 order by a.id_actividad Asc');
+        $actividadesUsuario = DB::select('select ua.fecha_inicio, ua.fecha_fin, a.nombre, a.descripcion, a.icono, a.url, a.color from actividad a '
+                        . 'join usuario_actividad ua on ua.id_actividad = a.id_actividad where ua.id_usuario = ' . $usuario->id_usuario . ' and ua.status = 1 and a.status = 1 order by a.id_actividad Asc');
         foreach ($actividadesUsuario as $ausu) {
             $opcion = array();
             $inicio = null;

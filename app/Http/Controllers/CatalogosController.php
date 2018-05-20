@@ -31,20 +31,9 @@ class CatalogosController extends BaseController {
         return;
     }
 
-    public function postBuscar() {
-        if (Request::ajax()) {
-            $grupo = siaGrupoModel::find(Request::get('id'));
-            if ($grupo) {
-                return Response::json(array('grupo' => $grupo));
-            } else {
-                return Redirect::to('Grupos')->with('mensajeError', 'Error al buscar la sección/grupo')->with('tituloMensaje', '¡Error!');
-            }
-        }
-    }
-
     public function postEliminar() {
         if (Request::ajax()) {
-            $grupo = siaGrupoModel::find(Request::get('modalConfirmaId'));
+            $grupo = camposModel::find(Request::get('modalConfirmaId'));
             if ($grupo) {
                 $grupo->delete();
                 Session::flash('mensaje', 'Grupo eliminado');
@@ -65,18 +54,18 @@ class CatalogosController extends BaseController {
             return;
         }
         $datos = Request::all();
-        $validator = siaGrupoModel::validar($datos);
+        $validator = camposModel::validar($datos);
         if ($validator->fails()) {
             return Response::json(array('errors' => $validator->errors()->toArray()));
         }
         if ($datos["id_grupo"] == "") {
-            $grupo = new siaGrupoModel(null,1);
+            $grupo = new camposModel(null,1);
             Session::flash('mensaje', 'Grupo agregado');
         } else {
-            $grupo = siaGrupoModel::find($datos["id_grupo"]);
+            $grupo = camposModel::find($datos["id_grupo"]);
             Session::flash('mensaje', 'Grupo modificado');
         }
-        $msg = siaGrupoModel::validarDuplicidad($datos,$grupo);
+        $msg = camposModel::validarDuplicidad($datos,$grupo);
         if (!empty($msg)) {
             return Response::json(array('errors' => $msg));
         }
