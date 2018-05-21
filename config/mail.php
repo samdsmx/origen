@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-	'address' => 'soporte_cenac@ipn.mx', 
-	'name' => 'Sistema de Inventario de Aplicativos'
+	'address' => 'origen@agsmac.org', 
+	'name' => 'Sistema Callcenter Origen'
     ],
 
     /*
