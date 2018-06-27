@@ -129,15 +129,32 @@ function changePais(formulario){
         $('#datosDireccion2').hide(); 
         $('#datosDireccion3').show(); 
         $('#datosDireccion4').show(); 
+        $('#datosDireccion5').hide(); 
+        $('#datosDireccion6').hide(); 
         $('#CP').val(''); 
+        $('#Estado').html('');
         $('#Municipio').html(''); 
         $('#Colonia').html(''); 
         }
-        else{
+      else if (Localidad.value == 'Estados Unidos'){
+        $('#datosDireccion').hide(); 
+        $('#datosDireccion2').hide(); 
+        $('#datosDireccion3').hide(); 
+        $('#datosDireccion4').hide(); 
+        $('#datosDireccion5').show(); 
+        $('#datosDireccion6').show();
+        $('#CP').val(''); 
+        $('#Estado').html('');
+        $('#Municipio').html(''); 
+        $('#Colonia').html(''); 
+      }
+      else {
           $('#datosDireccion').show(); 
           $('#datosDireccion2').show(); 
           $('#datosDireccion3').hide(); 
           $('#datosDireccion4').hide(); 
+          $('#datosDireccion5').hide(); 
+          $('#datosDireccion6').hide();
           $('#CP').val(''); 
           changeCP(formulario);
           }
@@ -383,6 +400,7 @@ startclock();
                               <TH align="center" colspan="4">
                                  <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">Localidad
                                  <input type="radio" name="Localidad" value="Mexico" checked onChange="changePais('forma');">M&eacute;xico
+                                 <input type="radio" name="Localidad" value="Estados Unidos" onChange="changePais('forma');">EUA
                                  <input type="radio" name="Localidad" value="Otro" onChange="changePais('forma');">Otro</FONT>
                               </TH>
                            </TR>   
@@ -428,6 +446,9 @@ startclock();
                               </select>
                            </TD>
                         </TR> 
+                        
+
+
                         <TR id="datosDireccion3" hidden align="center">
                           <TD>
                               <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Pais</B></FONT>
@@ -503,7 +524,6 @@ startclock();
                                   <option value="Eritrea">Eritrea</option>
                                   <option value="Eslovenia">Eslovenia</option>
                                   <option value="España">España</option>
-                                  <option value="Estados Unidos">Estados Unidos</option>
                                   <option value="Estonia">Estonia</option>
                                   <option value="Etiopía">Etiopía</option>
                                   <option value="Fiji">Fiji</option>
@@ -649,7 +669,74 @@ startclock();
                                 </select>
                             </FONT>
                            </TD>
+                        </TR>
+
+
+                        <TR id="datosDireccion5" hidden align="center">
+                          <TD>
+                              <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Estado</B></FONT>
+                           </TD>
                         </TR> 
+                        <TR id="datosDireccion6" hidden align="center">
+                          <TD>
+                              <FONT SIZE="-1" COLOR="#AAAAAA">
+                                <select id="EstadoEU" name="EstadoEU" class="js-example-basic-single" style="width: 210px;"> 
+                                  <option value="">-</option>
+                                  <option value="Alabama">Alabama</option>
+                                  <option value="Alaska">Alaska</option>
+                                  <option value="Arizona">Arizona</option>
+                                  <option value="Arkansas">Arkansas</option>
+                                  <option value="California">California</option>
+                                  <option value="Carolina del Norte">Carolina del Norte</option>
+                                  <option value="Carolina del Sur">Carolina del Sur</option>
+                                  <option value="Colorado">Colorado</option>
+                                  <option value="Connecticut">Connecticut</option>
+                                  <option value="Dakota del Norte">Dakota del Norte</option>
+                                  <option value="Dakota del Sur">Dakota del Sur</option>
+                                  <option value="Delaware">Delaware</option>
+                                  <option value="Florida">Florida</option>
+                                  <option value="Georgia">Georgia</option>
+                                  <option value="Hawái">Hawái</option>
+                                  <option value="Idaho">Idaho</option>
+                                  <option value="Illinois">Illinois</option>
+                                  <option value="Indiana">Indiana</option>
+                                  <option value="Iowa">Iowa</option>
+                                  <option value="Kansas">Kansas</option>
+                                  <option value="Kentucky">Kentucky</option>
+                                  <option value="Luisiana">Luisiana</option>
+                                  <option value="Maine">Maine</option>
+                                  <option value="Maryland">Maryland</option>
+                                  <option value="Massachusetts">Massachusetts</option>
+                                  <option value="Míchigan">Míchigan</option>
+                                  <option value="Minnesota">Minnesota</option>
+                                  <option value="Misisipi">Misisipi</option>
+                                  <option value="Misuri">Misuri</option>
+                                  <option value="Montana">Montana</option>
+                                  <option value="Nebraska">Nebraska</option>
+                                  <option value="Nevada">Nevada</option>
+                                  <option value="Nueva Jersey">Nueva Jersey</option>
+                                  <option value="Nueva York">Nueva York</option>
+                                  <option value="Nuevo Hampshire">Nuevo Hampshire</option>
+                                  <option value="Nuevo México">Nuevo México</option>
+                                  <option value="Ohio">Ohio</option>
+                                  <option value="Oklahoma">Oklahoma</option>
+                                  <option value="Oregón">Oregón</option>
+                                  <option value="Pensilvania">Pensilvania</option>
+                                  <option value="Rhode Island">Rhode Island</option>
+                                  <option value="Tennessee">Tennessee</option>
+                                  <option value="Texas">Texas</option>
+                                  <option value="Utah">Utah</option>
+                                  <option value="Vermont">Vermont</option>
+                                  <option value="Virginia">Virginia</option>
+                                  <option value="Virginia Occidental">Virginia Occidental</option>
+                                  <option value="Washington">Washington</option>
+                                  <option value="Wisconsin">Wisconsin</option>
+                                  <option value="Wyoming">Wyoming</option>
+                                </select>
+                            </FONT>
+                           </TD>
+                        </TR>
+
                         </TABLE>
                         <TABLE width="100%"> 
                         <THEAD>

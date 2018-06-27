@@ -270,9 +270,13 @@ if ($Sesion){
 			    if ($Localidad == "Mexico"){
 					$Pais = "México";
 			     	} 	
+				else if($Localidad == "Estados Unidos"){
+					$Pais = "Estados Unidos";
+					$Estado = $EstadoEU;
+				} 
 			     	else{
-						$Estado = "Extranjero";
-			     		}			     		
+					$Estado = "Extranjero";
+			     	}			     		
 			    if ($Estado == ""){
 					$Estado = "NINGUNO";
 			     	} 		
