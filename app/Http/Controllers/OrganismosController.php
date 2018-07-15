@@ -32,6 +32,7 @@ class OrganismosController extends BaseController {
         $menu = parent::createMenu();
         return View::make('organismos.organismos', array('menu' => $menu,
             'estados' => getEstadosArray(),
+            'ocultarAgregar' => false,
             'catalogo_tema' => parent::obtenerCampos('Tema')));
     }
 

@@ -12,6 +12,35 @@ class RegistroController extends BaseController {
         if (!parent::tienePermiso('Registro')){
             return Redirect::to('inicio');
         }
+        $numeroCaso = Request::input('caso');
+        $numeroLlamada = Request::input('llamada');
+        if($numeroCaso == NULL) {
+            $numeroCaso = 0;
+            $datosGenerales['nombre'] = '';
+            $datosGenerales['edad'] = '';
+            $datosGenerales['estadoCivil'] = '';
+            $datosGenerales['genero'] = '';
+            $datosGenerales['estudios'] = '';
+            $datosGenerales['religion'] = '';
+            $datosGenerales['lengua'] = '';
+            $datosGenerales['ocupacion'] = '';
+            $datosGenerales['vives'] = '';
+        }else{
+            $datosGenerales['nombre'] = 'Ricardo';
+            $datosGenerales['edad'] = '12';
+            $datosGenerales['estadoCivil'] = 'Soltera';
+            $datosGenerales['genero'] = 'm';
+            $datosGenerales['estudios'] = 'Posgrado';
+            $datosGenerales['religion'] = 'Testigo de Jehova';
+            $datosGenerales['lengua'] = 'Si';
+            $datosGenerales['ocupacion'] = 'Negocio propio';
+            $datosGenerales['vives'] = 'Hijos';
+        }
+
+        if($numeroLlamada == NULL) {
+            $numeroLlamada = 0;
+        }
+
         $menu = parent::createMenu();
         return View::make('registro.registro', array('menu' => $menu, 'estados'=> getEstadosArray(),
             'catalogo_tema' => parent::obtenerCampos('Tema'),
@@ -22,6 +51,10 @@ class RegistroController extends BaseController {
             'tv' => parent::obtenerCampos('TipoViolencia'),
             'mv' => parent::obtenerCampos('ModalidadViolencia'),
             'cte' => parent::obtenerCampos('ComoTeEnteraste'),
+            'ocultarAgregar' => true,
+            'numeroCaso' => $numeroCaso,
+            'numeroLlamada' => $numeroLlamada,
+            'datosGenerales' => $datosGenerales,
             'cleg' => parent::obtenerCampos('CanaLegal')));
     }
 

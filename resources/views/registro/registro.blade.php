@@ -21,6 +21,8 @@ Registro
 @section('cuerpo')
 @include('organismos.modalBusqueda')
 <section class="content-header">
+    {{ $numeroCaso }}
+    {{ $numeroLlamada }}
     <h1 style="color:#605ca8;font-weight: bolder;text-align:center;float:inherit;" class="col-md-10 col-sm-12 col-xs-12">
         <?php
             $fun=getdate();

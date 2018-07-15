@@ -9,25 +9,37 @@
 
     <div id="dNombre" class="form-group col-md-6">
       <label for="Nombre">Nombre:</label>
-      <input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Nombre completo">
+      <input type="text"
+        @if($datosGenerales['nombre']  != '') disabled @endif 
+        value="{{ $datosGenerales['nombre'] }}"
+        class="form-control" 
+        id="Nombre"
+        name="Nombre" 
+        placeholder="Nombre completo">
     </div>
 
     <div class="form-group col-md-2">
       <label for="Edad">Edad:</label>
-      <input type="number" class="form-control" name="Edad" placeholder="Edad en años" >
+      <input 
+        @if($datosGenerales['edad']  != '') disabled @endif 
+        value="{{ $datosGenerales['edad'] }}"
+        type="number"
+        class="form-control" 
+        name="Edad" 
+        placeholder="Edad en años" >
     </div>
 
     <div class="form-group col-md-4">
         <label for="EstadoCivil">Estado Civil:</label>
-        <select name="EstadoCivil" class="form-control" style="width: 100%;">
-         <option>-</option>
-         <option value="Soltera">Soltera</option>
-         <option value="Divorciada">Divorciada</option>
-         <option value="Viuda">Viuda</option>
-         <option value="Casada">Casada</option>
-         <option value="Separada">Separada</option>
-         <option value="Concubinato">Concubinato</option>
-         <option value="Union Libre">Union Libre</option>
+        <select @if($datosGenerales['estadoCivil']  != '') disabled @endif name="EstadoCivil" class="form-control" style="width: 100%;">
+         <option @if($datosGenerales['estadoCivil']  == '') selected @endif >-</option>
+         <option @if($datosGenerales['estadoCivil']  == 'Soltera') selected @endif value="Soltera">Soltera</option>
+         <option @if($datosGenerales['estadoCivil']  == 'Divorciada') selected @endif value="Divorciada">Divorciada</option>
+         <option @if($datosGenerales['estadoCivil']  == 'Viuda') selected @endif value="Viuda">Viuda</option>
+         <option @if($datosGenerales['estadoCivil']  == 'Casada') selected @endif value="Casada">Casada</option>
+         <option @if($datosGenerales['estadoCivil']  == 'Separada') selected @endif value="Separada">Separada</option>
+         <option @if($datosGenerales['estadoCivil']  == 'Concubinato') selected @endif value="Concubinato">Concubinato</option>
+         <option @if($datosGenerales['estadoCivil']  == 'Union Libre') selected @endif value="Union Libre">Union Libre</option>
         </select>
     </div>
 
@@ -35,11 +47,11 @@
       <label for="Sexo">Genero:</label>
       <div class="radio">
         <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
-          <input type="radio" name="Sexo" value="f" checked>
+          <input type="radio" name="Sexo" value="f" @if($datosGenerales['genero'] != 'm') checked @endif>
           Femenino
         </label>
         <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
-          <input type="radio" name="Sexo" value="m">
+          <input type="radio" name="Sexo" value="m" @if($datosGenerales['genero'] == 'm') checked @endif>
           Masculino
         </label>
       </div>
@@ -47,31 +59,31 @@
 
     <div class="form-group col-md-5">
         <label for="NivelEstudios">Nivel de estudios:</label>
-        <select name="NivelEstudios" class="form-control">
-            <option selected>-</option>
-            <option>Analfabeta</option>
-            <option>Primaria</option>
-            <option>Secundaria</option>
-            <option>Preparatoria</option>
-            <option>Carrera Técnica</option>
-            <option>Carrera Universitaria</option>
-            <option>Posgrado</option>
+        <select @if($datosGenerales['estudios']  != '') disabled @endif name="NivelEstudios" class="form-control">
+            <option @if($datosGenerales['estudios']  == '') selected @endif >-</option>
+            <option @if($datosGenerales['estudios']  == 'Analfabeta') selected @endif >Analfabeta</option>
+            <option @if($datosGenerales['estudios']  == 'Primaria') selected @endif >Primaria</option>
+            <option @if($datosGenerales['estudios']  == 'Secundaria') selected @endif >Secundaria</option>
+            <option @if($datosGenerales['estudios']  == 'Preparatoria') selected @endif >Preparatoria</option>
+            <option @if($datosGenerales['estudios']  == 'Carrera Técnica') selected @endif >Carrera Técnica</option>
+            <option @if($datosGenerales['estudios']  == 'Carrera Universitaria') selected @endif >Carrera Universitaria</option>
+            <option @if($datosGenerales['estudios']  == 'Posgrado') selected @endif >Posgrado</option>
         </select>
     </div>
 
     <div class="form-group col-md-4">
         <label for="Religion">Religión:</label>
-        <select name="Religion" class="form-control">
-         <option selected>-</option>
-         <option>Catolica</option>
-         <option>Musulmana</option>
-         <option>Judia</option>
-         <option>Pentecostes</option>
-         <option>Mormona</option>
-         <option>Evangelica</option>
-         <option>Cristiana</option>
-         <option>Testigo de Jehova</option>
-         <option>Ninguna</option>
+        <select  @if($datosGenerales['religion']  != '') disabled @endif name="Religion" class="form-control">
+         <option @if($datosGenerales['religion']  == '') selected @endif>-</option>
+         <option @if($datosGenerales['religion']  == 'Catolica') selected @endif>Catolica</option>
+         <option @if($datosGenerales['religion']  == 'Musulmana') selected @endif>Musulmana</option>
+         <option @if($datosGenerales['religion']  == 'Judia') selected @endif>Judia</option>
+         <option @if($datosGenerales['religion']  == 'Pentecostes') selected @endif>Pentecostes</option>
+         <option @if($datosGenerales['religion']  == 'Mormona') selected @endif>Mormona</option>
+         <option @if($datosGenerales['religion']  == 'Evangelica') selected @endif>Evangelica</option>
+         <option @if($datosGenerales['religion']  == 'Cristiana') selected @endif>Cristiana</option>
+         <option @if($datosGenerales['religion']  == 'Testigo de Jehova') selected @endif>Testigo de Jehova</option>
+         <option @if($datosGenerales['religion']  == 'Ninguna') selected @endif>Ninguna</option>
         </select>
     </div>
 
@@ -79,11 +91,11 @@
       <label for="LenguaIndigena" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">¿Habla alguna lengua indigena?</label>
       <div class="radio">
         <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
-          <input type="radio" name="LenguaIndigena" value="no" checked>
+          <input type="radio" name="LenguaIndigena" value="no"  @if($datosGenerales['lengua'] != 'Si') checked @endif>
           No
         </label>
         <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
-          <input type="radio" name="LenguaIndigena" value="si">
+          <input type="radio" name="LenguaIndigena" value="si" @if($datosGenerales['lengua']  == 'Si') checked @endif>
           Si
         </label>
       </div>
@@ -91,30 +103,31 @@
 
     <div class="form-group col-md-5">
       <label for="Ocupacion">Ocupación:</label>
-      <select name="Ocupacion" class="form-control" style="width: 100%;" onchange="showfield(this.options[this.selectedIndex].value)">
-        <option selected>-</option>
-        <option>Ama de casa</option>
-        <option>Empleada</option>
-        <option>Empleada Domestica</option>
-        <option>Negocio propio</option>
-        <option>Jubilado y/o pensionado</option>
-        <option>Estudiante</option>
-        <option>Desempleada</option>
-        <option value="Otra">Otra :</option>
+      <select @if($datosGenerales['ocupacion']  != '') disabled @endif name="Ocupacion" class="form-control" style="width: 100%;" onchange="showfield(this.options[this.selectedIndex].value)">
+        <option @if($datosGenerales['ocupacion']  == '') selected @endif>-</option>
+        <option @if($datosGenerales['ocupacion']  == 'Ama de casa') selected @endif>Ama de casa</option>
+        <option @if($datosGenerales['ocupacion']  == 'Empleada') selected @endif>Empleada</option>
+        <option @if($datosGenerales['ocupacion']  == 'Empleada Domestica') selected @endif>Empleada Domestica</option>
+        <option @if($datosGenerales['ocupacion']  == 'Negocio propio') selected @endif>Negocio propio</option>
+        <option @if($datosGenerales['ocupacion']  == 'Jubilado y/o pensionado') selected @endif>Jubilado y/o pensionado</option>
+        <option @if($datosGenerales['ocupacion']  == 'Estudiante') selected @endif>Estudiante</option>
+        <option @if($datosGenerales['ocupacion']  == 'Desempleada') selected @endif>Desempleada</option>
+        <option @if($datosGenerales['ocupacion']  == 'Otra :') selected @endif value="Otra">Otra :</option>
       </select>
     </div>
 
     <div class="form-group col-md-4">
       <label for="VivesCon">Vives con...</label>
-      <select name="VivesCon" class="form-control" style="width: 100%;">
-            <option>Sola</option>
-            <option>Padres</option>
-            <option>Pareja</option>
-            <option selected>Familia</option>
-            <option>Hijos</option>
-            <option>Padre</option>
-            <option>Madre</option>
-            <option>Otros</option>
+      <select @if($datosGenerales['vives']  != '') disabled @endif name="VivesCon" class="form-control" style="width: 100%;">
+            <option @if($datosGenerales['vives']  == 'Sola') selected @endif>Sola</option>
+            <option @if($datosGenerales['vives']  == 'Padres') selected @endif>Padres</option>
+            <option @if($datosGenerales['vives']  == 'Pareja') selected @endif>Pareja</option>
+            <option @if($datosGenerales['vives']  == '' || 
+              $datosGenerales['vives']  == 'Familia') selected @endif>Familia</option>
+            <option @if($datosGenerales['vives']  == 'Hijos') selected @endif>Hijos</option>
+            <option @if($datosGenerales['vives']  == 'Padre') selected @endif>Padre</option>
+            <option @if($datosGenerales['vives']  == 'Madre') selected @endif>Madre</option>
+            <option @if($datosGenerales['vives']  == 'Otros') selected @endif>Otros</option>
       </select>
     </div>
 
