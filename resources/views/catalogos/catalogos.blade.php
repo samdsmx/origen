@@ -37,7 +37,7 @@ Catalogos
                     <div class="col-md-6" style="padding: 0px; text-align: center;">
                         <button id="abrirModal" type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modalRegistroGrupo" ><span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Campo</button>
                         <div class="col-md-1" style="line-height: 33px;"><label for="tipo">Tipo:</label></div>
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <select name="tipo" class="form-control" onchange="filtro();" >
                                 @foreach($tipos as $tipo)
                                     <option value="{!! $tipo->Tipo !!}">{!! $tipo->Tipo !!}</option>

@@ -13,7 +13,9 @@ class CatalogosController extends BaseController {
         $menu = parent::createMenu();
         $tipos = DB::select('select Tipo from campos group by Tipo order by Tipo ASC');
         $campos = DB::select('select * from campos where Tipo = "'. $tipos[0]->Tipo .'" order by Nombre ASC');
-        return View::make('catalogos.catalogos', array('menu' => $menu, 'campos' => $campos, 'tipos' => $tipos));
+        return View::make('catalogos.catalogos', array('menu' => $menu, 
+            'campos' => $campos, 
+            'tipos' => $tipos));
     }
 
     public function postFiltro() {

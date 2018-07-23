@@ -32,9 +32,11 @@
             </div>
         </div>
         <div class="modal-footer" style="background: #ffffff;  border-top-color: #ffffff;">
+            @if (!$ocultarAgregar)
             <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#modalRegistroOrganismo" >
                 <span class="fa fa-plus-circle fa-lg"></span>&nbsp;Agregar Organismo
             </button>
+            @endif
             {!! Form::reset('Limpiar', array('class' => 'btn btn-primary', 'id' => "resetearBusqueda")) !!}
             {!! Form::submit('Buscar', array('class' => 'btn btn-success', 'id' => 'btnBuscarOrganismos')) !!}
         </div>
