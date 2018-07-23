@@ -12,10 +12,12 @@ class RegistroController extends BaseController {
         if (!parent::tienePermiso('Registro')){
             return Redirect::to('inicio');
         }
-        $numeroCaso = Request::input('caso');
-        $numeroLlamada = Request::input('llamada');
-        if($numeroCaso == NULL) {
-            $numeroCaso = 0;
+        $entradaCaso = Request::input('caso');
+        $entradaLlamada = Request::input('llamada');
+        $numeroCaso = ($entradaCaso != NULL)?$entradaCaso:0;
+        $numeroLlamada = ($entradaLlamada != NULL)?$entradaLlamada:0;
+        $datosLlamada = $this->obtenerLlamadas($numeroCaso,$numeroLlamada);
+        if($datosLlamada == NULL) {
             $datosGenerales['nombre'] = '';
             $datosGenerales['edad'] = '';
             $datosGenerales['estadoCivil'] = '';
@@ -25,20 +27,24 @@ class RegistroController extends BaseController {
             $datosGenerales['lengua'] = '';
             $datosGenerales['ocupacion'] = '';
             $datosGenerales['vives'] = '';
+            $datosGenerales['telefono'] = '';
+            $datosGenerales['correoElectronico'] = '';
+            $datosGenerales['medioContacto'] = '';
+            $datosGenerales['comoTeEnteraste'] = '';
         }else{
-            $datosGenerales['nombre'] = 'Ricardo';
-            $datosGenerales['edad'] = '12';
-            $datosGenerales['estadoCivil'] = 'Soltera';
-            $datosGenerales['genero'] = 'm';
-            $datosGenerales['estudios'] = 'Posgrado';
-            $datosGenerales['religion'] = 'Testigo de Jehova';
-            $datosGenerales['lengua'] = 'Si';
-            $datosGenerales['ocupacion'] = 'Negocio propio';
-            $datosGenerales['vives'] = 'Hijos';
-        }
-
-        if($numeroLlamada == NULL) {
-            $numeroLlamada = 0;
+            $datosGenerales['nombre'] = $datosLlamada[0]->Nombre;
+            $datosGenerales['edad'] = $datosLlamada[0]->Edad;
+            $datosGenerales['estadoCivil'] = $datosLlamada[0]->EstadoCivil;
+            $datosGenerales['genero'] = $datosLlamada[0]->Sexo;
+            $datosGenerales['estudios'] = $datosLlamada[0]->NivelEstudios;
+            $datosGenerales['religion'] = $datosLlamada[0]->Religion;
+            $datosGenerales['lengua'] = $datosLlamada[0]->LenguaIndigena;
+            $datosGenerales['ocupacion'] = $datosLlamada[0]->Ocupacion;
+            $datosGenerales['vives'] = $datosLlamada[0]->VivesCon;
+            $datosGenerales['telefono'] = $datosLlamada[0]->Telefono;
+            $datosGenerales['correoElectronico'] = $datosLlamada[0]->CorreoElectronico;
+            $datosGenerales['medioContacto'] = $datosLlamada[0]->MedioContacto;
+            $datosGenerales['comoTeEnteraste'] = $datosLlamada[0]->ComoTeEnteraste;
         }
 
         $menu = parent::createMenu();
@@ -167,6 +173,31 @@ class RegistroController extends BaseController {
         $llamada->save();
 
         Session::flash('mensaje', 'Se ha registrado la llamada correctamente. Caso #'.$caso->IDCaso);
+    }
+
+     public function obtenerLlamadas($nro_caso,$nro_llamada){
+        if($nro_caso == 0) {
+            return NULL;
+        }
+        if($nro_llamada == 0) {
+            $nro_llamada = 1;
+        }
+ 		$llamadas_casos = DB::table('llamadas')
+						->join('casos','casos.IDCaso','=','llamadas.IDCaso')
+						->join('consejeros','llamadas.Consejera','=','consejeros.nombre')
+						->join('persona','consejeros.id_persona','=','persona.id_persona')
+						->select('casos.*','llamadas.*')
+                        ->select('casos.IDCaso','casos.Telefono','Horainicio',
+                            'LlamadaNo','casos.Nombre','FechaLlamada','nombres',
+                            'primer_apellido','segundo_apellido','casos.Edad',
+                            'casos.EstadoCivil','casos.Sexo','casos.NivelEstudios',
+                            'casos.Religion','casos.LenguaIndigena','casos.Ocupacion',
+                            'casos.VivesCon','casos.Telefono','casos.CorreoElectronico',
+                            'casos.MedioContacto','casos.ComoTeEnteraste')
+                        ->where('casos.IDCaso',$nro_caso)
+                        ->where('llamadas.LlamadaNo',$nro_llamada)
+                        ->get();
+		return $llamadas_casos;
     }
 
 

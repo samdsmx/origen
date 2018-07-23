@@ -54,7 +54,7 @@ function mostrarMensaje(mensaje, clase) {
 }
 
 function guardarFormulario(data, url) {
-    event.preventDefault();
+    //event.preventDefault();
     $.ajax({
         type: 'POST',
         url: url,
@@ -64,15 +64,15 @@ function guardarFormulario(data, url) {
             $('input').removeAttr("title");
             if (response.errors) {
                 $.each(response.errors, function(index, error) {
-                    console.log(index);
-                    console.log(error);
                     $("#d" + index).addClass("has-error");
                     $("#" + index).attr("title", error);
                 });
                 mostrarMensaje(response.mensaje);
                 $('html, body').animate({scrollTop: 0}, 'fast');
+                return false;
             } else {
                 window.location="inicio";
+                return false;
             }
         },
         error: function(xhr, status, error) {
@@ -157,11 +157,9 @@ $('#registraOrganismo').submit(function(e) {
         url: "Organismos/registraorganismo",
         data: infoParaEnviar,
         success: function(response) {
-          console.log(response);
             $('div').removeClass('has-error');
             $('input').removeAttr("title");
             if (response.errors) {
-              console.log(response.errors);
                 $.each(response.errors, function(index, error) {
                     $("#d" + index).addClass("has-error");
                     $("#" + index).attr("title", error);
@@ -278,13 +276,11 @@ $(document).ready(function() {
         //$('#buscaOrganismosCanalizacion').trigger('reset');
         info = $(this).serialize();
         var informacionEnv = cambiarPeticionMultiplesTemas(info,'tema');
-        console.log(informacionEnv);
         $.ajax({
                 type: 'POST',
                 url: 'Registro/buscarorganismos',
                 data: informacionEnv,
                 success: function(response) {
-                    console.log(response);
                     $('#tablaMuestreo').show();
                     //$('#buscaOrganismosCanalizacion').trigger('reset');
                     $.each(response, function(index, value){
@@ -296,7 +292,6 @@ $(document).ready(function() {
                         var text = $(this).attr('data-organismo');
                         var valor_anterior = $('#CanaOtro').val();
                         $('#CanaOtro').val(valor_anterior + text+';\n')
-                        console.log($('#CanaOtro').val());
                     });
                 },
                 error: function(xhr, status, error) {
@@ -311,29 +306,32 @@ $(document).ready(function() {
         $("#tablaCasos").DataTable().clear().draw();
         info = $(this).serialize();
         var informacionEnv = cambiarPeticionMultiplesTemas(info,'motivos');
-        console.log(informacionEnv);
         $.ajax({
                 type: 'POST',
                 url: 'Consultas/consultarllamadas',
                 data: informacionEnv,
                 success: function(response) {
-                    console.log(response);
                   var resultado = [];
+                    var direccion = window.location.href.split('/');
+                    direccion.pop();
+                    direccion.push('Registro');
+                    direccion = direccion.join('/');
                    for(var i=0;i<response.length;i++) {
                      var ele = response[i];
-                     var arrayInterno = [];
-                     arrayInterno.push(ele.IDCaso);
-                     arrayInterno.push('<strong>'+ele.FechaLlamada+'</strong><br>'+ele.Horainicio);
-                     arrayInterno.push(ele.Nombre);
-                     arrayInterno.push(ele.Telefono);
-                     arrayInterno.push(ele.nombres+' '+ele.primer_apellido+' '+ele.segundo_apellido);
-			         arrayInterno.push('<input type="hidden" class="datosCaso" value="'+ele.IDCaso+'/'+ele.LlamadaNo+'"/>'
-										+'<button type="button" style="margin-right:10%;" class="btn btn-warning verLlamada">'
+                    direccionNvoCaso = direccion+'?caso='+ele.IDCaso;
+                    direccionVerLlamada = direccion+'?caso='+ele.IDCaso+'&llamada='+ele.LlamadaNo;
+                    var arrayInterno = [];
+                    arrayInterno.push(ele.IDCaso);
+                    arrayInterno.push('<strong>'+ele.FechaLlamada+'</strong><br>'+ele.Horainicio);
+                    arrayInterno.push(ele.Nombre);
+                    arrayInterno.push(ele.Telefono);
+                    arrayInterno.push(ele.nombres+' '+ele.primer_apellido+' '+ele.segundo_apellido);
+			        arrayInterno.push('<a href="'+direccionVerLlamada+'" style="margin-right:10%;" class="btn btn-warning verLlamada">'
                                         +'<span class="fa fa-eye"></span>'
-                                        +'</button> '
-                                        +'<button type="button" class="btn btn-success llamadaSeguimiento">'
+                                        +'</a> '
+                                        +'<a href="'+direccionNvoCaso+'" class="btn btn-success llamadaSeguimiento">'
                                         +'<span class="fa fa-plus"></span>'
-                                        +'</button>');
+                                        +'</a>');
                      resultado.push(arrayInterno);
                     }
                 $("#tablaCasos").DataTable().rows.add(resultado).draw();
