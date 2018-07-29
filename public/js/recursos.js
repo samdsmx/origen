@@ -3,6 +3,21 @@ $.ajaxSetup({
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
 });
+
+function cambiarStatusRegistro(valor) {
+    $('#Nombre').prop("disabled",valor);
+    $('#Edad').prop("disabled",valor);
+    $('#NivelEstudios').prop("disabled",valor);
+    $('#EstadoCivil').prop("disabled",valor);
+    $('#Religion').prop("disabled",valor);
+    $('#Ocupacion').prop("disabled",valor);
+    $('#VivesCon').prop("disabled",valor);
+    $('#Telefono').prop("disabled",valor);
+    $('#CorreoElectronico').prop("disabled",valor);
+    $('#MedioContacto').prop("disabled",valor);
+    $('#ComoTeEnteraste').prop("disabled",valor);
+}
+
 /**
  * Función que se encarga de cambiar el formulario que se pase para
  * concatenar múltiples temas.
@@ -63,6 +78,7 @@ function guardarFormulario(data, url) {
             $('div').removeClass('has-error');
             $('input').removeAttr("title");
             if (response.errors) {
+                cambiarStatusRegistro(true);
                 $.each(response.errors, function(index, error) {
                     $("#d" + index).addClass("has-error");
                     $("#" + index).attr("title", error);

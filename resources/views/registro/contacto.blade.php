@@ -14,6 +14,7 @@
             <input 
                 type="text" 
                 name="Telefono" 
+                id="Telefono" 
                 value="{{ $datosGenerales['telefono'] }}" 
                 class="form-control"
                 @if($datosGenerales['telefono'] != '') disabled @endif
@@ -30,6 +31,7 @@
                 value="{{ $datosGenerales['correoElectronico'] }}"
                 @if($datosGenerales['correoElectronico'] != '') disabled @endif
                 name="CorreoElectronico"
+                id="CorreoElectronico"
                 class="form-control"
                 placeholder="Email">
         </div>
@@ -37,7 +39,7 @@
 
     <div class="form-group col-md-3">
         <label for="MedioContacto" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Medio de contacto:</label>
-        <select @if($datosGenerales['medioContacto'] != '') disabled @endif name="MedioContacto" class="form-control">
+        <select @if($datosGenerales['medioContacto'] != '') disabled @endif id="MedioContacto" name="MedioContacto" class="form-control">
             <option @if($datosGenerales['medioContacto'] == '' || $datosGenerales['medioContacto'] == 'Teléfono') selected @endif value="telefono" >Teléfono</option>
             <option @if($datosGenerales['medioContacto'] == 'chat') selected @endif value="chat">Chat</option>
             <option @if($datosGenerales['medioContacto'] == 'correo') selected @endif value="correo">Mail</option>
