@@ -14,10 +14,7 @@
             <input 
                 type="text" 
                 name="Telefono" 
-<<<<<<< HEAD
                 id="Telefono" 
-=======
->>>>>>> 54441381fc792ce67d2c4dcd8fa3c3969ef0a3c1
                 value="{{ $datosGenerales['telefono'] }}" 
                 class="form-control"
                 @if($datosGenerales['telefono'] != '') disabled @endif
@@ -34,10 +31,7 @@
                 value="{{ $datosGenerales['correoElectronico'] }}"
                 @if($datosGenerales['correoElectronico'] != '') disabled @endif
                 name="CorreoElectronico"
-<<<<<<< HEAD
                 id="CorreoElectronico"
-=======
->>>>>>> 54441381fc792ce67d2c4dcd8fa3c3969ef0a3c1
                 class="form-control"
                 placeholder="Email">
         </div>

@@ -26,20 +26,13 @@
         type="number"
         class="form-control" 
         name="Edad" 
-<<<<<<< HEAD
         id="Edad" 
-=======
->>>>>>> 54441381fc792ce67d2c4dcd8fa3c3969ef0a3c1
         placeholder="Edad en años" >
     </div>
 
     <div class="form-group col-md-4">
         <label for="EstadoCivil">Estado Civil:</label>
-<<<<<<< HEAD
         <select @if($datosGenerales['estadoCivil']  != '') disabled @endif  id="EstadoCivil" name="EstadoCivil" class="form-control" style="width: 100%;">
-=======
-        <select @if($datosGenerales['estadoCivil']  != '') disabled @endif name="EstadoCivil" class="form-control" style="width: 100%;">
->>>>>>> 54441381fc792ce67d2c4dcd8fa3c3969ef0a3c1
          <option @if($datosGenerales['estadoCivil']  == '') selected @endif >-</option>
          <option @if($datosGenerales['estadoCivil']  == 'Soltera') selected @endif value="Soltera">Soltera</option>
          <option @if($datosGenerales['estadoCivil']  == 'Divorciada') selected @endif value="Divorciada">Divorciada</option>
@@ -67,11 +60,7 @@
 
     <div class="form-group col-md-5">
         <label for="NivelEstudios">Nivel de estudios:</label>
-<<<<<<< HEAD
         <select @if($datosGenerales['estudios']  != '') disabled @endif id="NivelEstudios" name="NivelEstudios" class="form-control">
-=======
-        <select @if($datosGenerales['estudios']  != '') disabled @endif name="NivelEstudios" class="form-control">
->>>>>>> 54441381fc792ce67d2c4dcd8fa3c3969ef0a3c1
             <option @if($datosGenerales['estudios']  == '') selected @endif >-</option>
             <option @if($datosGenerales['estudios']  == 'Analfabeta') selected @endif >Analfabeta</option>
             <option @if($datosGenerales['estudios']  == 'Primaria') selected @endif >Primaria</option>
@@ -85,11 +74,7 @@
 
     <div class="form-group col-md-4">
         <label for="Religion">Religión:</label>
-<<<<<<< HEAD
         <select  @if($datosGenerales['religion']  != '') disabled @endif id="Religion" name="Religion" class="form-control">
-=======
-        <select  @if($datosGenerales['religion']  != '') disabled @endif name="Religion" class="form-control">
->>>>>>> 54441381fc792ce67d2c4dcd8fa3c3969ef0a3c1
          <option @if($datosGenerales['religion']  == '') selected @endif>-</option>
          <option @if($datosGenerales['religion']  == 'Catolica') selected @endif>Catolica</option>
          <option @if($datosGenerales['religion']  == 'Musulmana') selected @endif>Musulmana</option>
@@ -134,11 +119,7 @@
 
     <div class="form-group col-md-4">
       <label for="VivesCon">Vives con...</label>
-<<<<<<< HEAD
       <select @if($datosGenerales['vives']  != '') disabled @endif id="VivesCon" name="VivesCon" class="form-control" style="width: 100%;">
-=======
-      <select @if($datosGenerales['vives']  != '') disabled @endif name="VivesCon" class="form-control" style="width: 100%;">
->>>>>>> 54441381fc792ce67d2c4dcd8fa3c3969ef0a3c1
             <option @if($datosGenerales['vives']  == 'Sola') selected @endif>Sola</option>
             <option @if($datosGenerales['vives']  == 'Padres') selected @endif>Padres</option>
             <option @if($datosGenerales['vives']  == 'Pareja') selected @endif>Pareja</option>

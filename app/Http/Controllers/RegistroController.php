@@ -31,10 +31,7 @@ class RegistroController extends BaseController {
             $datosGenerales['correoElectronico'] = '';
             $datosGenerales['medioContacto'] = '';
             $datosGenerales['comoTeEnteraste'] = '';
-<<<<<<< HEAD
             $datosGenerales['posibleSolucion'] = '';
-=======
->>>>>>> 54441381fc792ce67d2c4dcd8fa3c3969ef0a3c1
         }else{
             $datosGenerales['nombre'] = $datosLlamada[0]->Nombre;
             $datosGenerales['edad'] = $datosLlamada[0]->Edad;
@@ -219,31 +216,5 @@ class RegistroController extends BaseController {
                         ->get();
 		return $llamadas_casos;
     }
-
-     public function obtenerLlamadas($nro_caso,$nro_llamada){
-        if($nro_caso == 0) {
-            return NULL;
-        }
-        if($nro_llamada == 0) {
-            $nro_llamada = 1;
-        }
- 		$llamadas_casos = DB::table('llamadas')
-						->join('casos','casos.IDCaso','=','llamadas.IDCaso')
-						->join('consejeros','llamadas.Consejera','=','consejeros.nombre')
-						->join('persona','consejeros.id_persona','=','persona.id_persona')
-						->select('casos.*','llamadas.*')
-                        ->select('casos.IDCaso','casos.Telefono','Horainicio',
-                            'LlamadaNo','casos.Nombre','FechaLlamada','nombres',
-                            'primer_apellido','segundo_apellido','casos.Edad',
-                            'casos.EstadoCivil','casos.Sexo','casos.NivelEstudios',
-                            'casos.Religion','casos.LenguaIndigena','casos.Ocupacion',
-                            'casos.VivesCon','casos.Telefono','casos.CorreoElectronico',
-                            'casos.MedioContacto','casos.ComoTeEnteraste')
-                        ->where('casos.IDCaso',$nro_caso)
-                        ->where('llamadas.LlamadaNo',$nro_llamada)
-                        ->get();
-		return $llamadas_casos;
-    }
-
 
 }
