@@ -14,7 +14,10 @@
             <input 
                 type="text" 
                 name="Telefono" 
+<<<<<<< HEAD
                 id="Telefono" 
+=======
+>>>>>>> 54441381fc792ce67d2c4dcd8fa3c3969ef0a3c1
                 value="{{ $datosGenerales['telefono'] }}" 
                 class="form-control"
                 @if($datosGenerales['telefono'] != '') disabled @endif
@@ -31,7 +34,10 @@
                 value="{{ $datosGenerales['correoElectronico'] }}"
                 @if($datosGenerales['correoElectronico'] != '') disabled @endif
                 name="CorreoElectronico"
+<<<<<<< HEAD
                 id="CorreoElectronico"
+=======
+>>>>>>> 54441381fc792ce67d2c4dcd8fa3c3969ef0a3c1
                 class="form-control"
                 placeholder="Email">
         </div>
@@ -39,7 +45,11 @@
 
     <div class="form-group col-md-3">
         <label for="MedioContacto" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Medio de contacto:</label>
+<<<<<<< HEAD
         <select @if($datosGenerales['medioContacto'] != '') disabled @endif id="MedioContacto" name="MedioContacto" class="form-control">
+=======
+        <select @if($datosGenerales['medioContacto'] != '') disabled @endif name="MedioContacto" class="form-control">
+>>>>>>> 54441381fc792ce67d2c4dcd8fa3c3969ef0a3c1
             <option @if($datosGenerales['medioContacto'] == '' || $datosGenerales['medioContacto'] == 'Teléfono') selected @endif value="telefono" >Teléfono</option>
             <option @if($datosGenerales['medioContacto'] == 'chat') selected @endif value="chat">Chat</option>
             <option @if($datosGenerales['medioContacto'] == 'correo') selected @endif value="correo">Mail</option>
