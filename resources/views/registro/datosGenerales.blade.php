@@ -119,11 +119,7 @@
 
     <div class="form-group col-md-5">
       <label for="Ocupacion">Ocupación:</label>
-<<<<<<< HEAD
       <select @if($datosGenerales['ocupacion']  != '') disabled @endif id="Ocupacion" name="Ocupacion" class="form-control" style="width: 100%;" onchange="showfield(this.options[this.selectedIndex].value)">
-=======
-      <select @if($datosGenerales['ocupacion']  != '') disabled @endif name="Ocupacion" class="form-control" style="width: 100%;" onchange="showfield(this.options[this.selectedIndex].value)">
->>>>>>> 54441381fc792ce67d2c4dcd8fa3c3969ef0a3c1
         <option @if($datosGenerales['ocupacion']  == '') selected @endif>-</option>
         <option @if($datosGenerales['ocupacion']  == 'Ama de casa') selected @endif>Ama de casa</option>
         <option @if($datosGenerales['ocupacion']  == 'Empleada') selected @endif>Empleada</option>

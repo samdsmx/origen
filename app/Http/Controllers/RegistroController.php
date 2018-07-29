@@ -49,10 +49,7 @@ class RegistroController extends BaseController {
             $datosGenerales['correoElectronico'] = $datosLlamada[0]->CorreoElectronico;
             $datosGenerales['medioContacto'] = $datosLlamada[0]->MedioContacto;
             $datosGenerales['comoTeEnteraste'] = $datosLlamada[0]->ComoTeEnteraste;
-<<<<<<< HEAD
             $datosGenerales['posibleSolucion'] = $datosLlamada[0]->PosibleSolucion;
-=======
->>>>>>> 54441381fc792ce67d2c4dcd8fa3c3969ef0a3c1
         }
 
         $menu = parent::createMenu();
