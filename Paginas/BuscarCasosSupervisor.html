@@ -17,10 +17,10 @@
 	</script>
 </HEAD>
 
-<body style="text-align: center;">
+<body>
 	<? include ("Paginas/CodigoMenu.html"); ?>
 		<br>
-		<form action="" method=GET enctype="multipart/form-data">
+		<form action="" method=GET enctype="multipart/form-data" style="text-align: -webkit-center;">
 			<input type=hidden name=Accion value=RealizarBusqueda>
 			<input type=hidden name=AccionSec value=General>
 			<input type=hidden name=Objeto value=ReporteAnual>
@@ -213,7 +213,7 @@
 						</tr>
 						<tr>
 							<td>
-								<select name="MedioContacto" class="js-example-basic-multiple" multiple style="width: 100% !important;">
+								<select name="MedioContacto[]" class="js-example-basic-multiple" multiple style="width: 100% !important;">
 									<option value=Llamada>Llamada Telef&oacute;nica</option>
 									<option value=Chat>Chat</option>
 									<option value=Mail>Mail</option>
@@ -234,7 +234,7 @@
 						</tr>
 						<tr>
 							<td>
-								<select name="Sexo" class="js-example-basic-multiple" multiple style="width: 100% !important;">
+								<select name="Sexo[]" class="js-example-basic-multiple" multiple style="width: 100% !important;">
 									<option value="F">Femenino</option>
 									<option value="M">Masculino</option>
 								</select>
@@ -277,7 +277,7 @@
 						</tr>
 						<tr>
 							<td>
-								<select name="LenguaIndigena" class="js-example-basic-multiple" multiple style="width: 100% !important;">
+								<select name="LenguaIndigena[]" class="js-example-basic-multiple" multiple style="width: 100% !important;">
 									<option value="No">No</option>
 									<option value="Si">Si</option>
 								</select>
@@ -291,9 +291,7 @@
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
 							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Por Estado Civil</font>
-								</p>
+								<font face="Arial" color="#D80808">Por Estado Civil</font>
 							</td>
 						</tr>
 						<tr>
@@ -316,10 +314,8 @@
 					<!Como te enteraste>
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
-							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Como te enteraste</font>
-								</p>
+							<td>
+								<font face="Arial" color="#D80808">Como te enteraste</font>
 							</td>
 						</tr>
 						<tr>
@@ -349,9 +345,7 @@
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
 							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Estado</font>
-								</p>
+								<font face="Arial" color="#D80808">Estado</font>
 							</td>
 						</tr>
 						<tr>
@@ -409,9 +403,7 @@
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
 							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Delegacion o Municipio</font>
-								</p>
+								<font face="Arial" color="#D80808">Delegacion o Municipio</font>
 							</td>
 						</tr>
 						<tr>
@@ -566,9 +558,7 @@
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
 							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Ocupacion</font>
-								</p>
+								<font face="Arial" color="#D80808">Ocupacion</font>
 							</td>
 						</tr>
 						<tr>
@@ -590,9 +580,7 @@
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
 							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Por Consejera</font>
-								</p>
+								<font face="Arial" color="#D80808">Por Consejera</font>
 							</td>
 						</tr>
 						<tr>
@@ -610,9 +598,7 @@
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
 							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Psicologico</font>
-								</p>
+								<font face="Arial" color="#D80808">Psicologico</font>
 							</td>
 						</tr>
 						<tr>
@@ -642,10 +628,8 @@
 					<!motivo especifico legal>
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
-							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Legal</font>
-								</p>
+							<td>
+								<font face="Arial" color="#D80808">Legal</font>
 							</td>
 						</tr>
 						<tr>
@@ -675,10 +659,8 @@
 					<!motivo especifico medico>
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
-							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Medico</font>
-								</p>
+							<td>
+								<font face="Arial" color="#D80808">Medico</font>
 							</td>
 						</tr>
 						<tr>
@@ -705,46 +687,11 @@
 				</div>
 
 				<div style="float: right; width:48%;padding:5px;">
-					<!Motivo Especifico (Otros)>
-					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-						<tr>
-							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Otros</font>
-								</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<select name="AyudaOtros[]" class="js-example-basic-multiple" multiple style="width: 100% !important;">
-									<option value="Todos">Todos</option>
-									<? 
-							include("Datos_Comunicacion.php");
-							$sql ="select * from campos where Tipo = 'AyudaOtros' ORDER BY Nombre ASC";
-							$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-							$total_found = @mysql_num_rows($total_result);
-							$i=1;
-							while ($row = mysql_fetch_array($total_result)){
-							$Nombre=$row['Nombre'];
-							$Tipo=$row['Tipo'];
-								echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre;
-							$i=$i+1;
-							}
-							?>
-								</select>
-							</td>
-						</tr>
-					</table>
-				</div>
-
-				<div style="float: left; width:48%;padding:5px;">
 					<!motivo especifico nutricional>
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
-							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Nutricional</font>
-								</p>
+							<td>
+								<font face="Arial" color="#D80808">Nutricional</font>
 							</td>
 						</tr>
 						<tr>
@@ -770,35 +717,171 @@
 					</table>
 				</div>
 
-				<div style="float: left; width:100%;padding:5px;clear: both;">
-					<!Palabra>
+				<div style="float: left; width:48%;padding:5px;">
+					<!Motivo Especifico (Otros)>
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
-							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">C.P.</font>
-								</p>
-							</td>
-							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Palabra</font>
-								</p>
+							<td>
+								<font face="Arial" color="#D80808">Otros</font>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<p>
-									<font face="Arial" color="#D80808">
-										<input type=text name=CP value="-" size=25>
-									</font>
-								</p>
+								<select name="AyudaOtros[]" class="js-example-basic-multiple" multiple style="width: 100% !important;">
+									<option value="Todos">Todos</option>
+									<? 
+								include("Datos_Comunicacion.php");
+								$sql ="select * from campos where Tipo = 'AyudaOtros' ORDER BY Nombre ASC";
+								$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+								$total_found = @mysql_num_rows($total_result);
+								$i=1;
+								while ($row = mysql_fetch_array($total_result)){
+								$Nombre=$row['Nombre'];
+								$Tipo=$row['Tipo'];
+									echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre;
+								$i=$i+1;
+								}
+								?>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<div style="float: right; width:48%;padding:5px;">
+					<!Tipo de Violencia>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td>
+								<font face="Arial" color="#D80808">Tipo de violencia</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<select name="TipoViolencia[]" class="js-example-basic-multiple" multiple style="width: 100% !important;">
+									<option value="Todos">Todos</option>
+									<? 
+								include("Datos_Comunicacion.php");
+								$sql ="select * from campos where Tipo = 'TipoViolencia' ORDER BY Nombre ASC";
+								$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+								$total_found = @mysql_num_rows($total_result);
+								$i=1;
+								while ($row = mysql_fetch_array($total_result)){
+								$Nombre=$row['Nombre'];
+								$Tipo=$row['Tipo'];
+									echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre.'</OPTION>';
+								$i=$i+1;
+								}
+								?>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<div style="float: left; width:48%;padding:5px;">
+					<!Modalidad de violencia>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td>
+								<font face="Arial" color="#D80808">Modalidad de violencia</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<select name="ModalidadViolencia[]" class="js-example-basic-multiple" multiple style="width: 100% !important;">
+									<option value="Todos">Todos</option>
+									<? 
+									include("Datos_Comunicacion.php");
+									$sql ="select * from campos where Tipo = 'ModalidadViolencia' ORDER BY Nombre ASC";
+									$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+									$total_found = @mysql_num_rows($total_result);
+									$i=1;
+									while ($row = mysql_fetch_array($total_result)){
+									$Nombre=$row['Nombre'];
+									$Tipo=$row['Tipo'];
+										echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre.'</OPTION>';
+									$i=$i+1;
+									}
+									?>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<div style="float: right; width:48%;padding:5px;">
+					<!Violentometro>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td>
+								<font face="Arial" color="#D80808">Violentometro</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<select name="Violentometro[]" class="js-example-basic-multiple" multiple style="width: 100% !important;">
+									<option value="Todos">Todos</option>
+									<? 
+									include("Datos_Comunicacion.php");
+									$sql ="select * from campos where Tipo = 'Violentometro' ORDER BY Nombre ASC";
+									$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+									$total_found = @mysql_num_rows($total_result);
+									$i=1;
+									while ($row = mysql_fetch_array($total_result)){
+									$Nombre=$row['Nombre'];
+									$Tipo=$row['Tipo'];
+										echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre.'</OPTION>';
+									$i=$i+1;
+									}
+									?>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<div style="float: left; width:48%;padding:5px;">
+					<!Nivel de violencia>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td>
+								<font face="Arial" color="#D80808">Nivel de violencia</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<select name="NivelViolencia[]" class="js-example-basic-multiple" multiple style="width: 100% !important;">
+									<option>Bajo</option>
+									<option>Medio</option>
+									<option>Alto</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<div style="float: left; width:100%;padding:5px;clear: both;">
+					<!Palabra>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td>
+								<font face="Arial" color="#D80808">C.P.</font>
 							</td>
 							<td>
-								<p>
-									<font face="Arial" color="#D80808">
-										<input type=text name=Palabra value="-" size=25>
-									</font>
-								</p>
+								<font face="Arial" color="#D80808">Palabra</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<font face="Arial" color="#D80808">
+									<input type=text name=CP value="-" size=25>
+								</font>
+							</td>
+							<td>
+								<font face="Arial" color="#D80808">
+									<input type=text name=Palabra value="-" size=25>
+								</font>
 							</td>
 						</tr>
 					</table>
