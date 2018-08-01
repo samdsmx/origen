@@ -2,8 +2,8 @@
 
 <HEAD>
 	<TITLE>Busqueda de organismos</TITLE>
-	<link href="css/cusco.css" rel="stylesheet" type="text/css" />	
-	<link href="css/select2.css" rel="stylesheet" type="text/css"/>
+	<link href="css/cusco.css" rel="stylesheet" type="text/css" />
+	<link href="css/select2.css" rel="stylesheet" type="text/css" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="js/select2.js"></script>
 	<script>
@@ -148,45 +148,37 @@
 						</tr>
 						<tr>
 							<td>
-								<p>
-									<font face="Arial" color="#D80808">
-										<p>
-											<font face="Arial" color="#D80808">
-												<select name=Mes>
-													<option value="-">-</option>
-													<option value=1>Enero</option>
-													<option value=2>Febrero</option>
-													<option value=3>Marzo</option>
-													<option value=4>Abril</option>
-													<option value=5>Mayo</option>
-													<option value=6>Junio</option>
-													<option value=7>Julio</option>
-													<option value=8>Agosto</option>
-													<option value=9>Septiembre</option>
-													<option value=10>Octubre</option>
-													<option value=11>Noviembre</option>
-													<option value=12>Diciembre</option>
-												</select>
-												a
-												<select name=Mes2>
-													<option value="-">-</option>
-													<option value=1>Enero</option>
-													<option value=2>Febrero</option>
-													<option value=3>Marzo</option>
-													<option value=4>Abril</option>
-													<option value=5>Mayo</option>
-													<option value=6>Junio</option>
-													<option value=7>Julio</option>
-													<option value=8>Agosto</option>
-													<option value=9>Septiembre</option>
-													<option value=10>Octubre</option>
-													<option value=11>Noviembre</option>
-													<option value=12>Diciembre</option>
-												</select>
-											</font>
-										</p>
-									</font>
-								</P>
+								<select name=Mes>
+									<option value="-">-</option>
+									<option value=1>Enero</option>
+									<option value=2>Febrero</option>
+									<option value=3>Marzo</option>
+									<option value=4>Abril</option>
+									<option value=5>Mayo</option>
+									<option value=6>Junio</option>
+									<option value=7>Julio</option>
+									<option value=8>Agosto</option>
+									<option value=9>Septiembre</option>
+									<option value=10>Octubre</option>
+									<option value=11>Noviembre</option>
+									<option value=12>Diciembre</option>
+								</select>
+								a
+								<select name=Mes2>
+									<option value="-">-</option>
+									<option value=1>Enero</option>
+									<option value=2>Febrero</option>
+									<option value=3>Marzo</option>
+									<option value=4>Abril</option>
+									<option value=5>Mayo</option>
+									<option value=6>Junio</option>
+									<option value=7>Julio</option>
+									<option value=8>Agosto</option>
+									<option value=9>Septiembre</option>
+									<option value=10>Octubre</option>
+									<option value=11>Noviembre</option>
+									<option value=12>Diciembre</option>
+								</select>
 							</td>
 						</tr>
 					</table>
@@ -197,23 +189,15 @@
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
 							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Por A&ntilde;o</font>
-								</p>
+								<font face="Arial" color="#D80808">Por A&ntilde;o</font>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<p>
-									<font face="Arial" color="#D80808">
-										<p>
-											<font face="Arial" color="#D80808"> Del:
-												<input type=text name=Ano value="<? echo date('Y');?>" size=5> al
-												<input type=text name=Ano2 value="<? echo date('Y');?>" size=5>
-											</font>
-										</p>
-									</font>
-								</P>
+								<font face="Arial" color="#D80808"> Del:
+									<input type=text name=Ano value="<? echo date('Y');?>" size=5> al
+									<input type=text name=Ano2 value="<? echo date('Y');?>" size=5>
+								</font>
 							</td>
 						</tr>
 					</table>
@@ -224,14 +208,12 @@
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
 							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Medio de Contacto</font>
-								</p>
+								<font face="Arial" color="#D80808">Medio de Contacto</font>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<select name="MedioContacto" class="js-example-basic-multiple" style="width: 100% !important;">
+								<select name="MedioContacto" class="js-example-basic-multiple" multiple style="width: 100% !important;">
 									<option value=Llamada>Llamada Telef&oacute;nica</option>
 									<option value=Chat>Chat</option>
 									<option value=Mail>Mail</option>
@@ -247,14 +229,12 @@
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
 							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Genero</font>
-								</p>
+								<font face="Arial" color="#D80808">Genero</font>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<select name="Sexo" class="js-example-basic-multiple" style="width: 100% !important;">
+								<select name="Sexo" class="js-example-basic-multiple" multiple style="width: 100% !important;">
 									<option value="F">Femenino</option>
 									<option value="M">Masculino</option>
 								</select>
