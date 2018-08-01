@@ -17,376 +17,372 @@
 	<link href="css/cusco.css" rel="stylesheet" type="text/css" />
 </HEAD>
 
-<body text="#5DBC00" bgcolor="#FFFFFF">
-	<center>
-		<font face="Arial">
-			<b>
-				<!--NOEDIT-->
-				<? include ("Paginas/CodigoMenu.html"); ?>
-					<!--/NOEDIT-->
-					<br>
-					<form action="" method=GET enctype="multipart/form-data">
-						<input type=hidden name=Accion value=RealizarBusqueda>
-						<input type=hidden name=AccionSec value=General>
-						<input type=hidden name=Objeto value=ReporteAnual>
-						<input type=hidden name=Pagina value=1>
-						<div style="width:630px;">
-							<!EMPIEZA MI FORMULARIO>
-							<div style="float:left; width:48%;padding:5px;">
-								<!Medio de Contacto>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Medio de Contacto</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808">
-															<select name=MedioContacto>
-																<option value="-">-
-																	<option value=Llamada>Llamada Telef&oacute;nica
-																		<option value=Chat>Chat
-																			<option value=Mail>Mail
-																				<option value=WhatsApp>WhatsApp
-															</select>
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+<body>
+	<!--NOEDIT-->
+	<? include ("Paginas/CodigoMenu.html"); ?>
+		<!--/NOEDIT-->
+		<br>
+		<form action="" method=GET enctype="multipart/form-data">
+			<input type=hidden name=Accion value=RealizarBusqueda>
+			<input type=hidden name=AccionSec value=General>
+			<input type=hidden name=Objeto value=ReporteAnual>
+			<input type=hidden name=Pagina value=1>
+			<div style="width:630px;">
+				<!EMPIEZA MI FORMULARIO>
+				<div style="float:left; width:48%;padding:5px;">
+					<!Medio de Contacto>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Medio de Contacto</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808">
+												<select name=MedioContacto>
+													<option value="-">-
+														<option value=Llamada>Llamada Telef&oacute;nica
+															<option value=Chat>Chat
+																<option value=Mail>Mail
+																	<option value=WhatsApp>WhatsApp
+												</select>
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: right; width:48%;padding:5px;">
-								<!Genero>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Genero</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808">
-															<select name=Sexo>
-																<option value="-">-
-																	<option value="F">Femenino
-																		<option value="M">Masculino
-															</select>
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+				<div style="float: right; width:48%;padding:5px;">
+					<!Genero>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Genero</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808">
+												<select name=Sexo>
+													<option value="-">-
+														<option value="F">Femenino
+															<option value="M">Masculino
+												</select>
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: left; width:48%;padding:5px;">
-								<!POR DURACION>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Por duraci&oacute;n</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808"> De:
-															<input type=text name=Duracion value="-" size=5> min. a
-															<input type=text name=Duracion2 value="-" size=5> min.
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+				<div style="float: left; width:48%;padding:5px;">
+					<!POR DURACION>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Por duraci&oacute;n</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808"> De:
+												<input type=text name=Duracion value="-" size=5> min. a
+												<input type=text name=Duracion2 value="-" size=5> min.
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: right; width:48%;padding:5px;">
-								<!POR EDAD>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Por Edad</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808"> De:
-															<input type=text name=Edad value="-" size=5> A&ntilde;os a
-															<input type=text name=Edad2 value="-" size=5> A&ntilde;os
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+				<div style="float: right; width:48%;padding:5px;">
+					<!POR EDAD>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Por Edad</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808"> De:
+												<input type=text name=Edad value="-" size=5> A&ntilde;os a
+												<input type=text name=Edad2 value="-" size=5> A&ntilde;os
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: left; width:48%;padding:5px;">
-								<!Por Horas>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Por Horas</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808"> De las:
-															<input type=text name=Horas value="-" size=5> a las
-															<input type=text name=Horas2 value="-" size=5>
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+				<div style="float: left; width:48%;padding:5px;">
+					<!Por Horas>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Por Horas</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808"> De las:
+												<input type=text name=Horas value="-" size=5> a las
+												<input type=text name=Horas2 value="-" size=5>
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: right; width:48%;padding:5px;">
-								<!Por Dias>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Por Dias</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808"> Del:
-															<input type=text name=Dias value="-" size=5> al
-															<input type=text name=Dias2 value="-" size=5>
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+				<div style="float: right; width:48%;padding:5px;">
+					<!Por Dias>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Por Dias</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808"> Del:
+												<input type=text name=Dias value="-" size=5> al
+												<input type=text name=Dias2 value="-" size=5>
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: left; width:48%;padding:5px;">
-								<!Por mes>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Por mes</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808">
-															<select name=Mes>
-																<option value="-">-</option>
-																<option value=1>Enero</option>
-																<option value=2>Febrero</option>
-																<option value=3>Marzo</option>
-																<option value=4>Abril</option>
-																<option value=5>Mayo</option>
-																<option value=6>Junio</option>
-																<option value=7>Julio</option>
-																<option value=8>Agosto</option>
-																<option value=9>Septiembre</option>
-																<option value=10>Octubre</option>
-																<option value=11>Noviembre</option>
-																<option value=12>Diciembre</option>
-															</select>
-															a
-															<select name=Mes2>
-																<option value="-">-</option>
-																<option value=1>Enero</option>
-																<option value=2>Febrero</option>
-																<option value=3>Marzo</option>
-																<option value=4>Abril</option>
-																<option value=5>Mayo</option>
-																<option value=6>Junio</option>
-																<option value=7>Julio</option>
-																<option value=8>Agosto</option>
-																<option value=9>Septiembre</option>
-																<option value=10>Octubre</option>
-																<option value=11>Noviembre</option>
-																<option value=12>Diciembre</option>
-															</select>
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+				<div style="float: left; width:48%;padding:5px;">
+					<!Por mes>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Por mes</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808">
+												<select name=Mes>
+													<option value="-">-</option>
+													<option value=1>Enero</option>
+													<option value=2>Febrero</option>
+													<option value=3>Marzo</option>
+													<option value=4>Abril</option>
+													<option value=5>Mayo</option>
+													<option value=6>Junio</option>
+													<option value=7>Julio</option>
+													<option value=8>Agosto</option>
+													<option value=9>Septiembre</option>
+													<option value=10>Octubre</option>
+													<option value=11>Noviembre</option>
+													<option value=12>Diciembre</option>
+												</select>
+												a
+												<select name=Mes2>
+													<option value="-">-</option>
+													<option value=1>Enero</option>
+													<option value=2>Febrero</option>
+													<option value=3>Marzo</option>
+													<option value=4>Abril</option>
+													<option value=5>Mayo</option>
+													<option value=6>Junio</option>
+													<option value=7>Julio</option>
+													<option value=8>Agosto</option>
+													<option value=9>Septiembre</option>
+													<option value=10>Octubre</option>
+													<option value=11>Noviembre</option>
+													<option value=12>Diciembre</option>
+												</select>
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: right; width:48%;padding:5px;">
-								<!POR AÑO>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Por A&ntilde;o</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808"> Del:
-															<input type=text name=Ano value="<? echo date('Y');?>" size=5> al
-															<input type=text name=Ano2 value="<? echo date('Y');?>" size=5>
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+				<div style="float: right; width:48%;padding:5px;">
+					<!POR AÑO>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Por A&ntilde;o</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808"> Del:
+												<input type=text name=Ano value="<? echo date('Y');?>" size=5> al
+												<input type=text name=Ano2 value="<? echo date('Y');?>" size=5>
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<!Por Nivel De Estudios>
-							<div style="float: left; width:48%;padding:5px;">
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Por Nivel de Estudios</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<select name="NivelEstudios[]" class="js-example-basic-multiple" multiple style="width: 210px;">
-												<option value="Analfabeta">Analfabeta</option>
-												<option value="Primaria">Primaria</option>
-												<option value="Secundaria">Secundaria</option>
-												<option value="Preparatoria">Preparatoria</option>
-												<option value="Carrera T&eacute;cnica">Carrera T&eacute;cnica</option>
-												<option value="Carrera Universitaria">Carrera Universitaria</option>
-												<option value="Posgrado">Posgrado</option>
-											</select>
-										</td>
-									</tr>
-								</table>
-							</div>
+				<!Por Nivel De Estudios>
+				<div style="float: left; width:48%;padding:5px;">
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Por Nivel de Estudios</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<select name="NivelEstudios[]" class="js-example-basic-multiple" multiple>
+									<option value="Analfabeta">Analfabeta</option>
+									<option value="Primaria">Primaria</option>
+									<option value="Secundaria">Secundaria</option>
+									<option value="Preparatoria">Preparatoria</option>
+									<option value="Carrera T&eacute;cnica">Carrera T&eacute;cnica</option>
+									<option value="Carrera Universitaria">Carrera Universitaria</option>
+									<option value="Posgrado">Posgrado</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: right; width:48%;padding:5px;">
-								<!Lengua Indigena>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Habla alguna lengua indigena?</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808">
-															<select name=LenguaIndigena>
-																<option value="-">-</option>
-																<option value="No">No</option>
-																<option value="Si">Si</option>
-															</select>
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+				<div style="float: right; width:48%;padding:5px;">
+					<!Lengua Indigena>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Habla alguna lengua indigena?</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808">
+												<select name=LenguaIndigena>
+													<option value="-">-</option>
+													<option value="No">No</option>
+													<option value="Si">Si</option>
+												</select>
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<!Por Estado Civil>
-							<div style="float: left; width:48%;padding:5px;clear: both;">
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Por Estado Civil</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<select multiple name="EstadoCivil[]" class="js-example-basic-multiple">
-												<option value=- selected="true">-</option>
-												<option value=Soltera>Soltera</option>
-												<option value=Divorciada>Divorciada</option>
-												<option value=Viuda>Viuda</option>
-												<option value=Casada>Casada</option>
-												<option value=Separada>Separada</option>
-												<option value=Concubinato>Concubinato</option>
-												<option value="Union Libre">Union Libre</option>
-											</select>
-										</td>
-									</tr>
-								</table>
-							</div>
+				<!Por Estado Civil>
+				<div style="float: left; width:48%;padding:5px;clear: both;">
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Por Estado Civil</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<select multiple name="EstadoCivil[]" class="js-example-basic-multiple">
+									<option value=Soltera>Soltera</option>
+									<option value=Divorciada>Divorciada</option>
+									<option value=Viuda>Viuda</option>
+									<option value=Casada>Casada</option>
+									<option value=Separada>Separada</option>
+									<option value=Concubinato>Concubinato</option>
+									<option value="Union Libre">Union Libre</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: right; width:48%;padding:5px;">
-								<!Como te enteraste>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Como te enteraste</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808">
-															<select multiple size=6 name=ComoTeEnteraste[]>
-																<option value=- selected="true">-
-																	<? 
+				<div style="float: right; width:48%;padding:5px;">
+					<!Como te enteraste>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Como te enteraste</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808">
+												<select multiple size=6 name=ComoTeEnteraste[]>
+													<option value=- selected="true">-
+														<? 
 									include("Datos_Comunicacion.php");
 									$sql ="select * from campos where Tipo = 'ComoTeEnteraste' ORDER BY Nombre ASC";
 									$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
@@ -399,329 +395,329 @@
 									$i=$i+1;
 									}
 									?>
-															</select>
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+												</select>
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: left; width:48%;padding:5px;">
-								<!Estado>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Estado</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808">
-															<select multiple size=6 name=Estado[]>
-																<option value="-" selected="true">-</option>
-																<optgroup label="Paises extranjeros" />
-																<option value="Colombia">Colombia</option>
-																<option value="Costa Rica">Costa Rica</option>
-																<option value="Guatemala">Guatemala</option>
-																<option value="Honduras">Honduras</option>
-																<option value="Panama">Panama</option>
-																<option value="Salvador">Salvador</option>
-																<optgroup label="Estados de Mexico" />
-																<option value="">-En Blanco-</option>
-																<option value="Aguascalientes">Aguascalientes</option>
-																<option value="Baja California">Baja California</option>
-																<option value="Baja California Sur">Baja California Sur</option>
-																<option value="Campeche">Campeche</option>
-																<option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
-																<option value="Colima">Colima</option>
-																<option value="Chiapas">Chiapas</option>
-																<option value="Chihuahua">Chihuahua</option>
-																<option value="Distrito Federal">Distrito Federal</option>
-																<option value="Durango">Durango</option>
-																<option value="Guanajuato">Guanajuato</option>
-																<option value="Guerrero">Guerrero</option>
-																<option value="Hidalgo">Hidalgo</option>
-																<option value="Jalisco">Jalisco</option>
-																<option value="Mexico">M&eacute;xico</option>
-																<option value="Michoacan de Ocampo">Michoac&oacute;n de Ocampo</option>
-																<option value="Morelos">Morelos</option>
-																<option value="Nayarit">Nayarit</option>
-																<option value="Nuevo Leon">Nuevo Le&oacute;n</option>
-																<option value="Oaxaca">Oaxaca</option>
-																<option value="Puebla">Puebla</option>
-																<option value="Queretaro">Queretaro</option>
-																<option value="Quintana Roo">Quintana Roo</option>
-																<option value="San Luis Potosi">San Luis Potos&iacute;</option>
-																<option value="Sinaloa">Sinaloa</option>
-																<option value="Sonora">Sonora</option>
-																<option value="Tabasco">Tabasco</option>
-																<option value="Tamaulipas">Tamaulipas</option>
-																<option value="Tlaxcala">Tlaxcala</option>
-																<option value="Veracruz de Ignacio">Veracruz</option>
-																<option value="Yucatan">Yucatan</option>
-																<option value="Zacatecas">Zacatecas</option>
-															</select>
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+				<div style="float: left; width:48%;padding:5px;">
+					<!Estado>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Estado</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808">
+												<select multiple size=6 name=Estado[]>
+													<option value="-" selected="true">-</option>
+													<optgroup label="Paises extranjeros" />
+													<option value="Colombia">Colombia</option>
+													<option value="Costa Rica">Costa Rica</option>
+													<option value="Guatemala">Guatemala</option>
+													<option value="Honduras">Honduras</option>
+													<option value="Panama">Panama</option>
+													<option value="Salvador">Salvador</option>
+													<optgroup label="Estados de Mexico" />
+													<option value="">-En Blanco-</option>
+													<option value="Aguascalientes">Aguascalientes</option>
+													<option value="Baja California">Baja California</option>
+													<option value="Baja California Sur">Baja California Sur</option>
+													<option value="Campeche">Campeche</option>
+													<option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
+													<option value="Colima">Colima</option>
+													<option value="Chiapas">Chiapas</option>
+													<option value="Chihuahua">Chihuahua</option>
+													<option value="Distrito Federal">Distrito Federal</option>
+													<option value="Durango">Durango</option>
+													<option value="Guanajuato">Guanajuato</option>
+													<option value="Guerrero">Guerrero</option>
+													<option value="Hidalgo">Hidalgo</option>
+													<option value="Jalisco">Jalisco</option>
+													<option value="Mexico">M&eacute;xico</option>
+													<option value="Michoacan de Ocampo">Michoac&oacute;n de Ocampo</option>
+													<option value="Morelos">Morelos</option>
+													<option value="Nayarit">Nayarit</option>
+													<option value="Nuevo Leon">Nuevo Le&oacute;n</option>
+													<option value="Oaxaca">Oaxaca</option>
+													<option value="Puebla">Puebla</option>
+													<option value="Queretaro">Queretaro</option>
+													<option value="Quintana Roo">Quintana Roo</option>
+													<option value="San Luis Potosi">San Luis Potos&iacute;</option>
+													<option value="Sinaloa">Sinaloa</option>
+													<option value="Sonora">Sonora</option>
+													<option value="Tabasco">Tabasco</option>
+													<option value="Tamaulipas">Tamaulipas</option>
+													<option value="Tlaxcala">Tlaxcala</option>
+													<option value="Veracruz de Ignacio">Veracruz</option>
+													<option value="Yucatan">Yucatan</option>
+													<option value="Zacatecas">Zacatecas</option>
+												</select>
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: right; width:48%;padding:5px;">
-								<!DEL o Municipio>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Delegacion o Municipio</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808">
-															<select multiple size=6 name=Municipio[]>
-																<option value="-" selected="true">-</option>
-																<option value="Alvaro Obregon">Alvaro Obregon</option>
-																<option value="Azcapotzalco">Azcapotzalco</option>
-																<option value="Benito Juarez">Benito Juarez</option>
-																<option value="Coyoacan">Coyoacan</option>
-																<option value="Cuajimalpa de Morelos">Cuajimalpa de Morelos</option>
-																<option value="Cuahutemoc">Cuahutemoc</option>
-																<option value="Gustavo A. Madero">Gustavo A. Madero</option>
-																<option value="Iztacalco">Iztacalco</option>
-																<option value="Iztapalapa">Iztapalapa</option>
-																<option value="Magdalena Contreras">Magdalena Contreras</option>
-																<option value="Miguel Hidalgo">Miguel Hidalgo</option>
-																<option value="Milpalta">Milpalta</option>
-																<option value="Tlahuac">Tlahuac</option>
-																<option value="Tlalpan">Tlalpan</option>
-																<option value="Venustiano Carranza">Venustiano Carranza</option>
-																<option value="Xochimilco">Xochimilco</option>
-																<option value="Acambay">Acambay</option>
-																<option value="Acolman">Acolman</option>
-																<option value="Aculco">Aculco</option>
-																<option value="Almoloya de Alquisiras">Almoloya de Alquisiras</option>
-																<option value="Almoloya de Juarez">Almoloya de Juarez</option>
-																<option value="Almoloya del Rio">Almoloya del Rio</option>
-																<option value="Amanalco">Amanalco</option>
-																<option value="Amatepec">Amatepec</option>
-																<option value="Amecameca">Amecameca</option>
-																<option value="Apaxco">Apaxco</option>
-																<option value="Atenco">Atenco</option>
-																<option value="Atizapan">Atizapan</option>
-																<option value="Atizapan de Zaragoza">Atizapan de Zaragoza</option>
-																<option value="Atlacomulco">Atlacomulco</option>
-																<option value="Atlautla">Atlautla</option>
-																<option value="Axapuso">Axapuso</option>
-																<option value="Ayapango">Ayapango</option>
-																<option value="Calimaya">Calimaya</option>
-																<option value="Capulhuac">Capulhuac</option>
-																<option value="Coacalco">Coacalco</option>
-																<option value="Coatepec Harinas">Coatepec Harinas</option>
-																<option value="Cocotitlan">Cocotitlan</option>
-																<option value="Coyotepec">Coyotepec</option>
-																<option value="Cuautitlan">Cuautitlan</option>
-																<option value="Cuautitlan Izcalli">Cuautitlan Izcalli</option>
-																<option value="Chalco">Chalco</option>
-																<option value="Valle de Chalco Solidaridad">Valle de Chalco Solidaridad</option>
-																<option value="Chapa de Mota">Chapa de Mota</option>
-																<option value="Chapultepec">Chapultepec</option>
-																<option value="Chiautla">Chiautla</option>
-																<option value="Chicoloapan">Chicoloapan</option>
-																<option value="Chiconcuac">Chiconcuac</option>
-																<option value="Chimalhuacan">Chimalhuacan</option>
-																<option value="Donato Guerra">Donato Guerra</option>
-																<option value="Ecatepec">Ecatepec</option>
-																<option value="Ecatzingo">Ecatzingo</option>
-																<option value="Huehuetoca">Huehuetoca</option>
-																<option value="Hueypoxtla">Hueypoxtla</option>
-																<option value="Huixquilucan">Huixquilucan</option>
-																<option value="Isidro Fabela">Isidro Fabela</option>
-																<option value="Ixtapaluca">Ixtapaluca</option>
-																<option value="Ixtapan de la Sal">Ixtapan de la Sal</option>
-																<option value="Ixtapan del Oro">Ixtapan del Oro</option>
-																<option value="Ixtlahuaca">Ixtlahuaca</option>
-																<option value="Jalatlaco">Jalatlaco</option>
-																<option value="Jaltenco">Jaltenco</option>
-																<option value="Jilotepec">Jilotepec</option>
-																<option value="Jilotzingo">Jilotzingo</option>
-																<option value="Jiquipilco">Jiquipilco</option>
-																<option value="Jocotitlan">Jocotitlan</option>
-																<option value="Joquicingo">Joquicingo</option>
-																<option value="Juchitepec">Juchitepec</option>
-																<option value="Lerma">Lerma</option>
-																<option value="Malinalco">Malinalco</option>
-																<option value="Melchor Ocampo">Melchor Ocampo</option>
-																<option value="Metepec">Metepec</option>
-																<option value="Mexicalcingo">Mexicalcingo</option>
-																<option value="Morelos">Morelos</option>
-																<option value="Naucalpan">Naucalpan</option>
-																<option value="Nezahualcoyotl">Nezahualcoyotl</option>
-																<option value="Nextlalpan">Nextlalpan</option>
-																<option value="Nicolas Romero ">Nicolas Romero</option>
-																<option value="Nopaltepec">Nopaltepec</option>
-																<option value="Ocoyacac">Ocoyacac</option>
-																<option value="Ocuilan">Ocuilan</option>
-																<option value="El Oro">El Oro</option>
-																<option value="Otumba">Otumba</option>
-																<option value="Otzoloapan">Otzoloapan</option>
-																<option value="Otzolotepec">Otzolotepec</option>
-																<option value="Ozumba">Ozumba</option>
-																<option value="Papalotla">Papalotla</option>
-																<option value="La Paz">La Paz</option>
-																<option value="Plotitlan">Plotitlan</option>
-																<option value="Rañon">Rañon</option>
-																<option value="San Antonio de las Islas ">San Antonio de las Islas</option>
-																<option value="San Felipe del Progreso ">San Felipe del Progreso</option>
-																<option value="San Martin de las Piramides">San Martin de las Piramides</option>
-																<option value="San Mateo Atenco ">San Mateo Atenco</option>
-																<option value="San Simon de Guerrero ">San Simon de Guerrero</option>
-																<option value="Santo Tomas ">Santo Tomas</option>
-																<option value="Soyaniquilpan de Ju&aacute;rez ">Soyaniquilpan de Ju&aacute;rez</option>
-																<option value="Sultepec ">Sultepec</option>
-																<option value="Tecamac">Tecamac</option>
-																<option value="Tejupilco">Tejupilco</option>
-																<option value="Temamatla">Temamatla</option>
-																<option value="Temascalapa">Temascalapa</option>
-																<option value="Temascalcingo">Temascalcingo</option>
-																<option value="Temascaltepec">Temascaltepec</option>
-																<option value="Temoaya">Temoaya</option>
-																<option value="Tenancingo">Tenancingo</option>
-																<option value="Tenango del Aire">Tenango del Aire</option>
-																<option value="Tenango del Valle ">Tenango del Valle</option>
-																<option value="Teoloyucan">Teoloyucan</option>
-																<option value="Teotihuacan">Teotihuacan</option>
-																<option value="Tepetlaoxtoc">Tepetlaoxtoc</option>
-																<option value="Tepetlixpa">Tepetlixpa</option>
-																<option value="Tepozotlan">Tepozotlan</option>
-																<option value="Tequixquiac">Tequixquiac</option>
-																<option value="Texcatitlan">Texcatitlan</option>
-																<option value="Texcalyacac">Texcalyacac</option>
-																<option value="Texcoco">Texcoco</option>
-																<option value="Tezoyuca">Tezoyuca</option>
-																<option value="Toianguistenco">Toianguistenco</option>
-																<option value="Timilpan">Timilpan</option>
-																<option value="Tlalmanalco">Tlalmanalco</option>
-																<option value="Tlalnepantla">Tlalnepantla</option>
-																<option value="Tlatalva">Tlatalva</option>
-																<option value="Toluca">Toluca</option>
-																<option value="Tonatico">Tonatico</option>
-																<option value="Tultepec">Tultepec</option>
-																<option value="Tultitlan">Tultitlan</option>
-																<option value="Valle de Bravo">Valle de Bravo</option>
-																<option value="Villa de Allende ">Villa de Allende</option>
-																<option value="Villa del Carbon ">Villa del Carbon</option>
-																<option value="Villa Guerrero">Villa Guerrero</option>
-																<option value="Villa Victoria ">Villa Victoria</option>
-																<option value="Xonacatlan">Xonacatlan</option>
-																<option value="Zacazonapan">Zacazonapan</option>
-																<option value="Xacualpan">Xacualpan</option>
-																<option value="Zinacantepec">Zinacantepec</option>
-																<option value="Zumpahuacan">Zumpahuacan</option>
-																<option value="Zumpango ">Zumpango</option>
-															</select>
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+				<div style="float: right; width:48%;padding:5px;">
+					<!DEL o Municipio>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Delegacion o Municipio</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808">
+												<select multiple size=6 name=Municipio[]>
+													<option value="-" selected="true">-</option>
+													<option value="Alvaro Obregon">Alvaro Obregon</option>
+													<option value="Azcapotzalco">Azcapotzalco</option>
+													<option value="Benito Juarez">Benito Juarez</option>
+													<option value="Coyoacan">Coyoacan</option>
+													<option value="Cuajimalpa de Morelos">Cuajimalpa de Morelos</option>
+													<option value="Cuahutemoc">Cuahutemoc</option>
+													<option value="Gustavo A. Madero">Gustavo A. Madero</option>
+													<option value="Iztacalco">Iztacalco</option>
+													<option value="Iztapalapa">Iztapalapa</option>
+													<option value="Magdalena Contreras">Magdalena Contreras</option>
+													<option value="Miguel Hidalgo">Miguel Hidalgo</option>
+													<option value="Milpalta">Milpalta</option>
+													<option value="Tlahuac">Tlahuac</option>
+													<option value="Tlalpan">Tlalpan</option>
+													<option value="Venustiano Carranza">Venustiano Carranza</option>
+													<option value="Xochimilco">Xochimilco</option>
+													<option value="Acambay">Acambay</option>
+													<option value="Acolman">Acolman</option>
+													<option value="Aculco">Aculco</option>
+													<option value="Almoloya de Alquisiras">Almoloya de Alquisiras</option>
+													<option value="Almoloya de Juarez">Almoloya de Juarez</option>
+													<option value="Almoloya del Rio">Almoloya del Rio</option>
+													<option value="Amanalco">Amanalco</option>
+													<option value="Amatepec">Amatepec</option>
+													<option value="Amecameca">Amecameca</option>
+													<option value="Apaxco">Apaxco</option>
+													<option value="Atenco">Atenco</option>
+													<option value="Atizapan">Atizapan</option>
+													<option value="Atizapan de Zaragoza">Atizapan de Zaragoza</option>
+													<option value="Atlacomulco">Atlacomulco</option>
+													<option value="Atlautla">Atlautla</option>
+													<option value="Axapuso">Axapuso</option>
+													<option value="Ayapango">Ayapango</option>
+													<option value="Calimaya">Calimaya</option>
+													<option value="Capulhuac">Capulhuac</option>
+													<option value="Coacalco">Coacalco</option>
+													<option value="Coatepec Harinas">Coatepec Harinas</option>
+													<option value="Cocotitlan">Cocotitlan</option>
+													<option value="Coyotepec">Coyotepec</option>
+													<option value="Cuautitlan">Cuautitlan</option>
+													<option value="Cuautitlan Izcalli">Cuautitlan Izcalli</option>
+													<option value="Chalco">Chalco</option>
+													<option value="Valle de Chalco Solidaridad">Valle de Chalco Solidaridad</option>
+													<option value="Chapa de Mota">Chapa de Mota</option>
+													<option value="Chapultepec">Chapultepec</option>
+													<option value="Chiautla">Chiautla</option>
+													<option value="Chicoloapan">Chicoloapan</option>
+													<option value="Chiconcuac">Chiconcuac</option>
+													<option value="Chimalhuacan">Chimalhuacan</option>
+													<option value="Donato Guerra">Donato Guerra</option>
+													<option value="Ecatepec">Ecatepec</option>
+													<option value="Ecatzingo">Ecatzingo</option>
+													<option value="Huehuetoca">Huehuetoca</option>
+													<option value="Hueypoxtla">Hueypoxtla</option>
+													<option value="Huixquilucan">Huixquilucan</option>
+													<option value="Isidro Fabela">Isidro Fabela</option>
+													<option value="Ixtapaluca">Ixtapaluca</option>
+													<option value="Ixtapan de la Sal">Ixtapan de la Sal</option>
+													<option value="Ixtapan del Oro">Ixtapan del Oro</option>
+													<option value="Ixtlahuaca">Ixtlahuaca</option>
+													<option value="Jalatlaco">Jalatlaco</option>
+													<option value="Jaltenco">Jaltenco</option>
+													<option value="Jilotepec">Jilotepec</option>
+													<option value="Jilotzingo">Jilotzingo</option>
+													<option value="Jiquipilco">Jiquipilco</option>
+													<option value="Jocotitlan">Jocotitlan</option>
+													<option value="Joquicingo">Joquicingo</option>
+													<option value="Juchitepec">Juchitepec</option>
+													<option value="Lerma">Lerma</option>
+													<option value="Malinalco">Malinalco</option>
+													<option value="Melchor Ocampo">Melchor Ocampo</option>
+													<option value="Metepec">Metepec</option>
+													<option value="Mexicalcingo">Mexicalcingo</option>
+													<option value="Morelos">Morelos</option>
+													<option value="Naucalpan">Naucalpan</option>
+													<option value="Nezahualcoyotl">Nezahualcoyotl</option>
+													<option value="Nextlalpan">Nextlalpan</option>
+													<option value="Nicolas Romero ">Nicolas Romero</option>
+													<option value="Nopaltepec">Nopaltepec</option>
+													<option value="Ocoyacac">Ocoyacac</option>
+													<option value="Ocuilan">Ocuilan</option>
+													<option value="El Oro">El Oro</option>
+													<option value="Otumba">Otumba</option>
+													<option value="Otzoloapan">Otzoloapan</option>
+													<option value="Otzolotepec">Otzolotepec</option>
+													<option value="Ozumba">Ozumba</option>
+													<option value="Papalotla">Papalotla</option>
+													<option value="La Paz">La Paz</option>
+													<option value="Plotitlan">Plotitlan</option>
+													<option value="Rañon">Rañon</option>
+													<option value="San Antonio de las Islas ">San Antonio de las Islas</option>
+													<option value="San Felipe del Progreso ">San Felipe del Progreso</option>
+													<option value="San Martin de las Piramides">San Martin de las Piramides</option>
+													<option value="San Mateo Atenco ">San Mateo Atenco</option>
+													<option value="San Simon de Guerrero ">San Simon de Guerrero</option>
+													<option value="Santo Tomas ">Santo Tomas</option>
+													<option value="Soyaniquilpan de Ju&aacute;rez ">Soyaniquilpan de Ju&aacute;rez</option>
+													<option value="Sultepec ">Sultepec</option>
+													<option value="Tecamac">Tecamac</option>
+													<option value="Tejupilco">Tejupilco</option>
+													<option value="Temamatla">Temamatla</option>
+													<option value="Temascalapa">Temascalapa</option>
+													<option value="Temascalcingo">Temascalcingo</option>
+													<option value="Temascaltepec">Temascaltepec</option>
+													<option value="Temoaya">Temoaya</option>
+													<option value="Tenancingo">Tenancingo</option>
+													<option value="Tenango del Aire">Tenango del Aire</option>
+													<option value="Tenango del Valle ">Tenango del Valle</option>
+													<option value="Teoloyucan">Teoloyucan</option>
+													<option value="Teotihuacan">Teotihuacan</option>
+													<option value="Tepetlaoxtoc">Tepetlaoxtoc</option>
+													<option value="Tepetlixpa">Tepetlixpa</option>
+													<option value="Tepozotlan">Tepozotlan</option>
+													<option value="Tequixquiac">Tequixquiac</option>
+													<option value="Texcatitlan">Texcatitlan</option>
+													<option value="Texcalyacac">Texcalyacac</option>
+													<option value="Texcoco">Texcoco</option>
+													<option value="Tezoyuca">Tezoyuca</option>
+													<option value="Toianguistenco">Toianguistenco</option>
+													<option value="Timilpan">Timilpan</option>
+													<option value="Tlalmanalco">Tlalmanalco</option>
+													<option value="Tlalnepantla">Tlalnepantla</option>
+													<option value="Tlatalva">Tlatalva</option>
+													<option value="Toluca">Toluca</option>
+													<option value="Tonatico">Tonatico</option>
+													<option value="Tultepec">Tultepec</option>
+													<option value="Tultitlan">Tultitlan</option>
+													<option value="Valle de Bravo">Valle de Bravo</option>
+													<option value="Villa de Allende ">Villa de Allende</option>
+													<option value="Villa del Carbon ">Villa del Carbon</option>
+													<option value="Villa Guerrero">Villa Guerrero</option>
+													<option value="Villa Victoria ">Villa Victoria</option>
+													<option value="Xonacatlan">Xonacatlan</option>
+													<option value="Zacazonapan">Zacazonapan</option>
+													<option value="Xacualpan">Xacualpan</option>
+													<option value="Zinacantepec">Zinacantepec</option>
+													<option value="Zumpahuacan">Zumpahuacan</option>
+													<option value="Zumpango ">Zumpango</option>
+												</select>
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: left; width:48%;padding:5px;">
-								<!Ocupacion>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Ocupacion</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808">
-															<select multiple size=6 name=Ocupacion[]>
-																<option value="-" selected="true">-</option>
-																<option value="Ama de casa">Ama de casa</option>
-																<option value=Empleada>Empleada</option>
-																<option value="Negocio propio">Negocio propio</option>
-																<option value=Estudiante>Estudiante</option>
-																<option value=Desempleada>Desempleada</option>
-															</select>
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+				<div style="float: left; width:48%;padding:5px;">
+					<!Ocupacion>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Ocupacion</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808">
+												<select multiple size=6 name=Ocupacion[]>
+													<option value="-" selected="true">-</option>
+													<option value="Ama de casa">Ama de casa</option>
+													<option value=Empleada>Empleada</option>
+													<option value="Negocio propio">Negocio propio</option>
+													<option value=Estudiante>Estudiante</option>
+													<option value=Desempleada>Desempleada</option>
+												</select>
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: right; width:48%;padding:5px;">
-								<!Por Consejera>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Por Consejera</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<select multiple size=6 name=Consejera[]>
-														<option value=- selected="true">-
-															<? echo ListaConsejeras();?>
-													</select>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+				<div style="float: right; width:48%;padding:5px;">
+					<!Por Consejera>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Por Consejera</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<select multiple size=6 name=Consejera[]>
+											<option value=- selected="true">-
+												<? echo ListaConsejeras();?>
+										</select>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: left; width:48%;padding:5px;">
-								<!motivo Especifico (PSICOLOGICO)>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Psicologico</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808">
-															<select multiple size=6 name=AyudaPsicologico[]>
-																<option value="-" selected="true">-
-																	<option value="Todos">Todos
-																		<? 
+				<div style="float: left; width:48%;padding:5px;">
+					<!motivo Especifico (PSICOLOGICO)>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Psicologico</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808">
+												<select multiple size=6 name=AyudaPsicologico[]>
+													<option value="-" selected="true">-
+														<option value="Todos">Todos
+															<? 
 									include("Datos_Comunicacion.php");
 									$sql ="select * from campos where Tipo = 'AyudaPsicologico' ORDER BY Nombre ASC";
 									$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
@@ -734,36 +730,36 @@
 									$i=$i+1;
 									}
 									?>
-															</select>
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+												</select>
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: right; width:48%;padding:5px;">
-								<!motivo especifico legal>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Legal</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808">
-															<select multiple size=6 name=AyudaLegal[]>
-																<option value="-" selected="true">-
-																	<option value="Todos">Todos
-																		<? 
+				<div style="float: right; width:48%;padding:5px;">
+					<!motivo especifico legal>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Legal</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808">
+												<select multiple size=6 name=AyudaLegal[]>
+													<option value="-" selected="true">-
+														<option value="Todos">Todos
+															<? 
 								include("Datos_Comunicacion.php");
 								$sql ="select * from campos where Tipo = 'AyudaLegal' ORDER BY Nombre ASC";
 								$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
@@ -776,36 +772,36 @@
 								$i=$i+1;
 								}
 								?>
-															</select>
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+												</select>
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: left; width:48%;padding:5px;">
-								<!motivo especifico medico>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Medico</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808">
-															<select multiple size=6 style="width: 100%" name=AyudaMedica[]>
-																<option value="-" selected="true">-
-																	<option value="Todos">Todos
-																		<? 
+				<div style="float: left; width:48%;padding:5px;">
+					<!motivo especifico medico>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Medico</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808">
+												<select multiple size=6 style="width: 100%" name=AyudaMedica[]>
+													<option value="-" selected="true">-
+														<option value="Todos">Todos
+															<? 
 									include("Datos_Comunicacion.php");
 									$sql ="select * from campos where Tipo = 'AyudaMedica' ORDER BY Nombre ASC";
 									$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
@@ -818,34 +814,34 @@
 									$i=$i+1;
 									}
 									?>
-															</select>
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+												</select>
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: right; width:48%;padding:5px;">
-								<!Motivo Especifico (Otros)>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Otros</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<select multiple size=6 name=AyudaOtros[]>
-														<option value="-" selected="true">-
-															<option value="Todos">Todos
-																<? 
+				<div style="float: right; width:48%;padding:5px;">
+					<!Motivo Especifico (Otros)>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Otros</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<select multiple size=6 name=AyudaOtros[]>
+											<option value="-" selected="true">-
+												<option value="Todos">Todos
+													<? 
 							include("Datos_Comunicacion.php");
 							$sql ="select * from campos where Tipo = 'AyudaOtros' ORDER BY Nombre ASC";
 							$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
@@ -858,34 +854,34 @@
 							$i=$i+1;
 							}
 							?>
-													</select>
-												</font>
-											</p>
-										</td>
-									</tr>
-								</table>
-							</div>
+										</select>
+									</font>
+								</p>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: left; width:48%;padding:5px;">
-								<!motivo especifico nutricional>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Nutricional</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<p>
-														<font face="Arial" color="#D80808">
-															<select multiple size=6 name=AyudaNutricional[]>
-																<option value="-" selected="true">-
-																	<option value="Todos">Todos
-																		<? 
+				<div style="float: left; width:48%;padding:5px;">
+					<!motivo especifico nutricional>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Nutricional</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<p>
+											<font face="Arial" color="#D80808">
+												<select multiple size=6 name=AyudaNutricional[]>
+													<option value="-" selected="true">-
+														<option value="Todos">Todos
+															<? 
 									include("Datos_Comunicacion.php");
 									$sql ="select * from campos where Tipo = 'AyudaNutricional' ORDER BY Nombre ASC";
 									$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
@@ -898,71 +894,68 @@
 									$i=$i+1;
 									}
 									?>
-															</select>
-														</font>
-													</p>
-												</font>
-											</P>
-										</td>
-									</tr>
-								</table>
-							</div>
+												</select>
+											</font>
+										</p>
+									</font>
+								</P>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: left; width:100%;padding:5px;clear: both;">
-								<!Palabra>
-								<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-									<tr>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">C.P.</font>
-											</p>
-										</td>
-										<td bgcolor="#FFFFFF">
-											<p>
-												<font face="Arial" color="#D80808">Palabra</font>
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<input type=text name=CP value="-" size=25>
-												</font>
-											</p>
-										</td>
-										<td>
-											<p>
-												<font face="Arial" color="#D80808">
-													<input type=text name=Palabra value="-" size=25>
-												</font>
-											</p>
-										</td>
-									</tr>
-								</table>
-							</div>
+				<div style="float: left; width:100%;padding:5px;clear: both;">
+					<!Palabra>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">C.P.</font>
+								</p>
+							</td>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Palabra</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<input type=text name=CP value="-" size=25>
+									</font>
+								</p>
+							</td>
+							<td>
+								<p>
+									<font face="Arial" color="#D80808">
+										<input type=text name=Palabra value="-" size=25>
+									</font>
+								</p>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-							<div style="float: left; width:48%;padding:5px;">
-								<input type=submit name=submit value=Reporte>
-							</div>
+				<div style="float: left; width:48%;padding:5px;">
+					<input type=submit name=submit value=Reporte>
+				</div>
 
-							<div style="float: right; width:48%;padding:5px;">
-								<input type=submit name=submit value=Buscar>
-								<font face="Arial" color="#000000">
-									<b> Correlacionar:
-										<select name=Correlacion>
-											<option value="IDCaso">IDCaso
-												<option value="Nombre">Nombre
-													<option value="Telefono">Telefono
-										</select>
-									</b>
-								</font>
-							</div>
-						</div>
-					</form>
-			</b>
-		</font>
-	</CENTER>
+				<div style="float: right; width:48%;padding:5px;">
+					<input type=submit name=submit value=Buscar>
+					<font face="Arial" color="#000000">
+						<b> Correlacionar:
+							<select name=Correlacion>
+								<option value="IDCaso">IDCaso
+									<option value="Nombre">Nombre
+										<option value="Telefono">Telefono
+							</select>
+						</b>
+					</font>
+				</div>
+			</div>
+		</form>
 </body>
 
 </html>
