@@ -262,6 +262,7 @@ Registro
 
     $('#registrollamada').submit(function(e) {
         e.preventDefault();
+        cambiarStatusRegistro(false);
         var data = $(this).serialize()+'&duracion='+$('#timer_div').text();
         guardarFormulario(data, 'Registro/registrarllamada');
     });

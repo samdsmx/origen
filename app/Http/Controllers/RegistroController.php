@@ -31,6 +31,7 @@ class RegistroController extends BaseController {
             $datosGenerales['correoElectronico'] = '';
             $datosGenerales['medioContacto'] = '';
             $datosGenerales['comoTeEnteraste'] = '';
+            $datosGenerales['posibleSolucion'] = '';
         }else{
             $datosGenerales['nombre'] = $datosLlamada[0]->Nombre;
             $datosGenerales['edad'] = $datosLlamada[0]->Edad;
@@ -45,6 +46,7 @@ class RegistroController extends BaseController {
             $datosGenerales['correoElectronico'] = $datosLlamada[0]->CorreoElectronico;
             $datosGenerales['medioContacto'] = $datosLlamada[0]->MedioContacto;
             $datosGenerales['comoTeEnteraste'] = $datosLlamada[0]->ComoTeEnteraste;
+            $datosGenerales['posibleSolucion'] = $datosLlamada[0]->PosibleSolucion;
         }
 
         $menu = parent::createMenu();
@@ -155,15 +157,29 @@ class RegistroController extends BaseController {
         }
         $duracion = ceil( explode(" ", $datos['duracion'])[0]/60 );
 
-        $caso = new casosModel();
-        $datos['Estatus'] = '1';
-        $datos['HorasInvertidas'] = $duracion;
-        $caso->fill($datos);
-        $caso->save();
+        $numeroCaso = $datos['idCaso'];
+        $numeroLlamada = 1;
+
+        if($numeroCaso == 0){
+            $caso = new casosModel();
+            $datos['Estatus'] = '1';
+            $datos['HorasInvertidas'] = $duracion;
+            $caso->fill($datos);
+            $caso->save();
+            $numeroCaso = $caso->IDCaso;
+        } else {
+            $ultimaLlamada = DB::table('llamadas')
+                            ->select('LlamadaNo')
+                            ->where('IDCaso',$numeroCaso)
+                            ->orderBy('LlamadaNo','desc')
+                            ->take(1)
+                            ->get();
+            $numeroLlamada = ($ultimaLlamada[0]->LlamadaNo) + 1;
+        }
 
         $llamada = new llamadasModel();
-        $llamada->IDCaso = $caso->IDCaso;
-        $llamada->LlamadaNo = 1;
+        $llamada->IDCaso = $numeroCaso;
+        $llamada->LlamadaNo = $numeroLlamada;
         $llamada->FechaLlamada = preg_replace('#(\d{2})/(\d{2})/(\d{4})#', '$3-$2-$1', $datos['fechaActual']);
         $llamada->Consejera = Auth::user()->nombre;
         $llamada->Horatermino = date("G:i:s");
@@ -172,7 +188,7 @@ class RegistroController extends BaseController {
         $llamada->fill($datos);
         $llamada->save();
 
-        Session::flash('mensaje', 'Se ha registrado la llamada correctamente. Caso #'.$caso->IDCaso);
+        Session::flash('mensaje', 'Se ha registrado la llamada correctamente. Caso #'.$numeroCaso);
     }
 
      public function obtenerLlamadas($nro_caso,$nro_llamada){
@@ -193,12 +209,12 @@ class RegistroController extends BaseController {
                             'casos.EstadoCivil','casos.Sexo','casos.NivelEstudios',
                             'casos.Religion','casos.LenguaIndigena','casos.Ocupacion',
                             'casos.VivesCon','casos.Telefono','casos.CorreoElectronico',
-                            'casos.MedioContacto','casos.ComoTeEnteraste')
+                            'casos.MedioContacto','casos.ComoTeEnteraste', 
+                            'casos.PosibleSolucion')
                         ->where('casos.IDCaso',$nro_caso)
                         ->where('llamadas.LlamadaNo',$nro_llamada)
                         ->get();
 		return $llamadas_casos;
     }
-
 
 }
