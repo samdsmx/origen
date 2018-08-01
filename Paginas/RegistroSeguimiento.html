@@ -11,7 +11,7 @@
 	$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$row = mysql_fetch_array($result);
 	$TipoCaso=$row['TipoCaso'];
-  $NivelViolencia=$row['NivelViolencia'];
+    $NivelViolencia=$row['NivelViolencia'];
 	$PosibleSolucion=$row['PosibleSolucion'];
 	$Estatus=$row['Estatus'];
       $sql ="SELECT SUM(duracion) FROM llamadas WHERE IDCaso='".rs($IDCaso)."'";

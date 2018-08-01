@@ -35,7 +35,8 @@ if ($Sesion){
 		$AyudaOtros=$row['AyudaOtros'];
 		$TipoViolencia=$row['TipoViolencia'];
 		$ModalidadViolencia=$row['ModalidadViolencia'];
-		$NivelViolencia=$row['NivelViolencia'];	
+		$NivelViolencia=$row['NivelViolencia'];
+		$Nacionalidad=$row['Nacionalidad'];		
 		$Violentometro=$row['Violentometro'];		
 		$DesarrolloCaso=$row['DesarrolloCaso'];
 		$ComoTeEnteraste=$row['ComoTeEnteraste'];
