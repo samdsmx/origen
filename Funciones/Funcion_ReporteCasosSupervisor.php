@@ -107,9 +107,9 @@ if ($Sesion){
 		mysql_close($connection);
 		}
 
-	function Muestra($Tipo,$Clausula,$Order="Cantidad DESC",$Other=""){ 
+	function Muestra($Tipo,$Clausula="",$Order="Cantidad DESC",$Other=""){ 
 		include("Datos_Comunicacion.php");
-		$sql ="SELECT $Tipo, COUNT(*) 'Cantidad' FROM Reporte WHERE $Clausula /*$Tipo <> ''*/ 1=1 GROUP BY $Tipo ORDER BY $Order $Other";
+		$sql ="SELECT $Tipo, COUNT(*) 'Cantidad' FROM Reporte WHERE $Clausula 1=1 GROUP BY $Tipo ORDER BY $Order $Other";
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$Seguimientos="";
 		$i=0;
@@ -137,259 +137,52 @@ if ($Sesion){
 		mysql_close($connection);
 		}
 
-		$criterio="";
-		$CadBusqueda2="";
-		$CadBusqueda="";
-		if ($Ano <> "-"){
-			$CadBusqueda2 .="AND Year(l.FechaLlamada)>='$Ano' AND Year(l.FechaLlamada)<='$Ano2' ";
-			$criterio.="A&ntilde;o	>= $Ano y A&ntilde;o <= $Ano2<BR>";
-			}
-		if ($Mes <> "-"){
-			$CadBusqueda2 .="AND Month(l.FechaLlamada)>='$Mes' AND Month(l.FechaLlamada)<='$Mes2' ";
-			$criterio.="Mes	>= $Mes y Mes<= $Mes2<BR>";			
-			}
-		if ($Dias <> "-"){
-			$CadBusqueda2 .="AND DayOfMonth(l.FechaLlamada)>='$Dias' AND DayOfMonth(l.FechaLlamada)<='$Dias2' ";
-			$criterio.="Dia	>= $Dias y Dia <= $Dias2<BR>";			
-			}
-		if ($Horas <> "-"){
-			$CadBusqueda2 .="AND Hour(l.HoraInicio)>='$Horas' AND Hour(l.HoraTermino)<='$Horas2' ";
-			$criterio.="Hora >= $Horas y Hora<= $Horas2<BR>";			
-			}
-		if ($Duracion <> "-"){
-			$CadBusqueda .= "AND ((time_to_sec(l.Horatermino)-time_to_sec(l.Horainicio))/60)>='$Duracion' AND ((time_to_sec(l.Horatermino)-time_to_sec(l.Horainicio))/60)<='$Duracion2' ";
-			$criterio.="Duracion >= $Duracion y Duracion<= $Duracion2<BR>";			
-			}
-		if ($Edad <> "-"){
-			$CadBusqueda .="AND c.Edad >= \"$Edad\" AND c.Edad <= \"$Edad2\" ";
-			$criterio.="Edad >= $Edad y Edad<= $Edad2<BR>";			
-			}
-		/*if (count($Consejera)>0 && $Consejera[0] <> "-"){
-			$CadBusqueda .="AND (";
-			$criterio.="Consejera = ";
-			for ($i=0;$i<count($Consejera);$i++){
-				$CadBusqueda .="l.Consejera = \"$Consejera[$i]\" ";
-				$criterio.="$Consejera[$i] ";
-				if ($i<count($Consejera)-1){
-					$CadBusqueda .="OR ";
-					$criterio.="o ";
-					}
-				}
-			$CadBusqueda .=") ";
-			$criterio.="<br>";
-		}*/
-		preparaQuery($Consejera, "Consejera", &$CadBusqueda, &$criterio, false);
-		/*if (count($ComoTeEnteraste)>0 && $ComoTeEnteraste[0] <> "-"){
-			$CadBusqueda .="AND (";
-			$criterio.="ComoTeEnteraste = ";
-			for ($i=0;$i<count($ComoTeEnteraste);$i++){
-				$CadBusqueda .="c.ComoTeEnteraste LIKE \"%$ComoTeEnteraste[$i]%\" ";
-				$criterio.="$ComoTeEnteraste[$i] ";
-				if ($i<count($ComoTeEnteraste)-1){
-					$CadBusqueda .="OR ";
-					$criterio.="o ";
-					}
-				}
-			$CadBusqueda .=") ";
-			$criterio.="<br>";
-		} */ 
-		preparaQuery($ComoTeEnteraste, "ComoTeEnteraste", &$CadBusqueda, &$criterio, true, "c");
-		/*if ($Sexo <> "-"){
-			$CadBusqueda .="AND c.Sexo = \"$Sexo\" ";
-			$criterio.="Genero = $Sexo<BR>";					
-		}*/
-		preparaQuery($Sexo, "Sexo", &$CadBusqueda, &$criterio, false, "c");			
-		/*if ($LenguaIndigena <> "-"){
-			$CadBusqueda .="AND c.LenguaIndigena = \"$LenguaIndigena\" ";
-			$criterio.="LenguaIndigena = $LenguaIndigena<BR>";					
-		}*/
-		preparaQuery($LenguaIndigena, "LenguaIndigena", &$CadBusqueda, &$criterio, false, "c");			
-		/*if ($MedioContacto <> "-"){
-			$CadBusqueda .="AND c.MedioContacto like \"%$MedioContacto%\" ";
-			$criterio.="MedioContacto = $MedioContacto<BR>";					
-		}*/
-		preparaQuery($MedioContacto, "MedioContacto", &$CadBusqueda, &$criterio, false, "c");			
-		/*if (count($Ocupacion)>0 && $Ocupacion[0] <> "-"){
-			$CadBusqueda .="AND (";
-			$criterio.="Ocupacion = ";			
-			for ($i=0;$i<count($Ocupacion);$i++){
-				$CadBusqueda .="c.Ocupacion = '$Ocupacion[$i]' ";
-				$criterio.="$Ocupacion[$i] ";
-				if ($i<count($Ocupacion)-1){
-					$CadBusqueda .="OR ";
-					$criterio.="o ";
-					}
-				}
-			$CadBusqueda .=") ";
-			$criterio.="<br>";
-		}  	*/		
-		preparaQuery($Ocupacion, "Ocupacion", &$CadBusqueda, &$criterio, false, "c");
-		/*if (count($Municipio)>0 && $Municipio[0] <> "-"){
-			$CadBusqueda .="AND (";
-			$criterio.="Municipio = ";			
-			for ($i=0;$i<count($Municipio);$i++){
-				$CadBusqueda .="c.Municipio = '$Municipio[$i]' ";
-				$criterio.="$Municipio[$i] ";				
-				if ($i<count($Municipio)-1){
-					$CadBusqueda .="OR ";
-					$criterio.="o ";
-					}
-				}
-			$CadBusqueda .=") ";
-			$criterio.="<br>";
-		}  	*/					
-		preparaQuery($Municipio, "Municipio", &$CadBusqueda, &$criterio, false, "c");				
-		/*if (count($Estado)>0 && $Estado[0] <> "-"){
-			$CadBusqueda .="AND (";
-			$criterio.="Estado = ";				
-			for ($i=0;$i<count($Estado);$i++){
-				$CadBusqueda .="c.Estado = '$Estado[$i]' ";
-				$criterio.="$Estado[$i] ";					
-				if ($i<count($Estado)-1){
-					$CadBusqueda .="OR ";
-					$criterio.="o ";
-					}
-				}
-			$CadBusqueda .=") ";
-			$criterio.="<br>";
-		}*/
-		preparaQuery($Estado, "Estado", &$CadBusqueda, &$criterio, false, "c");				
-		/* if (count($EstadoCivil)>0 && $EstadoCivil[0] <> "-"){
-			$CadBusqueda .="AND (";
-			$criterio.="EstadoCivil = ";					
-			for ($i=0;$i<count($EstadoCivil);$i++){
-				$CadBusqueda .="c.EstadoCivil LIKE \"%$EstadoCivil[$i]%\" ";
-				$criterio.="$EstadoCivil[$i] ";
-				if ($i<count($EstadoCivil)-1){
-					$CadBusqueda .="OR ";
-					$criterio.="o ";
-					}
-				}
-			$CadBusqueda .=") ";
-			$criterio.="<br>";
-		}*/
-		preparaQuery($EstadoCivil, "EstadoCivil", &$CadBusqueda, &$criterio, false, "c");
-		/* if (count($NivelEstudios)>0 && $NivelEstudios[0] <> "-"){
-			$CadBusqueda .="AND (";
-			$criterio.="NivelEstudios = ";					
-			for ($i=0;$i<count($NivelEstudios);$i++){
-				$CadBusqueda .="c.NivelEstudios LIKE \"%$NivelEstudios[$i]%\" ";
-				$criterio.="$NivelEstudios[$i] ";
-				if ($i<count($NivelEstudios)-1){
-					$CadBusqueda .="OR ";
-					$criterio.="o ";
-					}
-				}
-			$CadBusqueda .=") ";
-			$criterio.="<br>";
-		} */
-		preparaQuery($NivelEstudios, "NivelEstudios", &$CadBusqueda, &$criterio, false, "c");			
-		/* if (count($AyudaPsicologico)>0 && $AyudaPsicologico[0] <> "-"){
-			if ($AyudaPsicologico[0] <> "Todos"){
-				$CadBusqueda .="AND (";
-				$criterio.="AyudaPsicologico = ";				
-				for ($i=0;$i<count($AyudaPsicologico);$i++){
-					$CadBusqueda .="l.AyudaPsicologico LIKE \"%$AyudaPsicologico[$i]%\" ";
-					$criterio.="$AyudaPsicologico[$i] ";					
-					if ($i<count($AyudaPsicologico)-1){
-						$CadBusqueda .="OR ";
-						$criterio.="o ";
-						}
-					}
-				$CadBusqueda .=") ";
-				$criterio.="<br>";
-				}
-				else{
-					$CadBusqueda .="AND l.AyudaPsicologico <> \"\" ";
-					$criterio.="AyudaPsicologico = Todos";
-					}
-		} */
-		preparaQuery($AyudaPsicologico, "AyudaPsicologico", &$CadBusqueda, &$criterio);								
-		/* if (count($AyudaLegal)>0 && $AyudaLegal[0] <> "-"){
-			if ($AyudaLegal[0] <> "Todos"){
-				$CadBusqueda .="AND (";
-				$criterio.="AyudaLegal = ";							
-				for ($i=0;$i<count($AyudaLegal);$i++){
-					$CadBusqueda .="l.AyudaLegal LIKE \"%$AyudaLegal[$i]%\" ";
-					$criterio.="$AyudaLegal[$i] ";					
-					if ($i<count($AyudaLegal)-1){
-						$CadBusqueda .="OR ";
-						$criterio.="o ";
-						}
-					}
-				$CadBusqueda .=") ";
-				$criterio.="<br>";
-				}
-				else{
-					$CadBusqueda .="AND l.AyudaLegal <> \"\" ";
-					$criterio.="AyudaLegal = Todos";
-					}
-		} */
-		preparaQuery($AyudaLegal, "AyudaLegal", &$CadBusqueda, &$criterio);					
-		/* if (count($AyudaMedica)>0 && $AyudaMedica[0] <> "-"){
-			if ($AyudaMedica[0] <> "Todos"){
-				$CadBusqueda .="AND (";
-				$criterio.="AyudaMedica = ";					
-				for ($i=0;$i<count($AyudaMedica);$i++){
-					$CadBusqueda .="l.AyudaMedica LIKE \"%$AyudaMedica[$i]%\" ";
-					$criterio.="$AyudaMedica[$i] ";						
-					if ($i<count($AyudaMedica)-1){
-						$CadBusqueda .="OR ";
-						$criterio.="o ";
-						}
-					}
-				$CadBusqueda .=") ";
-				$criterio.="<br>";
-				}
-				else{
-					$CadBusqueda .="AND l.AyudaMedica <> \"\" ";
-					$criterio.="AyudaMedica = Todos";
-					}
-		} */
-		preparaQuery($AyudaMedica, "AyudaMedica", &$CadBusqueda, &$criterio);
-		/* if (count($AyudaNutricional)>0 && $AyudaNutricional[0] <> "-"){
-			if ($AyudaNutricional[0] <> "Todos"){
-				$CadBusqueda .="AND (";
-				$criterio.="AyudaNutricional = ";					
-				for ($i=0;$i<count($AyudaNutricional);$i++){
-					$CadBusqueda .="l.AyudaNutricional LIKE \"%$AyudaNutricional[$i]%\" ";
-					$criterio.="$AyudaNutricional[$i] ";						
-					if ($i<count($AyudaNutricional)-1){
-						$CadBusqueda .="OR ";
-						$criterio.="o ";
-						}
-					}
-				$CadBusqueda .=") ";
-				$criterio.="<br>";
-				}
-				else{
-					$CadBusqueda .="AND l.AyudaNutricional <> \"\" ";
-					$criterio.="AyudaNutricional = Todos";
-					}
-		} */
-		preparaQuery($AyudaNutricional, "AyudaNutricional", &$CadBusqueda, &$criterio);
-		/*if (count($AyudaOtros)>0 && $AyudaOtros[0] <> "-"){
-			if ($AyudaOtros[0] <> "Todos"){
-				$CadBusqueda .="AND (";
-				$criterio.="AyudaOtros = ";				
-				for ($i=0;$i<count($AyudaOtros);$i++){
-					$CadBusqueda .="l.AyudaOtros LIKE \"%$AyudaOtros[$i]%\" ";
-					$criterio.="$AyudaOtros[$i] ";						
-					if ($i<count($AyudaOtros)-1){
-						$CadBusqueda .="OR ";
-						$criterio.="o ";
-						}
-					}
-				$CadBusqueda .=") ";
-				$criterio.="<br>";
-				}
-				else{
-					$CadBusqueda .="AND l.AyudaOtros <> \"\" ";
-					$criterio.="AyudaOtros = Todos";
-					}
-		} */
-	
+	$criterio="";
+	$CadBusqueda2="";
+	$CadBusqueda="";
+	if ($Ano <> "-"){
+		$CadBusqueda2 .="AND Year(l.FechaLlamada)>='$Ano' AND Year(l.FechaLlamada)<='$Ano2' ";
+		$criterio.="A&ntilde;o	>= $Ano y A&ntilde;o <= $Ano2<BR>";
+		}
+	if ($Mes <> "-"){
+		$CadBusqueda2 .="AND Month(l.FechaLlamada)>='$Mes' AND Month(l.FechaLlamada)<='$Mes2' ";
+		$criterio.="Mes	>= $Mes y Mes<= $Mes2<BR>";			
+		}
+	if ($Dias <> "-"){
+		$CadBusqueda2 .="AND DayOfMonth(l.FechaLlamada)>='$Dias' AND DayOfMonth(l.FechaLlamada)<='$Dias2' ";
+		$criterio.="Dia	>= $Dias y Dia <= $Dias2<BR>";			
+		}
+	if ($Horas <> "-"){
+		$CadBusqueda2 .="AND Hour(l.HoraInicio)>='$Horas' AND Hour(l.HoraTermino)<='$Horas2' ";
+		$criterio.="Hora >= $Horas y Hora<= $Horas2<BR>";			
+		}
+	if ($Duracion <> "-"){
+		$CadBusqueda .= "AND ((time_to_sec(l.Horatermino)-time_to_sec(l.Horainicio))/60)>='$Duracion' AND ((time_to_sec(l.Horatermino)-time_to_sec(l.Horainicio))/60)<='$Duracion2' ";
+		$criterio.="Duracion >= $Duracion y Duracion<= $Duracion2<BR>";			
+		}
+	if ($Edad <> "-"){
+		$CadBusqueda .="AND c.Edad >= \"$Edad\" AND c.Edad <= \"$Edad2\" ";
+		$criterio.="Edad >= $Edad y Edad<= $Edad2<BR>";			
+		}
+	preparaQuery($Consejera, "Consejera", &$CadBusqueda, &$criterio, false);
+	preparaQuery($ComoTeEnteraste, "ComoTeEnteraste", &$CadBusqueda, &$criterio, true, "c");
+	preparaQuery($Sexo, "Sexo", &$CadBusqueda, &$criterio, false, "c");			
+	preparaQuery($LenguaIndigena, "LenguaIndigena", &$CadBusqueda, &$criterio, false, "c");			
+	preparaQuery($MedioContacto, "MedioContacto", &$CadBusqueda, &$criterio, false, "c");			
+	preparaQuery($Ocupacion, "Ocupacion", &$CadBusqueda, &$criterio, false, "c");
+	preparaQuery($Municipio, "Municipio", &$CadBusqueda, &$criterio, false, "c");				
+	preparaQuery($Estado, "Estado", &$CadBusqueda, &$criterio, false, "c");				
+	preparaQuery($EstadoCivil, "EstadoCivil", &$CadBusqueda, &$criterio, false, "c");
+	preparaQuery($NivelEstudios, "NivelEstudios", &$CadBusqueda, &$criterio, false, "c");			
+	preparaQuery($AyudaPsicologico, "AyudaPsicologico", &$CadBusqueda, &$criterio);								
+	preparaQuery($AyudaLegal, "AyudaLegal", &$CadBusqueda, &$criterio);					
+	preparaQuery($AyudaMedica, "AyudaMedica", &$CadBusqueda, &$criterio);
+	preparaQuery($AyudaNutricional, "AyudaNutricional", &$CadBusqueda, &$criterio);	
 	preparaQuery($AyudaOtros, "AyudaOtros", &$CadBusqueda, &$criterio);	
+	preparaQuery($TipoViolencia, "TipoViolencia", &$CadBusqueda, &$criterio);	
+	preparaQuery($ModalidadViolencia, "ModalidadViolencia", &$CadBusqueda, &$criterio);	
+	preparaQuery($Violentometro, "Violentometro", &$CadBusqueda, &$criterio);	
+	preparaQuery($NivelViolencia, "NivelViolencia", &$CadBusqueda, &$criterio);	
 
 	include("Datos_Comunicacion.php");
 	$sql ="Drop Table Reporte";
@@ -440,15 +233,16 @@ if ($Sesion){
 
 	//Llamadas45
 	$TotalMas45=Muestra("Consejera","((time_to_sec(Horatermino)-time_to_sec(Horainicio))/60)>45 AND ");
+	$TotalConsejera=Muestra("Consejera");
 
 	//PorDia
 	$PorDia=Muestra("FechaLlamada","","FechaLlamada DESC","LIMIT 31");
 
 	//MedioContacto
-	$MedioContacto=Muestra("MedioContacto","");
+	$MedioContacto=Muestra("MedioContacto");
 
 	//Religion
-	$TotalReligion=Muestra("Religion","");
+	$TotalReligion=Muestra("Religion");
 
 	//Edad
 	$NoDada=CuentaEsto("Edad = '0'");
@@ -477,25 +271,25 @@ if ($Sesion){
 	$Femenino=CuentaEsto("Sexo = 'F'");
 
 	//Ocupacion
-	$TotalOcu=Muestra("Ocupacion","");
+	$TotalOcu=Muestra("Ocupacion","","Cantidad DESC","LIMIT 10");
 
 	//Estado Civil
-	$TotalEstadoCivil=Muestra("EstadoCivil","");
+	$TotalEstadoCivil=Muestra("EstadoCivil");
 
 	//Nivel de estudios
-	$TotalNivelEstudios=Muestra("NivelEstudios","");
+	$TotalNivelEstudios=Muestra("NivelEstudios");
 
 	//Lengua Indigena
-	$TotalLenguaIndigena=Muestra("LenguaIndigena","");
+	$TotalLenguaIndigena=Muestra("LenguaIndigena");
 	
 	//Nivel de Violencia
-	$TotalNViol=Muestra("NivelViolencia","");
+	$TotalNViol=Muestra("NivelViolencia");
 
 	//Nacionalidad
-	$TotalNacionalidad=Muestra("Nacionalidad","");
+	$TotalNacionalidad=Muestra("Nacionalidad");
 
 	//Acude Institucion
-	$TotalAInst=Muestra("AcudeInstitucion","");
+	$TotalAInst=Muestra("AcudeInstitucion");
 
 	//Informacion Prestada
 	$psicologico=CuentaAyuda("AyudaPsicologico");
@@ -508,13 +302,13 @@ if ($Sesion){
 	$Violentometro=CuentaAyuda("Violentometro");
 
 	//Estado
-	$TotalEst=Muestra("Estado","");
+	$TotalEst=Muestra("Estado");
 
 	//Municipio
-	$TotalDele=Muestra("Municipio","");
+	$TotalDele=Muestra("Municipio","","Cantidad DESC","LIMIT 10");
 	
 	//CP
-	$TotalCP=Muestra("CP","","Cantidad DESC","LIMIT 11");
+	$TotalCP=Muestra("CP","","Cantidad DESC","LIMIT 10");
 
 	//Motivos Especificos
 	$TotalAyuP=MuestraAyuda("AyudaPsicologico");
@@ -530,10 +324,10 @@ if ($Sesion){
 	$TotalEnteraste=MuestraAyuda("ComoTeEnteraste");
 
 	//Canalizacion
-	$TotalCanaLegal=Muestra("CanaLegal","CanaLegal Not Like \"%Voluntario%\" And ");
-	$TotalCanaLegalV=Muestra("CanaLegal","CanaLegal Like \"%Voluntario%\" And ");
-	$TotalCanaOtro=Muestra("CanaOtro","CanaOtro Not Like \"%Voluntario%\" And ");
-	$TotalCanaOtroV=Muestra("CanaOtro","CanaOtro Like \"%Voluntario%\" And ");
+	$TotalCanaLegal=Muestra("CanaLegal","CanaLegal Not Like \"%Voluntario%\" And ","Cantidad DESC","LIMIT 10");
+	$TotalCanaLegalV=Muestra("CanaLegal","CanaLegal Like \"%Voluntario%\" And ","Cantidad DESC","LIMIT 10");
+	$TotalCanaOtro=Muestra("CanaOtro","CanaOtro Not Like \"%Voluntario%\" And ","Cantidad DESC","LIMIT 10");
+	$TotalCanaOtroV=Muestra("CanaOtro","CanaOtro Like \"%Voluntario%\" And ","Cantidad DESC","LIMIT 10");
 	
 	include ("Paginas/BuscarCasos_Reporte.html");
 	}
