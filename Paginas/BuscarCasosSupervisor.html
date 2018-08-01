@@ -17,10 +17,8 @@
 	<link href="css/cusco.css" rel="stylesheet" type="text/css" />
 </HEAD>
 
-<body>
-	<!--NOEDIT-->
+<body style="text-align: center;">
 	<? include ("Paginas/CodigoMenu.html"); ?>
-		<!--/NOEDIT-->
 		<br>
 		<form action="" method=GET enctype="multipart/form-data">
 			<input type=hidden name=Accion value=RealizarBusqueda>
@@ -29,67 +27,6 @@
 			<input type=hidden name=Pagina value=1>
 			<div style="width:630px;">
 				<!EMPIEZA MI FORMULARIO>
-				<div style="float:left; width:48%;padding:5px;">
-					<!Medio de Contacto>
-					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-						<tr>
-							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Medio de Contacto</font>
-								</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>
-									<font face="Arial" color="#D80808">
-										<p>
-											<font face="Arial" color="#D80808">
-												<select name=MedioContacto>
-													<option value="-">-
-														<option value=Llamada>Llamada Telef&oacute;nica
-															<option value=Chat>Chat
-																<option value=Mail>Mail
-																	<option value=WhatsApp>WhatsApp
-												</select>
-											</font>
-										</p>
-									</font>
-								</P>
-							</td>
-						</tr>
-					</table>
-				</div>
-
-				<div style="float: right; width:48%;padding:5px;">
-					<!Genero>
-					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
-						<tr>
-							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Genero</font>
-								</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>
-									<font face="Arial" color="#D80808">
-										<p>
-											<font face="Arial" color="#D80808">
-												<select name=Sexo>
-													<option value="-">-
-														<option value="F">Femenino
-															<option value="M">Masculino
-												</select>
-											</font>
-										</p>
-									</font>
-								</P>
-							</td>
-						</tr>
-					</table>
-				</div>
 
 				<div style="float: left; width:48%;padding:5px;">
 					<!POR DURACION>
@@ -282,14 +219,58 @@
 					</table>
 				</div>
 
+				<div style="float:left; width:48%;padding:5px;">
+					<!Medio de Contacto>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Medio de Contacto</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<select name=MedioContacto>
+									<option value="-">-</option>
+									<option value=Llamada>Llamada Telef&oacute;nica</option>
+									<option value=Chat>Chat</option>
+									<option value=Mail>Mail</option>
+									<option value=WhatsApp>WhatsApp</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<div style="float: right; width:48%;padding:5px;">
+					<!Genero>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td bgcolor="#FFFFFF">
+								<p>
+									<font face="Arial" color="#D80808">Genero</font>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<select name=Sexo>
+									<option value="-">-</option>
+									<option value="F">Femenino</option>
+									<option value="M">Masculino</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</div>
+
 				<!Por Nivel De Estudios>
 				<div style="float: left; width:48%;padding:5px;">
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
 							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Por Nivel de Estudios</font>
-								</p>
+								<font face="Arial" color="#D80808">Por Nivel de Estudios</font>
 							</td>
 						</tr>
 						<tr>
@@ -313,26 +294,15 @@
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
 							<td bgcolor="#FFFFFF">
-								<p>
-									<font face="Arial" color="#D80808">Habla alguna lengua indigena?</font>
-								</p>
+								<font face="Arial" color="#D80808">Habla alguna lengua indigena?</font>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<p>
-									<font face="Arial" color="#D80808">
-										<p>
-											<font face="Arial" color="#D80808">
-												<select name=LenguaIndigena>
-													<option value="-">-</option>
-													<option value="No">No</option>
-													<option value="Si">Si</option>
-												</select>
-											</font>
-										</p>
-									</font>
-								</P>
+								<select name="LenguaIndigena" class="js-example-basic">
+									<option value="No">No</option>
+									<option value="Si">Si</option>
+								</select>
 							</td>
 						</tr>
 					</table>
