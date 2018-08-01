@@ -1,6 +1,25 @@
 <?
 if ($Sesion){
+
 	include("Datos_Comunicacion.php");
+	
+	function preparaQuery($v, $name, &$CadBusqueda, &$criterio){
+		if (count($v)>0 && $v[0] <> ""){
+			$CadBusqueda .="AND (";
+			$criterio.="$name = ";
+			for ($i=0;$i<count($v);$i++){
+				$CadBusqueda .="c.$name = '".rs($v[$i])."' ";
+				$criterio.="$v[$i] ";
+				if ($i<count($v)-1){
+					$CadBusqueda .="OR ";
+					$criterio.="o ";
+					}
+				}
+			$CadBusqueda .=") ";
+			$criterio.="<br>";
+			} 
+	}
+	
 	$tmp=substr(mysql_real_escape_string($Sesion),0,5);
 	if ($Ano OR $IDCaso OR $Nombre OR $Telefono){
 		$criterio="";
@@ -17,7 +36,7 @@ if ($Sesion){
 		if ($Ano <> "-" AND $Ano <> ""){
 			if (!isset($Ano2)) $Ano2=$Ano;
 			$CadBusqueda2 .="AND Year(l.FechaLlamada)>='".rs($Ano)."' AND Year(l.FechaLlamada)<='".rs($Ano2)."' ";
-			$criterio.="Año	>= $Ano y Año <= $Ano2<BR>";
+			$criterio.="AA&ntilde;o	>= $Ano y AA&ntilde;o <= $Ano2<BR>";
 			}
 		if ($Mes <> "-" AND $Mes <> ""){
 			if (!isset($Mes2)) $Mes2=$Mes;
@@ -76,11 +95,24 @@ if ($Sesion){
 				}
 			$CadBusqueda .=") ";
 			$criterio.="<br>";
-			}  
-		if ($Sexo <> "-" AND $Sexo <> ""){
-			$CadBusqueda .="AND c.Sexo = '".rs($Sexo)."' ";
-			$criterio.="Genero = $Sexo<BR>";					
-			}
+			} 
+		preparaQuery($MedioContacto, "MedioContacto", &$CadBusqueda, &$criterio);
+		preparaQuery($Sexo, "Sexo", &$CadBusqueda, &$criterio);
+		preparaQuery($LenguaIndigena, "LenguaIndigena", &$CadBusqueda, &$criterio);
+		/* if (count($Sexo)>0 && $Sexo[0] <> ""){
+			$CadBusqueda .="AND (";
+			$criterio.="Sexo = ";
+			for ($i=0;$i<count($Sexo);$i++){
+				$CadBusqueda .="c.Sexo = '".rs($Sexo[$i])."' ";
+				$criterio.="$Sexo[$i] ";
+				if ($i<count($Sexo)-1){
+					$CadBusqueda .="OR ";
+					$criterio.="o ";
+					}
+				}
+			$CadBusqueda .=") ";
+			$criterio.="<br>";
+			}  */
 		if (count($Ocupacion)>0 && $Ocupacion[0] <> "-"){
 			$CadBusqueda .="AND (";
 			$criterio.="Ocupacion = ";			
@@ -122,9 +154,7 @@ if ($Sesion){
 				}
 			$CadBusqueda .=") ";
 			$criterio.="<br>";
-			}
-
-			 				
+			}				
 		if (count($EstadoCivil)>0 && $EstadoCivil[0] <> "-"){
 			$CadBusqueda .="AND (";
 			$criterio.="EstadoCivil = ";					
