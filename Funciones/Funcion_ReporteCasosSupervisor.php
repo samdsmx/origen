@@ -99,8 +99,7 @@ if ($Sesion){
 				$Seguimientos .= "<TR><TD>$Ayuda2</TD><TD>$i</TD><TD>$CantAyu</TD><TR>";
 				}
 			}
-		$Seguimientos .= "<TR><TD COLSPAN=13>$data - $datag<CENTER>";
-		<img src="Funciones/grafico_bar.php?Nom=AyudaNutricional&amp;datax=ESTILO DE VIDA SALUDABLE,OBESIDAD / SOBREPESO,&amp;datagx=5,3,">
+		$Seguimientos .= "<TR><TD COLSPAN=13><CENTER>";
 		$Seguimientos .= '<img src="Funciones/grafico_bar.php?Nom='.$Tipo.'&datax='.$data.'&datagx='.$datag.'">';
 		$Seguimientos .= "</CENTER></TD></TR>";
 
