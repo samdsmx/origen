@@ -69,8 +69,8 @@ if ($Sesion){
 				$t=$t+$CantAyu;		
 				}
 			}
-		return $t;
 		mysql_close($connection);
+		return $t;
 		}
 
 	function MuestraAyuda($Tipo){
@@ -84,27 +84,22 @@ if ($Sesion){
 			$Ayuda=$row['Nombre'];		
 			$sql2 ="Select c.Nombre, COUNT(*) 'Cantidad' FROM Reporte l, Campos c WHERE c.Nombre='$Ayuda' AND c.Tipo='$Tipo' AND l.$Tipo LIKE \"%$Ayuda%\" Group By c.Nombre ORDER BY Cantidad DESC";
 			$total_result2 = @mysql_query($sql2, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-			while ($row2 = mysql_fetch_array($total_result2)){
+			if ($row2 = mysql_fetch_array($total_result2)){
 				$Ayuda2=$row2['Nombre'];
 				$CantAyu=$row2['Cantidad'];
 				$i=$i+1;
-				if($i<$Total){
-					$data .= $Ayuda2.",";
-					$datag .= $CantAyu.",";
-					}
-					else{
-						$data .= $Ayuda2;
-						$datag .= $CantAyu;
-						}
+				$data .= $Ayuda2.",";
+				$datag .= $CantAyu.",";
 				$Seguimientos .= "<TR><TD>$Ayuda2</TD><TD>$i</TD><TD>$CantAyu</TD><TR>";
 				}
 			}
+		$data = trim($data, ",");
+		$datag = trim($datag, ",");
 		$Seguimientos .= "<TR><TD COLSPAN=13><CENTER>";
 		$Seguimientos .= '<img src="Funciones/grafico_bar.php?Nom='.$Tipo.'&datax='.$data.'&datagx='.$datag.'">';
 		$Seguimientos .= "</CENTER></TD></TR>";
-
-		return $Seguimientos;
 		mysql_close($connection);
+		return $Seguimientos;
 		}
 
 	function Muestra($Tipo,$Clausula="",$Order="Cantidad DESC",$Other=""){ 
