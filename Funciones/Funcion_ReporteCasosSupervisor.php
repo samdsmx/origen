@@ -255,7 +255,7 @@ if ($Sesion){
 	$Femenino=CuentaEsto("Sexo = 'F'");
 
 	//Ocupacion
-	$TotalOcu=Muestra("Ocupacion","","Cantidad DESC","LIMIT 10");
+	$TotalOcu=Muestra("Ocupacion","Ocupacion <> '-' AND ","Cantidad DESC","LIMIT 10");
 
 	//Estado Civil
 	$TotalEstadoCivil=Muestra("EstadoCivil");
@@ -267,13 +267,13 @@ if ($Sesion){
 	$TotalLenguaIndigena=Muestra("LenguaIndigena");
 	
 	//Nivel de Violencia
-	$TotalNViol=Muestra("NivelViolencia");
+	$TotalNViol=Muestra("NivelViolencia","NivelViolencia <> '' AND ");
 
 	//Nacionalidad
 	$TotalNacionalidad=Muestra("Nacionalidad");
 
 	//Acude Institucion
-	$TotalAInst=Muestra("AcudeInstitucion");
+	$TotalAInst=Muestra("AcudeInstitucion","AcudeInstitucion <> '' AND ");
 
 	//Informacion Prestada
 	$psicologico=CuentaAyuda("AyudaPsicologico");
@@ -297,7 +297,7 @@ if ($Sesion){
 	$TotalMViol=MuestraAyuda("ModalidadViolencia");
 	$TotalViolentometro=MuestraAyuda("Violentometro");
 
-	$TotalCP=Muestra("CP","CP is not Null AND ","Cantidad DESC","LIMIT 10");
+	$TotalCP=Muestra("CP","CP <> '' AND ","Cantidad DESC","LIMIT 10");
 	$TotalEnteraste=MuestraAyuda("ComoTeEnteraste");
 
 	include ("Paginas/BuscarCasos_Reporte.html");
