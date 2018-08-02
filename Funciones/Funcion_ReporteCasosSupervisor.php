@@ -99,7 +99,8 @@ if ($Sesion){
 				$Seguimientos .= "<TR><TD>$Ayuda2</TD><TD>$i</TD><TD>$CantAyu</TD><TR>";
 				}
 			}
-		$Seguimientos .= "<TR><TD COLSPAN=13><CENTER>";
+		$Seguimientos .= "<TR><TD COLSPAN=13>$data - $datag<CENTER>";
+		<img src="Funciones/grafico_bar.php?Nom=AyudaNutricional&amp;datax=ESTILO DE VIDA SALUDABLE,OBESIDAD / SOBREPESO,&amp;datagx=5,3,">
 		$Seguimientos .= '<img src="Funciones/grafico_bar.php?Nom='.$Tipo.'&datax='.$data.'&datagx='.$datag.'">';
 		$Seguimientos .= "</CENTER></TD></TR>";
 
@@ -301,16 +302,9 @@ if ($Sesion){
 	$ModalidadViol=CuentaAyuda("ModalidadViolencia");
 	$Violentometro=CuentaAyuda("Violentometro");
 
-	//Estado
 	$TotalEst=Muestra("Estado");
+	$TotalDele=Muestra("Municipio","Municipio is not Null","Cantidad DESC","LIMIT 10");
 
-	//Municipio
-	$TotalDele=Muestra("Municipio","","Cantidad DESC","LIMIT 10");
-	
-	//CP
-	$TotalCP=Muestra("CP","","Cantidad DESC","LIMIT 10");
-
-	//Motivos Especificos
 	$TotalAyuP=MuestraAyuda("AyudaPsicologico");
 	$TotalAyuL=MuestraAyuda("AyudaLegal");
 	$TotalAyuM=MuestraAyuda("AyudaMedica");
@@ -320,15 +314,9 @@ if ($Sesion){
 	$TotalMViol=MuestraAyuda("ModalidadViolencia");
 	$TotalViolentometro=MuestraAyuda("Violentometro");
 
-	//ComoSeEntero
+	$TotalCP=Muestra("CP","CP is not Null","Cantidad DESC","LIMIT 10");
 	$TotalEnteraste=MuestraAyuda("ComoTeEnteraste");
 
-	//Canalizacion
-	$TotalCanaLegal=Muestra("CanaLegal","CanaLegal Not Like \"%Voluntario%\" And ","Cantidad DESC","LIMIT 10");
-	$TotalCanaLegalV=Muestra("CanaLegal","CanaLegal Like \"%Voluntario%\" And ","Cantidad DESC","LIMIT 10");
-	$TotalCanaOtro=Muestra("CanaOtro","CanaOtro Not Like \"%Voluntario%\" And ","Cantidad DESC","LIMIT 10");
-	$TotalCanaOtroV=Muestra("CanaOtro","CanaOtro Like \"%Voluntario%\" And ","Cantidad DESC","LIMIT 10");
-	
 	include ("Paginas/BuscarCasos_Reporte.html");
 	}
 	else{

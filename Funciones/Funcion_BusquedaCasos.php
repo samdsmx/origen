@@ -27,7 +27,8 @@ if ($Sesion){
 					$CadBusqueda .="AND $b.$name <> \"\" ";
 					$criterio.="$name = Todos";
 					}
-			} 
+			}
+		}
 
 	$tmp=substr(mysql_real_escape_string($Sesion),0,5);
 	if ($Ano OR $IDCaso OR $Nombre OR $Telefono){
