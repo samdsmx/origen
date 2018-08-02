@@ -42,19 +42,16 @@ if ($Sesion){
 	}
 
 	function CuentaEsto($CadBusc){
-		include("Datos_Comunicacion.php");
 		if($CadBusc){
 			$CadBusc ="where $CadBusc";
 			}
 		$sql ="select * from reporte $CadBusc";
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$Total=@mysql_num_rows($total_result);
-		mysql_close($connection);
 		return $Total;
 		}
 
 	function CuentaAyuda($Tipo){
-		include("Datos_Comunicacion.php");
 		$sql ="SELECT Nombre FROM Campos WHERE tipo='$Tipo'";
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$Seguimientos="";
@@ -69,12 +66,10 @@ if ($Sesion){
 				$t=$t+$CantAyu;		
 				}
 			}
-		mysql_close($connection);
 		return $t;
 		}
 
 	function MuestraAyuda($Tipo){
-		include("Datos_Comunicacion.php");
 		$sql ="SELECT Nombre FROM Campos WHERE tipo='$Tipo'";
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$Seguimientos="";
@@ -98,12 +93,10 @@ if ($Sesion){
 		$Seguimientos .= "<TR><TD COLSPAN=13><CENTER>";
 		$Seguimientos .= '<img src="Funciones/grafico_bar.php?Nom='.$Tipo.'&datax='.$data.'&datagx='.$datag.'">';
 		$Seguimientos .= "</CENTER></TD></TR>";
-		mysql_close($connection);
 		return $Seguimientos;
 		}
 
 	function Muestra($Tipo,$Clausula="",$Order="Cantidad DESC",$Other=""){ 
-		include("Datos_Comunicacion.php");
 		$sql ="SELECT $Tipo, COUNT(*) 'Cantidad' FROM Reporte WHERE $Clausula 1=1 GROUP BY $Tipo ORDER BY $Order $Other";
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$Seguimientos="";
@@ -129,9 +122,9 @@ if ($Sesion){
 			$Seguimientos .= '<img src="Funciones/grafico_bar.php?Nom='.$Tipo.'&datax='.$data.'&datagx='.$datag.'">';
 			$Seguimientos .= "</CENTER></TD></TR>";
 		return $Seguimientos;
-		mysql_close($connection);
 		}
-
+	
+	include("Datos_Comunicacion.php");
 	$criterio="";
 	$CadBusqueda2="";
 	$CadBusqueda="";
@@ -179,12 +172,10 @@ if ($Sesion){
 	preparaQuery($Violentometro, "Violentometro", &$CadBusqueda, &$criterio);	
 	preparaQuery($NivelViolencia, "NivelViolencia", &$CadBusqueda, &$criterio);	
 
-	include("Datos_Comunicacion.php");
 	$sql ="Drop Table Reporte";
 	$total_result = @mysql_query($sql, $connection);
 	$sql ="Create table Reporte select l.*, c.Edad,c.Religion,c.NivelEstudios,c.Sexo,c.Municipio,c.EstadoCivil,c.LenguaIndigena,c.Estado,c.Ocupacion,c.ComoTeEnteraste,c.MedioContacto,c.CP,c.NivelViolencia,c.Nacionalidad from Casos c, Llamadas l where c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda";
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-	mysql_close($connection);
 
 	//Totales
 	$TotalLlamadasMes  = CuentaEsto("");
@@ -209,7 +200,6 @@ if ($Sesion){
 			$MesP=12;
 			$AnoP=$Ano-1;
 			}
-	include("Datos_Comunicacion.php");
 	$sql ="SELECT DISTINCT l.IDCaso FROM Llamadas l, Casos c, Llamadas l2 WHERE l.IDCaso=l2.IDCaso AND l.IDCaso=c.IDCaso AND Year(l.FechaLlamada)='$AnoP' AND Month(l.FechaLlamada)='$MesP' AND Year(l2.FechaLlamada)='$Ano' AND Month(l2.FechaLlamada)='$Mes' $CadBusqueda";
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$TotalNoResueltos=@mysql_num_rows($total_result);
@@ -217,7 +207,6 @@ if ($Sesion){
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$TotalMesAnterior=@mysql_num_rows($total_result);
 	$TotalResueltos=$TotalMesAnterior-$TotalNoResueltos;
-	mysql_close($connection);
 
 	//Duracion
 	$De0a10=CuentaEsto("((time_to_sec(Horatermino)-time_to_sec(Horainicio))/60)<=10");
@@ -316,4 +305,7 @@ if ($Sesion){
 	else{
 		header("Refresh: 0; URL= ");
 		}
+	
+	mysql_close($connection);
+
 ?>
