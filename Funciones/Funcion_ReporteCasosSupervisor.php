@@ -48,20 +48,20 @@ if ($Sesion){
 			$CadBusc ="where $CadBusc";
 			}
 		$sql ="select * from reporte $CadBusc";
-		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+		$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$Total=@mysql_num_rows($total_result);
 		return $Total;
 		}
 
 	function CuentaAyuda($Tipo){
 		$sql ="SELECT Nombre FROM Campos WHERE tipo='$Tipo'";
-		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+		$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$Seguimientos="";
 		$t=0;
 		while ($row = mysql_fetch_array($total_result)){
 			$Ayuda=$row['Nombre'];		
 			$sql2 ="Select c.Nombre, COUNT(*) 'Cantidad' FROM Reporte l, Campos c WHERE c.Nombre='$Ayuda' AND c.Tipo='$Tipo' AND l.$Tipo LIKE \"%$Ayuda%\" Group By c.Nombre ORDER BY Cantidad DESC";
-			$total_result2 = @mysql_query($sql2, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+			$total_result2 = @mysql_query($sql2, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 			while ($row2 = mysql_fetch_array($total_result2)){
 				$Ayuda2=$row2['Nombre'];
 				$CantAyu=$row2['Cantidad'];
@@ -73,14 +73,14 @@ if ($Sesion){
 
 	function MuestraAyuda($Tipo){
 		$sql ="SELECT Nombre FROM Campos WHERE tipo='$Tipo'";
-		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+		$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$Seguimientos="";
 		$i=0;
 		$Total=@mysql_num_rows($total_result);
 		while ($row = mysql_fetch_array($total_result)){
 			$Ayuda=$row['Nombre'];		
 			$sql2 ="Select c.Nombre, COUNT(*) 'Cantidad' FROM Reporte l, Campos c WHERE c.Nombre='$Ayuda' AND c.Tipo='$Tipo' AND l.$Tipo LIKE \"%$Ayuda%\" Group By c.Nombre ORDER BY Cantidad DESC";
-			$total_result2 = @mysql_query($sql2, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+			$total_result2 = @mysql_query($sql2, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 			if ($row2 = mysql_fetch_array($total_result2)){
 				$Ayuda2=$row2['Nombre'];
 				$CantAyu=$row2['Cantidad'];
@@ -100,7 +100,7 @@ if ($Sesion){
 
 	function Muestra($Tipo,$Clausula="",$Order="Cantidad DESC",$Other=""){ 
 		$sql ="SELECT $Tipo, COUNT(*) 'Cantidad' FROM Reporte WHERE $Clausula 1=1 GROUP BY $Tipo ORDER BY $Order $Other";
-		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+		$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$Seguimientos="";
 		$i=0;
 		$Total=@mysql_num_rows($total_result);
@@ -174,9 +174,9 @@ if ($Sesion){
 	preparaQuery($NivelViolencia, "NivelViolencia", &$CadBusqueda, &$criterio);	
 
 	$sql ="Drop Table Reporte";
-	$total_result = @mysql_query($sql, $connection);
+	$total_result = @mysql_query($sql, $GLOBALS['connection']);
 	$sql ="Create table Reporte select l.*, c.Edad,c.Religion,c.NivelEstudios,c.Sexo,c.Municipio,c.EstadoCivil,c.LenguaIndigena,c.Estado,c.Ocupacion,c.ComoTeEnteraste,c.MedioContacto,c.CP,c.NivelViolencia,c.Nacionalidad from Casos c, Llamadas l where c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda";
-	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+	$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 
 	//Totales
 	$TotalLlamadasMes  = CuentaEsto("");
@@ -202,10 +202,10 @@ if ($Sesion){
 			$AnoP=$Ano-1;
 			}
 	$sql ="SELECT DISTINCT l.IDCaso FROM Llamadas l, Casos c, Llamadas l2 WHERE l.IDCaso=l2.IDCaso AND l.IDCaso=c.IDCaso AND Year(l.FechaLlamada)='$AnoP' AND Month(l.FechaLlamada)='$MesP' AND Year(l2.FechaLlamada)='$Ano' AND Month(l2.FechaLlamada)='$Mes' $CadBusqueda";
-	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+	$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$TotalNoResueltos=@mysql_num_rows($total_result);
 	$sql ="SELECT DISTINCT l.IDCaso FROM Llamadas l, Casos c WHERE l.IDCaso=c.IDCaso AND Year(FechaLlamada)='$AnoP' AND Month(FechaLlamada)='$MesP' $CadBusqueda";
-	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+	$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$TotalMesAnterior=@mysql_num_rows($total_result);
 	$TotalResueltos=$TotalMesAnterior-$TotalNoResueltos;
 
@@ -307,6 +307,6 @@ if ($Sesion){
 		header("Refresh: 0; URL= ");
 		}
 	
-	mysql_close($connection);
+	mysql_close($GLOBALS['connection']);
 
 ?>
