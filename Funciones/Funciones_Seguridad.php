@@ -45,8 +45,8 @@ function Autentifica($Nombre, $Password, $Estado){
 
 function RevisaSesion($DatosSesion, $verificacion){
 	$SecureCad=base64_decode($DatosSesion);
-	list($Nombre, $Password)= split("@", $SecureCad);
-	return Autentifica($Nombre, $Password, "$verificacion");
+	list($Consejera, $Password)= split("@", $SecureCad);
+	return Autentifica($Consejera, $Password, "$verificacion");
 	}
 
 function BorraCache(){
