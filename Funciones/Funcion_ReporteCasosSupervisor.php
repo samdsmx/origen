@@ -1,6 +1,8 @@
 <?
 
 if ($Sesion){
+	include("Datos_Comunicacion.php");
+
 	$MesL[1]="Enero";
 	$MesL[2]="Febrero";
 	$MesL[3]="Marzo";
@@ -124,7 +126,6 @@ if ($Sesion){
 		return $Seguimientos;
 		}
 	
-	include("Datos_Comunicacion.php");
 	$criterio="";
 	$CadBusqueda2="";
 	$CadBusqueda="";
