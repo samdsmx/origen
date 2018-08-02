@@ -302,7 +302,7 @@ if ($Sesion){
 	$Violentometro=CuentaAyuda("Violentometro");
 
 	$TotalEst=Muestra("Estado");
-	$TotalDele=Muestra("Municipio","Municipio is not Null","Cantidad DESC","LIMIT 10");
+	$TotalDele=Muestra("Municipio","Municipio is not Null AND ","Cantidad DESC","LIMIT 10");
 
 	$TotalAyuP=MuestraAyuda("AyudaPsicologico");
 	$TotalAyuL=MuestraAyuda("AyudaLegal");
@@ -313,7 +313,7 @@ if ($Sesion){
 	$TotalMViol=MuestraAyuda("ModalidadViolencia");
 	$TotalViolentometro=MuestraAyuda("Violentometro");
 
-	$TotalCP=Muestra("CP","CP is not Null","Cantidad DESC","LIMIT 10");
+	$TotalCP=Muestra("CP","CP is not Null AND ","Cantidad DESC","LIMIT 10");
 	$TotalEnteraste=MuestraAyuda("ComoTeEnteraste");
 
 	include ("Paginas/BuscarCasos_Reporte.html");
