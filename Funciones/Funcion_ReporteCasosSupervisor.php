@@ -218,7 +218,6 @@ if ($Sesion){
 
 	//Llamadas45
 	$TotalMas45=Muestra("Consejera","((time_to_sec(Horatermino)-time_to_sec(Horainicio))/60)>45 AND ");
-	$TotalConsejera=Muestra("Consejera");
 
 	//PorDia
 	$PorDia=Muestra("FechaLlamada","","FechaLlamada DESC","LIMIT 31");
@@ -287,7 +286,7 @@ if ($Sesion){
 	$Violentometro=CuentaAyuda("Violentometro");
 
 	$TotalEst=Muestra("Estado");
-	$TotalDele=Muestra("Municipio","Municipio is not Null AND ","Cantidad DESC","LIMIT 10");
+	$TotalDele=Muestra("Municipio","Municipio <> '' AND ","Cantidad DESC","LIMIT 10");
 
 	$TotalAyuP=MuestraAyuda("AyudaPsicologico");
 	$TotalAyuL=MuestraAyuda("AyudaLegal");
