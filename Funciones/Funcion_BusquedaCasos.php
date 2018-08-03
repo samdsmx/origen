@@ -4,29 +4,36 @@ if ($Sesion){
 	include("Datos_Comunicacion.php");
 	
 	function preparaQuery($v, $name, &$CadBusqueda, &$criterio, $like=true, $b = "l"){
-		if (count($v)>0){
-			if ($v[0] <> "Todos"){
-				$CadBusqueda .="AND (";
-				$criterio.="$name = ";				
-				for ($i=0;$i<count($v);$i++){
-					if ($like){
-						$CadBusqueda .="$b.$name LIKE '%".$v[$i]."%' ";
-					} else {
-						$CadBusqueda .="$b.$name = '".$v[$i]."' ";
-					}
-					$criterio.="$v[$i] ";						
-					if ($i<count($v)-1){
-						$CadBusqueda .="OR ";
-						$criterio.="o ";
+		if (is_array($v)){
+			if (count($v)>0){
+				if ($v[0] <> "Todos"){
+					$CadBusqueda .="AND (";
+					$criterio.="$name = ";				
+					for ($i=0;$i<count($v);$i++){
+						if ($like){
+							$CadBusqueda .="$b.$name LIKE '%".$v[$i]."%' ";
+						} else {
+							$CadBusqueda .="$b.$name = '".$v[$i]."' ";
 						}
+						$criterio.="$v[$i] ";						
+						if ($i<count($v)-1){
+							$CadBusqueda .="OR ";
+							$criterio.="o ";
+							}
+						}
+					$CadBusqueda .=") ";
+					$criterio.="<br>";
 					}
-				$CadBusqueda .=") ";
-				$criterio.="<br>";
+					else{
+						$CadBusqueda .="AND $b.$name <> \"\" ";
+						$criterio.="$name = Todos";
+						}
 				}
-				else{
-					$CadBusqueda .="AND $b.$name <> \"\" ";
-					$criterio.="$name = Todos";
-					}
+			} else {
+				if ($v <> "-" AND $v <> ""){
+					$CadBusqueda .="AND $b.$name = '". rs($v) . "' ";
+					$criterio.="$name = $v<BR>";		
+					}	
 			}
 		}
 
@@ -41,8 +48,9 @@ if ($Sesion){
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$row = mysql_fetch_array($total_result);
 		$access=$row['Acceso'];
-		if ($access==0 OR $access==2)
+		if ($access==0 OR $access==2){
 			$Consejera[0]=$Nombre_Consejera;
+		}
 		if ($Ano <> "-" AND $Ano <> ""){
 			if (!isset($Ano2)) $Ano2=$Ano;
 			$CadBusqueda2 .="AND Year(l.FechaLlamada)>='".rs($Ano)."' AND Year(l.FechaLlamada)<='".rs($Ano2)."' ";
@@ -98,10 +106,6 @@ if ($Sesion){
 			$CadBusqueda .="AND c.Telefono LIKE '%".rs($Telefono)."%' ";
 		$sql ="drop table IF EXISTS $tmp";
 		$total_result = @mysql_query($sql, $connection);
-
-
-
-
 		$sql ="create table $tmp SELECT DISTINCT l.*, c.Nombre, c.Telefono, c.Edad, c.Sexo, c.ComoTeEnteraste, c.Ocupacion, c.Municipio, c.Estado, c.EstadoCivil FROM Llamadas l, Casos c WHERE c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda Order By l.LlamadaNo Desc";
 		$deb = $sql;
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
