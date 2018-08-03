@@ -106,19 +106,19 @@ if ($Sesion){
 		$Total=@mysql_num_rows($total_result);
 	 	while ($row = mysql_fetch_array($total_result)){
 			$Nombre=$row[$Tipo];
-			$Cant=$row['Cantidad'];
+			$Llam=$row['Llamadas'];
 			$Usu=$row['Usuarios'];
 			$i=$i+1;
 			if($i<20)
 				if($i<19&&$i<$Total){
 					$data .= $Nombre.",";
-					$datag .= $Cant.",";
+					$datag .= $Llam.",";
 					}
 					else{
 						$data .= $Nombre;
-						$datag .= $Cant;
+						$datag .= $Llam;
 						}
-       		$Seguimientos .= "<TR><TD>$Nombre</TD><TD>$Cant</TD><TD>$Usu</TD></TR>";
+       		$Seguimientos .= "<TR><TD>$Nombre</TD><TD>$Llam</TD><TD>$Usu</TD></TR>";
 			}
 
 			$Seguimientos .= "<TR><TD COLSPAN=13><CENTER>";
