@@ -98,15 +98,16 @@ if ($Sesion){
 		return $Seguimientos;
 		}
 
-	function Muestra($Tipo,$Clausula="",$Order="Cantidad DESC",$Other=""){ 
-		$sql ="SELECT $Tipo, COUNT(*) 'Cantidad' FROM Reporte WHERE $Clausula 1=1 GROUP BY $Tipo ORDER BY $Order $Other";
+	function Muestra($Tipo,$Clausula="",$Order="Llamadas DESC",$Other=""){ 
+		$sql ="SELECT $Tipo, COUNT(*) 'Llamadas', COUNT(Distinct(idcaso)) 'Usuarios' FROM Reporte WHERE $Clausula 1=1 GROUP BY $Tipo ORDER BY $Order $Other";
 		$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
-		$Seguimientos="";
+		$Seguimientos="<TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH><TR>";
 		$i=0;
 		$Total=@mysql_num_rows($total_result);
 	 	while ($row = mysql_fetch_array($total_result)){
 			$Nombre=$row[$Tipo];
 			$Cant=$row['Cantidad'];
+			$Usu=$row['Usuarios'];
 			$i=$i+1;
 			if($i<20)
 				if($i<19&&$i<$Total){
@@ -117,7 +118,7 @@ if ($Sesion){
 						$data .= $Nombre;
 						$datag .= $Cant;
 						}
-       		$Seguimientos .= "<TR><TD>$Nombre</TD><TD>$i</TD><TD>$Cant</TD></TR>";
+       		$Seguimientos .= "<TR><TD>$Nombre</TD><TD>$Cant</TD><TD>$Usu</TD></TR>";
 			}
 
 			$Seguimientos .= "<TR><TD COLSPAN=13><CENTER>";
@@ -255,7 +256,7 @@ if ($Sesion){
 	$Femenino=CuentaEsto("Sexo = 'F'");
 
 	//Ocupacion
-	$TotalOcu=Muestra("Ocupacion","Ocupacion <> '-' AND ","Cantidad DESC","LIMIT 10");
+	$TotalOcu=Muestra("Ocupacion","Ocupacion <> '-' AND ","Llamadas DESC","LIMIT 10");
 
 	//Estado Civil
 	$TotalEstadoCivil=Muestra("EstadoCivil");
@@ -286,7 +287,7 @@ if ($Sesion){
 	$Violentometro=CuentaAyuda("Violentometro");
 
 	$TotalEst=Muestra("Estado");
-	$TotalDele=Muestra("Municipio","Municipio <> '' AND ","Cantidad DESC","LIMIT 10");
+	$TotalDele=Muestra("Municipio","Municipio <> '' AND ","Llamadas DESC","LIMIT 10");
 
 	$TotalAyuP=MuestraAyuda("AyudaPsicologico");
 	$TotalAyuL=MuestraAyuda("AyudaLegal");
@@ -297,7 +298,7 @@ if ($Sesion){
 	$TotalMViol=MuestraAyuda("ModalidadViolencia");
 	$TotalViolentometro=MuestraAyuda("Violentometro");
 
-	$TotalCP=Muestra("CP","CP <> '' AND ","Cantidad DESC","LIMIT 10");
+	$TotalCP=Muestra("CP","CP <> '' AND ","Llamadas DESC","LIMIT 10");
 	$TotalEnteraste=MuestraAyuda("ComoTeEnteraste");
 
 	include ("Paginas/BuscarCasos_Reporte.html");
