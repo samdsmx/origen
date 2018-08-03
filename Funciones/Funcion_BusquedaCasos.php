@@ -101,7 +101,7 @@ if ($Sesion){
 
 
 
-		
+
 		$sql ="create table $tmp SELECT DISTINCT l.*, c.Nombre, c.Telefono, c.Edad, c.Sexo, c.ComoTeEnteraste, c.Ocupacion, c.Municipio, c.Estado, c.EstadoCivil FROM Llamadas l, Casos c WHERE c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda Order By l.LlamadaNo Desc";
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		}
@@ -205,7 +205,7 @@ switch ($Correlacion){
 		include("Paginas/BuscarCasos_Resultados.html");
 		}
 		else{
-			$Mensaje ="No hay resultados que coincidan con esa busqueda.";
+			$Mensaje ="No hay resultados que coincidan con esa busqueda.". $sql;
 			include("Paginas/CodigoMenuSinOpciones.html");
 			include("Paginas/Error.html");
 			}
