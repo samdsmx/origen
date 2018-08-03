@@ -27,7 +27,7 @@ if($Pagina && $submit <> "Reporte"){
 			case "RealizarBusqueda":
 				switch ($AccionSec){
 					case "General":
-						include("Funciones/Funcion_BusquedaCasos.php");
+						include("Funciones/Funcion_BusquedaOrganismos.php");
 						break;
 					case "Organismos":
 						include("Funciones/Funcion_BusquedaOrganismos.php");

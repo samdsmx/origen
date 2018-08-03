@@ -46,7 +46,7 @@ if ($Sesion){
 		if ($Ano <> "-" AND $Ano <> ""){
 			if (!isset($Ano2)) $Ano2=$Ano;
 			$CadBusqueda2 .="AND Year(l.FechaLlamada)>='".rs($Ano)."' AND Year(l.FechaLlamada)<='".rs($Ano2)."' ";
-			$criterio.="AA&ntilde;o	>= $Ano y AA&ntilde;o <= $Ano2<BR>";
+			$criterio.="Año	>= $Ano y Año <= $Ano2<BR>";
 			}
 		if ($Mes <> "-" AND $Mes <> ""){
 			if (!isset($Mes2)) $Mes2=$Mes;
@@ -98,6 +98,7 @@ if ($Sesion){
 			$CadBusqueda .="AND c.Telefono LIKE '%".rs($Telefono)."%' ";
 		$sql ="drop table IF EXISTS $tmp";
 		$total_result = @mysql_query($sql, $connection);
+
 		$sql ="create table $tmp SELECT DISTINCT l.*, c.Nombre, c.Telefono, c.Edad, c.Sexo, c.ComoTeEnteraste, c.Ocupacion, c.Municipio, c.Estado, c.EstadoCivil FROM Llamadas l, Casos c WHERE c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda Order By l.LlamadaNo Desc";
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		}
