@@ -16,7 +16,13 @@
     </div>
     <div class="form-group">
       <label for="PosibleSolucion">¿Qué tendría que pasar en esta llamada para saber que te fue de utilidad?</label>
-      <textarea name="PosibleSolucion" class="form-control" rows="3" cols="25" placeholder="..." wrap="hard"></textarea>
+      <textarea name="PosibleSolucion"
+        @if($datosGenerales['posibleSolucion']  != '' && $numeroLlamada > 0) disabled @endif 
+        class="form-control" 
+        rows="3" 
+        cols="25" 
+        placeholder="..." 
+        wrap="hard">{{ $datosGenerales['posibleSolucion'] }}</textarea>
     </div>    
     <div class="form-group">
       <label for="recFort">Recursos y fortalezas:</label>

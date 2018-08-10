@@ -46,6 +46,7 @@ Registro
         
       {!! Form::open( array( 'id'=>'registrollamada', 'method'=>'POST' ) ) !!}
 
+        <input type="hidden" value="{{ $numeroCaso }}" name="idCaso" id="idCaso" />
       <div class="col-md-12" >
           <div class="col-md-3">
              <label for="nombre">Consejera: </label>&nbsp;<small>{!! Auth::user()->persona->nombres." ".Auth::user()->persona->primer_apellido." ".Auth::user()->persona->segundo_apellido !!}</small>
@@ -103,6 +104,7 @@ Registro
 
       </div>
 
+    @if($numeroLlamada == 0 )
       <h4 style="color:#605ca8; font-weight:bold; text-align:center;">
           Te atendio {!! Auth::user()->persona->nombres." ".Auth::user()->persona->primer_apellido." ".Auth::user()->persona->segundo_apellido !!} no dudes en marcar las veces que sea necesario. Nuestro horario es de Lunes a Viernes de 8:00am a 8:00pm <br/>
           De acuerdo a la ley de protección de datos personales puedes conocer nuestro aviso de privacidad en nuestra página www.origenac.org<br/>
@@ -112,7 +114,7 @@ Registro
       <div style="text-align:center;">
           <button type="submit" class="btn btn-app bg-olive"><i class='fa fa-save'></i> Registrar</button>
       </div>
-
+    @endif
       {!! Form::close()!!}
         
     </div>
@@ -260,6 +262,7 @@ Registro
 
     $('#registrollamada').submit(function(e) {
         e.preventDefault();
+        cambiarStatusRegistro(false);
         var data = $(this).serialize()+'&duracion='+$('#timer_div').text();
         guardarFormulario(data, 'Registro/registrarllamada');
     });
