@@ -256,7 +256,8 @@ if ($Sesion){
 	$Femenino=CuentaEsto("Sexo = 'F'");
 
 	//Ocupacion
-	$TotalOcu=Muestra("Ocupacion","Ocupacion <> '-' AND ","Llamadas DESC","LIMIT 10");
+	// $TotalOcu=Muestra("Ocupacion","Ocupacion <> '-' AND ","Llamadas DESC");
+	$TotalOcu=Muestra("Ocupacion"); // Muestra las llamadas con otros.. 
 
 	//Estado Civil
 	$TotalEstadoCivil=Muestra("EstadoCivil");
@@ -278,7 +279,8 @@ if ($Sesion){
 
 	//Informacion Prestada
 	$psicologico=CuentaAyuda("AyudaPsicologico");
-	$legal=CuentaAyuda("AyudaLegal");
+	$legal=Muestra("AyudaPsicologico");
+	// $legal=CuentaAyuda("AyudaLegal");
 	$medico=CuentaAyuda("AyudaMedica");
 	$nutricional=CuentaAyuda("AyudaNutricional");
 	$otros=CuentaAyuda("AyudaOtros");
