@@ -155,16 +155,16 @@ echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&da
 
 <TR><TD COLSPAN=13><CENTER>Informaci&oacute;n Prestada</CENTER></TD></TR>
 <TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH><TR></TR>
-<TR><TD>Psicologico</TD><?echo "<TD>$psicologico['l']</TD><TD>$psicologico['u']</TD>";?></TR>
-<TR><TD>Legal</TD><?echo "<TD>$legal['l']</TD><TD>$legal['u']</TD>";?></TR>
-<TR><TD>Medico</TD><?echo "<TD>$medico['l']</TD><TD>$medico['u']</TD>";?></TR>
-<TR><TD>Nutricional</TD><?echo "<TD>$nutricional['l']</TD><TD>$nutricional['u']</TD>";?></TR>
-<TR><TD>Otros</TD><?echo "<TD>$otros['l']</TD><TD>$otros['u']</TD>";?></TR>
+<TR><TD>Psicologico</TD><?echo "<TD>".$psicologico["l"]."</TD><TD>".$psicologico["u"]."</TD>";?></TR>
+<TR><TD>Legal</TD><?echo "<TD>".$legal["l"]."</TD><TD>".$legal["u"]."</TD>";?></TR>
+<TR><TD>Medico</TD><?echo "<TD>".$medico["l"]."</TD><TD>".$medico["u"]."</TD>";?></TR>
+<TR><TD>Nutricional</TD><?echo "<TD>".$nutricional["l"]."</TD><TD>".$nutricional["u"]."</TD>";?></TR>
+<TR><TD>Otros</TD><?echo "<TD>".$otros["l"]."</TD><TD>".$otros["u"]."</TD>";?></TR>
 <TR><TD COLSPAN=13><CENTER>
 <?
 $Nom="Informacion prestada";
 $data="Psicologico,Legal,Medico,Nutricional";
-$datag=$psicologico['l'].",".$legal['l'].",".$medico['l'].",".$nutricional['l'];
+$datag=$psicologico["l"].",".$legal["l"].",".$medico["l"].",".$nutricional["l"];
 echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
 ?>
 </CENTER></TD></TR> 
