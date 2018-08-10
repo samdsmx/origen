@@ -61,7 +61,7 @@ if ($Sesion){
 		$u=0;
 		while ($row = mysql_fetch_array($total_result)){
 			$Ayuda=$row['Nombre'];		
-			$sql2 ="Select c.Nombre, COUNT(*) 'Llamadas', COUNT(Distinct(l.idcaso)) 'Usuarios' FROM Reporte l, Campos c WHERE c.Nombre='$Ayuda' AND c.Tipo='$Tipo' AND l.$Tipo LIKE \"%$Ayuda%\" Group By c.Nombre ORDER BY Cantidad DESC";
+			$sql2 ="Select c.Nombre, COUNT(*) 'Llamadas', COUNT(Distinct(l.idcaso)) 'Usuarios' FROM Reporte l, Campos c WHERE c.Nombre='$Ayuda' AND c.Tipo='$Tipo' AND l.$Tipo LIKE \"%$Ayuda%\" Group By c.Nombre ORDER BY Llamadas DESC";
 			$total_result2 = @mysql_query($sql2, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 			while ($row2 = mysql_fetch_array($total_result2)){
 				$Ayuda2=$row2['Nombre'];
@@ -81,7 +81,7 @@ if ($Sesion){
 		$Total=@mysql_num_rows($total_result);
 		while ($row = mysql_fetch_array($total_result)){
 			$Ayuda=$row['Nombre'];		
-			$sql2 ="Select c.Nombre, COUNT(*) 'Llamadas', COUNT(Distinct(l.idcaso)) 'Usuarios' FROM Reporte l, Campos c WHERE c.Nombre='$Ayuda' AND c.Tipo='$Tipo' AND l.$Tipo LIKE \"%$Ayuda%\" Group By c.Nombre ORDER BY Cantidad DESC";
+			$sql2 ="Select c.Nombre, COUNT(*) 'Llamadas', COUNT(Distinct(l.idcaso)) 'Usuarios' FROM Reporte l, Campos c WHERE c.Nombre='$Ayuda' AND c.Tipo='$Tipo' AND l.$Tipo LIKE \"%$Ayuda%\" Group By c.Nombre ORDER BY Llamadas DESC";
 			$total_result2 = @mysql_query($sql2, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 			if ($row2 = mysql_fetch_array($total_result2)){
 				$Ayuda2=$row2['Nombre'];
