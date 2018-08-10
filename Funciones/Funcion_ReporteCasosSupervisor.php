@@ -65,7 +65,7 @@ if ($Sesion){
 			while ($row2 = mysql_fetch_array($total_result2)){
 				$Ayuda2=$row2['Nombre'];
 				$CantAyu=$row2['Llamadas'];
-				$Usu=$row['Usuarios'];
+				$Usu=$row2['Usuarios'];
 				$u=$u+$Usu;
 				$t=$t+$CantAyu;		
 				}
@@ -79,13 +79,13 @@ if ($Sesion){
 		$Seguimientos="<TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH><TR>";
 		$Total=@mysql_num_rows($total_result);
 		while ($row = mysql_fetch_array($total_result)){
-			$Ayuda=$row['Nombre'];		
-			$sql2 ="Select c.Nombre, COUNT(*) 'Llamadas', COUNT(Distinct(l.idcaso)) 'Usuarios' FROM Reporte l, Campos c WHERE c.Nombre='$Ayuda' AND c.Tipo='$Tipo' AND l.$Tipo LIKE \"%$Ayuda%\" Group By c.Nombre ORDER BY Llamadas DESC";
+			$Ayuda=$row['Nombre'];	
+			$sql2 ="SELECT c.Nombre, COUNT(*) 'Llamadas', COUNT(Distinct(l.idcaso)) 'Usuarios' FROM Reporte l, Campos c WHERE c.Nombre='$Ayuda' AND c.Tipo='$Tipo' AND l.$Tipo LIKE \"%$Ayuda%\" Group By c.Nombre ORDER BY Llamadas DESC";
 			$total_result2 = @mysql_query($sql2, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 			if ($row2 = mysql_fetch_array($total_result2)){
 				$Ayuda2=$row2['Nombre'];
 				$CantAyu=$row2['Llamadas'];
-				$Usu=$row['Usuarios'];
+				$Usu=$row2['Usuarios'];
 				$data .= $Ayuda2.",";
 				$datag .= $CantAyu.",";
 				$Seguimientos .= "<TR><TD>$Ayuda2</TD><TD>$CantAyu</TD><TD>$Usu</TD><TR>";
