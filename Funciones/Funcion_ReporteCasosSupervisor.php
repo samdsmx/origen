@@ -70,7 +70,8 @@ if ($Sesion){
 				$t=$t+$CantAyu;		
 				}
 			}
-		return $t;
+		$v=array('l' => $t, 'u' => $u);
+		return $v;
 		}
 
 	function MuestraAyuda($Tipo){
@@ -284,9 +285,6 @@ if ($Sesion){
 	$medico=CuentaAyuda("AyudaMedica");
 	$nutricional=CuentaAyuda("AyudaNutricional");
 	$otros=CuentaAyuda("AyudaOtros");
-	$TipoViol=CuentaAyuda("TipoViolencia");
-	$ModalidadViol=CuentaAyuda("ModalidadViolencia");
-	$Violentometro=CuentaAyuda("Violentometro");
 
 	$TotalEst=Muestra("Estado");
 	$TotalDele=Muestra("Municipio","Municipio <> '' AND ","Llamadas DESC","LIMIT 10");

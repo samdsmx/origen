@@ -151,51 +151,52 @@ echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&da
 </CENTER></TD></TR> 
 
 <TR><TD COLSPAN=13><CENTER>Ocupaci&oacute;n (10+)</CENTER></TD></TR> 
-<?echo "<TD>$TotalOcu</TD>";?>
+<?echo $TotalOcu;?>
 
 <TR><TD COLSPAN=13><CENTER>Informaci&oacute;n Prestada</CENTER></TD></TR>
-<TR><TD>Psicologico</TD><?echo "<TD>$psicologico</TD>";?></TR>
-<TR><TD>Legal</TD><?echo "<TD>$legal</TD>";?></TR>
-<TR><TD>Medico</TD><?echo "<TD>$medico</TD>";?></TR>
-<TR><TD>Nutricional</TD><?echo "<TD>$nutricional</TD>";?></TR>
-<TR><TD>Otros</TD><?echo "<TD>$otros</TD>";?></TR>
+<TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH><TR></TR>
+<TR><TD>Psicologico</TD><?echo "<TD>$psicologico['l']</TD><TD>$psicologico['u']</TD>";?></TR>
+<TR><TD>Legal</TD><?echo "<TD>$legal['l']</TD><TD>$legal['u']</TD>";?></TR>
+<TR><TD>Medico</TD><?echo "<TD>$medico['l']</TD><TD>$medico['u']</TD>";?></TR>
+<TR><TD>Nutricional</TD><?echo "<TD>$nutricional['l']</TD><TD>$nutricional['u']</TD>";?></TR>
+<TR><TD>Otros</TD><?echo "<TD>$otros['l']</TD><TD>$otros['u']</TD>";?></TR>
 <TR><TD COLSPAN=13><CENTER>
 <?
 $Nom="Informacion prestada";
 $data="Psicologico,Legal,Medico,Nutricional";
-$datag=$psicologico.",".$legal.",".$medico.",".$nutricional;
+$datag=$psicologico['l'].",".$legal['l'].",".$medico['l'].",".$nutricional['l'];
 echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
 ?>
 </CENTER></TD></TR> 
 
 <TR><TD COLSPAN=13><CENTER>Motivo Especifico Psicologico</CENTER></TD></TR>
-<?echo "$TotalAyuP";?>
+<?echo $TotalAyuP;?>
 <TR><TD COLSPAN=13><CENTER>Motivo Especifico Legal</CENTER></TD></TR>
-<?echo "$TotalAyuL";?>
+<?echo $TotalAyuL;?>
 <TR><TD COLSPAN=13><CENTER>Motivo Especifico Medica</CENTER></TD></TR>
-<?echo "$TotalAyuM";?>
+<?echo $TotalAyuM;?>
 <TR><TD COLSPAN=13><CENTER>Motivo Especifico Nutricional</CENTER></TD></TR>
-<?echo "$TotalAyuN";?>
+<?echo $TotalAyuN;?>
 <TR><TD COLSPAN=13><CENTER>Motivo Especifico Otros</CENTER></TD></TR>
-<?echo "$TotalAyuO";?>
+<?echo $TotalAyuO;?>
 <TR><TD COLSPAN=13><CENTER>Tipo de Violencia</CENTER></TD></TR>
-<?echo "$TotalTViol";?>
+<?echo $TotalTViol;?>
 <TR><TD COLSPAN=13><CENTER>Modalidad de Violencia</CENTER></TD></TR>
-<?echo "$TotalMViol";?>
+<?echo $TotalMViol;?>
 <TR><TD COLSPAN=13><CENTER>Violentometro</CENTER></TD></TR>
-<?echo "$TotalViolentometro";?>
+<?echo $TotalViolentometro;?>
 
 <TR><TD COLSPAN=13><CENTER>Estado</CENTER></TD></TR>
-<?echo "$TotalEst";?>
+<?echo $TotalEst;?>
 
 <TR><TD COLSPAN=13><CENTER>Delegacion o Municipio (10+)</CENTER></TD></TR>
-<?echo "$TotalDele";?>
+<?echo $TotalDele;?>
 
 <TR><TD COLSPAN=13><CENTER>Codigo Postal (10+)</CENTER></TD></TR>
-<?echo "$TotalCP";?>
+<?echo $TotalCP;?>
 
 <TR><TD COLSPAN=13><CENTER>Como Se Entero</CENTER></TD></TR> 
-<?echo "$TotalEnteraste";?>
+<?echo $TotalEnteraste;?>
 
 </TABLE>
  </FONT><BR>
