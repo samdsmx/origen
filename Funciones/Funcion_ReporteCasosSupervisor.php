@@ -58,13 +58,16 @@ if ($Sesion){
 		$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$Seguimientos="";
 		$t=0;
+		$u=0;
 		while ($row = mysql_fetch_array($total_result)){
 			$Ayuda=$row['Nombre'];		
-			$sql2 ="Select c.Nombre, COUNT(*) 'Cantidad' FROM Reporte l, Campos c WHERE c.Nombre='$Ayuda' AND c.Tipo='$Tipo' AND l.$Tipo LIKE \"%$Ayuda%\" Group By c.Nombre ORDER BY Cantidad DESC";
+			$sql2 ="Select c.Nombre, COUNT(*) 'Llamadas', COUNT(Distinct(l.idcaso)) 'Usuarios' FROM Reporte l, Campos c WHERE c.Nombre='$Ayuda' AND c.Tipo='$Tipo' AND l.$Tipo LIKE \"%$Ayuda%\" Group By c.Nombre ORDER BY Cantidad DESC";
 			$total_result2 = @mysql_query($sql2, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 			while ($row2 = mysql_fetch_array($total_result2)){
 				$Ayuda2=$row2['Nombre'];
-				$CantAyu=$row2['Cantidad'];
+				$CantAyu=$row2['Llamadas'];
+				$Usu=$row['Usuarios'];
+				$u=$u+$Usu;
 				$t=$t+$CantAyu;		
 				}
 			}
@@ -75,19 +78,18 @@ if ($Sesion){
 		$sql ="SELECT Nombre FROM Campos WHERE tipo='$Tipo'";
 		$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$Seguimientos="";
-		$i=0;
 		$Total=@mysql_num_rows($total_result);
 		while ($row = mysql_fetch_array($total_result)){
 			$Ayuda=$row['Nombre'];		
-			$sql2 ="Select c.Nombre, COUNT(*) 'Cantidad' FROM Reporte l, Campos c WHERE c.Nombre='$Ayuda' AND c.Tipo='$Tipo' AND l.$Tipo LIKE \"%$Ayuda%\" Group By c.Nombre ORDER BY Cantidad DESC";
+			$sql2 ="Select c.Nombre, COUNT(*) 'Llamadas', COUNT(Distinct(l.idcaso)) 'Usuarios' FROM Reporte l, Campos c WHERE c.Nombre='$Ayuda' AND c.Tipo='$Tipo' AND l.$Tipo LIKE \"%$Ayuda%\" Group By c.Nombre ORDER BY Cantidad DESC";
 			$total_result2 = @mysql_query($sql2, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 			if ($row2 = mysql_fetch_array($total_result2)){
 				$Ayuda2=$row2['Nombre'];
-				$CantAyu=$row2['Cantidad'];
-				$i=$i+1;
+				$CantAyu=$row2['Llamadas'];
+				$Usu=$row['Usuarios'];
 				$data .= $Ayuda2.",";
 				$datag .= $CantAyu.",";
-				$Seguimientos .= "<TR><TD>$Ayuda2</TD><TD>$i</TD><TD>$CantAyu</TD><TR>";
+				$Seguimientos .= "<TR><TD>$Ayuda2</TD><TD>$CantAyu</TD><TD>$Usu</TD><TR>";
 				}
 			}
 		$data = trim($data, ",");
@@ -279,8 +281,7 @@ if ($Sesion){
 
 	//Informacion Prestada
 	$psicologico=CuentaAyuda("AyudaPsicologico");
-	$legal=Muestra("AyudaPsicologico");
-	// $legal=CuentaAyuda("AyudaLegal");
+	$legal=CuentaAyuda("AyudaLegal");
 	$medico=CuentaAyuda("AyudaMedica");
 	$nutricional=CuentaAyuda("AyudaNutricional");
 	$otros=CuentaAyuda("AyudaOtros");
