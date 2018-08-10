@@ -56,7 +56,6 @@ if ($Sesion){
 	function CuentaAyuda($Tipo){
 		$sql ="SELECT Nombre FROM Campos WHERE tipo='$Tipo'";
 		$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
-		$Seguimientos="";
 		$t=0;
 		$u=0;
 		while ($row = mysql_fetch_array($total_result)){
@@ -77,7 +76,7 @@ if ($Sesion){
 	function MuestraAyuda($Tipo){
 		$sql ="SELECT Nombre FROM Campos WHERE tipo='$Tipo'";
 		$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
-		$Seguimientos="";
+		$Seguimientos="<TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH><TR>";
 		$Total=@mysql_num_rows($total_result);
 		while ($row = mysql_fetch_array($total_result)){
 			$Ayuda=$row['Nombre'];		
