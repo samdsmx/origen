@@ -26,7 +26,13 @@
     </div>    
     <div class="form-group">
       <label for="recFort">Recursos y fortalezas:</label>
-      <textarea name="recFort" id="recFort" class="form-control" rows="3" cols="25" placeholder="..." wrap="hard"></textarea>
+      <textarea name="Estatus" 
+        @if($datosGenerales['Estatus']  != '' && $numeroLlamada > 0) disabled @endif 
+        id="recFort" 
+        class="form-control" 
+        rows="3" cols="25" 
+        placeholder="..." 
+        wrap="hard">{{ $datosGenerales['Estatus'] }}</textarea>
     </div>      
     <div class="form-group">
       <label for="DesarrolloCaso">Desarrollo del caso:</label>
