@@ -40,6 +40,7 @@ class ConsultasController extends BaseController {
 						->join('persona','consejeros.id_persona','=','persona.id_persona')
 						->select('casos.*','llamadas.*')
 						->select('casos.IDCaso','casos.Telefono','Horainicio','LlamadaNo','casos.Nombre','FechaLlamada','nombres','primer_apellido','segundo_apellido')
+						->groupBy('llamadas.IDCaso')
 						->get();
 						//->toSql();
 		return $llamadas_casos;
