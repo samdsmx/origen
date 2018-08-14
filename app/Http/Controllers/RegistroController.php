@@ -31,7 +31,7 @@ class RegistroController extends BaseController {
             $datosGenerales['correoElectronico'] = '';
             $datosGenerales['medioContacto'] = '';
             $datosGenerales['comoTeEnteraste'] = '';
-            $datosGenerales['posibleSolucion'] = '';
+            $datosGenerales['Estatus'] = '';
         }else{
             $datosGenerales['nombre'] = $datosLlamada[0]->Nombre;
             $datosGenerales['edad'] = $datosLlamada[0]->Edad;
@@ -47,6 +47,7 @@ class RegistroController extends BaseController {
             $datosGenerales['medioContacto'] = $datosLlamada[0]->MedioContacto;
             $datosGenerales['comoTeEnteraste'] = $datosLlamada[0]->ComoTeEnteraste;
             $datosGenerales['posibleSolucion'] = $datosLlamada[0]->PosibleSolucion;
+            $datosGenerales['Estatus'] = $datosLlamada[0]->Estatus;
         }
 
         $menu = parent::createMenu();
@@ -162,7 +163,6 @@ class RegistroController extends BaseController {
 
         if($numeroCaso == 0){
             $caso = new casosModel();
-            $datos['Estatus'] = '1';
             $datos['HorasInvertidas'] = $duracion;
             $caso->fill($datos);
             $caso->save();
@@ -210,7 +210,7 @@ class RegistroController extends BaseController {
                             'casos.Religion','casos.LenguaIndigena','casos.Ocupacion',
                             'casos.VivesCon','casos.Telefono','casos.CorreoElectronico',
                             'casos.MedioContacto','casos.ComoTeEnteraste', 
-                            'casos.PosibleSolucion')
+                            'casos.PosibleSolucion', 'casos.Estatus')
                         ->where('casos.IDCaso',$nro_caso)
                         ->where('llamadas.LlamadaNo',$nro_llamada)
                         ->get();

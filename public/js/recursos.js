@@ -68,7 +68,7 @@ function mostrarMensaje(mensaje, clase) {
     });
 }
 
-function guardarFormulario(data, url) {
+function guardarFormulario(data, url, estaDesactivado) {
     //event.preventDefault();
     $.ajax({
         type: 'POST',
@@ -78,7 +78,8 @@ function guardarFormulario(data, url) {
             $('div').removeClass('has-error');
             $('input').removeAttr("title");
             if (response.errors) {
-                cambiarStatusRegistro(true);
+                console.log(estaDesactivado);
+                cambiarStatusRegistro(estaDesactivado);
                 $.each(response.errors, function(index, error) {
                     $("#d" + index).addClass("has-error");
                     $("#" + index).attr("title", error);

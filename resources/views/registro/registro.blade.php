@@ -262,9 +262,12 @@ Registro
 
     $('#registrollamada').submit(function(e) {
         e.preventDefault();
+        var estaDesactivado = '{{ $numeroCaso }}' !== '0';
+        console.log('>>>>>>estaDesactivado: ',estaDesactivado);
+        console.log('>>>>>>valor: ','{{ $numeroCaso }}');
         cambiarStatusRegistro(false);
         var data = $(this).serialize()+'&duracion='+$('#timer_div').text();
-        guardarFormulario(data, 'Registro/registrarllamada');
+        guardarFormulario(data, 'Registro/registrarllamada',estaDesactivado);
     });
    
     var startDate = new Date();
