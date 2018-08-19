@@ -78,7 +78,6 @@ function guardarFormulario(data, url, estaDesactivado) {
             $('div').removeClass('has-error');
             $('input').removeAttr("title");
             if (response.errors) {
-                console.log(estaDesactivado);
                 cambiarStatusRegistro(estaDesactivado);
                 $.each(response.errors, function(index, error) {
                     $("#d" + index).addClass("has-error");
@@ -318,7 +317,6 @@ $(document).ready(function() {
     } );
 
     function crearTablaSeguimiento(id) {
-        console.log(id);
         var direccion = window.location.href.split('/');
                     direccion.pop();
                     direccion.push('Registro');
@@ -328,9 +326,8 @@ $(document).ready(function() {
             type: 'GET',
             url: 'Consultas/followcalls/'+id,
             success: function(response) {
-                console.log(response);
                 for(let i=0;i<response.length;i++) {
-                    let direccionVerLlamada = direccion+'?caso='+response[i].IDCaso+'&llamada='+response[i].LlamadaNo;
+                    let direccionVerLlamada = direccion+'?caso='+response[i].IDCaso+'&llamada='+response[].LlamadaNo;
                     $('#'+id+' tr:last').after('<tr> <td><span class="fecha">'+ response[i].FechaLlamada+'</span><br>'+
                     response[i].Horainicio
                     +'</td> <td>'+
