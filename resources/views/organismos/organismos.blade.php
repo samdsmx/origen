@@ -91,7 +91,6 @@ Sistemas
      success: function(data) {
      if (data == 'error') {
      mostrarMensajeError('Ha ocurrido un error debido a que la información introducida no es correcta. Vuelva a intentarlo más tarde.');
-     console.log('data = error');
      }
      else {
      var cantidad = data.length;

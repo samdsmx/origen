@@ -5,3 +5,12 @@
 .opcionPaginacion{
     padding: 5px;
 }
+
+.tablaDetallesConsulta td {
+    padding-left: 10vw;
+    padding-bottom: 20px;
+}
+
+.tablaDetallesConsulta .fecha {
+    font-weight: bolder;
+}

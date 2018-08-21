@@ -320,7 +320,6 @@ Sistemas
                     $.ajax({
                     url:'Reportes/graficar/' + valor,
                             success: function(data){
-                            console.log(data);
                                     informacionTabulada = data;
                                     var cantidad = data.length;
                                     for (var i = 0; i < cantidad; i++){
@@ -684,7 +683,6 @@ Sistemas
                     info = data;
                     }
 
-                    console.log(info);
                             for (var j = 1; j < cantidadMaxima; j++){
                     var separadorCantidadLabel = info[j].split(':');
                             cantidadGraficada.push(separadorCantidadLabel[1]);

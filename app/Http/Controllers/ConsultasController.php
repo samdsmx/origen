@@ -289,4 +289,17 @@ class ConsultasController extends BaseController {
 		return $respuesta;
 	}
 
+	public function getFollowcalls($id) {
+		$llamadas_casos = DB::table('llamadas')
+						->join('casos','casos.IDCaso','=','llamadas.IDCaso')
+						->join('consejeros','llamadas.Consejera','=','consejeros.nombre')
+						->join('persona','consejeros.id_persona','=','persona.id_persona')
+						->select('casos.*','llamadas.*')
+						->select('casos.IDCaso','llamadas.LlamadaNo','Horainicio','FechaLlamada','nombres','primer_apellido','segundo_apellido')
+						->where('llamadas.IDCaso',$id)
+						->get();
+						//->toSql();
+		return $llamadas_casos;
+	}
+
 }

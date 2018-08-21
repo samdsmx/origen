@@ -238,7 +238,6 @@ Registro
                 url: 'Registro/buscarcp', 
                 data: { CP: cp },
                 success: function( response ){
-                    console.log(response);
                     $("#Estado").val(response["estado"]);
                     $("#Municipio").find('option')
                             .remove()
@@ -263,8 +262,6 @@ Registro
     $('#registrollamada').submit(function(e) {
         e.preventDefault();
         var estaDesactivado = '{{ $numeroCaso }}' !== '0';
-        console.log('>>>>>>estaDesactivado: ',estaDesactivado);
-        console.log('>>>>>>valor: ','{{ $numeroCaso }}');
         cambiarStatusRegistro(false);
         var data = $(this).serialize()+'&duracion='+$('#timer_div').text();
         guardarFormulario(data, 'Registro/registrarllamada',estaDesactivado);
