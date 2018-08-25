@@ -78,7 +78,6 @@ function guardarFormulario(data, url, estaDesactivado) {
             $('div').removeClass('has-error');
             $('input').removeAttr("title");
             if (response.errors) {
-                console.log(estaDesactivado);
                 cambiarStatusRegistro(estaDesactivado);
                 $.each(response.errors, function(index, error) {
                     $("#d" + index).addClass("has-error");
@@ -317,6 +316,36 @@ $(document).ready(function() {
             });
     } );
 
+    function crearTablaSeguimiento(id) {
+        var direccion = window.location.href.split('/');
+                    direccion.pop();
+                    direccion.push('Registro');
+                    direccion = direccion.join('/');
+        let content = '<table id="'+id+'" class="tablaDetallesConsulta">';
+        $.ajax({
+            type: 'GET',
+            url: 'Consultas/followcalls/'+id,
+            success: function(response) {
+                for(let i=0;i<response.length;i++) {
+                    let direccionVerLlamada = direccion+'?caso='+response[i].IDCaso+'&llamada='+response[].LlamadaNo;
+                    $('#'+id+' tr:last').after('<tr> <td><span class="fecha">'+ response[i].FechaLlamada+'</span><br>'+
+                    response[i].Horainicio
+                    +'</td> <td>'+
+                    response[i].nombres+' '+response[i].primer_apellido+' '+response[i].segundo_apellido
+                    +'</td><td><a href="'+direccionVerLlamada+'">Ver detalles</a></td> </tr>');
+                }
+            },
+            error: function(xhr, status, error) {
+                alert("Error en el servidor");
+                content += '</table>';
+                return content;
+            }
+
+        });
+                content += '<tr> <td> </td> <td> </td><td> </td> </tr>';
+                content += '</table>';
+                return content;
+    }
 
     $('#buscaCasos').submit( function(e){
         e.preventDefault();
@@ -352,6 +381,10 @@ $(document).ready(function() {
                      resultado.push(arrayInterno);
                     }
                 $("#tablaCasos").DataTable().rows.add(resultado).draw();
+                $('#tablaCasos tbody tr').each(function(index,ele) {
+                    var row = $('#tablaCasos').DataTable().row( $(this));
+                    row.child( crearTablaSeguimiento($(this).children()[0].innerHTML )).show();
+                });
                 },
                 error: function(xhr, status, error) {
                     alert("Error en el servidor");
