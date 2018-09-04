@@ -107,7 +107,6 @@ if ($Sesion){
 		$sql ="drop table IF EXISTS $tmp";
 		$total_result = @mysql_query($sql, $connection);
 		$sql ="create table $tmp SELECT DISTINCT l.*, c.Nombre, c.Telefono, c.Edad, c.Sexo, c.ComoTeEnteraste, c.Ocupacion, c.Municipio, c.Estado, c.EstadoCivil FROM Llamadas l, Casos c WHERE c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda Order By l.LlamadaNo Desc";
-		echo $sql."</br>";
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		}
 	if(!$Correlacion){
@@ -119,7 +118,7 @@ if ($Sesion){
 	$inicio=(($Pagina-1)*50);
 
 	$sql ="SELECT * FROM ".rs($tmp)." group by ".rs($Correlacion)." Order By FechaLlamada Desc limit ".rs($inicio).",50";
-	echo $sql."</br>";
+
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	while ($row = mysql_fetch_array($total_result)){
 		$IDCaso=$row['IDCaso'];
@@ -155,7 +154,7 @@ switch ($Correlacion){
 		$sql2 = "SELECT IDCaso, FechaLlamada, HoraInicio, Consejera, LlamadaNo, Acceso FROM ".rs($tmp)." WHERE Telefono='".rs($Telefono)."' Order By FechaLlamada Desc";		
 		break;
 	}
-	echo $sql2."</br>";
+
 		$total_result2 = @mysql_query($sql2, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$total_found2 = @mysql_num_rows($total_result2);
 	 	while ($row2 = mysql_fetch_array($total_result2)){
@@ -202,7 +201,7 @@ switch ($Correlacion){
            	<TR><TD><FONT SIZE=\"-2\">Seguimientos ($total_found2)</FONT><BR><BR><FONT SIZE=\"-2\">$Seguimientos</FONT><BR></TD></TR>
 	     	</TABLE>
 		</td><td VALIGN=top NOWRAP BGCOLOR=\"#FFFFFF\"><FONT SIZE=\"-1\">$Color $Consejera</td><TD VALIGN=top BGCOLOR=\"#FFFFFF\">
-		<a href=\"javascript: openwindow('?Accion=Seguimiento&IDCaso=$IDCaso&Nombre=$Nombre&LlamadaNo=".($total_found2+1)."');\"><IMG SRC=\"resc/seguimiento.gif\" BORDER=0 ALIGN=bottom></a></TD><TD VALIGN=top NOWRAP BGCOLOR=\"#FFFFFF\">
+		<a href=\"javascript: openwindow('?Accion=Seguimiento&IDCaso=$IDCaso&Nombre=$Nombre&LlamadaNo=".($LlamadaNo+1)."');\"><IMG SRC=\"resc/seguimiento.gif\" BORDER=0 ALIGN=bottom></a></TD><TD VALIGN=top NOWRAP BGCOLOR=\"#FFFFFF\">
 		<a href=\"javascript: openwindow('?Accion=VerDetalles&IDCaso=$IDCaso&LlamadaNo=$LlamadaNo');\"><IMG SRC=\"resc/detalles.gif\" BORDER=0 ALIGN=bottom><a></TD></tr>";
 		$Seguimientos ="";
 		}
