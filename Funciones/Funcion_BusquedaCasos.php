@@ -118,7 +118,7 @@ if ($Sesion){
 	$inicio=(($Pagina-1)*50);
 
 	$sql ="SELECT * FROM ".rs($tmp)." group by ".rs($Correlacion)." Order By FechaLlamada Desc limit ".rs($inicio).",50";
-
+	echo "Que paso aqui";
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	while ($row = mysql_fetch_array($total_result)){
 		$IDCaso=$row['IDCaso'];
