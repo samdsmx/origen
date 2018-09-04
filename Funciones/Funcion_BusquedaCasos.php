@@ -155,7 +155,7 @@ switch ($Correlacion){
 		$sql2 = "SELECT IDCaso, FechaLlamada, HoraInicio, Consejera, LlamadaNo, Acceso FROM ".rs($tmp)." WHERE Telefono='".rs($Telefono)."' Order By FechaLlamada Desc";		
 		break;
 	}
-
+	echo $sql2."</br>";
 		$total_result2 = @mysql_query($sql2, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$total_found2 = @mysql_num_rows($total_result2);
 	 	while ($row2 = mysql_fetch_array($total_result2)){
