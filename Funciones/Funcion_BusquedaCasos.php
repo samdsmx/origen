@@ -201,7 +201,7 @@ switch ($Correlacion){
            	<TR><TD><FONT SIZE=\"-2\">Seguimientos ($total_found2)</FONT><BR><BR><FONT SIZE=\"-2\">$Seguimientos</FONT><BR></TD></TR>
 	     	</TABLE>
 		</td><td VALIGN=top NOWRAP BGCOLOR=\"#FFFFFF\"><FONT SIZE=\"-1\">$Color $Consejera</td><TD VALIGN=top BGCOLOR=\"#FFFFFF\">
-		<a href=\"javascript: openwindow('?Accion=Seguimiento&IDCaso=$IDCaso&Nombre=$Nombre&LlamadaNo=".($total_found2+1)."');\"><IMG SRC=\"resc/seguimiento.gif\" BORDER=0 ALIGN=bottom></a></TD><TD VALIGN=top NOWRAP BGCOLOR=\"#FFFFFF\">
+		<a href=\"javascript: openwindow('?Accion=Seguimiento&IDCaso=$IDCaso&Nombre=$Nombre&LlamadaNo=".($LlamadaNo+1)."');\"><IMG SRC=\"resc/seguimiento.gif\" BORDER=0 ALIGN=bottom></a></TD><TD VALIGN=top NOWRAP BGCOLOR=\"#FFFFFF\">
 		<a href=\"javascript: openwindow('?Accion=VerDetalles&IDCaso=$IDCaso&LlamadaNo=$LlamadaNo');\"><IMG SRC=\"resc/detalles.gif\" BORDER=0 ALIGN=bottom><a></TD></tr>";
 		$Seguimientos ="";
 		}
