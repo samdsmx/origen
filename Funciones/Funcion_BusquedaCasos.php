@@ -107,6 +107,7 @@ if ($Sesion){
 		$sql ="drop table IF EXISTS $tmp";
 		$total_result = @mysql_query($sql, $connection);
 		$sql ="create table $tmp SELECT DISTINCT l.*, c.Nombre, c.Telefono, c.Edad, c.Sexo, c.ComoTeEnteraste, c.Ocupacion, c.Municipio, c.Estado, c.EstadoCivil FROM Llamadas l, Casos c WHERE c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda Order By l.LlamadaNo Desc";
+		echo $sql."</br>";
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		}
 	if(!$Correlacion){
@@ -118,8 +119,7 @@ if ($Sesion){
 	$inicio=(($Pagina-1)*50);
 
 	$sql ="SELECT * FROM ".rs($tmp)." group by ".rs($Correlacion)." Order By FechaLlamada Desc limit ".rs($inicio).",50";
-	echo "Que paso aqui";
-	echo $sql;
+	echo $sql."</br>";
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	while ($row = mysql_fetch_array($total_result)){
 		$IDCaso=$row['IDCaso'];
