@@ -41,6 +41,22 @@ function cambiarPeticionMultiplesTemas(peticion,campo) {
     return peticionCorrecta;
 }
 
+function cambiarPeticionMultipleSelect(peticion,campo) {
+    var peticionCorrecta = '';
+    var campoConcat = '';
+    var informacionDiv = peticion.split('&');
+    for(var i=0;i<informacionDiv.length;i++) {
+      var eleDiv = informacionDiv[i].split('=');
+      if(eleDiv[0] === campo) {
+        campoConcat += eleDiv[1] + ',';
+      } else {
+        peticionCorrecta += informacionDiv[i] + '&';
+      }
+    }
+    peticionCorrecta += campo+'='+campoConcat;
+    return peticionCorrecta;
+}
+
 function limpiarCampos() {
   $('#ID').val('');
   $('.select2-selection__rendered').children().each(function() {
@@ -70,10 +86,16 @@ function mostrarMensaje(mensaje, clase) {
 
 function guardarFormulario(data, url, estaDesactivado) {
     //event.preventDefault();
+    let dataChanged = cambiarPeticionMultipleSelect(data,'AyudaPsicologico');
+    dataChanged = cambiarPeticionMultipleSelect(dataChanged,'AyudaLegal');
+    dataChanged = cambiarPeticionMultipleSelect(dataChanged,'AyudaMedica');
+    dataChanged = cambiarPeticionMultipleSelect(dataChanged,'AyudaOtros');
+    dataChanged = cambiarPeticionMultipleSelect(dataChanged,'TipoViolencia');
+    dataChanged = cambiarPeticionMultipleSelect(dataChanged,'ModalidadViolencia');
     $.ajax({
         type: 'POST',
         url: url,
-        data: data,
+        data: dataChanged,
         success: function(response) {
             $('div').removeClass('has-error');
             $('input').removeAttr("title");
@@ -327,7 +349,7 @@ $(document).ready(function() {
             url: 'Consultas/followcalls/'+id,
             success: function(response) {
                 for(let i=0;i<response.length;i++) {
-                    let direccionVerLlamada = direccion+'?caso='+response[i].IDCaso+'&llamada='+response[].LlamadaNo;
+                    let direccionVerLlamada = direccion+'?caso='+response[i].IDCaso+'&llamada='+response[i].LlamadaNo;
                     $('#'+id+' tr:last').after('<tr> <td><span class="fecha">'+ response[i].FechaLlamada+'</span><br>'+
                     response[i].Horainicio
                     +'</td> <td>'+

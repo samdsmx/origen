@@ -48,11 +48,11 @@
       <label for="Sexo">Genero:</label>
       <div class="radio">
         <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
-          <input type="radio" name="Sexo" value="f" @if($datosGenerales['genero'] != 'm') checked @endif>
+          <input type="radio" name="Sexo" value="f" @if($datosGenerales['genero'] != 'm') checked @elseif($datosGenerales['genero'] == 'm') disabled @endif>
           Femenino
         </label>
         <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
-          <input type="radio" name="Sexo" value="m" @if($datosGenerales['genero'] == 'm') checked @endif>
+          <input type="radio" name="Sexo" value="m" @if($datosGenerales['genero'] == 'm') checked @elseif($datosGenerales['genero'] == 'f') disabled @endif>
           Masculino
         </label>
       </div>
@@ -92,11 +92,11 @@
       <label for="LenguaIndigena" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">¿Habla alguna lengua indigena?</label>
       <div class="radio">
         <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
-          <input type="radio" name="LenguaIndigena" value="no"  @if($datosGenerales['lengua'] != 'Si') checked @endif>
+          <input type="radio" name="LenguaIndigena" value="no"  @if($datosGenerales['lengua'] != 'Si') checked @elseif($datosGenerales['lengua']  == 'Si') disabled @endif>
           No
         </label>
         <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
-          <input type="radio" name="LenguaIndigena" value="si" @if($datosGenerales['lengua']  == 'Si') checked @endif>
+          <input type="radio" name="LenguaIndigena" value="si" @if($datosGenerales['lengua']  == 'Si') checked @elseif($datosGenerales['lengua']  != 'Si') disabled @endif>
           Si
         </label>
       </div>

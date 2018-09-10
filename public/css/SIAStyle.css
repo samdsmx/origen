@@ -14,3 +14,7 @@
 .tablaDetallesConsulta .fecha {
     font-weight: bolder;
 }
+
+.minimum {
+    width: 90%!important;
+}

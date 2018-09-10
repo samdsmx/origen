@@ -31,8 +31,26 @@ class RegistroController extends BaseController {
             $datosGenerales['correoElectronico'] = '';
             $datosGenerales['medioContacto'] = '';
             $datosGenerales['comoTeEnteraste'] = '';
+            $datosGenerales['posibleSolucion'] ='';
             $datosGenerales['Estatus'] = '';
-        }else{
+
+            // Para ver información de la llamada
+            $datosGenerales['Pais'] = '';
+            $datosGenerales['Estado'] = '';
+            $datosGenerales['Municipio'] = '';
+            $datosGenerales['Colonia'] = '';
+            $datosGenerales['CP'] = '';
+            $datosGenerales['tipocaso'] = '';
+            $datosGenerales['ComentariosAdicionales'] = '';
+            $datosGenerales['DesarrolloCaso'] = '';
+            $datosGenerales['AyudaPsicologico'] = [];
+            $datosGenerales['AyudaLegal'] = [];
+            $datosGenerales['AyudaOtros'] = [];
+            $datosGenerales['AyudaMedica'] = [];
+            $datosGenerales['TipoViolencia'] = [];
+            $datosGenerales['ModalidadViolencia'] = [];
+
+        }else if($numeroLlamada == 0){
             $datosGenerales['nombre'] = $datosLlamada[0]->Nombre;
             $datosGenerales['edad'] = $datosLlamada[0]->Edad;
             $datosGenerales['estadoCivil'] = $datosLlamada[0]->EstadoCivil;
@@ -48,6 +66,54 @@ class RegistroController extends BaseController {
             $datosGenerales['comoTeEnteraste'] = $datosLlamada[0]->ComoTeEnteraste;
             $datosGenerales['posibleSolucion'] = $datosLlamada[0]->PosibleSolucion;
             $datosGenerales['Estatus'] = $datosLlamada[0]->Estatus;
+
+            // Para información de las llamadas
+
+            $datosGenerales['Pais'] = '';
+            $datosGenerales['Estado'] = '';
+            $datosGenerales['Municipio'] = '';
+            $datosGenerales['Colonia'] = '';
+            $datosGenerales['CP'] = '';
+            $datosGenerales['tipocaso'] = '';
+            $datosGenerales['ComentariosAdicionales'] = '';
+            $datosGenerales['DesarrolloCaso'] = '';
+            $datosGenerales['AyudaPsicologico'] = [];
+            $datosGenerales['AyudaLegal'] = [];
+            $datosGenerales['AyudaOtros'] = [];
+            $datosGenerales['AyudaMedica'] = [];
+            $datosGenerales['TipoViolencia'] = [];
+            $datosGenerales['ModalidadViolencia'] = [];
+
+        } else if( $numeroLlamada > 0) {
+            $datosGenerales['nombre'] = $datosLlamada[0]->Nombre;
+            $datosGenerales['edad'] = $datosLlamada[0]->Edad;
+            $datosGenerales['estadoCivil'] = $datosLlamada[0]->EstadoCivil;
+            $datosGenerales['genero'] = $datosLlamada[0]->Sexo;
+            $datosGenerales['estudios'] = $datosLlamada[0]->NivelEstudios;
+            $datosGenerales['religion'] = $datosLlamada[0]->Religion;
+            $datosGenerales['lengua'] = $datosLlamada[0]->LenguaIndigena;
+            $datosGenerales['ocupacion'] = $datosLlamada[0]->Ocupacion;
+            $datosGenerales['vives'] = $datosLlamada[0]->VivesCon;
+            $datosGenerales['telefono'] = $datosLlamada[0]->Telefono;
+            $datosGenerales['correoElectronico'] = $datosLlamada[0]->CorreoElectronico;
+            $datosGenerales['medioContacto'] = $datosLlamada[0]->MedioContacto;
+            $datosGenerales['comoTeEnteraste'] = $datosLlamada[0]->ComoTeEnteraste;
+            $datosGenerales['posibleSolucion'] = $datosLlamada[0]->PosibleSolucion;
+            $datosGenerales['Estatus'] = $datosLlamada[0]->Estatus;
+            $datosGenerales['Pais'] = $datosLlamada[0]->Pais;
+            $datosGenerales['Estado'] = $datosLlamada[0]->Estado;
+            $datosGenerales['Municipio'] = $datosLlamada[0]->Municipio;
+            $datosGenerales['Colonia'] = $datosLlamada[0]->Colonia;
+            $datosGenerales['CP'] = $datosLlamada[0]->CP;
+            $datosGenerales['tipocaso'] = $datosLlamada[0]->tipocaso;
+            $datosGenerales['ComentariosAdicionales'] = $datosLlamada[0]->ComentariosAdicionales;
+            $datosGenerales['DesarrolloCaso'] = $datosLlamada[0]->DesarrolloCaso;
+            $datosGenerales['AyudaPsicologico'] = explode(',',$datosLlamada[0]->AyudaPsicologico);
+            $datosGenerales['AyudaLegal'] = explode(',',$datosLlamada[0]->AyudaLegal);
+            $datosGenerales['AyudaMedica'] = explode(',',$datosLlamada[0]->AyudaMedica);
+            $datosGenerales['AyudaOtros'] = explode(',',$datosLlamada[0]->AyudaOtros);
+            $datosGenerales['TipoViolencia'] = explode(',',$datosLlamada[0]->TipoViolencia);
+            $datosGenerales['ModalidadViolencia'] = explode(',',$datosLlamada[0]->ModalidadViolencia);
         }
 
         $menu = parent::createMenu();
@@ -197,8 +263,7 @@ class RegistroController extends BaseController {
         }
         if($nro_llamada == 0) {
             $nro_llamada = 1;
-        }
- 		$llamadas_casos = DB::table('llamadas')
+		$llamadas_casos = DB::table('llamadas')
 						->join('casos','casos.IDCaso','=','llamadas.IDCaso')
 						->join('consejeros','llamadas.Consejera','=','consejeros.nombre')
 						->join('persona','consejeros.id_persona','=','persona.id_persona')
@@ -214,6 +279,29 @@ class RegistroController extends BaseController {
                         ->where('casos.IDCaso',$nro_caso)
                         ->where('llamadas.LlamadaNo',$nro_llamada)
                         ->get();
+        } else {
+	    	$llamadas_casos = DB::table('llamadas')
+						->join('casos','casos.IDCaso','=','llamadas.IDCaso')
+						->join('consejeros','llamadas.Consejera','=','consejeros.nombre')
+						->join('persona','consejeros.id_persona','=','persona.id_persona')
+						->select('casos.*','llamadas.*')
+                        ->select('casos.IDCaso','casos.Telefono','Horainicio',
+                            'LlamadaNo','casos.Nombre','FechaLlamada','nombres',
+                            'primer_apellido','segundo_apellido','casos.Edad',
+                            'casos.EstadoCivil','casos.Sexo','casos.NivelEstudios',
+                            'casos.Religion','casos.LenguaIndigena','casos.Ocupacion',
+                            'casos.VivesCon','casos.Telefono','casos.CorreoElectronico',
+                            'casos.MedioContacto','casos.ComoTeEnteraste', 
+                            'casos.PosibleSolucion', 'casos.Estatus',
+                            'casos.Pais', 'casos.CP','casos.Colonia','casos.Municipio','casos.Estado',
+                            'llamadas.ComentariosAdicionales','llamadas.DesarrolloCaso','casos.tipocaso',
+                            'llamadas.AyudaPsicologico', 'llamadas.AyudaMedica','llamadas.AyudaOtros',
+                            'llamadas.AyudaLegal','llamadas.ModalidadViolencia','llamadas.TipoViolencia')
+                        ->where('casos.IDCaso',$nro_caso)
+                        ->where('llamadas.LlamadaNo',$nro_llamada)
+                        ->get();
+ 
+        }
 		return $llamadas_casos;
     }
 
