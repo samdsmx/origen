@@ -1,5 +1,5 @@
 <?
-$contexto="ORIGEN";//"SEGOB"
+$contexto="SEGOB";//"ORIGEN"
 include("Funciones/Funciones_Seguridad.php");
 header('Pragma: no-cache');
 header("Content-Type: text/html; charset=UTF-8");

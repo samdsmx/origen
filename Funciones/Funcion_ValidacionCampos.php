@@ -21,8 +21,8 @@ function rs($campo){
 	return mysql_real_escape_string($campo);
 	}
 
-function cod($Nombre,$campo){
+function cod($campo){
 	$campo=rs($campo);
-	return crypt($Nombre,$campo);
+	return crypt($campo,"qwertyuiop");
 	}
 ?>

@@ -1,14 +1,14 @@
 <?
 function Autentifica($Nombre, $Password, $Estado){
 	include("Datos_Comunicacion.php");
-	$Password=rs($Password);
-	$Password=crypt($Nombre,$Password);
+	if ($Estado == "login"){
+		$Password=cod($Password);
+		}
 	$ip = substr($_SERVER['REMOTE_ADDR'],0,3); 
 	if ($ip!="192" && $ip!="127")
-		$sql ="SELECT NivelSeguridad FROM Consejeros WHERE Nombre='".rs($Nombre)."' AND Password2='".rs($Password)."' AND Acceso > 1";
+		$sql ="SELECT NivelSeguridad FROM Consejeros WHERE Nombre='".rs($Nombre)."' AND Password='".$Password."' AND Acceso > 1";
 		else
-			$sql ="SELECT NivelSeguridad FROM Consejeros WHERE Nombre='".rs($Nombre)."' AND Password2='".rs($Password)."'";
-
+			$sql ="SELECT NivelSeguridad FROM Consejeros WHERE Nombre='".rs($Nombre)."' AND Password='".$Password."'";
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	if ($total_found == "1"){
@@ -45,8 +45,8 @@ function Autentifica($Nombre, $Password, $Estado){
 
 function RevisaSesion($DatosSesion, $verificacion){
 	$SecureCad=base64_decode($DatosSesion);
-	list($Consejera, $Password)= split("@", $SecureCad);
-	return Autentifica($Consejera, $Password, "$verificacion");
+	list($Nombre, $Password)= split("@", $SecureCad);
+	return Autentifica($Nombre, $Password, "$verificacion");
 	}
 
 function BorraCache(){

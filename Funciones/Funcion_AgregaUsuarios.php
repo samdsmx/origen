@@ -9,9 +9,9 @@ if (RevisarNombre($Nombre)=="OK"){
 		if ($casos)
 			$acceso+=1;
 		include("Datos_Comunicacion.php");
-		$sql = "INSERT INTO consejeros(Nombre,Password2,NivelSeguridad,Acceso)
+		$sql = "INSERT INTO consejeros(Nombre,Password,NivelSeguridad,Acceso)
 		VALUES
-		('".rs($Nombre)."','".cod($Nombre,$Password)."','".rs($NivelSeguridad)."','".rs($acceso)."')";
+		('".rs($Nombre)."','".cod($Password)."','".rs($NivelSeguridad)."','".rs($acceso)."')";
 		echo $sql."<br/>";
 		$result = mysql_query($sql, $connection) or $Mensaje="El usuario ya existe" and die(include ("Paginas/Error.html"));
 		mysql_close($connection);

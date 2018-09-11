@@ -4,7 +4,7 @@ if (RevisarNombre($Nombre)=="OK"){
 	if (RevisarPassword($Password)=="OK"){
 		include("Datos_Comunicacion.php");
 		$acceso=$internet + $casos; 
-		$sql ="UPDATE Consejeros set Nombre='".rs($Nombre)."', Password2='".cod($Nombre,$Password)."', NivelSeguridad='".rs($NivelSeguridad)."', acceso='".rs($acceso)."' WHERE Nombre='".rs($NombreViejo)."'";
+		$sql ="UPDATE Consejeros set Nombre='".rs($Nombre)."', Password='".cod($Password)."', NivelSeguridad='".rs($NivelSeguridad)."', acceso='".rs($acceso)."' WHERE Nombre='".rs($NombreViejo)."'";
 		$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		BorraCache();
 		mysql_close($connection);

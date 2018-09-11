@@ -94,12 +94,6 @@ if ($Sesion){
 				$sql=$sql."NivelViolencia='".rs($NivelViolencia)."'";
 				$cuenta=$cuenta+1;
 				}
-			if ($Nacionalidad <> ""){
-				if ($cuenta>0)
-					$sql=$sql.",";
-				$sql=$sql."Nacionalidad='".rs($Nacionalidad)."'";
-				$cuenta=$cuenta+1;
-				}	
 			if ($PosibleSolucion <> ""){
 				if ($cuenta>0)
 					$sql=$sql.",";
@@ -136,12 +130,6 @@ if ($Sesion){
 				$sql=$sql."Colonia='".rs($Colonia)."'";
 				$cuenta=$cuenta+1;
 				}
-			if ($Pais <> ""){
-				if ($cuenta>0)
-					$sql=$sql.",";
-				$sql=$sql."Pais='".rs($Pais)."'";
-				$cuenta=$cuenta+1;
-				}				
 			if ($CorreoElectronico <> ""){
 				if ($cuenta>0)
 					$sql=$sql.",";
@@ -191,12 +179,6 @@ if ($Sesion){
 				$sql=$sql."AyudaMedica='".rs($AYUDAMEDICA)."'";
 				$cuenta=$cuenta+1;
 				}
-			if ($AyudaNutricional <> ""){
-				if ($cuenta>0)
-					$sql=$sql.",";
-				$sql=$sql."AyudaNutricional='".rs($AYUDANUTRICIONAL)."'";
-				$cuenta=$cuenta+1;
-				}
 			if ($AyudaOtros <> ""){
 				if ($cuenta>0)
 					$sql=$sql.",";
@@ -239,12 +221,6 @@ if ($Sesion){
 				$sql=$sql."CanaOtro='".rs($CanaOtro)."'";
 				$cuenta=$cuenta+1;
 				}
-			if ($AcudeInstitucion <> ""){
-				if ($cuenta>0)
-					$sql=$sql.",";
-				$sql=$sql."AcudeInstitucion='".rs($AcudeInstitucion)."'";
-				$cuenta=$cuenta+1;
-				}
 			$sql=$sql." where ";
 			$union = "";
 			for ($i=0; $i<$NumElementos; $i++ ){
@@ -261,47 +237,28 @@ if ($Sesion){
 				}
 			}
 			else{			
-				$sql = "UPDATE casos SET Nombre='".rs($Nombre)."',Edad='".rs($Edad)."',Sexo='".rs($Sexo)."',EstadoCivil='".rs($EstadoCivil)."',Telefono='".rs($Telefono)."',Municipio='".rs($Municipio)."',Estado='".rs($Estado)."',Ocupacion='".rs($Ocupacion)."' '".rs($Ocupacion2)."',Religion='".rs($Religion)."',VivesCon='".rs($VivesCon)."',ComoTeEnteraste='".rs($ComoTeEnteraste)."',TipoCaso='".rs($TipoCaso)."',NivelViolencia='".rs($NivelViolencia)."',Nacionalidad='".rs($Nacionalidad)."',PosibleSolucion='".rs($PosibleSolucion)."',Estatus='".rs($Estatus)."',HorasInvertidas='".rs($HorasInvertidas)."',NivelEstudios='".rs($NivelEstudios)."',LenguaIndigena='".rs($LenguaIndigena)."',CP='".rs($CP)."',Colonia='".rs($Colonia)."',Pais='".rs($Pais)."',CorreoElectronico='".rs($CorreoElectronico)."',MedioContacto='".rs($MedioContacto)."' where IDCaso='".rs($IDCaso)."'";
+				$sql = "UPDATE casos SET Nombre='".rs($Nombre)."',Edad='".rs($Edad)."',Sexo='".rs($Sexo)."',EstadoCivil='".rs($EstadoCivil)."',Telefono='".rs($Telefono)."',Municipio='".rs($Municipio)."',Estado='".rs($Estado)."',Ocupacion='".rs($Ocupacion)."' '".rs($Ocupacion2)."',Religion='".rs($Religion)."',VivesCon='".rs($VivesCon)."',ComoTeEnteraste='".rs($ComoTeEnteraste)."',TipoCaso='".rs($TipoCaso)."',NivelViolencia='".rs($NivelViolencia)."',PosibleSolucion='".rs($PosibleSolucion)."',Estatus='".rs($Estatus)."',HorasInvertidas='".rs($HorasInvertidas)."',NivelEstudios='".rs($NivelEstudios)."',LenguaIndigena='".rs($LenguaIndigena)."',CP='".rs($CP)."',Colonia='".rs($Colonia)."',CorreoElectronico='".rs($CorreoElectronico)."',MedioContacto='".rs($MedioContacto)."' where IDCaso='".rs($IDCaso)."'";
 				$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-				$sql = "UPDATE llamadas SET ComentariosAdicionales='".rs($ComentariosAdicionales)."',AyudaPsicologico='".rs($AYUDAPSICOLOGICO)."',AyudaLegal='".rs($AYUDALEGAL). "',AyudaMedica='".rs($AYUDAMEDICA)."',AyudaNutricional='".rs($AYUDANUTRICIONAL). "',AyudaOtros='".rs($AYUDAOTROS)."',TipoViolencia='".rs($TipoViolencia)."',ModalidadViolencia='".rs($ModalidadViolencia)."',Violentometro='".rs($Violentometro)."',AcudeInstitucion='".rs($AcudeInstitucion)."',DesarrolloCaso='".rs($DesarrolloCaso)."',CanaLegal='".rs($CanaLegal)."',CanaOtro='".rs($CanaOtro)."' where IDCaso='".rs($IDCaso)."' and LlamadaNo='".rs($LlamadaNo)."'";
+				$sql = "UPDATE llamadas SET ComentariosAdicionales='".rs($ComentariosAdicionales)."',AyudaPsicologico='".rs($AYUDAPSICOLOGICO)."',AyudaLegal='".rs($AYUDALEGAL)."',AyudaMedica='".rs($AYUDAMEDICA)."',AyudaOtros='".rs($AYUDAOTROS)."',TipoViolencia='".rs($TipoViolencia)."',ModalidadViolencia='".rs($ModalidadViolencia)."',Violentometro='".rs($Violentometro)."',DesarrolloCaso='".rs($DesarrolloCaso)."',CanaLegal='".rs($CanaLegal)."',CanaOtro='".rs($CanaOtro)."' where IDCaso='".rs($IDCaso)."' and LlamadaNo='".rs($LlamadaNo)."'";
 				$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 				}
 		}
 		else{
 			if(!$IDCaso){
 				$HorasInvertidas=0;
-				if ($Edad == ""){
-					$Edad = 0;
-			     	}
-			    if ($Localidad == "Mexico"){
-					$Pais = "México";
-			     	} 	
-				else if($Localidad == "Estados Unidos"){
-					$Pais = "Estados Unidos";
-					$Estado = $EstadoEU;
-				} 
-			     	else{
-					$Estado = "Extranjero";
-			     	}			     		
-			    if ($Estado == ""){
-					$Estado = "NINGUNO";
-			     	} 		
-			    if ($Pais == ""){
-			    	$Pais = "Extranjero";
-			    	}
-				$sql = "INSERT INTO casos (Nombre,Edad,Sexo,EstadoCivil,Telefono,Municipio,Estado,Ocupacion,Religion,VivesCon,ComoTeEnteraste,TipoCaso,PosibleSolucion,Estatus,HorasInvertidas,NivelEstudios,LenguaIndigena,CP,Colonia,Pais,CorreoElectronico,MedioContacto,NivelViolencia,Nacionalidad) VALUES ('".rs($Nombre)."','".rs($Edad)."','".rs($Sexo)."','".rs($EstadoCivil)."','".rs($Telefono)."','".rs($Municipio)."','".rs($Estado)."','".rs($Ocupacion)."' '".rs($Ocupacion2)."','".rs($Religion)."','".rs($VivesCon)."','".rs($ComoTeEnteraste)."','".rs($TipoCaso)."','".rs($PosibleSolucion)."','".rs($Estatus)."','".rs($HorasInvertidas)."','".rs($NivelEstudios)."','".rs($LenguaIndigena)."','".rs($CP)."','".rs($Colonia)."','".rs($Pais)."','".rs($CorreoElectronico)."','".rs($MedioContacto)."', '".rs($NivelViolencia)."', '".rs($Nacionalidad)."')";
+				$sql = "INSERT INTO casos (Nombre,Edad,Sexo,EstadoCivil,Telefono,Municipio,Estado,Ocupacion,Religion,VivesCon,ComoTeEnteraste,TipoCaso,PosibleSolucion,Estatus,HorasInvertidas,NivelEstudios,LenguaIndigena,CP,Colonia,CorreoElectronico,MedioContacto,NivelViolencia) VALUES ('".rs($Nombre)."','".rs($Edad)."','".rs($Sexo)."','".rs($EstadoCivil)."','".rs($Telefono)."','".rs($Municipio)."','".rs($Estado)."','".rs($Ocupacion)."' '".rs($Ocupacion2)."','".rs($Religion)."','".rs($VivesCon)."','".rs($ComoTeEnteraste)."','".rs($TipoCaso)."','".rs($PosibleSolucion)."','".rs($Estatus)."','".rs($HorasInvertidas)."','".rs($NivelEstudios)."','".rs($LenguaIndigena)."','".rs($CP)."','".rs($Colonia)."','".rs($CorreoElectronico)."','".rs($MedioContacto)."', '".rs($NivelViolencia)."')";
 				$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 				$sql = "SELECT MAX(IDCaso) IDCaso from Casos";
 				$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 				$row = mysql_fetch_array($result);
 			        $IDCaso=$row['IDCaso'];
 				}
-			$sql = "UPDATE casos SET TipoCaso='".rs($TipoCaso)."',NivelViolencia='".rs($NivelViolencia)."',Nacionalidad='".rs($Nacionalidad)."',PosibleSolucion='".rs($PosibleSolucion)."',Estatus='".rs($Estatus)."',HorasInvertidas='".rs($HorasInvertidas)."' where IDCaso='".rs($IDCaso)."'";
+			$sql = "UPDATE casos SET TipoCaso='".rs($TipoCaso)."',NivelViolencia='".rs($NivelViolencia)."',PosibleSolucion='".rs($PosibleSolucion)."',Estatus='".rs($Estatus)."',HorasInvertidas='".rs($HorasInvertidas)."' where IDCaso='".rs($IDCaso)."'";
 			$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 			$sql = "INSERT INTO Llamadas
-			(IDCaso,FechaLlamada,Consejera,HoraInicio,HoraTermino,ComentariosAdicionales,AyudaPsicologico,AyudaLegal,AyudaMedica,AyudaNutricional,AyudaOtros,DesarrolloCaso,CanaLegal,CanaOtro,LlamadaNo,Duracion,Acceso,TipoViolencia,ModalidadViolencia,Violentometro,AcudeInstitucion)
+			(IDCaso,FechaLlamada,Consejera,HoraInicio,HoraTermino,ComentariosAdicionales,AyudaPsicologico,AyudaLegal,AyudaMedica,AyudaOtros,DesarrolloCaso,CanaLegal,CanaOtro,LlamadaNo,Duracion,Acceso,TipoViolencia,ModalidadViolencia,Violentometro)
 			VALUES
-			('".rs($IDCaso)."','".rs($FechaLlamada)."','".rs($Consejera)."','".rs($HoraInicio)."','".rs($HoraTermino)."','".rs($ComentariosAdicionales)."','".rs($AYUDAPSICOLOGICO)."','".rs($AYUDALEGAL)."','".rs($AYUDAMEDICA)."','".rs($AYUDANUTRICIONAL)."','".rs($AYUDAOTROS)."','".rs($DesarrolloCaso)."','".rs($CanaLegal)."', '".rs($CanaOtro)."','".rs($LlamadaNo)."', '".rs($Duracion)."', '".rs($Acceso)."', '".rs($TipoViolencia)."', '".rs($ModalidadViolencia)."', '".rs($Violentometro)."', '".rs($AcudeInstitucion)."')";
+			('".rs($IDCaso)."','".rs($FechaLlamada)."','".rs($Consejera)."','".rs($HoraInicio)."','".rs($HoraTermino)."','".rs($ComentariosAdicionales)."','".rs($AYUDAPSICOLOGICO)."','".rs($AYUDALEGAL)."','".rs($AYUDAMEDICA)."','".rs($AYUDAOTROS)."','".rs($DesarrolloCaso)."','".rs($CanaLegal)."', '".rs($CanaOtro)."','".rs($LlamadaNo)."', '".rs($Duracion)."', '".rs($Acceso)."', '".rs($TipoViolencia)."', '".rs($ModalidadViolencia)."', '".rs($Violentometro)."')";
 			$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 			}
 	$sql="UPDATE llamadas SET Duracion=((time_to_sec('".rs($HoraTermino)."')-time_to_sec('".rs($HoraInicio)."'))/60) where IDCaso='".rs($IDCaso)."' and LlamadaNo='".rs($LlamadaNo)."'";

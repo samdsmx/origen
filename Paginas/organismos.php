@@ -1,6 +1,6 @@
 <HEAD>
 <TITLE>Busqueda de organismos</TITLE>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <link href="css/select2.css" rel="stylesheet" />
 <script src="js/select2.js"></script>
 <script>

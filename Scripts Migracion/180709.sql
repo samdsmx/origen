@@ -1,1 +1,0 @@
-ALTER TABLE  `casos` ADD  `Nacionalidad` VARCHAR( 30 ) NULL ;

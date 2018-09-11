@@ -9,11 +9,11 @@ include(RelativePath . "/db_mysql.php");
 $CCConnectionSettings = array (
     "calendar" => array(
         "Type" => "MySQL",
-        "Database" => "vcalendar",
+        "Database" => "X",
         "Host" => "localhost",
         "Port" => "",
-        "User" => "root",
-        "Password" => "origendb",
+        "User" => "X",
+        "Password" => "X",
         "Encoding" => array("", "utf8"),
         "Persistent" => true,
         "DateFormat" => array("yyyy", "-", "mm", "-", "dd", " ", "HH", ":", "nn", ":", "ss"),

@@ -126,7 +126,7 @@
 <FONT FACE="Arial" COLOR="#D80808">Mostrar todos mis casos del: </FONT>
 <FONT SIZE="-1" FACE="Arial" COLOR="#D80808">
 <INPUT TYPE=hidden NAME=Accion VALUE=RealizarBusqueda>
-<INPUT TYPE=hidden NAME=Consejera VALUE="<?$SecureCad=base64_decode($Sesion);list($Consejera, $Password)= split("@", $SecureCad);echo $Consejera;?>">
+<INPUT TYPE=hidden NAME=Consejera VALUE="<?$SecureCad=base64_decode($Sesion);list($Nombre, $Password)= split("@", $SecureCad);echo $Nombre;?>">
 <INPUT TYPE=hidden NAME=Pagina VALUE=1>
 
 

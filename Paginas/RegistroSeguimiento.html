@@ -11,7 +11,7 @@
 	$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$row = mysql_fetch_array($result);
 	$TipoCaso=$row['TipoCaso'];
-    $NivelViolencia=$row['NivelViolencia'];
+	$NivelViolencia=$row['NivelViolencia'];
 	$PosibleSolucion=$row['PosibleSolucion'];
 	$Estatus=$row['Estatus'];
       $sql ="SELECT SUM(duracion) FROM llamadas WHERE IDCaso='".rs($IDCaso)."'";
@@ -32,7 +32,7 @@ function validar(){
 				v=1;
 		}
 	if(v==0)
-		alert("Faltan motivos de llamada");
+		alert("Faltan elementos de llamada");
 	if(v==0)
 		return false;
 		else
@@ -108,7 +108,7 @@ startclock();
                         </TR>
                         <TR>
                            <TD>
-                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Motivo de llamada</B></FONT></P>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Elementos de llamada</B></FONT></P>
                            </TD>
                         </TR>
                         <TR>
@@ -120,17 +120,6 @@ startclock();
 
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Objetivo</B></FONT></P></TD></TR>
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=text NAME=TipoCaso VALUE="<? echo $TipoCaso;?>" SIZE=40 MAXLENGTH=40></FONT></P></TD></TR>
-
-
-<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Acude a la institucion</B></FONT></P></TD></TR>
-<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
-	<select size="1" name="AcudeInstitucion">
-		<?echo "<OPTION SELECTED VALUE=".$AcudeInstitucion.">".$AcudeInstitucion;?>
-        <option>Si</option>
-        <option>No</option>
-    </select>
-</FONT></P></TD></TR>
-
 
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>&iquest;Qu&eacute; tendr&iacute;a que pasar en esta llamada para saber que te fue de utilidad?</B></FONT></P></TD></TR>
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=text NAME=PosibleSolucion VALUE="<? echo $PosibleSolucion;?>" SIZE=40 MAXLENGTH=40></FONT></P></TD></TR>
@@ -237,9 +226,6 @@ startclock();
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>MEDICO</B></FONT></CENTER>
                   </TD>
                   <TD BGCOLOR="#FFFFFF">
-                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>NUTRICIONAL</B></FONT></CENTER>
-                  </TD>
-                  <TD BGCOLOR="#FFFFFF">
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>OTROS</B></FONT></CENTER>
                   </TD>
                </TR>
@@ -303,24 +289,6 @@ startclock();
   <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
 	<? 
 	include("Datos_Comunicacion.php");
-	$sql ="select * from campos where Tipo = 'AYUDANUTRICIONAL' and activo=1 ORDER BY Nombre ASC";
-	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-	$total_found = @mysql_num_rows($total_result);
-	$i=1;
-	while ($row = mysql_fetch_array($total_result)){
-		$Nombre=$row['Nombre'];
-		$Tipo=$row['Tipo'];
-    		echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
-		$i=$i+1;
-		}
-	?>
-	</FONT></P>
-      </TD>
-
-  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
-  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
-	<? 
-	include("Datos_Comunicacion.php");
 	$sql ="select * from campos where Tipo = 'AYUDAOTROS' and activo=1 ORDER BY Nombre ASC";
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
@@ -341,7 +309,7 @@ startclock();
                   <TD BGCOLOR="#FFFFFF" colspan=2>
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>TIPO DE VIOLENCIA</B></FONT></CENTER>
                   </TD>
-                  <TD BGCOLOR="#FFFFFF" >
+                  <TD BGCOLOR="#FFFFFF">
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>MODALIDAD DE VIOLENCIA</B></FONT></CENTER>
                   </TD>
                    <TD BGCOLOR="#FFFFFF" colspan=2>
