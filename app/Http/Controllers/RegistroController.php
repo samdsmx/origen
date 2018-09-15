@@ -33,6 +33,8 @@ class RegistroController extends BaseController {
             $datosGenerales['comoTeEnteraste'] = '';
             $datosGenerales['posibleSolucion'] ='';
             $datosGenerales['Estatus'] = '';
+            $datosGenerales['CanaLegal'] = '';
+            $datosGenerales['Estatus'] = '';
 
             // Para ver información de la llamada
             $datosGenerales['Pais'] = '';
@@ -49,6 +51,9 @@ class RegistroController extends BaseController {
             $datosGenerales['AyudaMedica'] = [];
             $datosGenerales['TipoViolencia'] = [];
             $datosGenerales['ModalidadViolencia'] = [];
+            $datosGenerales['CanaOtro'] = "";
+            $datosGenerales['CanaLegal'] = [];
+
 
         }else if($numeroLlamada == 0){
             $datosGenerales['nombre'] = $datosLlamada[0]->Nombre;
@@ -83,6 +88,8 @@ class RegistroController extends BaseController {
             $datosGenerales['AyudaMedica'] = [];
             $datosGenerales['TipoViolencia'] = [];
             $datosGenerales['ModalidadViolencia'] = [];
+            $datosGenerales['CanaOtro'] = "";
+            $datosGenerales['CanaLegal'] = [];
 
         } else if( $numeroLlamada > 0) {
             $datosGenerales['nombre'] = $datosLlamada[0]->Nombre;
@@ -114,6 +121,8 @@ class RegistroController extends BaseController {
             $datosGenerales['AyudaOtros'] = explode(',',$datosLlamada[0]->AyudaOtros);
             $datosGenerales['TipoViolencia'] = explode(',',$datosLlamada[0]->TipoViolencia);
             $datosGenerales['ModalidadViolencia'] = explode(',',$datosLlamada[0]->ModalidadViolencia);
+            $datosGenerales['CanaLegal'] = explode(',',$datosLlamada[0]->CanaLegal);
+            $datosGenerales['CanaOtro'] = $datosLlamada[0]->CanaOtro;
         }
 
         $menu = parent::createMenu();
@@ -296,7 +305,8 @@ class RegistroController extends BaseController {
                             'casos.Pais', 'casos.CP','casos.Colonia','casos.Municipio','casos.Estado',
                             'llamadas.ComentariosAdicionales','llamadas.DesarrolloCaso','casos.tipocaso',
                             'llamadas.AyudaPsicologico', 'llamadas.AyudaMedica','llamadas.AyudaOtros',
-                            'llamadas.AyudaLegal','llamadas.ModalidadViolencia','llamadas.TipoViolencia')
+                            'llamadas.AyudaLegal','llamadas.ModalidadViolencia','llamadas.TipoViolencia',
+                            'llamadas.CanaOtro','llamadas.CanaLegal')
                         ->where('casos.IDCaso',$nro_caso)
                         ->where('llamadas.LlamadaNo',$nro_llamada)
                         ->get();
