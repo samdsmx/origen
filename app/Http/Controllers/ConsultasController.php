@@ -34,12 +34,27 @@ class ConsultasController extends BaseController {
     }
 
     public function obtenerLlamadas($datos){
+		if($datos['id'] == '') {
+			$identificador = ['casos.IDCaso','>',0];
+		} else {
+			$identificador = ['casos.IDCaso','=',$datos['id']];
+		}
+		$nombre = ['casos.Nombre','like','%'.$datos['nombre'].'%'];
+		if($datos['consejera'] > 0) {
+			$consejera = ['consejeros.id_persona','=', $datos['consejera'] ];
+		} else {
+			$consejera = ['consejeros.id_persona','>', 0];
+		}
+		
  		$llamadas_casos = DB::table('llamadas')
 						->join('casos','casos.IDCaso','=','llamadas.IDCaso')
 						->join('consejeros','llamadas.Consejera','=','consejeros.nombre')
 						->join('persona','consejeros.id_persona','=','persona.id_persona')
 						->select('casos.*','llamadas.*')
 						->select('casos.IDCaso','casos.Telefono','Horainicio','LlamadaNo','casos.Nombre','FechaLlamada','nombres','primer_apellido','segundo_apellido')
+						->where($identificador[0],$identificador[1],$identificador[2])
+						->where($nombre[0],$nombre[1],$nombre[2])
+						->where($consejera[0],$consejera[1],$consejera[2])
 						->groupBy('llamadas.IDCaso')
 						->get();
 						//->toSql();
