@@ -96,7 +96,7 @@
           No
         </label>
         <label class="col-md-6 col-sm-6" style="white-space: nowrap; overflow: hidden;">
-          <input type="radio" name="LenguaIndigena" value="si" @if($datosGenerales['lengua']  == 'Si') checked @elseif($datosGenerales['lengua']  != 'Si') disabled @endif>
+          <input type="radio" name="LenguaIndigena" value="si" @if($datosGenerales['lengua']  == 'Si') checked @elseif($datosGenerales['lengua']  == 'No') disabled @endif>
           Si
         </label>
       </div>
