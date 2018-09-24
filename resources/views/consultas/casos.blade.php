@@ -67,5 +67,8 @@ Sistemas
         order: [[0, "desc"]],
         language: dataTablesSpanish,
     });
+
+    $('#fechaInicial').datepicker(({ dateFormat: 'yy/mm/dd' }));
+    $('#fechaFinal').datepicker({ dateFormat: 'yy/mm/dd' });
 </script>
 @stop
