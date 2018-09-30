@@ -17,7 +17,7 @@ class ConsultasController extends BaseController {
 		$menu = parent::createMenu();
 		$consejeras = $this->obtenerConsejerasAll();
 		$motivos = DB::table('campos')
-			->select('Nombre')->where('Tipo','like','%AYUDA%')
+			->select('Nombre','Tipo')->where('Tipo','like','%AYUDA%')
 			->get();
 		return View::make('consultas.casos', array('menu' => $menu, 'consejeras' => $consejeras
 			, 'motivos' => $motivos));	
@@ -59,6 +59,29 @@ class ConsultasController extends BaseController {
 		} else {
 			$fechaInicial = ['FechaLlamada','>',$datos['fechaInicial']];
 		}
+
+		$ayuda = ['%%','%%','%%','%%'];
+		if($datos['tema'] !== '') {
+			foreach(explode(',',$datos['tema']) as $llave => $tema) {
+				if($tema != ''){
+					$tema_div = explode('-',$tema);
+					switch($tema_div[0]) {
+						case 'AYUDALEGAL':
+							$ayuda[0] = $ayuda[0].$tema_div[1].'%';
+							break;
+						case 'AYUDAPSICOLOGICO':
+							$ayuda[1] = $ayuda[1].$tema_div[1].'%';
+							break;
+						case 'AYUDAMEDICA':
+							$ayuda[2] = $ayuda[2].$tema_div[1].'%';
+							break;
+						case 'AYUDAOTRO':
+							$ayuda[3] = $ayuda[3].$tema_div[1].'%';
+							break;
+					}
+				}
+			}
+		}
 		
  		$llamadas_casos = DB::table('llamadas')
 						->join('casos','casos.IDCaso','=','llamadas.IDCaso')
@@ -71,6 +94,10 @@ class ConsultasController extends BaseController {
 						->where($consejera[0],$consejera[1],$consejera[2])
 						->where($fechaFin[0],$fechaFin[1],$fechaFin[2])
 						->where($fechaInicial[0],$fechaInicial[1],$fechaInicial[2])
+						->where('llamadas.AyudaLegal','like',$ayuda[0])
+						->where('llamadas.AyudaPsicologico','like',$ayuda[1])
+						->where('llamadas.AyudaMedica','like',$ayuda[2])
+						->where('llamadas.AyudaOtros','like',$ayuda[3])
 						->groupBy('llamadas.IDCaso')
 						->get();
 						//->toSql();
