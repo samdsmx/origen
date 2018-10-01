@@ -16,14 +16,14 @@
                 <label for="motivos">Motivos (psicológico, legal, etc):</label>
                 <select name="motivos" id="motivos" multiple class="form-control js-example-basic-multiple" style="width:100%;" >
                     @foreach ($motivos as $motivo)
-                        <option value="{{ $motivo->Nombre }}">{{ $motivo->Nombre }}</option>
+                        <option value="{{ $motivo->Tipo.'-'.$motivo->Nombre }}">{{ $motivo->Nombre }}</option>
                     @endforeach
                 </select>
             </div>     
 
             <div class="form-group col-md-3">
                 <label for="consejera">Consejera:</label>
-                <select name="consejera" id="consejera" class="form-control">
+                <select name="consejera" id="consejera" class="form-control col-md-3">
                     <option value="-1">-</option>
                     @foreach($consejeras as $v)
                     <option value="{!! $v->id_persona !!}"> 
@@ -45,7 +45,7 @@
       
         </div>
 
-        <div class="modal-footer" style="background: #ffffff;  border-top-color: #ffffff;">
+        <div class="modal-footer col-md-12" style="background: #ffffff;  border-top-color: #ffffff;">
             {!! Form::reset('Limpiar', array('class' => 'btn btn-primary', 'id' => "resetear")) !!}
             {!! Form::submit('Buscar', array('class' => 'btn btn-success', 'id' => 'btnBuscarCasos')) !!}
         </div>
