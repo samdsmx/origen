@@ -35,9 +35,13 @@ class CatalogosController extends BaseController {
 
     public function postEliminar() {
         if (Request::ajax()) {
-            $grupo = camposModel::find(Request::get('modalConfirmaId'));
+            $datos = explode('-',Request::get('modalConfirmaId'));
+            $grupo = DB::table('campos')
+                        ->select('Nombre','Tipo')
+                        ->where('Tipo','like','%'.$datos[0].'%')
+                        ->where('Nombre','like','%'.$datos[1].'%')
+                        ->delete();
             if ($grupo) {
-                $grupo->delete();
                 Session::flash('mensaje', 'Grupo eliminado');
             } else {
                 Session::flash('mensajeError', "Error al tratar de eliminar el grupo");
@@ -56,24 +60,25 @@ class CatalogosController extends BaseController {
             return;
         }
         $datos = Request::all();
-        $validator = camposModel::validar($datos);
-        if ($validator->fails()) {
-            return Response::json(array('errors' => $validator->errors()->toArray()));
-        }
-        if ($datos["id_grupo"] == "") {
-            $grupo = new camposModel(null,1);
-            Session::flash('mensaje', 'Grupo agregado');
+
+        $grupo = $datos['grupo'];
+        $orden = $datos['orden'];
+        $id_grupo = $datos['id_grupo'];
+        $id_orden = $datos['id_orden'];
+        if($id_grupo == '') {
+            DB::table('campos')->insert(
+                ['Nombre'=> $orden,'Tipo'=>$grupo,'activo'=>1]
+            );     
+            Session::flash('mensaje', 'Grupo añadido');
         } else {
-            $grupo = camposModel::find($datos["id_grupo"]);
-            Session::flash('mensaje', 'Grupo modificado');
+            DB::table('campos')
+                ->where('Tipo',$id_grupo)
+                ->where('Nombre',$id_orden)
+                ->update(
+                    ['Tipo'=>$grupo,'Nombre'=>$orden]
+                );
+            Session::flash('mensaje', 'Grupo editado');
         }
-        $msg = camposModel::validarDuplicidad($datos,$grupo);
-        if (!empty($msg)) {
-            return Response::json(array('errors' => $msg));
-        }
-        $grupo->grupo = $datos["grupo"];
-        $grupo->orden = $datos["orden"] == '' ? null : intval($datos["orden"]);
-        $grupo->save();
     }
 
 }

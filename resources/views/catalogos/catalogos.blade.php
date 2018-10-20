@@ -70,8 +70,8 @@ Catalogos
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <button type="button" class="btn bg-olive updateGroup" data-toggle="modal" data-target="#modalRegistroCampo" data-id="{!!$campo->Tipo!!}"><i class="fa fa-edit"></i></button>
-                                            <button type="button" class="btn bg-red-gradient deleteGroupModal" data-toggle="modal" data-target="#modalConfirma" data-id="{!!$campo->Tipo!!}"><i class="fa fa-trash"></i></button>
+                                            <button type="button" class="btn bg-olive updateCatalogo" data-toggle="modal" data-target="#modalRegistroGrupo" data-id="{!!$campo->Tipo.'-'.$campo->Nombre!!}"><i class="fa fa-edit"></i></button>
+                                            <button type="button" class="btn bg-red-gradient deleteGroupModal" data-toggle="modal" data-target="#modalConfirma" data-id="{!!$campo->Tipo.'-'.$campo->Nombre!!}"><i class="fa fa-trash"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -110,42 +110,36 @@ Catalogos
         $('#grupo').removeAttr("value");
         $('#orden').removeAttr("value");
         $("#btnGuardarGrupo").attr("value", "Guardar");
+        $('#grupo').val('');
+        $('#orden').val('');
+        $('#id_grupo').val('');
+        $('#id_orden').val('');
     });
 
     $('#registraGrupo').submit(function(e) {
         e.preventDefault();
-        guardarFormulario($(this).serialize(), 'Grupos/registragrupo');
+        guardarFormulario($(this).serialize(), 'Catalogos/registragrupo');
     });
 
-    $("#tablaGrupos").on("click", ".updateGroup", function() {
+    $("#tablaCampos").on("click", ".updateCatalogo", function() {
         event.preventDefault();
-        var id = $(this).data('id');
+        var id = $(this).data('id').split('-');
         $('div').removeClass('has-error');
+        $('.modal-title').text("Editar grupo");
         $('input').removeAttr("title");
-        $.ajax({
-            type: "POST",
-            url: 'Grupos/buscar',
-            data: {id: id},
-            success: function(response) {
-                var grupo = response.grupo;
-                $('.modal-title').text("Actualizar Grupo");
-                $("#btnGuardarGrupo").attr("value", "Aceptar");
-                $("#id_grupo").attr("value", grupo.id_grupo);
-                $('#grupo').attr("value", grupo.grupo);
-                $('#orden').attr("value", grupo.orden);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert("Error en el servidor");
-            }
-        });
+        $('#grupo').val(id[0]);
+        $('#orden').val(id[1]);
+        $('#id_grupo').val(id[0]);
+        $('#id_orden').val(id[1]);
     });
 
-    $("#tablaGrupos").on("click", ".deleteGroupModal", function() {
+    $("#tablaCampos").on("click", ".deleteGroupModal", function() {
         $('#modalConfirmaTitle').text("Borrar Grupo");
         $("#modalConfirmaId").attr("value", $(this).data('id'));
+        $("#formConfirma").attr("action",'');
         $("#formConfirma").submit(function(e) {
             e.preventDefault();
-            borrarRegistro($(this).serialize(), 'Grupos/eliminar');
+            borrarRegistro($(this).serialize(), 'Catalogos/eliminar');
         });
     });
 

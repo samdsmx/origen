@@ -109,7 +109,11 @@ function guardarFormulario(data, url, estaDesactivado) {
                 $('html, body').animate({scrollTop: 0}, 'fast');
                 return false;
             } else {
-                window.location="inicio";
+                if(window.location.pathname.split('/').slice(-1)[0] === 'Registro') {
+                    window.location="inicio";
+                } else {
+                    window.location.reload();
+                }
                 return false;
             }
         },
