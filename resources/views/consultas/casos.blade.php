@@ -34,7 +34,8 @@ Sistemas
                     @include('consultas.busqueda')
                     <table id="tablaCasos" class="table table-bordered table-striped table-dataTable text-center" width="100%">
                         <thead>
-                        <th class="alert-info col-md-2">ID del caso</th>
+                        <th class="alert-info col-md-1"> </th>
+                        <th class="alert-info col-md-1">ID del caso</th>
                         <th class="alert-info col-md-2">FECHA</th>
                         <th class="alert-info col-md-2">NOMBRE</th>
                         <th class="alert-info col-md-2">TELÉFONO</th>
@@ -59,7 +60,7 @@ Sistemas
     $('#tablaCasos').DataTable({
        scrollX: false,
         responsive: true,
-        searching: true,
+        searching: false,
         paging: true,
         lengthMenu: [[10, 20, 200], [10, 20, 200]],
         ordering: true,
@@ -70,5 +71,16 @@ Sistemas
 
     $('#fechaInicial').datepicker(({ dateFormat: 'yy/mm/dd' }));
     $('#fechaFinal').datepicker({ dateFormat: 'yy/mm/dd' });
+
+    function cerrarTableButton(id) {
+        let clase = $('#'+id).attr('class');
+        if(clase === 'tablaDetallesConsulta') {
+            $('#'+id).attr('class','hidden');
+            $('#'+id+'button button').html('+');
+        } else {
+            $('#'+id).attr('class','tablaDetallesConsulta');
+            $('#'+id+'button button').html('-');
+        }
+    }
 </script>
 @stop

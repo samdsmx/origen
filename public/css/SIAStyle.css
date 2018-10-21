@@ -6,8 +6,12 @@
     padding: 5px;
 }
 
+.tablaDetallesConsulta a {
+    color: #005E9A;
+}
+
 .tablaDetallesConsulta td {
-    padding-left: 10vw;
+    padding-left: 25vw;
     padding-bottom: 20px;
 }
 
