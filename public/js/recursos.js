@@ -109,7 +109,11 @@ function guardarFormulario(data, url, estaDesactivado) {
                 $('html, body').animate({scrollTop: 0}, 'fast');
                 return false;
             } else {
-                window.location="inicio";
+                if(window.location.pathname.split('/').slice(-1)[0] === 'Registro') {
+                    window.location="inicio";
+                } else {
+                    window.location.reload();
+                }
                 return false;
             }
         },
@@ -339,22 +343,33 @@ $(document).ready(function() {
     } );
 
     function crearTablaSeguimiento(id) {
+        let id_caso = id.split('<span class="hidden">')[0];
+        let id_llamada = id.split('<span class="hidden">')[1].split('</span>')[0];
         var direccion = window.location.href.split('/');
                     direccion.pop();
                     direccion.push('Registro');
                     direccion = direccion.join('/');
-        let content = '<table id="'+id+'" class="tablaDetallesConsulta">';
+        let content = '<table id="'+id_caso+'" class="tablaDetallesConsulta">';
         $.ajax({
             type: 'GET',
-            url: 'Consultas/followcalls/'+id,
+            url: 'Consultas/followcalls/'+id_caso,
             success: function(response) {
+                if(response.length <= 1) {
+                    $('#'+id_caso).html('');
+                    $('#'+id_caso+'button').html('');
+                    return ;
+                }
+
+                $('#'+id_caso+' tr:last').after('<tr><td class="fecha">Hay '+(response.length-1)+' llamadas de seguimiento:</td></tr>');
                 for(let i=0;i<response.length;i++) {
+                    if(parseInt(id_llamada) === response[i].LlamadaNo) {
+                        continue;
+                    }
                     let direccionVerLlamada = direccion+'?caso='+response[i].IDCaso+'&llamada='+response[i].LlamadaNo;
-                    $('#'+id+' tr:last').after('<tr> <td><span class="fecha">'+ response[i].FechaLlamada+'</span><br>'+
+                    $('#'+id_caso+' tr:last').after('<tr><td><a  target="_blank" href="'+direccionVerLlamada+'"> <span class="fecha">'+ response[i].FechaLlamada+'</span> '+
                     response[i].Horainicio
-                    +'</td> <td>'+
-                    response[i].nombres+' '+response[i].primer_apellido+' '+response[i].segundo_apellido
-                    +'</td><td><a href="'+direccionVerLlamada+'">Ver detalles</a></td> </tr>');
+                    + ' '+response[i].nombres+' '+response[i].primer_apellido+' '+response[i].segundo_apellido
+                    +'</a></td> </tr>');
                 }
             },
             error: function(xhr, status, error) {
@@ -364,10 +379,12 @@ $(document).ready(function() {
             }
 
         });
-                content += '<tr> <td> </td> <td> </td><td> </td> </tr>';
+                content += '<tr> <td> </td></tr>';
                 content += '</table>';
                 return content;
     }
+
+
 
     $('#buscaCasos').submit( function(e){
         e.preventDefault();
@@ -389,15 +406,16 @@ $(document).ready(function() {
                     direccionNvoCaso = direccion+'?caso='+ele.IDCaso;
                     direccionVerLlamada = direccion+'?caso='+ele.IDCaso+'&llamada='+ele.LlamadaNo;
                     var arrayInterno = [];
-                    arrayInterno.push(ele.IDCaso);
+                    arrayInterno.push('<div id="'+ele.IDCaso+'button" ><button onclick="cerrarTableButton('+ele.IDCaso+')">-</button</div>');
+                    arrayInterno.push(ele.IDCaso+'<span class="hidden">'+ele.LlamadaNo+'</span>');
                     arrayInterno.push('<strong>'+ele.FechaLlamada+'</strong><br>'+ele.Horainicio);
                     arrayInterno.push(ele.Nombre);
                     arrayInterno.push(ele.Telefono);
                     arrayInterno.push(ele.nombres+' '+ele.primer_apellido+' '+ele.segundo_apellido);
-			        arrayInterno.push('<a href="'+direccionVerLlamada+'" style="margin-right:10%;" class="btn btn-warning verLlamada">'
+			        arrayInterno.push('<a href="'+direccionVerLlamada+'" target="_blank" style="margin-right:10%;" class="btn btn-warning verLlamada">'
                                         +'<span class="fa fa-eye"></span>'
                                         +'</a> '
-                                        +'<a href="'+direccionNvoCaso+'" class="btn btn-success llamadaSeguimiento">'
+                                        +'<a href="'+direccionNvoCaso+'" target="_blank" class="btn btn-success llamadaSeguimiento">'
                                         +'<span class="fa fa-plus"></span>'
                                         +'</a>');
                      resultado.push(arrayInterno);
@@ -405,7 +423,7 @@ $(document).ready(function() {
                 $("#tablaCasos").DataTable().rows.add(resultado).draw();
                 $('#tablaCasos tbody tr').each(function(index,ele) {
                     var row = $('#tablaCasos').DataTable().row( $(this));
-                    row.child( crearTablaSeguimiento($(this).children()[0].innerHTML )).show();
+                    row.child( crearTablaSeguimiento($(this).children()[1].innerHTML)).show();
                 });
                 },
                 error: function(xhr, status, error) {

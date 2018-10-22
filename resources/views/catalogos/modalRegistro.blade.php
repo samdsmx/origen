@@ -8,6 +8,7 @@
             </div>
             <div class="modal-body" style="background: #ffffff; padding-bottom: 10px;">
                 <input type="hidden" id="id_grupo" name="id_grupo"/>
+                <input type="hidden" id="id_orden" name="id_orden"/>
                 <div class="col-lg-12">
                     <div id="dgrupo" class='form-group has-feedback'>
                         <input id="grupo" name="grupo" type="text" class="form-control" placeholder="Grupo" autocomplete="off"/>
