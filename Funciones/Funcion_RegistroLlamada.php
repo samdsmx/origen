@@ -246,6 +246,9 @@ if ($Sesion){
 		else{
 			if(!$IDCaso){
 				$HorasInvertidas=0;
+				if ($Edad == ""){
+					$Edad = 0;
+			     	}
 				$sql = "INSERT INTO casos (Nombre,Edad,Sexo,EstadoCivil,Telefono,Municipio,Estado,Ocupacion,Religion,VivesCon,ComoTeEnteraste,TipoCaso,PosibleSolucion,Estatus,HorasInvertidas,NivelEstudios,LenguaIndigena,CP,Colonia,CorreoElectronico,MedioContacto,NivelViolencia) VALUES ('".rs($Nombre)."','".rs($Edad)."','".rs($Sexo)."','".rs($EstadoCivil)."','".rs($Telefono)."','".rs($Municipio)."','".rs($Estado)."','".rs($Ocupacion)."' '".rs($Ocupacion2)."','".rs($Religion)."','".rs($VivesCon)."','".rs($ComoTeEnteraste)."','".rs($TipoCaso)."','".rs($PosibleSolucion)."','".rs($Estatus)."','".rs($HorasInvertidas)."','".rs($NivelEstudios)."','".rs($LenguaIndigena)."','".rs($CP)."','".rs($Colonia)."','".rs($CorreoElectronico)."','".rs($MedioContacto)."', '".rs($NivelViolencia)."')";
 				$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 				$sql = "SELECT MAX(IDCaso) IDCaso from Casos";
