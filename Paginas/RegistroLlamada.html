@@ -148,7 +148,7 @@ function rellenaCanaLegal(formulario){
 		with (document.forms[formulario]){
 			var str = CanaLegal.value = selLegal[selLegal.selectedIndex].value; 
 			if (str.search("Voluntario")>=0) Voluntario.checked = true; else Voluntario.checked = false;
-			if (str.search("-")>=0) CanaLegal.disabled = false; else CanaLegal.disabled = true;
+			if (str.search("-")>=0) CanaLegal.readOnly = false; else CanaLegal.readOnly = true;
 			CanaLegal.focus();
 			}
 		}
