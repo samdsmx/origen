@@ -128,7 +128,7 @@ if ($Sesion){
 			$Seguimientos .= "</CENTER></TD></TR>";
 		return $Seguimientos;
 		}
-	
+
 	$criterio="";
 	$CadBusqueda2="";
 	$CadBusqueda="";
@@ -158,23 +158,23 @@ if ($Sesion){
 		}
 	preparaQuery($Consejera, "Consejera", &$CadBusqueda, &$criterio, false);
 	preparaQuery($ComoTeEnteraste, "ComoTeEnteraste", &$CadBusqueda, &$criterio, true, "c");
-	preparaQuery($Sexo, "Sexo", &$CadBusqueda, &$criterio, false, "c");			
+	preparaQuery($Sexo, "Sexo", &$CadBusqueda, &$criterio, false, "c");
 	preparaQuery($LenguaIndigena, "LenguaIndigena", &$CadBusqueda, &$criterio, false, "c");			
 	preparaQuery($MedioContacto, "MedioContacto", &$CadBusqueda, &$criterio, false, "c");			
 	preparaQuery($Ocupacion, "Ocupacion", &$CadBusqueda, &$criterio, false, "c");
 	preparaQuery($Municipio, "Municipio", &$CadBusqueda, &$criterio, false, "c");				
-	preparaQuery($Estado, "Estado", &$CadBusqueda, &$criterio, false, "c");				
+	preparaQuery($Estado, "Estado", &$CadBusqueda, &$criterio, false, "c");
 	preparaQuery($EstadoCivil, "EstadoCivil", &$CadBusqueda, &$criterio, false, "c");
-	preparaQuery($NivelEstudios, "NivelEstudios", &$CadBusqueda, &$criterio, false, "c");			
-	preparaQuery($AyudaPsicologico, "AyudaPsicologico", &$CadBusqueda, &$criterio);								
-	preparaQuery($AyudaLegal, "AyudaLegal", &$CadBusqueda, &$criterio);					
+	preparaQuery($NivelEstudios, "NivelEstudios", &$CadBusqueda, &$criterio, false, "c");
+	preparaQuery($AyudaPsicologico, "AyudaPsicologico", &$CadBusqueda, &$criterio);	
+	preparaQuery($AyudaLegal, "AyudaLegal", &$CadBusqueda, &$criterio);
 	preparaQuery($AyudaMedica, "AyudaMedica", &$CadBusqueda, &$criterio);
 	preparaQuery($AyudaNutricional, "AyudaNutricional", &$CadBusqueda, &$criterio);	
 	preparaQuery($AyudaOtros, "AyudaOtros", &$CadBusqueda, &$criterio);	
 	preparaQuery($TipoViolencia, "TipoViolencia", &$CadBusqueda, &$criterio);	
 	preparaQuery($ModalidadViolencia, "ModalidadViolencia", &$CadBusqueda, &$criterio);	
 	preparaQuery($Violentometro, "Violentometro", &$CadBusqueda, &$criterio);	
-	preparaQuery($NivelViolencia, "NivelViolencia", &$CadBusqueda, &$criterio);	
+	preparaQuery($NivelViolencia, "NivelViolencia", &$CadBusqueda, &$criterio);
 
 	$sql ="Drop Table Reporte";
 	$total_result = @mysql_query($sql, $GLOBALS['connection']);
@@ -258,7 +258,6 @@ if ($Sesion){
 	$Femenino=CuentaEsto("Sexo = 'F'");
 
 	//Ocupacion
-	// $TotalOcu=Muestra("Ocupacion","Ocupacion <> '-' AND ","Llamadas DESC");
 	$TotalOcu=Muestra("Ocupacion"); // Muestra las llamadas con otros.. 
 
 	//Estado Civil
@@ -300,6 +299,12 @@ if ($Sesion){
 
 	$TotalCP=Muestra("CP","CP <> '' AND ","Llamadas DESC","LIMIT 10");
 	$TotalEnteraste=MuestraAyuda("ComoTeEnteraste");
+
+	//Canalizacion
+	$TotalCanaLegal=Muestra("CanaLegal","CanaLegal Not Like \"%Voluntario%\" And ","Llamadas DESC","LIMIT 10");
+	$TotalCanaLegalV=Muestra("CanaLegal","CanaLegal Like \"%Voluntario%\" And ","Llamadas DESC","LIMIT 10");
+	$TotalCanaOtro=Muestra("CanaOtro","CanaOtro Not Like \"%Voluntario%\" And ","Llamadas DESC","LIMIT 10");
+	$TotalCanaOtroV=Muestra("CanaOtro","CanaOtro Like \"%Voluntario%\" And ","Llamadas DESC","LIMIT 10");
 
 	include ("Paginas/BuscarCasos_Reporte.html");
 	}
