@@ -98,15 +98,16 @@ echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&da
 <?echo $PorDia;?>
 
 <TR><TD COLSPAN=13><CENTER>Edad (A&ntilde;os)</CENTER></TD></TR> 
-<TR><TD>No Dada</TD><?echo "<TD>$NoDada</TD>";?></TR>
-<TR><TD>1-12</TD><?echo "<TD>$De1a12</TD>";?></TR>
-<TR><TD>13-17</TD><?echo "<TD>$De13a17</TD>";?></TR>
-<TR><TD>18-29</TD><?echo "<TD>$De18a29</TD>";?></TR>
-<TR><TD>30-39</TD><?echo "<TD>$De30a39</TD>";?></TR>
-<TR><TD>40-49</TD><?echo "<TD>$De40a49</TD>";?></TR>
-<TR><TD>50-59</TD><?echo "<TD>$De50a59</TD>";?></TR>
-<TR><TD>60-69</TD><?echo "<TD>$De60a69</TD>";?></TR>
-<TR><TD>Mas De 70</TD><?echo "<TD>$MasDe70</TD>";?></TR>
+<TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH></TR>
+<TR><TD>No Dada</TD><?echo "<TD>$NoDada</TD><TD>$CNoDada</TD>";?></TR>
+<TR><TD>1-12</TD><?echo "<TD>$De1a12</TD><TD>$CDe1a12</TD>";?></TR>
+<TR><TD>13-17</TD><?echo "<TD>$De13a17</TD><TD>$CDe13a17</TD>";?></TR>
+<TR><TD>18-29</TD><?echo "<TD>$De18a29</TD><TD>$CDe18a29</TD>";?></TR>
+<TR><TD>30-39</TD><?echo "<TD>$De30a39</TD><TD>$CDe30a39</TD>";?></TR>
+<TR><TD>40-49</TD><?echo "<TD>$De40a49</TD><TD>$CDe40a49</TD>";?></TR>
+<TR><TD>50-59</TD><?echo "<TD>$De50a59</TD><TD>$CDe50a59</TD>";?></TR>
+<TR><TD>60-69</TD><?echo "<TD>$De60a69</TD><TD>$CDe60a69</TD>";?></TR>
+<TR><TD>Mas De 70</TD><?echo "<TD>$MasDe70</TD><TD>$CMasDe70</TD>";?></TR>
 <TR><TD COLSPAN=13><CENTER>
 <?
 $Nom="Edad";
@@ -116,45 +117,14 @@ echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&da
 ?>
 </CENTER></TD></TR> 
 
-<TR><TD COLSPAN=13><CENTER>Edad por casos</CENTER></TD></TR> 
-<TR><TD>No Dada</TD><?echo "<TD>$CNoDada</TD>";?></TR>
-<TR><TD>1-12</TD><?echo "<TD>$CDe1a12</TD>";?></TR>
-<TR><TD>13-17</TD><?echo "<TD>$CDe13a17</TD>";?></TR>
-<TR><TD>18-29</TD><?echo "<TD>$CDe18a29</TD>";?></TR>
-<TR><TD>30-39</TD><?echo "<TD>$CDe30a39</TD>";?></TR>
-<TR><TD>40-49</TD><?echo "<TD>$CDe40a49</TD>";?></TR>
-<TR><TD>50-59</TD><?echo "<TD>$CDe50a59</TD>";?></TR>
-<TR><TD>60-69</TD><?echo "<TD>$CDe60a69</TD>";?></TR>
-<TR><TD>Mas De 70</TD><?echo "<TD>$CMasDe70</TD>";?></TR>
-<TR><TD COLSPAN=13><CENTER>
-<?
-$Nom="EdadCasos";
-$data="No Dada,1-12,13-17,18-29,30-39,40-49,50-59,60-69,Mas de 70";
-$$datag=$CNoDada.",".$CDe1a12.",".$CDe13a17.",".$CDe18a29.",".$CDe30a39.",".$CDe40a49.",".$CDe50a59.",".$CDe60a69.",".$CMasDe70;
-echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
-?>
-</CENTER></TD></TR> 
-
 <TR><TD COLSPAN=13><CENTER>Genero</CENTER></TD></TR>
 <?echo $TotalGenero;?>
 
-<TR><TD COLSPAN=13><CENTER>Genero</CENTER></TD></TR> 
-<TR><TD>Femenino</TD><?echo "<TD>$Femenino</TD>";?></TR>
-<TR><TD>Masculino</TD><?echo "<TD>$Masculino</TD>";?></TR>
-<TR><TD COLSPAN=13><CENTER>
-<?
-$Nom="Genero";
-$data="Femenino,Masculino";
-$datag=$Femenino.",".$Masculino;
-echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
-?>
-</CENTER></TD></TR> 
-
-<TR><TD COLSPAN=13><CENTER>Ocupaci&oacute;n (10+)</CENTER></TD></TR> 
+<TR><TD COLSPAN=13><CENTER>Ocupaci&oacute;n</CENTER></TD></TR> 
 <?echo $TotalOcu;?>
 
 <TR><TD COLSPAN=13><CENTER>Informaci&oacute;n Prestada</CENTER></TD></TR>
-<TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH><TR></TR>
+<TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH></TR>
 <TR><TD>Psicologico</TD><?echo "<TD>".$psicologico["l"]."</TD><TD>".$psicologico["u"]."</TD>";?></TR>
 <TR><TD>Legal</TD><?echo "<TD>".$legal["l"]."</TD><TD>".$legal["u"]."</TD>";?></TR>
 <TR><TD>Medico</TD><?echo "<TD>".$medico["l"]."</TD><TD>".$medico["u"]."</TD>";?></TR>

@@ -103,7 +103,7 @@ if ($Sesion){
 	function Muestra($Tipo,$Clausula="",$Order="Llamadas DESC",$Other=""){ 
 		$sql ="SELECT $Tipo, COUNT(*) 'Llamadas', COUNT(Distinct(idcaso)) 'Usuarios' FROM Reporte WHERE $Clausula 1=1 GROUP BY $Tipo ORDER BY $Order $Other";
 		$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
-		$Seguimientos="<TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH><TR>";
+		$Seguimientos="<TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH></TR>";
 		$i=0;
 		$Total=@mysql_num_rows($total_result);
 	 	while ($row = mysql_fetch_array($total_result)){
@@ -253,8 +253,6 @@ if ($Sesion){
 
 	//Genero
 	$TotalGenero=Muestra("Sexo");
-	$Masculino=CuentaEsto("Sexo = 'M'");
-	$Femenino=CuentaEsto("Sexo = 'F'");
 
 	//Ocupacion
 	$TotalOcu=Muestra("Ocupacion"); // Muestra las llamadas con otros.. 
