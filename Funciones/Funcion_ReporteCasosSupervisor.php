@@ -183,8 +183,6 @@ if ($Sesion){
 
 	//Totales
 	$TotalLlamadasMes  = CuentaEsto("");
-	$TotalLlamadasCMes  = CuentaEsto("Acceso=0");
-	$TotalLlamadasIMes = CuentaEsto("Acceso=1");
 	$TotalCasos = CuentaEsto("LlamadaNo=1");
 	$TotalPersonas = CuentaEsto("LlamadaNo>0 group by IDCaso");
 	$TotalSeguimiento = CuentaEsto("LlamadaNo>1");
