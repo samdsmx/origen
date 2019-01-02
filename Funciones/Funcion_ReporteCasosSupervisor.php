@@ -252,6 +252,7 @@ if ($Sesion){
 	$CMasDe70=CuentaEsto("LlamadaNo=1 AND Edad >= '70'");
 
 	//Genero
+	$TotalGenero=Muestra("Sexo");
 	$Masculino=CuentaEsto("Sexo = 'M'");
 	$Femenino=CuentaEsto("Sexo = 'F'");
 
