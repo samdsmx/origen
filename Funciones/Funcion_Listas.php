@@ -21,9 +21,6 @@ function ListaUsuarios(){
 		if($Tipo == 'AYUDALEGAL'){
 			$Legal .= "<OPTION VALUE='$Nombre'>$Nombre".chr(10);
 			}
-		if($Tipo == 'AYUDAMEDICA'){
-			$Medicos .= "<OPTION VALUE='$Nombre'>$Nombre".chr(10);
-			}
 		if($Tipo == 'AYUDAOTROS'){
 			$Otros .= "<OPTION VALUE='$Nombre'>$Nombre".chr(10);
 			}
@@ -45,7 +42,8 @@ function ListaUsuarios(){
 		if($Tipo == 'Violentometro'){
 			$Violentometro.= "<OPTION VALUE='$Nombre'>$Nombre".chr(10);
 			}
-   		}
+		   }
+	mysql_close($connection);
 	include("Paginas/Usuarios_Lista.html");
 	}
 
@@ -54,6 +52,7 @@ function ListaConsejeras(){
 	$sql ="SELECT Nombre FROM Consejeros WHERE NivelSeguridad=1 OR NivelSeguridad=4";
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
+	mysql_close($connection);
 	while ($row = mysql_fetch_array($total_result)){
 		$Consejera=$row['Nombre'];
     		$Consejeras .= "<OPTION VALUE='$Consejera'>$Consejera".chr(10);
