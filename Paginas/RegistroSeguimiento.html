@@ -11,7 +11,14 @@
 	$row = mysql_fetch_array($result);
 	$TipoCaso=$row['TipoCaso'];
     $NivelViolencia=$row['NivelViolencia'];
-	$PosibleSolucion=$row['PosibleSolucion'];
+    $PosibleSolucion=$row['PosibleSolucion'];
+	$MPrincipal=$row['MPrincipal'];
+    $Metas=$row['Metas'];
+    $OClinico=$row['OClinico'];
+    $Intervencion=$row['Intervencion'];
+    $Canalizacion=$row['Canalizacion'];
+    $Avances=$row['Avances'];
+    $CExito=$row['CExito'];    
 	$Estatus=$row['Estatus'];
       $sql ="SELECT SUM(duracion) FROM llamadas WHERE IDCaso='".rs($IDCaso)."'";
 	$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
@@ -359,19 +366,127 @@ startclock();
                </TR>
                
             </TABLE>
-             </FONT><FONT FACE="Arial" COLOR="#FFCC00">
-            </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#FFCC00"><TABLE BORDER=0 WIDTH="100%">
+             </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#FFCC00">
+
+            <TABLE BORDER="0" WIDTH="100%">
+               
                <TR>
-                  <TD WIDTH=438 BGCOLOR="#FFFFFF">
+                  <TD WIDTH="438" BGCOLOR="#FFFFFF">
                      <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Desarrollo del caso</B></FONT></P>
                   </TD>
                </TR>
                <TR>
-                  <TD VALIGN=top NOWRAP WIDTH=438 BGCOLOR="#FFFFFF">
-                     <P><FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME=DesarrolloCaso ROWS=10 COLS=91 WRAP=virtual></TEXTAREA></FONT></P>
+                  <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+                     <P><FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="DesarrolloCaso" ROWS="10" COLS="91" WRAP="virtual"></TEXTAREA></FONT></P>
                   </TD>
                </TR>
+
+                <TR>
+                    <TD WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Motivo principal</B></FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="MPrincipal" ROWS="10" COLS="91" WRAP="virtual"><? echo $MPrincipal;?></TEXTAREA></FONT>
+                        </P>
+                    </TD>
+                </TR>
+
+                <TR>
+                    <TD WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Objetivo del usuario (Metas)</B></FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Metas" ROWS="10" COLS="91" WRAP="virtual"><? echo $Metas;?></TEXTAREA></FONT>
+                        </P>
+                    </TD>
+                </TR>
+
+                <TR>
+                    <TD WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Objetivo del usuario (Metas)</B></FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="OClinico" ROWS="10" COLS="91" WRAP="virtual"><? echo $OClinico;?></TEXTAREA></FONT>
+                        </P>
+                    </TD>
+                </TR>
+
+                <TR>
+                    <TD WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Intervención</B></FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Intervencion" ROWS="10" COLS="91" WRAP="virtual"><? echo $Intervencion;?></TEXTAREA></FONT>
+                        </P>
+                    </TD>
+                </TR>     
+                
+                <TR>
+                    <TD WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Canalización</B></FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Canalizacion" ROWS="10" COLS="91" WRAP="virtual"><? echo $Canalizacion;?></TEXTAREA></FONT>
+                        </P>
+                    </TD>
+                </TR>   
+                
+                <TR>
+                    <TD WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Revisión de tareas y avances:</B></FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Avances" ROWS="10" COLS="91" WRAP="virtual"><? echo $Avances;?></TEXTAREA></FONT>
+                        </P>
+                    </TD>
+                </TR>  
+
+                <TR>
+                    <TD WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Caso de éxito:</B></FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="CExito" ROWS="10" COLS="91" WRAP="virtual"><? echo $CExito;?></TEXTAREA></FONT>
+                        </P>
+                    </TD>
+                </TR>  
             </TABLE>
+
 	<p align=center style='text-align:center'><span style='font-size:22.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'>
 	<a href="#" onClick="window.open('?Accion=RealizarBusquedaOrga','mywindow','height=600,width=350,scrollbars=yes,status=yes');">Busqueda de Organismos</a>
 <p align=center style='text-align:center'><span style='font-size:22.0pt;

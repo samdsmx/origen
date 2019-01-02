@@ -42,6 +42,13 @@ if ($Sesion){
 		$Duracion=$row['Duracion'];
 		$TipoCaso=$row['TipoCaso'];
 		$PosibleSolucion=$row['PosibleSolucion'];
+		$MPrincipal=$row['MPrincipal'];
+		$Metas=$row['Metas'];
+		$OClinico=$row['OClinico'];
+		$Intervencion=$row['Intervencion'];
+		$Canalizacion=$row['Canalizacion'];
+		$Avances=$row['Avances'];
+		$CExito=$row['CExito'];
 		$Estatus=$row['Estatus'];
 		$HorasInvertidas=$row['HorasInvertidas'];
 		}
