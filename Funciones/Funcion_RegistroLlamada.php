@@ -141,7 +141,7 @@ if ($Sesion){
 					$sql=$sql.",";
 				$sql=$sql."Pais='".rs($Pais)."'";
 				$cuenta=$cuenta+1;
-				}				
+				}
 			if ($CorreoElectronico <> ""){
 				if ($cuenta>0)
 					$sql=$sql.",";
@@ -263,7 +263,7 @@ if ($Sesion){
 			else{			
 				$sql = "UPDATE casos SET Nombre='".rs($Nombre)."',Edad='".rs($Edad)."',Sexo='".rs($Sexo)."',EstadoCivil='".rs($EstadoCivil)."',Telefono='".rs($Telefono)."',Municipio='".rs($Municipio)."',Estado='".rs($Estado)."',Ocupacion='".rs($Ocupacion)."' '".rs($Ocupacion2)."',Religion='".rs($Religion)."',VivesCon='".rs($VivesCon)."',ComoTeEnteraste='".rs($ComoTeEnteraste)."',TipoCaso='".rs($TipoCaso)."',NivelViolencia='".rs($NivelViolencia)."',Nacionalidad='".rs($Nacionalidad)."',PosibleSolucion='".rs($PosibleSolucion)."',Estatus='".rs($Estatus)."',HorasInvertidas='".rs($HorasInvertidas)."',NivelEstudios='".rs($NivelEstudios)."',LenguaIndigena='".rs($LenguaIndigena)."',CP='".rs($CP)."',Colonia='".rs($Colonia)."',Pais='".rs($Pais)."',CorreoElectronico='".rs($CorreoElectronico)."',MedioContacto='".rs($MedioContacto)."' where IDCaso='".rs($IDCaso)."'";
 				$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-				$sql = "UPDATE llamadas SET ComentariosAdicionales='".rs($ComentariosAdicionales)."',AyudaPsicologico='".rs($AYUDAPSICOLOGICO)."',AyudaLegal='".rs($AYUDALEGAL). "',AyudaMedica='".rs($AYUDAMEDICA)."',AyudaNutricional='".rs($AYUDANUTRICIONAL). "',AyudaOtros='".rs($AYUDAOTROS)."',TipoViolencia='".rs($TipoViolencia)."',ModalidadViolencia='".rs($ModalidadViolencia)."',Violentometro='".rs($Violentometro)."',AcudeInstitucion='".rs($AcudeInstitucion)."',DesarrolloCaso='".rs($DesarrolloCaso)."',CanaLegal='".rs($CanaLegal)."',CanaOtro='".rs($CanaOtro)."' where IDCaso='".rs($IDCaso)."' and LlamadaNo='".rs($LlamadaNo)."'";
+				$sql = "UPDATE llamadas SET ComentariosAdicionales='".rs($ComentariosAdicionales)."',AyudaPsicologico='".rs($AYUDAPSICOLOGICO)."',AyudaLegal='".rs($AYUDALEGAL)."',AyudaMedica='".rs($AYUDAMEDICA)."',AyudaNutricional='".rs($AYUDANUTRICIONAL). "',AyudaOtros='".rs($AYUDAOTROS)."',TipoViolencia='".rs($TipoViolencia)."',ModalidadViolencia='".rs($ModalidadViolencia)."',Violentometro='".rs($Violentometro)."',AcudeInstitucion='".rs($AcudeInstitucion)."',DesarrolloCaso='".rs($DesarrolloCaso)."',CanaLegal='".rs($CanaLegal)."',CanaOtro='".rs($CanaOtro)."' where IDCaso='".rs($IDCaso)."' and LlamadaNo='".rs($LlamadaNo)."'";
 				$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 				}
 		}

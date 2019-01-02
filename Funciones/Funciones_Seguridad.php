@@ -8,7 +8,6 @@ function Autentifica($Nombre, $Password, $Estado){
 		$sql ="SELECT NivelSeguridad FROM Consejeros WHERE Nombre='".rs($Nombre)."' AND Password2='".rs($Password)."' AND Acceso > 1";
 		else
 			$sql ="SELECT NivelSeguridad FROM Consejeros WHERE Nombre='".rs($Nombre)."' AND Password2='".rs($Password)."'";
-
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	if ($total_found == "1"){

@@ -189,7 +189,7 @@ function rellenaCanaLegal(formulario){
 		with (document.forms[formulario]){
 			var str = CanaLegal.value = selLegal[selLegal.selectedIndex].value; 
 			if (str.search("Voluntario")>=0) Voluntario.checked = true; else Voluntario.checked = false;
-      if (str.search("-")>=0) CanaLegal.readOnly = false; else CanaLegal.readOnly = true;
+			if (str.search("-")>=0) CanaLegal.readOnly = false; else CanaLegal.readOnly = true;
 			CanaLegal.focus();
 			}
 		}
@@ -611,7 +611,7 @@ startclock();
                                  ?>
                               </select>
                            </TD>
-                           <TD> 
+                           <TD>
                               <select size="1" name="Municipio" id="Municipio" ONCHANGE="changeMunicipio('forma');">
                               </select>
                            </TD>
@@ -1196,7 +1196,7 @@ startclock();
   </FONT></P>
       </TD>
 
-<TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF" >
+<TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
   <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
   <? 
   include("Datos_Comunicacion.php");
