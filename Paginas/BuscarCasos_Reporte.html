@@ -29,7 +29,7 @@
 <TR><TD>Personas atendidas</TD><?echo "<TD>$TotalPersonas </TD>";?></TR>
 
 <TR><TD COLSPAN=13><CENTER>Medio de contacto</CENTER></TD></TR>
-<?echo "<TD>$MedioContacto</TD>";?>
+<?echo $MedioContacto;?>
 
 <TR><TD>Total de casos</TD><?echo "<TD>$TotalCasos</TD>";?></TR>
 <TR><TD>Llamadas de seguimiento</TD><?echo "<TD>$TotalSeguimiento</TD>";?></TR>
@@ -54,6 +54,26 @@ $datag=$TotalResueltos.",".$TotalCasosCana.",".$TotalCasosSeguimiento.",".$Total
 echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
 ?>
 </CENTER></TD></TR> 
+
+<TR><TD COLSPAN=13><CENTER>Edad (A&ntilde;os)</CENTER></TD></TR> 
+<TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH></TR>
+<TR><TD>No Dada</TD><?echo "<TD>$NoDada</TD><TD>$CNoDada</TD>";?></TR>
+<TR><TD>1-14</TD><?echo "<TD>$De1a14</TD><TD>$CDe1a14</TD>";?></TR> 
+<TR><TD>15-29</TD><?echo "<TD>$De15a29</TD><TD>$CDe15a29</TD>";?></TR>
+<TR><TD>30-44</TD><?echo "<TD>$De30a44</TD><TD>$CDe30a44</TD>";?></TR>
+<TR><TD>45-59</TD><?echo "<TD>$De45a59</TD><TD>$CDe45a59</TD>";?></TR>
+<TR><TD>Mas De 60</TD><?echo "<TD>$MasDe60</TD><TD>$CMasDe60</TD>";?></TR>
+<TR><TD COLSPAN=13><CENTER>
+<?
+$Nom="Edad";
+$data="No Dada,1-14,15-29,30-44,45-59,Mas de 60";
+$datag=$NoDada.",".$De1a14.",".$De15a29.",".$De30a44.",".$De45a59.",".$MasDe60;
+echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
+?>
+</CENTER></TD></TR> 
+
+<TR><TD COLSPAN=13><CENTER>Genero</CENTER></TD></TR>
+<?echo $TotalGenero;?>
 
 <TR><TD COLSPAN=13><CENTER>Duraci&oacute;n de la llamada (Minutos)</CENTER></TD></TR> 
 <TR><TD>0 a 10</TD><?echo "<TD>$De0a10</TD>";?></TR>
@@ -91,56 +111,11 @@ echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&da
 <TR><TD COLSPAN=13><CENTER>Por Día</CENTER></TD></TR>
 <?echo $PorDia;?>
 
-<TR><TD COLSPAN=13><CENTER>Edad (A&ntilde;os)</CENTER></TD></TR> 
-<TR><TD>No Dada</TD><?echo "<TD>$NoDada</TD>";?></TR>
-<TR><TD>1-14</TD><?echo "<TD>$De1a14</TD>";?></TR> 
-<TR><TD>15-29</TD><?echo "<TD>$De15a29</TD>";?></TR>
-<TR><TD>30-44</TD><?echo "<TD>$De30a44</TD>";?></TR>
-<TR><TD>45-59</TD><?echo "<TD>$De45a59</TD>";?></TR>
-<TR><TD>Mas De 60</TD><?echo "<TD>$MasDe60</TD>";?></TR>
-<TR><TD COLSPAN=13><CENTER>
-<?
-$Nom="Edad";
-$data="No Dada,1-14,15-29,30-44,45-59,Mas de 60";
-$datag=$NoDada.",".$De1a14.",".$De15a29.",".$De30a44.",".$De45a59.",".$MasDe60;
-echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
-?>
-</CENTER></TD></TR> 
-
-<TR><TD COLSPAN=13><CENTER>Edad por casos</CENTER></TD></TR> 
-<TR><TD>No Dada</TD><?echo "<TD>$CNoDada</TD>";?></TR>
-<TR><TD>1-14</TD><?echo "<TD>$CDe1a14</TD>";?></TR>
-<TR><TD>15-29</TD><?echo "<TD>$CDe15a29</TD>";?></TR>
-<TR><TD>30-44</TD><?echo "<TD>$CDe30a44</TD>";?></TR>
-<TR><TD>45-59</TD><?echo "<TD>$CDe45a59</TD>";?></TR>
-<TR><TD>Mas De 60</TD><?echo "<TD>$CMasDe60</TD>";?></TR>
-<TR><TD COLSPAN=13><CENTER>
-<?
-$Nom="EdadCasos";
-$data="No Dada,1-14,15-29,30-44,45-59,Mas de 60";
-$$datag=$CNoDada.",".$CDe1a14.",".$CDe15a29.",".$CDe30a44.",".$CDe45a59.",".$CMasDe60;
-echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
-?>
-</CENTER></TD></TR> 
-
-
-<TR><TD COLSPAN=13><CENTER>Genero</CENTER></TD></TR> 
-<TR><TD>Femenino</TD><?echo "<TD>$Femenino</TD>";?></TR>
-<TR><TD>Masculino</TD><?echo "<TD>$Masculino</TD>";?></TR>
-<TR><TD COLSPAN=13><CENTER>
-<?
-$Nom="Genero";
-$data="Femenino,Masculino";
-$datag=$Femenino.",".$Masculino;
-echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
-?>
-</CENTER></TD></TR> 
-
-<TR><TD COLSPAN=13><CENTER>Ocupaci&oacute;n (10+)</CENTER></TD></TR> 
+<TR><TD COLSPAN=13><CENTER>Ocupaci&oacute;n</CENTER></TD></TR> 
 <?echo $TotalOcu;?>
 
 <TR><TD COLSPAN=13><CENTER>Informaci&oacute;n Prestada</CENTER></TD></TR>
-<TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH><TR></TR>
+<TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH></TR>
 <TR><TD>Psicologico</TD><?echo "<TD>".$psicologico["l"]."</TD><TD>".$psicologico["u"]."</TD>";?></TR>
 <TR><TD>Legal</TD><?echo "<TD>".$legal["l"]."</TD><TD>".$legal["u"]."</TD>";?></TR>
 <TR><TD>Otros</TD><?echo "<TD>".$otros["l"]."</TD><TD>".$otros["u"]."</TD>";?></TR>
