@@ -141,7 +141,7 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
                            </TD>
                         </TR>
                         <TR>
-                           <TD>
+					   		<TD>
                               <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
                                  <TR>
                                     <TD WIDTH="50%">
@@ -463,9 +463,6 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>LEGAL</B></FONT></CENTER>
                   </TD>
                   <TD BGCOLOR="#FFFFFF">
-                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>MEDICO</B></FONT></CENTER>
-                  </TD>
-                  <TD BGCOLOR="#FFFFFF">
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>OTROS</B></FONT></CENTER>
                   </TD>
                </TR>
@@ -506,29 +503,6 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
 		$Nombre=$row['Nombre'];
 		$Tipo=$row['Tipo'];
 		if(!strstr($AyudaLegal, $Nombre)){
-	    		echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
-			}
-			else{
-				echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'" checked>'.$Nombre.'<BR>';
-				}
-		$i=$i+1;
-		}
-	?>
-	</FONT></P>
-      </TD>
-
-  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
-  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
-	<? 
-	include("Datos_Comunicacion.php");
-	$sql ="select * from campos where Tipo = 'AYUDAMEDICA' ORDER BY Nombre ASC";
-	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-	$total_found = @mysql_num_rows($total_result);
-	$i=1;
-	while ($row = mysql_fetch_array($total_result)){
-		$Nombre=$row['Nombre'];
-		$Tipo=$row['Tipo'];
-		if(!strstr($AyudaMedica, $Nombre)){
 	    		echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
 			}
 			else{

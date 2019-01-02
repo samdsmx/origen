@@ -86,7 +86,7 @@
                                </FONT></P>
                            </TD>
                         </TR>
-                        <TR>
+						<TR>
                            <TD BGCOLOR="#FFFFFF">
                               <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>
                                  <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
@@ -306,9 +306,6 @@
                      <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>LEGAL</B></FONT></CENTER>
                   </TD>
                   <TD BGCOLOR="#FFFFFF">
-                     <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>MEDICO</B></FONT></CENTER>
-                  </TD>
-                  <TD BGCOLOR="#FFFFFF">
                      <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>OTROS</B></FONT></CENTER>
                   </TD>
                </TR>
@@ -324,11 +321,6 @@
                      </FONT></P>
                   </TD>
                   <TD VALIGN=top BGCOLOR="#FFFFFF">
-                     <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $AyudaMedica; ?><BR>
-                     <BR>
-                     </FONT></P>
-                  </TD>
-                  <TD VALIGN=top BGCOLOR="#FFFFFF">
                      <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $AyudaOtros; ?><BR>
                      <BR>
                      </FONT></P>
@@ -336,7 +328,7 @@
                </TR>
 
 
-   <TR>
+               <TR>
                   <TD BGCOLOR="#FFFFFF" colspan=2>
                      <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>TIPO DE VIOLENCIA</B></FONT></CENTER>
                   </TD>
@@ -400,24 +392,20 @@
 <B><TABLE BORDER=0 BGCOLOR="#000000" CELLPADDING=3 WIDTH="100%">
 
 <TR>
-<TD BGCOLOR="#FFFFFF">
-<P><FONT SIZE="-2" FACE="Arial" COLOR="#000000">
-<B>Canalizaci&oacute;n Legal:</B>
-</FONT></P>
-</TD>
+	<TD BGCOLOR="#FFFFFF">
+		<P><FONT SIZE="-2" FACE="Arial" COLOR="#000000">
+		<B>Canalizaci&oacute;n Legal:</B>
+		</FONT></P>
+	</TD>
 </TR>
 <TR>
-<TD BGCOLOR="#FFFFFF">
-<P style="text-align:justify">
-<FONT SIZE="-2" FACE="Arial" COLOR="#000000">
-<? if($CanaLegal) echo $CanaLegal; else echo "--"; ?>
-<B>
-<BR>
-<BR>
-</B>
-</FONT>
-</P>
-</TD>
+	<TD BGCOLOR="#FFFFFF">
+		<P style="text-align:justify">
+		<FONT SIZE="-2" FACE="Arial" COLOR="#000000">
+		<? if($CanaLegal) echo $CanaLegal; else echo "--"; ?>
+		</FONT>
+		</P>
+	</TD>
 </TR>
 
 <TR>

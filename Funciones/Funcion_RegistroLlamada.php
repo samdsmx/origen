@@ -173,12 +173,6 @@ if ($Sesion){
 				$sql=$sql."AyudaLegal='".rs($AYUDALEGAL)."'";
 				$cuenta=$cuenta+1;
 				}
-			if ($AyudaMedica <> ""){
-				if ($cuenta>0)
-					$sql=$sql.",";
-				$sql=$sql."AyudaMedica='".rs($AYUDAMEDICA)."'";
-				$cuenta=$cuenta+1;
-				}
 			if ($AyudaOtros <> ""){
 				if ($cuenta>0)
 					$sql=$sql.",";
@@ -239,7 +233,7 @@ if ($Sesion){
 			else{			
 				$sql = "UPDATE casos SET Nombre='".rs($Nombre)."',Edad='".rs($Edad)."',Sexo='".rs($Sexo)."',EstadoCivil='".rs($EstadoCivil)."',Telefono='".rs($Telefono)."',Municipio='".rs($Municipio)."',Estado='".rs($Estado)."',Ocupacion='".rs($Ocupacion)."' '".rs($Ocupacion2)."',Religion='".rs($Religion)."',VivesCon='".rs($VivesCon)."',ComoTeEnteraste='".rs($ComoTeEnteraste)."',TipoCaso='".rs($TipoCaso)."',NivelViolencia='".rs($NivelViolencia)."',PosibleSolucion='".rs($PosibleSolucion)."',Estatus='".rs($Estatus)."',HorasInvertidas='".rs($HorasInvertidas)."',NivelEstudios='".rs($NivelEstudios)."',LenguaIndigena='".rs($LenguaIndigena)."',CP='".rs($CP)."',Colonia='".rs($Colonia)."',CorreoElectronico='".rs($CorreoElectronico)."',MedioContacto='".rs($MedioContacto)."' where IDCaso='".rs($IDCaso)."'";
 				$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-				$sql = "UPDATE llamadas SET ComentariosAdicionales='".rs($ComentariosAdicionales)."',AyudaPsicologico='".rs($AYUDAPSICOLOGICO)."',AyudaLegal='".rs($AYUDALEGAL)."',AyudaMedica='".rs($AYUDAMEDICA)."',AyudaOtros='".rs($AYUDAOTROS)."',TipoViolencia='".rs($TipoViolencia)."',ModalidadViolencia='".rs($ModalidadViolencia)."',Violentometro='".rs($Violentometro)."',DesarrolloCaso='".rs($DesarrolloCaso)."',CanaLegal='".rs($CanaLegal)."',CanaOtro='".rs($CanaOtro)."' where IDCaso='".rs($IDCaso)."' and LlamadaNo='".rs($LlamadaNo)."'";
+				$sql = "UPDATE llamadas SET ComentariosAdicionales='".rs($ComentariosAdicionales)."',AyudaPsicologico='".rs($AYUDAPSICOLOGICO)."',AyudaLegal='".rs($AYUDALEGAL)."',AyudaOtros='".rs($AYUDAOTROS)."',TipoViolencia='".rs($TipoViolencia)."',ModalidadViolencia='".rs($ModalidadViolencia)."',Violentometro='".rs($Violentometro)."',DesarrolloCaso='".rs($DesarrolloCaso)."',CanaLegal='".rs($CanaLegal)."',CanaOtro='".rs($CanaOtro)."' where IDCaso='".rs($IDCaso)."' and LlamadaNo='".rs($LlamadaNo)."'";
 				$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 				}
 		}
@@ -259,9 +253,9 @@ if ($Sesion){
 			$sql = "UPDATE casos SET TipoCaso='".rs($TipoCaso)."',NivelViolencia='".rs($NivelViolencia)."',PosibleSolucion='".rs($PosibleSolucion)."',Estatus='".rs($Estatus)."',HorasInvertidas='".rs($HorasInvertidas)."' where IDCaso='".rs($IDCaso)."'";
 			$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 			$sql = "INSERT INTO Llamadas
-			(IDCaso,FechaLlamada,Consejera,HoraInicio,HoraTermino,ComentariosAdicionales,AyudaPsicologico,AyudaLegal,AyudaMedica,AyudaOtros,DesarrolloCaso,CanaLegal,CanaOtro,LlamadaNo,Duracion,Acceso,TipoViolencia,ModalidadViolencia,Violentometro)
+			(IDCaso,FechaLlamada,Consejera,HoraInicio,HoraTermino,ComentariosAdicionales,AyudaPsicologico,AyudaLegal,AyudaOtros,DesarrolloCaso,CanaLegal,CanaOtro,LlamadaNo,Duracion,Acceso,TipoViolencia,ModalidadViolencia,Violentometro)
 			VALUES
-			('".rs($IDCaso)."','".rs($FechaLlamada)."','".rs($Consejera)."','".rs($HoraInicio)."','".rs($HoraTermino)."','".rs($ComentariosAdicionales)."','".rs($AYUDAPSICOLOGICO)."','".rs($AYUDALEGAL)."','".rs($AYUDAMEDICA)."','".rs($AYUDAOTROS)."','".rs($DesarrolloCaso)."','".rs($CanaLegal)."', '".rs($CanaOtro)."','".rs($LlamadaNo)."', '".rs($Duracion)."', '".rs($Acceso)."', '".rs($TipoViolencia)."', '".rs($ModalidadViolencia)."', '".rs($Violentometro)."')";
+			('".rs($IDCaso)."','".rs($FechaLlamada)."','".rs($Consejera)."','".rs($HoraInicio)."','".rs($HoraTermino)."','".rs($ComentariosAdicionales)."','".rs($AYUDAPSICOLOGICO)."','".rs($AYUDALEGAL)."','".rs($AYUDAOTROS)."','".rs($DesarrolloCaso)."','".rs($CanaLegal)."', '".rs($CanaOtro)."','".rs($LlamadaNo)."', '".rs($Duracion)."', '".rs($Acceso)."', '".rs($TipoViolencia)."', '".rs($ModalidadViolencia)."', '".rs($Violentometro)."')";
 			$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 			}
 	$sql="UPDATE llamadas SET Duracion=((time_to_sec('".rs($HoraTermino)."')-time_to_sec('".rs($HoraInicio)."'))/60) where IDCaso='".rs($IDCaso)."' and LlamadaNo='".rs($LlamadaNo)."'";

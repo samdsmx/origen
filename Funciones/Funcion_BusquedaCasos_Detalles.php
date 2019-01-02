@@ -29,11 +29,10 @@ if ($Sesion){
 		$VivesCon=$row['VivesCon'];
 		$AyudaPsicologico=$row['AyudaPsicologico'];
 		$AyudaLegal=$row['AyudaLegal'];
-		$AyudaMedica=$row['AyudaMedica'];
 		$AyudaOtros=$row['AyudaOtros'];
 		$TipoViolencia=$row['TipoViolencia'];
 		$ModalidadViolencia=$row['ModalidadViolencia'];
-		$NivelViolencia=$row['NivelViolencia'];	
+		$NivelViolencia=$row['NivelViolencia'];
 		$Violentometro=$row['Violentometro'];		
 		$DesarrolloCaso=$row['DesarrolloCaso'];
 		$ComoTeEnteraste=$row['ComoTeEnteraste'];
@@ -50,7 +49,6 @@ if ($Sesion){
 	if ($num != 0){
 		$AyudaPsicologico = SacaElementos($AyudaPsicologico);
 		$AyudaLegal = SacaElementos($AyudaLegal);
-		$AyudaMedica = SacaElementos($AyudaMedica);
 		$AyudaOtros = SacaElementos($AyudaOtros);
 		$TipoViolencia = SacaElementos($TipoViolencia);
 		$ModalidadViolencia = SacaElementos($ModalidadViolencia);

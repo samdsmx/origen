@@ -1,6 +1,42 @@
 <?
 if ($Sesion){
+
 	include("Datos_Comunicacion.php");
+	
+	function preparaQuery($v, $name, &$CadBusqueda, &$criterio, $like=true, $b = "l"){
+		if (is_array($v)){
+			if (count($v)>0){
+				if ($v[0] <> "Todos"){
+					$CadBusqueda .="AND (";
+					$criterio.="$name = ";				
+					for ($i=0;$i<count($v);$i++){
+						if ($like){
+							$CadBusqueda .="$b.$name LIKE '%".$v[$i]."%' ";
+						} else {
+							$CadBusqueda .="$b.$name = '".$v[$i]."' ";
+						}
+						$criterio.="$v[$i] ";						
+						if ($i<count($v)-1){
+							$CadBusqueda .="OR ";
+							$criterio.="o ";
+							}
+						}
+					$CadBusqueda .=") ";
+					$criterio.="<br>";
+					}
+					else{
+						$CadBusqueda .="AND $b.$name <> \"\" ";
+						$criterio.="$name = Todos";
+						}
+				}
+			} else {
+				if ($v <> "-" AND $v <> ""){
+					$CadBusqueda .="AND $b.$name = '". rs($v) . "' ";
+					$criterio.="$name = $v<BR>";		
+					}	
+			}
+		}
+
 	$tmp=substr(mysql_real_escape_string($Sesion),0,5);
 	if ($Ano OR $IDCaso OR $Nombre OR $Telefono){
 		$criterio="";
@@ -12,8 +48,9 @@ if ($Sesion){
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$row = mysql_fetch_array($total_result);
 		$access=$row['Acceso'];
-		if ($access==0 OR $access==2)
+		if ($access==0 OR $access==2){
 			$Consejera[0]=$Nombre_Consejera;
+		}
 		if ($Ano <> "-" AND $Ano <> ""){
 			if (!isset($Ano2)) $Ano2=$Ano;
 			$CadBusqueda2 .="AND Year(l.FechaLlamada)>='".rs($Ano)."' AND Year(l.FechaLlamada)<='".rs($Ano2)."' ";
@@ -36,187 +73,27 @@ if ($Sesion){
 			$CadBusqueda .= "AND ((time_to_sec(l.Horatermino)-time_to_sec(l.Horainicio))/60)>='".rs($Duracion)."' AND ((time_to_sec(l.Horatermino)-time_to_sec(l.Horainicio))/60)<='".rs($Duracion2)."' ";
 			$criterio.="Duracion >= $Duracion y Duracion<= $Duracion2<BR>";			
 			}	
-
-		if (is_array($Consejera)){
-			if (count($Consejera)>0 && $Consejera[0] <> "-"){
-				$CadBusqueda .="AND (";
-				$criterio.="Consejera = ";
-				for ($i=0;$i<count($Consejera);$i++){
-					$CadBusqueda .="l.Consejera = \"$Consejera[$i]\" ";
-					$criterio.="$Consejera[$i] ";
-					if ($i<count($Consejera)-1){
-						$CadBusqueda .="OR ";
-						$criterio.="o ";
-						}
-					}
-				$CadBusqueda .=") ";
-				$criterio.="<br>";
-				}
-			}
-			else{
-				if ($Consejera <> "-" AND $Consejera <> ""){
-					$CadBusqueda .="AND l.Consejera = '".rs($Consejera)."' ";
-					$criterio.="Consejera = $Consejera<BR>";		
-					}
-				}
 		if ($Edad <> "-" AND $Edad <> ""){
 			$CadBusqueda .="AND c.Edad >= '".rs($Edad)."' AND c.Edad <= '".rs($Edad2)."' ";
 			$criterio.="Edad >= $Edad y Edad<= $Edad2<BR>";			
 			}
-		if (count($ComoTeEnteraste)>0 && $ComoTeEnteraste[0] <> "-"){
-			$CadBusqueda .="AND (";
-			$criterio.="ComoTeEnteraste = ";
-			for ($i=0;$i<count($ComoTeEnteraste);$i++){
-				$CadBusqueda .="c.ComoTeEnteraste LIKE '%".rs($ComoTeEnteraste[$i])."%' ";
-				$criterio.="$ComoTeEnteraste[$i] ";
-				if ($i<count($ComoTeEnteraste)-1){
-					$CadBusqueda .="OR ";
-					$criterio.="o ";
-					}
-				}
-			$CadBusqueda .=") ";
-			$criterio.="<br>";
-			}  
-		if ($Sexo <> "-" AND $Sexo <> ""){
-			$CadBusqueda .="AND c.Sexo = '".rs($Sexo)."' ";
-			$criterio.="Genero = $Sexo<BR>";					
-			}
-		if (count($Ocupacion)>0 && $Ocupacion[0] <> "-"){
-			$CadBusqueda .="AND (";
-			$criterio.="Ocupacion = ";			
-			for ($i=0;$i<count($Ocupacion);$i++){
-				$CadBusqueda .="c.Ocupacion = '".rs($Ocupacion[$i])."' ";
-				$criterio.="$Ocupacion[$i] ";
-				if ($i<count($Ocupacion)-1){
-					$CadBusqueda .="OR ";
-					$criterio.="o ";
-					}
-				}
-			$CadBusqueda .=") ";
-			$criterio.="<br>";
-			}  			
-		if (count($Municipio)>0 && $Municipio[0] <> "-"){
-			$CadBusqueda .="AND (";
-			$criterio.="Municipio = ";			
-			for ($i=0;$i<count($Municipio);$i++){
-				$CadBusqueda .="c.Municipio LIKE '%".rs($Municipio[$i])."%' ";
-				$criterio.="$Municipio[$i] ";				
-				if ($i<count($Municipio)-1){
-					$CadBusqueda .="OR ";
-					$criterio.="o ";
-					}
-				}
-			$CadBusqueda .=") ";
-			$criterio.="<br>";
-			}  						
-		if (count($Estado)>0 && $Estado[0] <> "-"){
-			$CadBusqueda .="AND (";
-			$criterio.="Estado = ";				
-			for ($i=0;$i<count($Estado);$i++){
-				$CadBusqueda .="c.Estado LIKE '%".rs($Estado[$i])."%' ";
-				$criterio.="$Estado[$i] ";					
-				if ($i<count($Estado)-1){
-					$CadBusqueda .="OR ";
-					$criterio.="o ";
-					}
-				}
-			$CadBusqueda .=") ";
-			$criterio.="<br>";
-			} 				
-		if (count($EstadoCivil)>0 && $EstadoCivil[0] <> "-"){
-			$CadBusqueda .="AND (";
-			$criterio.="EstadoCivil = ";					
-			for ($i=0;$i<count($EstadoCivil);$i++){
-				$CadBusqueda .="c.EstadoCivil LIKE '%".rs($EstadoCivil[$i])."%' ";
-				$criterio.="$EstadoCivil[$i] ";
-				if ($i<count($EstadoCivil)-1){
-					$CadBusqueda .="OR ";
-					$criterio.="o ";
-					}
-				}
-			$CadBusqueda .=") ";
-			$criterio.="<br>";
-			} 			
-		if (count($AyudaPsicologico)>0 && $AyudaPsicologico[0] <> "-"){
-			if ($AyudaPsicologico[0] <> "Todos"){
-				$CadBusqueda .="AND (";
-				$criterio.="AyudaPsicologico = ";				
-				for ($i=0;$i<count($AyudaPsicologico);$i++){
-					$CadBusqueda .="l.AyudaPsicologico LIKE '%".rs($AyudaPsicologico[$i])."%' ";
-					$criterio.="$AyudaPsicologico[$i] ";					
-					if ($i<count($AyudaPsicologico)-1){
-						$CadBusqueda .="OR ";
-						$criterio.="o ";
-						}
-					}
-				$CadBusqueda .=") ";
-				$criterio.="<br>";
-				}
-				else{
-					$CadBusqueda .="AND l.AyudaPsicologico <> \"\" ";
-					$criterio.="AyudaPsicologico = Todos";
-					}
-			} 			
-		if (count($AyudaLegal)>0 && $AyudaLegal[0] <> "-"){
-			if ($AyudaLegal[0] <> "Todos"){
-				$CadBusqueda .="AND (";
-				$criterio.="AyudaLegal = ";							
-				for ($i=0;$i<count($AyudaLegal);$i++){
-					$CadBusqueda .="l.AyudaLegal LIKE '%".rs($AyudaLegal[$i])."%' ";
-					$criterio.="$AyudaLegal[$i] ";					
-					if ($i<count($AyudaLegal)-1){
-						$CadBusqueda .="OR ";
-						$criterio.="o ";
-						}
-					}
-				$CadBusqueda .=") ";
-				$criterio.="<br>";
-				}
-				else{
-					$CadBusqueda .="AND l.AyudaLegal <> \"\" ";
-					$criterio.="AyudaLegal = Todos";
-					}
-			} 					
-		if (count($AyudaMedica)>0 && $AyudaMedica[0] <> "-"){
-			if ($AyudaMedica[0] <> "Todos"){
-				$CadBusqueda .="AND (";
-				$criterio.="AyudaMedica = ";					
-				for ($i=0;$i<count($AyudaMedica);$i++){
-					$CadBusqueda .="l.AyudaMedica LIKE '%".rs($AyudaMedica[$i])."%' ";
-					$criterio.="$AyudaMedica[$i] ";						
-					if ($i<count($AyudaMedica)-1){
-						$CadBusqueda .="OR ";
-						$criterio.="o ";
-						}
-					}
-				$CadBusqueda .=") ";
-				$criterio.="<br>";
-				}
-				else{
-					$CadBusqueda .="AND l.AyudaMedica <> \"\" ";
-					$criterio.="AyudaMedica = Todos";
-					}
-			} 			
-		if (count($AyudaOtros)>0 && $AyudaOtros[0] <> "-"){
-			if ($AyudaOtros[0] <> "Todos"){
-				$CadBusqueda .="AND (";
-				$criterio.="AyudaOtros = ";				
-				for ($i=0;$i<count($AyudaOtros);$i++){
-					$CadBusqueda .="l.AyudaOtros LIKE '%".rs($AyudaOtros[$i])."%' ";
-					$criterio.="$AyudaOtros[$i] ";						
-					if ($i<count($AyudaOtros)-1){
-						$CadBusqueda .="OR ";
-						$criterio.="o ";
-						}
-					}
-				$CadBusqueda .=") ";
-				$criterio.="<br>";
-				}
-				else{
-					$CadBusqueda .="AND l.AyudaOtros <> \"\" ";
-					$criterio.="AyudaOtros = Todos";
-					}
-			} 	
+		preparaQuery($Consejera, "Consejera", &$CadBusqueda, &$criterio, false);
+		preparaQuery($ComoTeEnteraste, "ComoTeEnteraste", &$CadBusqueda, &$criterio, true, "c");	
+		preparaQuery($MedioContacto, "MedioContacto", &$CadBusqueda, &$criterio,false,"c");
+		preparaQuery($Sexo, "Sexo", &$CadBusqueda, &$criterio,false,"c");
+		preparaQuery($LenguaIndigena, "LenguaIndigena", &$CadBusqueda, &$criterio,false,"c");
+		preparaQuery($Ocupacion, "Ocupacion", &$CadBusqueda, &$criterio,false,"c");
+		preparaQuery($Municipio, "Municipio", &$CadBusqueda, &$criterio,false,"c");
+		preparaQuery($Estado, "Estado", &$CadBusqueda, &$criterio,false,"c");
+		preparaQuery($EstadoCivil, "EstadoCivil", &$CadBusqueda, &$criterio,false,"c");
+		preparaQuery($AyudaPsicologico, "AyudaPsicologico", &$CadBusqueda, &$criterio,true,"l");
+		preparaQuery($AyudaLegal, "AyudaLegal", &$CadBusqueda, &$criterio,true,"l");	
+		preparaQuery($AyudaOtros, "AyudaOtros", &$CadBusqueda, &$criterio);	
+		preparaQuery($TipoViolencia, "TipoViolencia", &$CadBusqueda, &$criterio);	
+		preparaQuery($ModalidadViolencia, "ModalidadViolencia", &$CadBusqueda, &$criterio);	
+		preparaQuery($Violentometro, "Violentometro", &$CadBusqueda, &$criterio);	
+		preparaQuery($NivelViolencia, "NivelViolencia", &$CadBusqueda, &$criterio);	
+		
 		if ($Palabra <> "-" AND $Palabra <> "")
 			$CadBusqueda .="AND l.DesarrolloCaso LIKE '%".rs($Palabra)."%' ";
 		if ($IDCaso <> "")
@@ -266,13 +143,13 @@ if ($Sesion){
 				}
 switch ($Correlacion){
 	case "IDCaso":	
-		$sql2 = "SELECT IDCaso, FechaLlamada, HoraInicio, Consejera, LlamadaNo, Acceso FROM Llamadas WHERE IDCaso='".rs($IDCaso)."' AND LlamadaNo<>'".rs($LlamadaNo)."' Order By LlamadaNo Desc";		
+		$sql2 = "SELECT IDCaso, FechaLlamada, HoraInicio, Consejera, LlamadaNo, Acceso FROM Llamadas WHERE IDCaso='".rs($IDCaso)."' AND LlamadaNo<>'".rs($LlamadaNo)."' Order By FechaLlamada Desc";		
 		break;
 	case "Nombre":	
-		$sql2 = "SELECT IDCaso, FechaLlamada, HoraInicio, Consejera, LlamadaNo, Acceso FROM ".rs($tmp)." WHERE Nombre='".rs($Nombre)."' Order By LlamadaNo Desc";		
+		$sql2 = "SELECT IDCaso, FechaLlamada, HoraInicio, Consejera, LlamadaNo, Acceso FROM ".rs($tmp)." WHERE Nombre='".rs($Nombre)."' Order By FechaLlamada Desc";		
 		break;
 	case "Telefono":	
-		$sql2 = "SELECT IDCaso, FechaLlamada, HoraInicio, Consejera, LlamadaNo, Acceso FROM ".rs($tmp)." WHERE Telefono='".rs($Telefono)."' Order By LlamadaNo Desc";		
+		$sql2 = "SELECT IDCaso, FechaLlamada, HoraInicio, Consejera, LlamadaNo, Acceso FROM ".rs($tmp)." WHERE Telefono='".rs($Telefono)."' Order By FechaLlamada Desc";		
 		break;
 	}
 
@@ -322,7 +199,7 @@ switch ($Correlacion){
            	<TR><TD><FONT SIZE=\"-2\">Seguimientos ($total_found2)</FONT><BR><BR><FONT SIZE=\"-2\">$Seguimientos</FONT><BR></TD></TR>
 	     	</TABLE>
 		</td><td VALIGN=top NOWRAP BGCOLOR=\"#FFFFFF\"><FONT SIZE=\"-1\">$Color $Consejera</td><TD VALIGN=top BGCOLOR=\"#FFFFFF\">
-		<a href=\"javascript: openwindow('?Accion=Seguimiento&IDCaso=$IDCaso&Nombre=$Nombre&LlamadaNo=".($total_found2+1)."');\"><IMG SRC=\"resc/seguimiento.gif\" BORDER=0 ALIGN=bottom></a></TD><TD VALIGN=top NOWRAP BGCOLOR=\"#FFFFFF\">
+		<a href=\"javascript: openwindow('?Accion=Seguimiento&IDCaso=$IDCaso&Nombre=$Nombre&LlamadaNo=".($LlamadaNo+1)."');\"><IMG SRC=\"resc/seguimiento.gif\" BORDER=0 ALIGN=bottom></a></TD><TD VALIGN=top NOWRAP BGCOLOR=\"#FFFFFF\">
 		<a href=\"javascript: openwindow('?Accion=VerDetalles&IDCaso=$IDCaso&LlamadaNo=$LlamadaNo');\"><IMG SRC=\"resc/detalles.gif\" BORDER=0 ALIGN=bottom><a></TD></tr>";
 		$Seguimientos ="";
 		}
