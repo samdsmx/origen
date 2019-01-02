@@ -5,9 +5,8 @@
 	$HoraActual=date("h:i A");
 	$FechaActual=date("d/m/Y");
 	$NombreConsejero=RevisaSesion($Sesion, "identidad");
-	$LlamadaNo=$LlamadaNo+1;
 	include("Datos_Comunicacion.php");
-      $sql ="SELECT * FROM casos WHERE IDCaso='".rs($IDCaso)."'";
+    $sql ="SELECT * FROM casos WHERE IDCaso='".rs($IDCaso)."'";
 	$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$row = mysql_fetch_array($result);
 	$TipoCaso=$row['TipoCaso'];
