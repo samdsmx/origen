@@ -105,11 +105,14 @@ startclock();
                         <TR>
                            <TD>
                               <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>En referencia al caso</B></FONT></P>
-                           </TD>
+                          </TD>
                         </TR>
                         <TR>
                            <TD>
-                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=hidden NAME=IDCaso VALUE="<? echo $IDCaso;?>"><!--NOEDIT--><? echo $IDCaso;?><!--/NOEDIT--></FONT></P>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=hidden NAME=IDCaso VALUE="<? echo $IDCaso;?>"><!--NOEDIT--><? echo $IDCaso;?><!--/NOEDIT-->
+							  </FONT>
+							  <INPUT TYPE=checkbox NAME="CExito" VALUE="1" <? if($CExito=='1')echo "checked";?> >Caso de Exito
+							  </P>
                            </TD>
                         </TR>
                         <TR>
@@ -369,18 +372,7 @@ startclock();
              </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#FFCC00">
 
             <TABLE BORDER="0" WIDTH="100%">
-               
-               <TR>
-                  <TD WIDTH="438" BGCOLOR="#FFFFFF">
-                     <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Desarrollo del caso</B></FONT></P>
-                  </TD>
-               </TR>
-               <TR>
-                  <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
-                     <P><FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="DesarrolloCaso" ROWS="10" COLS="91" WRAP="virtual"></TEXTAREA></FONT></P>
-                  </TD>
-               </TR>
-
+              
                 <TR>
                     <TD WIDTH="438" BGCOLOR="#FFFFFF">
                         <P>
@@ -391,7 +383,7 @@ startclock();
                 <TR>
                     <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
                         <P>
-                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="MPrincipal" ROWS="10" COLS="91" WRAP="virtual"><? echo $MPrincipal;?></TEXTAREA></FONT>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="MPrincipal" ROWS="10" COLS="91" WRAP="virtual"></TEXTAREA></FONT>
                         </P>
                     </TD>
                 </TR>
@@ -406,7 +398,7 @@ startclock();
                 <TR>
                     <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
                         <P>
-                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Metas" ROWS="10" COLS="91" WRAP="virtual"><? echo $Metas;?></TEXTAREA></FONT>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Metas" ROWS="10" COLS="91" WRAP="virtual"></TEXTAREA></FONT>
                         </P>
                     </TD>
                 </TR>
@@ -414,14 +406,14 @@ startclock();
                 <TR>
                     <TD WIDTH="438" BGCOLOR="#FFFFFF">
                         <P>
-                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Objetivo del usuario (Metas)</B></FONT>
+                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Plan de acción (Objetivo clínico):</B></FONT>
                         </P>
                     </TD>
                 </TR>
                 <TR>
                     <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
                         <P>
-                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="OClinico" ROWS="10" COLS="91" WRAP="virtual"><? echo $OClinico;?></TEXTAREA></FONT>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="OClinico" ROWS="10" COLS="91" WRAP="virtual"></TEXTAREA></FONT>
                         </P>
                     </TD>
                 </TR>
@@ -436,26 +428,11 @@ startclock();
                 <TR>
                     <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
                         <P>
-                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Intervencion" ROWS="10" COLS="91" WRAP="virtual"><? echo $Intervencion;?></TEXTAREA></FONT>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Intervencion" ROWS="10" COLS="91" WRAP="virtual"></TEXTAREA></FONT>
                         </P>
                     </TD>
                 </TR>     
-                
-                <TR>
-                    <TD WIDTH="438" BGCOLOR="#FFFFFF">
-                        <P>
-                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Canalización</B></FONT>
-                        </P>
-                    </TD>
-                </TR>
-                <TR>
-                    <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
-                        <P>
-                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Canalizacion" ROWS="10" COLS="91" WRAP="virtual"><? echo $Canalizacion;?></TEXTAREA></FONT>
-                        </P>
-                    </TD>
-                </TR>   
-                
+                               
                 <TR>
                     <TD WIDTH="438" BGCOLOR="#FFFFFF">
                         <P>
@@ -466,7 +443,7 @@ startclock();
                 <TR>
                     <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
                         <P>
-                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Avances" ROWS="10" COLS="91" WRAP="virtual"><? echo $Avances;?></TEXTAREA></FONT>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Avances" ROWS="10" COLS="91" WRAP="virtual"></TEXTAREA></FONT>
                         </P>
                     </TD>
                 </TR>  
@@ -474,17 +451,17 @@ startclock();
                 <TR>
                     <TD WIDTH="438" BGCOLOR="#FFFFFF">
                         <P>
-                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Caso de éxito:</B></FONT>
+                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Canalización</B></FONT>
                         </P>
                     </TD>
                 </TR>
                 <TR>
                     <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
                         <P>
-                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="CExito" ROWS="10" COLS="91" WRAP="virtual"><? echo $CExito;?></TEXTAREA></FONT>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Canalizacion" ROWS="10" COLS="91" WRAP="virtual"></TEXTAREA></FONT>
                         </P>
                     </TD>
-                </TR>  
+                </TR>
             </TABLE>
 
 	<p align=center style='text-align:center'><span style='font-size:22.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'>

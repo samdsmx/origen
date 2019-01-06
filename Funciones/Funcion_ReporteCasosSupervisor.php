@@ -159,6 +159,7 @@ if ($Sesion){
 	preparaQuery($Consejera, "Consejera", &$CadBusqueda, &$criterio, false);
 	preparaQuery($ComoTeEnteraste, "ComoTeEnteraste", &$CadBusqueda, &$criterio, true, "c");
 	preparaQuery($Sexo, "Sexo", &$CadBusqueda, &$criterio, false, "c");
+	preparaQuery($CExito, "CExito", &$CadBusqueda, &$criterio, false, "c");
 	preparaQuery($LenguaIndigena, "LenguaIndigena", &$CadBusqueda, &$criterio, false, "c");			
 	preparaQuery($MedioContacto, "MedioContacto", &$CadBusqueda, &$criterio, false, "c");			
 	preparaQuery($Ocupacion, "Ocupacion", &$CadBusqueda, &$criterio, false, "c");
@@ -176,7 +177,7 @@ if ($Sesion){
 
 	$sql ="Drop Table Reporte";
 	$total_result = @mysql_query($sql, $GLOBALS['connection']);
-	$sql ="Create table Reporte select l.*, c.Edad,c.Religion,c.NivelEstudios,c.Sexo,c.Municipio,c.EstadoCivil,c.LenguaIndigena,c.Estado,c.Ocupacion,c.ComoTeEnteraste,c.MedioContacto,c.CP,c.NivelViolencia from Casos c, Llamadas l where c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda";
+	$sql ="Create table Reporte select l.*, c.Edad,c.Religion,c.NivelEstudios,c.Sexo,c.Municipio,c.EstadoCivil,c.LenguaIndigena,c.Estado,c.Ocupacion,c.ComoTeEnteraste,c.MedioContacto,c.CP,c.NivelViolencia,c.CExito from Casos c, Llamadas l where c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda";
 	$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 
 	//Totales
@@ -184,7 +185,7 @@ if ($Sesion){
 	$TotalCasos = CuentaEsto("LlamadaNo=1");
 	$TotalPersonas = CuentaEsto("LlamadaNo>0 group by IDCaso");
 	$TotalSeguimiento = CuentaEsto("LlamadaNo>1");
-
+	$TotalExito	= CuentaEsto("CExito = '1' group by IDCaso");
 	$TotalCasosCana = CuentaEsto("CanaLegal <> \"\" or CanaOtro <> \"\"");
 
 	$TotalCasosSeguimiento = CuentaEsto("LlamadaNo>1 group by IDCaso");

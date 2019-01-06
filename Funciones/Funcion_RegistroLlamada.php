@@ -100,48 +100,12 @@ if ($Sesion){
 				$sql=$sql."PosibleSolucion='".rs($PosibleSolucion)."'";
 				$cuenta=$cuenta+1;
 				}
-			if ($MPrincipal <> ""){
-				if ($cuenta>0)
-					$sql=$sql.",";
-				$sql=$sql."MPrincipal='".rs($MPrincipal)."'";
-				$cuenta=$cuenta+1;
-				}
-			if ($Metas <> ""){
-				if ($cuenta>0)
-					$sql=$sql.",";
-				$sql=$sql."Metas='".rs($Metas)."'";
-				$cuenta=$cuenta+1;
-				}
-			if ($OClinico <> ""){
-				if ($cuenta>0)
-					$sql=$sql.",";
-				$sql=$sql."OClinico='".rs($OClinico)."'";
-				$cuenta=$cuenta+1;
-				}
-			if ($Intervencion <> ""){
-				if ($cuenta>0)
-					$sql=$sql.",";
-				$sql=$sql."Intervencion='".rs($Intervencion)."'";
-				$cuenta=$cuenta+1;
-				}
-			if ($Canalizacion <> ""){
-				if ($cuenta>0)
-					$sql=$sql.",";
-				$sql=$sql."Canalizacion='".rs($Canalizacion)."'";
-				$cuenta=$cuenta+1;
-				}
-			if ($Avances <> ""){
-				if ($cuenta>0)
-					$sql=$sql.",";
-				$sql=$sql."Avances='".rs($Avances)."'";
-				$cuenta=$cuenta+1;
-				}
 			if ($CExito <> ""){
 				if ($cuenta>0)
 					$sql=$sql.",";
 				$sql=$sql."CExito='".rs($CExito)."'";
 				$cuenta=$cuenta+1;
-				}	
+				}
 			if ($Estatus <> ""){
 				if ($cuenta>0)
 					$sql=$sql.",";
@@ -239,12 +203,42 @@ if ($Sesion){
 				$sql=$sql."Violentometro='".rs($Violentometro)."'";
 				$cuenta=$cuenta+1;
 				}
-			if ($DesarrolloCaso <> ""){
+			if ($MPrincipal <> ""){
 				if ($cuenta>0)
 					$sql=$sql.",";
-				$sql=$sql."DesarrolloCaso='".rs($DesarrolloCaso)."'";
+				$sql=$sql."MPrincipal='".rs($MPrincipal)."'";
 				$cuenta=$cuenta+1;
 				}
+			if ($Metas <> ""){
+				if ($cuenta>0)
+					$sql=$sql.",";
+				$sql=$sql."Metas='".rs($Metas)."'";
+				$cuenta=$cuenta+1;
+				}
+			if ($OClinico <> ""){
+				if ($cuenta>0)
+					$sql=$sql.",";
+				$sql=$sql."OClinico='".rs($OClinico)."'";
+				$cuenta=$cuenta+1;
+				}
+			if ($Intervencion <> ""){
+				if ($cuenta>0)
+					$sql=$sql.",";
+				$sql=$sql."Intervencion='".rs($Intervencion)."'";
+				$cuenta=$cuenta+1;
+				}
+			if ($Canalizacion <> ""){
+				if ($cuenta>0)
+					$sql=$sql.",";
+				$sql=$sql."Canalizacion='".rs($Canalizacion)."'";
+				$cuenta=$cuenta+1;
+				}
+			if ($Avances <> ""){
+				if ($cuenta>0)
+					$sql=$sql.",";
+				$sql=$sql."Avances='".rs($Avances)."'";
+				$cuenta=$cuenta+1;
+				}		
 			if ($CanaLegal <> ""){
 				if ($cuenta>0)
 					$sql=$sql.",";
@@ -287,12 +281,6 @@ if ($Sesion){
 				"',TipoCaso='".rs($TipoCaso).
 				"',NivelViolencia='".rs($NivelViolencia).
 				"',PosibleSolucion='".rs($PosibleSolucion).
-				"',MPrincipal='".rs($MPrincipal).
-				"',Metas='".rs($Metas).
-				"',OClinico='".rs($OClinico).
-				"',Intervencion='".rs($Intervencion).
-				"',Canalizacion='".rs($Canalizacion).
-				"',Avances='".rs($Avances).
 				"',CExito='".rs($CExito).
 				"',Estatus='".rs($Estatus).
 				"',HorasInvertidas='".rs($HorasInvertidas).
@@ -310,7 +298,12 @@ if ($Sesion){
 				"',TipoViolencia='".rs($TipoViolencia).
 				"',ModalidadViolencia='".rs($ModalidadViolencia).
 				"',Violentometro='".rs($Violentometro).
-				"',DesarrolloCaso='".rs($DesarrolloCaso).
+				"',MPrincipal='".rs($MPrincipal).
+				"',Metas='".rs($Metas).
+				"',OClinico='".rs($OClinico).
+				"',Intervencion='".rs($Intervencion).
+				"',Canalizacion='".rs($Canalizacion).
+				"',Avances='".rs($Avances).
 				"',CanaLegal='".rs($CanaLegal).
 				"',CanaOtro='".rs($CanaOtro)."' where IDCaso='".rs($IDCaso)."' and LlamadaNo='".rs($LlamadaNo)."'";
 				$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
@@ -322,7 +315,7 @@ if ($Sesion){
 				if ($Edad == ""){
 					$Edad = 0;
 			     	}
-				$sql = "INSERT INTO casos (Nombre,Edad,Sexo,EstadoCivil,Telefono,Municipio,Estado,Ocupacion,Religion,VivesCon,ComoTeEnteraste,TipoCaso,PosibleSolucion,MPrincipal,Metas,OClinico,Intervencion,Canalizacion,Avances,CExito,Estatus,HorasInvertidas,NivelEstudios,LenguaIndigena,CP,Colonia,CorreoElectronico,MedioContacto,NivelViolencia) VALUES ('".rs($Nombre).
+				$sql = "INSERT INTO casos (Nombre,Edad,Sexo,EstadoCivil,Telefono,Municipio,Estado,Ocupacion,Religion,VivesCon,ComoTeEnteraste,TipoCaso,PosibleSolucion,CExito,Estatus,HorasInvertidas,NivelEstudios,LenguaIndigena,CP,Colonia,CorreoElectronico,MedioContacto,NivelViolencia) VALUES ('".rs($Nombre).
 				"','".rs($Edad).
 				"','".rs($Sexo).
 				"','".rs($EstadoCivil).
@@ -335,12 +328,6 @@ if ($Sesion){
 				"','".rs($ComoTeEnteraste).
 				"','".rs($TipoCaso).
 				"','".rs($PosibleSolucion).
-				"','".rs($MPrincipal).
-				"','".rs($Metas).
-				"','".rs($OClinico).
-				"','".rs($Intervencion).
-				"','".rs($Canalizacion).
-				"','".rs($Avances).
 				"','".rs($CExito).
 				"','".rs($Estatus).
 				"','".rs($HorasInvertidas).
@@ -360,18 +347,12 @@ if ($Sesion){
 			$sql = "UPDATE casos SET TipoCaso='".rs($TipoCaso).
 			"',NivelViolencia='".rs($NivelViolencia).
 			"',PosibleSolucion='".rs($PosibleSolucion).
-			"',MPrincipal='".rs($MPrincipal).
-			"',Metas='".rs($Metas).
-			"',OClinico='".rs($OClinico).
-			"',Intervencion='".rs($Intervencion).
-			"',Canalizacion='".rs($Canalizacion).
-			"',Avances='".rs($Avances).
 			"',CExito='".rs($CExito).			
 			"',Estatus='".rs($Estatus).
 			"',HorasInvertidas='".rs($HorasInvertidas)."' where IDCaso='".rs($IDCaso)."'";
 			$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 			$sql = "INSERT INTO Llamadas
-			(IDCaso,FechaLlamada,Consejera,HoraInicio,HoraTermino,ComentariosAdicionales,AyudaPsicologico,AyudaLegal,AyudaOtros,DesarrolloCaso,CanaLegal,CanaOtro,LlamadaNo,Duracion,Acceso,TipoViolencia,ModalidadViolencia,Violentometro)
+			(IDCaso,FechaLlamada,Consejera,HoraInicio,HoraTermino,ComentariosAdicionales,AyudaPsicologico,AyudaLegal,AyudaOtros,MPrincipal,Metas,OClinico,Intervencion,Canalizacion,Avances,CanaLegal,CanaOtro,LlamadaNo,Duracion,Acceso,TipoViolencia,ModalidadViolencia,Violentometro)
 			VALUES
 			('".rs($IDCaso).
 			"','".rs($FechaLlamada).
@@ -382,7 +363,12 @@ if ($Sesion){
 			"','".rs($AYUDAPSICOLOGICO).
 			"','".rs($AYUDALEGAL).
 			"','".rs($AYUDAOTROS).
-			"','".rs($DesarrolloCaso).
+			"','".rs($MPrincipal).
+			"','".rs($Metas).
+			"','".rs($OClinico).
+			"','".rs($Intervencion).
+			"','".rs($Canalizacion).
+			"','".rs($Avances).			
 			"','".rs($CanaLegal).
 			"', '".rs($CanaOtro).
 			"','".rs($LlamadaNo).

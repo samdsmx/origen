@@ -41,7 +41,7 @@ $datag=$TotalCasos.",".$TotalSeguimiento;
 echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
 ?>
 
-
+<TR><TD>Casos de exito</TD><?echo "<TD>$TotalExito</TD>";?></TR>
 <TR><TD>Casos temporalmente inactivos</TD><?echo "<TD>$TotalResueltos</TD>";?></TR>
 <TR><TD>Casos Canalizados</TD><?echo "<TD>$TotalCasosCana</TD>";?></TR>
 <TR><TD>Casos en Seguimiento</TD><?echo "<TD>$TotalCasosSeguimiento</TD>";?></TR>
@@ -49,8 +49,8 @@ echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&da
 <TR><TD COLSPAN=13><CENTER>
 <?
 $Nom="Casos";
-$data="Resueltos,Canalizados,Seguimiento,Sin Canalizar";
-$datag=$TotalResueltos.",".$TotalCasosCana.",".$TotalCasosSeguimiento.",".$TotalCasossinCana;
+$data="Exito,Inactivos,Canalizados,Seguimiento,Sin Canalizar";
+$datag=$TotalExito.",".$TotalResueltos.",".$TotalCasosCana.",".$TotalCasosSeguimiento.",".$TotalCasossinCana;
 echo '<img src="Funciones/grafico_existencia.php?Nom='.$Nom.'&datax='.$data.'&datagx='.$datag.'">';
 ?>
 </CENTER></TD></TR> 

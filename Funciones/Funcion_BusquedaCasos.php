@@ -81,6 +81,7 @@ if ($Sesion){
 		preparaQuery($ComoTeEnteraste, "ComoTeEnteraste", &$CadBusqueda, &$criterio, true, "c");	
 		preparaQuery($MedioContacto, "MedioContacto", &$CadBusqueda, &$criterio,false,"c");
 		preparaQuery($Sexo, "Sexo", &$CadBusqueda, &$criterio,false,"c");
+		preparaQuery($CExito, "CExito", &$CadBusqueda, &$criterio, false, "c");
 		preparaQuery($LenguaIndigena, "LenguaIndigena", &$CadBusqueda, &$criterio,false,"c");
 		preparaQuery($Ocupacion, "Ocupacion", &$CadBusqueda, &$criterio,false,"c");
 		preparaQuery($Municipio, "Municipio", &$CadBusqueda, &$criterio,false,"c");
@@ -95,7 +96,7 @@ if ($Sesion){
 		preparaQuery($NivelViolencia, "NivelViolencia", &$CadBusqueda, &$criterio);	
 		
 		if ($Palabra <> "-" AND $Palabra <> "")
-			$CadBusqueda .="AND l.DesarrolloCaso LIKE '%".rs($Palabra)."%' ";
+			$CadBusqueda .="AND l.MPrincipal LIKE '%".rs($Palabra)."%' ";
 		if ($IDCaso <> "")
 			$CadBusqueda .="AND l.IDCaso LIKE '%".rs($IDCaso)."%' ";
 		if ($Nombre <> "")
@@ -104,7 +105,7 @@ if ($Sesion){
 			$CadBusqueda .="AND c.Telefono LIKE '%".rs($Telefono)."%' ";
 		$sql ="drop table IF EXISTS $tmp";
 		$total_result = @mysql_query($sql, $connection);
-		$sql ="create table $tmp SELECT DISTINCT l.*, c.Nombre, c.Telefono, c.Edad, c.Sexo, c.ComoTeEnteraste, c.Ocupacion, c.Municipio, c.Estado, c.EstadoCivil FROM Llamadas l, Casos c WHERE c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda Order By l.LlamadaNo Desc";
+		$sql ="create table $tmp SELECT DISTINCT l.*, c.Nombre, c.Telefono, c.Edad, c.Sexo, c.ComoTeEnteraste, c.Ocupacion, c.Municipio, c.Estado, c.EstadoCivil, c.CExito FROM Llamadas l, Casos c WHERE c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda Order By l.LlamadaNo Desc";
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		}
 	if(!$Correlacion){

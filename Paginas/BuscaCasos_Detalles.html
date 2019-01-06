@@ -9,7 +9,9 @@
 <TD VALIGN=top><P><FONT FACE="Arial"><B><? include ("Paginas/CodigoMenuSinOpciones.html"); ?></B></FONT></P></TD>
 <TD VALIGN=top><P ALIGN=right>
 
-<TABLE BORDER=0 BGCOLOR="#000000" WIDTH=40 HEIGHT=40><TR><TD BGCOLOR="#FFFFFF"><CENTER><FONT FACE="Arial" COLOR="#000000"><B><?echo $IDCaso;?></B></FONT></CENTER></TD></TR></TABLE>
+<TABLE BORDER=0 BGCOLOR="#000000" WIDTH=40 HEIGHT=40><TR><TD BGCOLOR="#FFFFFF"><CENTER><FONT FACE="Arial" COLOR="#000000"><B><?echo $IDCaso;?></B></FONT>
+<? if($CExito=='1')echo "Caso de Exito";?>
+</CENTER></TD></TR></TABLE>
 
 <BR>
 </P></TD></TR></TABLE>
@@ -364,20 +366,11 @@
             <BR>
             <TABLE BORDER=0 BGCOLOR="#000000" CELLPADDING=3 WIDTH="100%">
                <TR>
-                  <TD WIDTH=438 BGCOLOR="#FFFFFF">
-                     <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Desarrollo
-                     del caso:</B></FONT></P>
-                  </TD>
                   <TD BGCOLOR="#FFFFFF">
                      <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>Como te enteraste:</B></FONT></P>
                   </TD>
                </TR>
                <TR>
-                  <TD VALIGN=top NOWRAP WIDTH=438 BGCOLOR="#FFFFFF">
-                     <P style="text-align:justify"><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($DesarrolloCaso) echo $DesarrolloCaso; else echo "--"; ?><BR>
-                     <BR>
-                     </FONT></P>
-                  </TD>
                   <TD VALIGN=top BGCOLOR="#FFFFFF">
                      <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? if($ComoTeEnteraste) echo $ComoTeEnteraste; else echo "--"; ?></FONT></P>
                   </TD>
@@ -462,23 +455,6 @@
 <TR>
       <TD BGCOLOR="#FFFFFF">
             <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000">
-            <B>Canalización:</B>
-            </FONT></P>
-      </TD>
-</TR>
-<TR>
-      <TD BGCOLOR="#FFFFFF">
-            <P style="text-align:justify">
-            <FONT SIZE="-2" FACE="Arial" COLOR="#000000">
-            <? if($Canalizacion) echo $Canalizacion; else echo "--"; ?>
-            </FONT>
-            </P>
-      </TD>
-</TR>
-
-<TR>
-      <TD BGCOLOR="#FFFFFF">
-            <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000">
             <B>Revisión de tareas y avances:</B>
             </FONT></P>
       </TD>
@@ -493,11 +469,10 @@
       </TD>
 </TR>
 
-
 <TR>
       <TD BGCOLOR="#FFFFFF">
             <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000">
-            <B>Caso de éxito:</B>
+            <B>Canalización:</B>
             </FONT></P>
       </TD>
 </TR>
@@ -505,7 +480,7 @@
       <TD BGCOLOR="#FFFFFF">
             <P style="text-align:justify">
             <FONT SIZE="-2" FACE="Arial" COLOR="#000000">
-            <? if($CExito) echo $CExito; else echo "--"; ?>
+            <? if($Canalizacion) echo $Canalizacion; else echo "--"; ?>
             </FONT>
             </P>
       </TD>

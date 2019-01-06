@@ -470,9 +470,9 @@ function rellenaMedios(formulario){
 	  <TR>
 
   <TD VALIGN="top" NOWRAP BGCOLOR="#FFFFFF">
-  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808"> 
-	<?
-      include("Datos_Comunicacion.php");
+  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
+	<? 
+    include("Datos_Comunicacion.php");
 	$sql = "select * from campos where Tipo = 'AYUDAPSICOLOGICO' ORDER BY Nombre ASC";
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
@@ -489,7 +489,6 @@ function rellenaMedios(formulario){
 		$i=$i+1;
 		}
 	?>
-
 	</FONT></P>
       </TD>
 
@@ -630,18 +629,12 @@ function rellenaMedios(formulario){
              </FONT><FONT FACE="Arial" COLOR="#FFCC00">
             </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#FFCC00"><TABLE BORDER="0" WIDTH="100%">
                <TR>
-                  <TD WIDTH="438" BGCOLOR="#FFFFFF">
-                     <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Desarrollo del caso</B></FONT></P>
-                  </TD>
                   <TD BGCOLOR="#FFFFFF">
                      <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Como te enteraste</B></FONT></P>
                   </TD>
                </TR>
                <TR>
 
-<TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
-<P><FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="DesarrolloCaso" ROWS="10" COLS="56" WRAP="virtual"><?echo $DesarrolloCaso;?></TEXTAREA></FONT></P>
-</TD>
 <TD BGCOLOR="#FFFFFF">
 <FONT SIZE="-1" FACE="Arial" COLOR="#00AA00"><B><?echo $ComoTeEnteraste;?></B></FONT>
 <INPUT TYPE=hidden NAME=ComoTeEnteraste VALUE=<?echo $ComoTeEnteraste;?>><P>
@@ -741,21 +734,6 @@ Otros
       <TR>              
             <TD BGCOLOR="#FFFFFF">
                   <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
-                        <B>Canalización:</B>
-                  </FONT>
-            </TD>
-      </TR>
-      <TR>
-            <TD BGCOLOR="#FFFFFF">
-                  <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
-                        <TEXTAREA NAME="Canalizacion" ROWS="4" COLS="80" WRAP="virtual"><?echo $Canalizacion;?></TEXTAREA>
-                  </FONT>
-            </TD>
-      </TR>
-
-      <TR>              
-            <TD BGCOLOR="#FFFFFF">
-                  <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
                         <B>Revisión de tareas y avances:</B>
                   </FONT>
             </TD>
@@ -768,17 +746,17 @@ Otros
             </TD>
       </TR>
 
-            <TR>              
+	   <TR>              
             <TD BGCOLOR="#FFFFFF">
                   <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
-                        <B>Caso de éxito:</B>
+                        <B>Canalización:</B>
                   </FONT>
             </TD>
       </TR>
       <TR>
             <TD BGCOLOR="#FFFFFF">
                   <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
-                        <TEXTAREA NAME="CExito" ROWS="4" COLS="80" WRAP="virtual"><?echo $CExito;?></TEXTAREA>
+                        <TEXTAREA NAME="Canalizacion" ROWS="4" COLS="80" WRAP="virtual"><?echo $Canalizacion;?></TEXTAREA>
                   </FONT>
             </TD>
       </TR>
