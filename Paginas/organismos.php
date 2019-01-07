@@ -13,6 +13,7 @@ $(document).ready(function() {
   });
 
   function ponOrganismo(pref,tema) {
+    alert(1);
     if (tema == 'ASESORIA LEGAL') {
       opener.document.forma.CanaLegal.value = pref;
     } else {
