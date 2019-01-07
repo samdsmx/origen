@@ -37,7 +37,7 @@ if ($Sesion){
      	$display_block .= 
 	"<tr>
     <TD><a href=\"#\" onclick=\"return false;\" title=\"$Direccion\">$Institucion2<a></TD>
-	<TD><a href=\"#\" onClick=\"ponOrganismo('$Institucion2','$Tema2'); return false;\"  title=\"$Telefono\"><IMG SRC=\"resc/seguimiento.gif\" BORDER=0 ALIGN=bottom></a></TD>
+	<TD><a href=\"#\" onClick=\"ponOrganismo('$Institucion2'); return false;\"  title=\"$Telefono\"><IMG SRC=\"resc/seguimiento.gif\" BORDER=0 ALIGN=bottom></a></TD>
 	<TD><a href=\"#\" onClick=\"window.open('?Accion=RegistraOrga&IDOrganismo=$ID2','mywindow2','top=0,left=500,width=750,height='+(screen.availHeight)+',toolbar=yes,menubar=yes,resizable=yes,scrollbars=yes,scrolling=yes,status=yes'); return false;\"><IMG SRC=\"resc/detalles.gif\" BORDER=0 ALIGN=bottom></a></TD>
 	</tr>";
 		}

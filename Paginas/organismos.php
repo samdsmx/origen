@@ -11,14 +11,13 @@ $(document).ready(function() {
     tokenSeparators: [',']
     })
   });
-function ponOrganismo(pref,tema){
-  if (tema == 'ASESORIA LEGAL')
-      opener.document.forma.CanaLegal.value = pref;
-    else
-      opener.document.forma.CanaOtro.value = pref;
-      window.close();
-  return false;
+
+  function ponOrganismo(pref){
+    opener.document.forma.CanaOtro.value = pref;
+    window.close();
+    return false;
   }
+
 </script> 
 <link href="css/cusco.css" rel="stylesheet" type="text/css" />
 </HEAD>
