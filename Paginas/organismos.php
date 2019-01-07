@@ -12,14 +12,8 @@ $(document).ready(function() {
     })
   });
 
-  function ponOrganismo(pref,tema) {
-    alert(1);
-    if (tema == 'ASESORIA LEGAL') {
-      opener.document.forma.CanaLegal.value = pref;
-    } else {
-      alert(pref);
-      opener.document.forma.CanaOtro.value = pref;
-    }
+  function ponOrganismo(pref) {
+    opener.document.forma.CanaOtro.value = pref;
     window.close();
     return false;
   }
