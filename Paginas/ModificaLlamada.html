@@ -41,14 +41,14 @@ function rellenaMedios(formulario){
 <span BGCOLOR="#FFFFFF" LINK="#000000" ALINK="#000000" VLINK="#000000"><p>
 <CENTER><BR>
 <BR>
-<FORM ACTION="" METHOD=POST name=forma>
-   <CENTER><TABLE BORDER=0 BGCOLOR="#EEEEEE" CELLSPACING=0 CELLPADDING=0 WIDTH=630>
+<FORM ACTION="" METHOD="POST" name="forma">
+   <CENTER><TABLE BORDER="0" BGCOLOR="#EEEEEE" CELLSPACING="0" CELLPADDING="0" WIDTH="630">
       <TR>
          <TD>
-            <P><TABLE BORDER=0 BGCOLOR="#EEEEEE" WIDTH="100%">
+            <P><TABLE BORDER="0" BGCOLOR="#EEEEEE" WIDTH="100%">
                <TR>
-                  <TD VALIGN=top WIDTH="50%" BGCOLOR="#FFFFFF">
-                     <P><FONT SIZE="-1" COLOR="#AAAAAA"><TABLE BORDER=0 WIDTH="100%">
+                  <TD VALIGN="top" WIDTH="50%" BGCOLOR="#FFFFFF">
+                     <P><FONT SIZE="-1" COLOR="#AAAAAA"><TABLE BORDER="0" WIDTH="100%">
                         <TR>
                            <TD>
                               <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Nombre</B></FONT></P>
@@ -56,12 +56,12 @@ function rellenaMedios(formulario){
                         </TR>
                         <TR>
                            <TD>
-                              <P><FONT SIZE="-1" COLOR="#AAAAAA"><INPUT TYPE=text NAME=Nombre VALUE="<? echo $Nombre;?>" SIZE=40 MAXLENGTH=255></FONT></P>
+                              <P><FONT SIZE="-1" COLOR="#AAAAAA"><INPUT TYPE="text" NAME="Nombre" VALUE="<? echo $Nombre;?>" SIZE="40" MAXLENGTH="255"></FONT></P>
                            </TD>
                         </TR>
                         <TR>
                            <TD>
-                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
                                  <TR>
                                     <TD>
                                        <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Edad</B></FONT></P>
@@ -87,19 +87,19 @@ function rellenaMedios(formulario){
                                        </select></P>
                                     </TD>
                                     <TD>
-                                       <P><FONT SIZE="-1" COLOR="#AAAAAA"><SELECT NAME=EstadoCivil>
+                                       <P><FONT SIZE="-1" COLOR="#AAAAAA"><SELECT NAME="EstadoCivil">
 	                                    <?echo "<OPTION SELECTED VALUE=".$EstadoCivil.">".$EstadoCivil;?>
-                                          <OPTION VALUE=Soltera>Soltera
-                                          <OPTION VALUE=Divorciada>Divorciada
-                                          <OPTION VALUE=Viuda>Viuda
-                                          <OPTION VALUE=Casada>Casada
-                                          <OPTION VALUE=Separada>Separada
-                                          <OPTION VALUE=Concubinato>Concubinato
+                                          <OPTION VALUE="Soltera">Soltera
+                                          <OPTION VALUE="Divorciada">Divorciada
+                                          <OPTION VALUE="Viuda">Viuda
+                                          <OPTION VALUE="Casada">Casada
+                                          <OPTION VALUE="Separada">Separada
+                                          <OPTION VALUE="Concubinato">Concubinato
                                           <OPTION VALUE="Union Libre">Union Libre
                                        </SELECT></FONT></P>
                                     </TD>
                                     <TD>
-                                       <P><FONT SIZE="-1" COLOR="#AAAAAA"><SELECT NAME=Religion>
+                                       <P><FONT SIZE="-1" COLOR="#AAAAAA"><SELECT NAME="Religion">
 							<?echo "<OPTION SELECTED VALUE=".$Religion.">".$Religion;?>
                                           <OPTION>Catolica
                                           <OPTION>Musulmana
@@ -114,7 +114,7 @@ function rellenaMedios(formulario){
                                     </TD>
                                  </TR>
                         <TR>
-                           <TD colspan=2>
+                           <TD colspan="2">
                               <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Genero</B></FONT></P>
                            </TD>
                            <TD>
@@ -122,11 +122,11 @@ function rellenaMedios(formulario){
                            </TD>
                         </TR>
                         <TR>
-<TD colspan=2>
-					<FONT SIZE="-1" COLOR="#AAAAAA"><input type="radio" name="Sexo" value="F" <?if($Sexo=='F')echo "checked";?>>Femenino <input type="radio" name="Sexo" value="M" <?if($Sexo=='M')echo "checked";?>>Masculino</FONT>
+                           <TD colspan="2">
+					<FONT SIZE="-1" COLOR="#AAAAAA"><input type="radio" name="Sexo" value="F" <? if($Sexo=='F')echo "checked";?> >Femenino <input type="radio" name="Sexo" value="M" <? if($Sexo=='M')echo "checked";?> >Masculino</FONT>
                            </TD>
                            <TD>
-                              <P><FONT SIZE="-1" COLOR="#AAAAAA"><INPUT TYPE=text NAME=Telefono VALUE="<? echo $Telefono;?>"SIZE=19 MAXLENGTH=30></FONT></P>
+                              <P><FONT SIZE="-1" COLOR="#AAAAAA"><INPUT TYPE="text" NAME="Telefono" VALUE="<? echo $Telefono;?>"SIZE="19" MAXLENGTH="30"></FONT></P>
                            </TD>
                         </TR>
                               </TABLE>
@@ -135,7 +135,7 @@ function rellenaMedios(formulario){
                         </TR>
                         <TR>
                            <TD>
-                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B><TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
                                  <TR>
                                     <TD WIDTH="50%">
                                        <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Delegaci&oacute;n</B></FONT></P>
@@ -364,7 +364,7 @@ function rellenaMedios(formulario){
                         </TR>
                         <TR>
                            <TD>
-                              <P><FONT SIZE="-1" COLOR="#AAAAAA"><SELECT NAME=VivesCon>
+                              <P><FONT SIZE="-1" COLOR="#AAAAAA"><SELECT NAME="VivesCon">
 						<?echo "<OPTION SELECTED VALUE=".$VivesCon.">".$VivesCon;?>
 	                             	<OPTION>Sola
                                  	<OPTION>Padres
@@ -380,8 +380,8 @@ function rellenaMedios(formulario){
                      </TABLE>
                       </FONT><FONT SIZE="-1"> </FONT>
                   </TD>
-                  <TD VALIGN=top WIDTH="50%" BGCOLOR="#FFFFFF">
-                     <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><TABLE BORDER=0 WIDTH="100%">
+                  <TD VALIGN="top" WIDTH="50%" BGCOLOR="#FFFFFF">
+                     <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><TABLE BORDER="0" WIDTH="100%">
                         <TR>
                            <TD>
                               <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Nombre de la consejera</B></FONT></P>
@@ -390,7 +390,7 @@ function rellenaMedios(formulario){
                         <TR>
                            <TD>
                               <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><!--NOEDIT--><?echo $Consejera;?><!--/NOEDIT-->
-					<INPUT TYPE=hidden NAME=AccionSec VALUE=Modificar>
+					<INPUT TYPE="hidden" NAME="AccionSec" VALUE="Modificar">
 					</FONT></P>
                            </TD>
                         </TR>
@@ -401,7 +401,7 @@ function rellenaMedios(formulario){
                         </TR>
                         <TR>
                            <TD>
-                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=hidden NAME=FechaLlamada VALUE="<? echo $FechaLlamada;?>"><!--NOEDIT--><? echo $FechaLlamada;?><!--/NOEDIT--></FONT></P>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE="hidden" NAME="FechaLlamada" VALUE="<? echo $FechaLlamada;?>"><!--NOEDIT--><? echo $FechaLlamada;?><!--/NOEDIT--></FONT></P>
                            </TD>
                         </TR>
                         <TR>
@@ -411,7 +411,7 @@ function rellenaMedios(formulario){
                         </TR>
                         <TR>
                            <TD>
-                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=hidden NAME=IDCaso VALUE="<? echo $IDCaso;?>"><? echo $IDCaso;?></FONT></P>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE="hidden" NAME="IDCaso" VALUE="<? echo $IDCaso;?>"><? echo $IDCaso;?></FONT></P>
                            </TD>
                         </TR>
 
@@ -421,15 +421,15 @@ function rellenaMedios(formulario){
                            </TD>
                         </TR>
                         <TR>
-                           <TD VALIGN=top>
+                           <TD VALIGN="top">
                             <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
-<TEXTAREA NAME=ComentariosAdicionales ROWS=5 COLS=38 WRAP=virtual><? echo $ComentariosAdicionales;?></TEXTAREA>
+<TEXTAREA NAME="ComentariosAdicionales" ROWS="5" COLS="38" WRAP="virtual"><? echo $ComentariosAdicionales;?></TEXTAREA>
 </FONT></P>
                            </TD>
                         </TR>
 
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Tipo de Caso</B></FONT></P></TD></TR>
-<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=text NAME=TipoCaso VALUE="<? echo $TipoCaso;?>" SIZE=40 MAXLENGTH=40></FONT></P></TD></TR>
+<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE="text" NAME="TipoCaso" VALUE="<? echo $TipoCaso;?>" SIZE="40" MAXLENGTH="40"></FONT></P></TD></TR>
 
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Nivel de violencia</B></FONT></P></TD></TR>
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
@@ -442,10 +442,10 @@ function rellenaMedios(formulario){
 </FONT></P></TD></TR>
 
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Posible Solucion</B></FONT></P></TD></TR>
-<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=text NAME=PosibleSolucion VALUE="<? echo $PosibleSolucion;?>" SIZE=40 MAXLENGTH=40></FONT></P></TD></TR>
+<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE="text" NAME="PosibleSolucion" VALUE="<? echo $PosibleSolucion;?>" SIZE="40" MAXLENGTH="40"></FONT></P></TD></TR>
 
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Estatus</B></FONT></P></TD></TR>
-<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=text NAME=Estatus VALUE="<? echo $Estatus;?>" SIZE=40 MAXLENGTH=40></FONT></P></TD></TR>
+<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE="text" NAME="Estatus" VALUE="<? echo $Estatus;?>" SIZE="40" MAXLENGTH="40"></FONT></P></TD></TR>
 
                      </TABLE>
                       </FONT><FONT SIZE="-1" FACE="Arial">
@@ -455,7 +455,7 @@ function rellenaMedios(formulario){
             </TABLE>
 
 
-<FONT FACE="Arial" COLOR="#D80808"><TABLE BORDER=0 BGCOLOR="#EEEEEE" WIDTH="100%">
+<FONT FACE="Arial" COLOR="#D80808"><TABLE BORDER="0" BGCOLOR="#EEEEEE" WIDTH="100%">
                <TR>
                   <TD BGCOLOR="#FFFFFF">
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>PSICOLOGICO</B></FONT></CENTER>
@@ -464,30 +464,27 @@ function rellenaMedios(formulario){
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>LEGAL</B></FONT></CENTER>
                   </TD>
                   <TD BGCOLOR="#FFFFFF">
-                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>MEDICO</B></FONT></CENTER>
-                  </TD>
-                  <TD BGCOLOR="#FFFFFF">
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>OTROS</B></FONT></CENTER>
                   </TD>
                </TR>
 	  <TR>
 
-  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+  <TD VALIGN="top" NOWRAP BGCOLOR="#FFFFFF">
   <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
 	<? 
-	include("Datos_Comunicacion.php");
-	$sql ="select * from campos where Tipo = 'AYUDAPSICOLOGICO' ORDER BY Nombre ASC";
+    include("Datos_Comunicacion.php");
+	$sql = "select * from campos where Tipo = 'AYUDAPSICOLOGICO' ORDER BY Nombre ASC";
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
-	$i=1;
-	while ($row = mysql_fetch_array($total_result)){
+	$i = 1;
+	while ($row = mysql_fetch_array($total_result)) {
 		$Nombre=$row['Nombre'];
 		$Tipo=$row['Tipo'];
-		if(!strstr($AyudaPsicologico, $Nombre)){
-	    		echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
+		if(!strstr($AyudaPsicologico, $Nombre)) {
+	    		echo '<INPUT TYPE="checkbox" NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
 			}
-			else{
-				echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'" checked>'.$Nombre.'<BR>';
+			else {
+				echo '<INPUT TYPE="checkbox" NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'" checked>'.$Nombre.'<BR>';
 				}
 		$i=$i+1;
 		}
@@ -495,7 +492,7 @@ function rellenaMedios(formulario){
 	</FONT></P>
       </TD>
 
-  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+  <TD VALIGN="top" NOWRAP BGCOLOR="#FFFFFF">
   <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
 	<? 
 	include("Datos_Comunicacion.php");
@@ -518,30 +515,7 @@ function rellenaMedios(formulario){
 	</FONT></P>
       </TD>
 
-  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
-  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
-	<? 
-	include("Datos_Comunicacion.php");
-	$sql ="select * from campos where Tipo = 'AYUDAMEDICA' ORDER BY Nombre ASC";
-	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-	$total_found = @mysql_num_rows($total_result);
-	$i=1;
-	while ($row = mysql_fetch_array($total_result)){
-		$Nombre=$row['Nombre'];
-		$Tipo=$row['Tipo'];
-		if(!strstr($AyudaMedica, $Nombre)){
-	    		echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
-			}
-			else{
-				echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'" checked>'.$Nombre.'<BR>';
-				}
-		$i=$i+1;
-		}
-	?>
-	</FONT></P>
-      </TD>
-
-  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+  <TD VALIGN="top" NOWRAP BGCOLOR="#FFFFFF">
   <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
 	<? 
 	include("Datos_Comunicacion.php");
@@ -566,19 +540,19 @@ function rellenaMedios(formulario){
                </TR>
 
  <TR>
-                  <TD BGCOLOR="#FFFFFF" colspan=2>
+                  <TD BGCOLOR="#FFFFFF" colspan="2">
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>TIPO DE VIOLENCIA</B></FONT></CENTER>
                   </TD>
                   <TD BGCOLOR="#FFFFFF">
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>MODALIDAD DE VIOLENCIA</B></FONT></CENTER>
                   </TD>
-                  <TD BGCOLOR="#FFFFFF" colspan=2>
+                  <TD BGCOLOR="#FFFFFF" colspan="2">
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>VIOLENTOMETRO</B></FONT></CENTER>
                   </TD>
                </TR>
                <TR>
                
-<TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF" colspan=2>
+<TD VALIGN="top" NOWRAP BGCOLOR="#FFFFFF" colspan="2">
   <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
    <? 
    include("Datos_Comunicacion.php");
@@ -601,7 +575,7 @@ function rellenaMedios(formulario){
    </FONT></P>
       </TD>
 
-<TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+<TD VALIGN="top" NOWRAP BGCOLOR="#FFFFFF">
   <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
    <? 
    include("Datos_Comunicacion.php");
@@ -625,7 +599,7 @@ function rellenaMedios(formulario){
       </TD>
 
 
-<TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF" colspan=2>
+<TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF" colspan="2">
   <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
    <? 
    include("Datos_Comunicacion.php");
@@ -653,20 +627,14 @@ function rellenaMedios(formulario){
 
             </TABLE>
              </FONT><FONT FACE="Arial" COLOR="#FFCC00">
-            </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#FFCC00"><TABLE BORDER=0 WIDTH="100%">
+            </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#FFCC00"><TABLE BORDER="0" WIDTH="100%">
                <TR>
-                  <TD WIDTH=438 BGCOLOR="#FFFFFF">
-                     <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Desarrollo del caso</B></FONT></P>
-                  </TD>
                   <TD BGCOLOR="#FFFFFF">
                      <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Como te enteraste</B></FONT></P>
                   </TD>
                </TR>
                <TR>
 
-<TD VALIGN=top NOWRAP WIDTH=438 BGCOLOR="#FFFFFF">
-<P><FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME=DesarrolloCaso ROWS=10 COLS=56 WRAP=virtual><?echo $DesarrolloCaso;?></TEXTAREA></FONT></P>
-</TD>
 <TD BGCOLOR="#FFFFFF">
 <FONT SIZE="-1" FACE="Arial" COLOR="#00AA00"><B><?echo $ComoTeEnteraste;?></B></FONT>
 <INPUT TYPE=hidden NAME=ComoTeEnteraste VALUE=<?echo $ComoTeEnteraste;?>><P>
@@ -691,24 +659,9 @@ function rellenaMedios(formulario){
 					<option value="">-
                     </select>
 <P>
-<!--
-	<? 
-	include("Datos_Comunicacion.php");
-	$sql ="select * from campos where Tipo = 'ComoTeEnteraste' AND Nombre <> 'Otros' and activo=1 ORDER BY Nombre ASC";
-	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-	$total_found = @mysql_num_rows($total_result);
-	while ($row = mysql_fetch_array($total_result)){
-		$Nombre=$row['Nombre'];
-		$Tipo=$row['Tipo'];
-		if($Nombre=="No Informa")
-			    		echo '<INPUT TYPE=radio NAME=ComoTeEnteraste VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
-					else
-				    		echo '<INPUT TYPE=radio NAME=ComoTeEnteraste VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
-		}
-	?>
--->
+
 Otros
-<BR><INPUT TYPE=text NAME=OtrosEnteraste VALUE="" SIZE=19><BR>
+<BR><INPUT TYPE="text" NAME="OtrosEnteraste" VALUE="" SIZE="19"><BR>
 		   
  	<BR>
 	</FONT></P>
@@ -717,25 +670,118 @@ Otros
 
 </TABLE>
 
-<p align=center style='text-align:center'><span style='font-size:22.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'>
-<a href="#" onClick="window.open('?Accion=RealizarBusquedaOrga','mywindow','height=600,width=350,scrollbars=yes,status=yes'); return false;">Busqueda de Organismos</a>
-<p align=center style='text-align:center'><span style='font-size:22.0pt;
-    mso-bidi-font-size:10.0pt;font-family:Arial'><a
-    href="Real.bat">Mensajeria</a><o:p></o:p></span></p>
-             </FONT>
+<TABLE BORDER="0" WIDTH="100%">
+      <TR>
+            <TD BGCOLOR="#FFFFFF">
+                  <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+                        <B>Motivo principal:</B>
+                  </FONT>
+            </TD>
+      </TR>
+      <TR>
+            <TD BGCOLOR="#FFFFFF">
+                  <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+                        <TEXTAREA NAME="MPrincipal" ROWS="4" COLS="80" WRAP="virtual"><?echo $MPrincipal;?></TEXTAREA>
+                  </FONT>
+            </TD>
+      </TR>
 
-<FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B><TABLE BORDER=0 WIDTH="100%">
-               
+      <TR>              
+            <TD BGCOLOR="#FFFFFF">
+                  <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+                        <B>Objetivo del usuario (Metas):</B>
+                  </FONT>
+            </TD>
+      </TR>
+      <TR>
+            <TD BGCOLOR="#FFFFFF">
+                  <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+                        <TEXTAREA NAME="Metas" ROWS="4" COLS="80" WRAP="virtual"><?echo $Metas;?></TEXTAREA>
+                  </FONT>
+            </TD>
+      </TR>
+
+      <TR>              
+            <TD BGCOLOR="#FFFFFF">
+                  <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+                        <B>Plan de acción (Objetivo clínico):</B>
+                  </FONT>
+            </TD>
+      </TR>
+      <TR>
+            <TD BGCOLOR="#FFFFFF">
+                  <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+                        <TEXTAREA NAME="OClinico" ROWS="4" COLS="80" WRAP="virtual"><?echo $OClinico;?></TEXTAREA>
+                  </FONT>
+            </TD>
+      </TR>
+
+      <TR>              
+            <TD BGCOLOR="#FFFFFF">
+                  <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+                        <B>Intervención:</B>
+                  </FONT>
+            </TD>
+      </TR>
+      <TR>
+            <TD BGCOLOR="#FFFFFF">
+                  <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+                        <TEXTAREA NAME="Intervencion" ROWS="4" COLS="80" WRAP="virtual"><?echo $Intervencion;?></TEXTAREA>
+                  </FONT>
+            </TD>
+      </TR>
+
+      <TR>              
+            <TD BGCOLOR="#FFFFFF">
+                  <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+                        <B>Revisión de tareas y avances:</B>
+                  </FONT>
+            </TD>
+      </TR>
+      <TR>
+            <TD BGCOLOR="#FFFFFF">
+                  <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+                        <TEXTAREA NAME="Avances" ROWS="4" COLS="80" WRAP="virtual"><?echo $Avances;?></TEXTAREA>
+                  </FONT>
+            </TD>
+      </TR>
+
+	   <TR>              
+            <TD BGCOLOR="#FFFFFF">
+                  <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+                        <B>Canalización:</B>
+                  </FONT>
+            </TD>
+      </TR>
+      <TR>
+            <TD BGCOLOR="#FFFFFF">
+                  <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
+                        <TEXTAREA NAME="Canalizacion" ROWS="4" COLS="80" WRAP="virtual"><?echo $Canalizacion;?></TEXTAREA>
+                  </FONT>
+            </TD>
+      </TR>
+
+</TABLE>
+
+<p align="center" style="text-align:center"><span style='font-size:22.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'>
+<a href="#" onClick="window.open('?Accion=RealizarBusquedaOrga','mywindow','height=600,width=350,scrollbars=yes,status=yes'); return false;">Busqueda de Organismos</a>
+<p align="center" style='text-align:center'><span style='font-size:22.0pt; mso-bidi-font-size:10.0pt;font-family:Arial'>
+<a href="Real.bat">Mensajeria</a><o:p></o:p></span></p>
+</FONT>
+
+<FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B><TABLE BORDER="0" WIDTH="100%">
+
+<TR>              
 <TD BGCOLOR="#FFFFFF">
 <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">
 <B>Legal</B>
 </FONT>
 </TD>
-
+</TR>
 <TR>
 <TD BGCOLOR="#FFFFFF">
 <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>
-<TEXTAREA NAME=CanaLegal ROWS=4 COLS=80 WRAP=virtual><?echo $CanaLegal;?></TEXTAREA>
+<TEXTAREA NAME="CanaLegal" ROWS="4" COLS="80" WRAP="virtual"><?echo $CanaLegal;?></TEXTAREA>
 </B></FONT></P>
 </TD>
 </TR>
@@ -749,7 +795,7 @@ Otros
 <TR>
 <TD BGCOLOR="#FFFFFF">
 <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>
-<TEXTAREA NAME=CanaOtro ROWS=4 COLS=80 WRAP=virtual><?echo $CanaOtro;?></TEXTAREA>
+<TEXTAREA NAME="CanaOtro" ROWS="4" COLS="80" WRAP="virtual"><?echo $CanaOtro;?></TEXTAREA>
 </B></FONT></P>
 </TD>
 </TR>
@@ -757,13 +803,13 @@ Otros
             </TABLE>
              </B></FONT><FONT SIZE="-1" FACE="Arial" COLOR="#FFCC00">
             </FONT><FONT FACE="Arial" COLOR="#FFCC00">
-            </FONT><TABLE BORDER=0 BGCOLOR="#FFFFFF" CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
+            </FONT><TABLE BORDER="0" BGCOLOR="#FFFFFF" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
                <TR>
                   <TD>
-                     <P ALIGN=right><BR>
-                     <TABLE BORDER=0 WIDTH="100%">
+                     <P ALIGN="right"><BR>
+                     <TABLE BORDER="0" WIDTH="100%">
 <TR><TD>
-<CENTER><INPUT TYPE=submit NAME=submit VALUE="Modificar"></CENTER>
+<CENTER><INPUT TYPE="submit" NAME="submit" VALUE="Modificar"></CENTER>
                            </TD>
                         </TR>
                      </TABLE>

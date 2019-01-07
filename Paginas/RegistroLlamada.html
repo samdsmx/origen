@@ -1,11 +1,7 @@
 ﻿<HEAD>
-   <TITLE>Registro primera vez</TITLE>
-   <script type="text/javascript" src="js/jquery.min.js"></script>
-
+  <TITLE>Registro primera vez</TITLE>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
 </HEAD>
-<span><p>
-</span>
-<p>
 <?
 	$HoraActual=date("h:i A");
 	$FechaActual=date("d/m/Y");
@@ -148,7 +144,7 @@ function rellenaCanaLegal(formulario){
 		with (document.forms[formulario]){
 			var str = CanaLegal.value = selLegal[selLegal.selectedIndex].value; 
 			if (str.search("Voluntario")>=0) Voluntario.checked = true; else Voluntario.checked = false;
-			if (str.search("-")>=0) CanaLegal.disabled = false; else CanaLegal.disabled = true;
+			if (str.search("-")>=0) CanaLegal.readOnly = false; else CanaLegal.readOnly = true;
 			CanaLegal.focus();
 			}
 		}
@@ -251,8 +247,7 @@ startclock();
                               </FONT>
                            </TD>
                            <TD>
-                              <input type="number" id="Edad" name="Edad" placeholder="A&ntilde;os" min="0" max="99" onkeypress="return isNumberKey(event)">
-                              
+                              <input type="number" id="Edad" name="Edad" placeholder="Años" min="0" max="99" onkeypress="return isNumberKey(event)">
                            </TD>
                         </TR>
                         <TR>
@@ -294,15 +289,15 @@ startclock();
                               </SELECT></FONT>
                            </TD>
                            <TD>
-                              <FONT SIZE="-1" COLOR="#AAAAAA"><SELECT NAME=EstadoCivil>
-                                 <OPTION>
-                                 <OPTION VALUE=Soltera>Soltera
-                                 <OPTION VALUE=Divorciada>Divorciada
-                                 <OPTION VALUE=Viuda>Viuda
-                                 <OPTION VALUE=Casada>Casada
-                                 <OPTION VALUE=Separada>Separada
-                                 <OPTION VALUE=Concubinato>Concubinato
-                                 <OPTION VALUE="Union Libre">Union Libre
+                              <FONT SIZE="-1" COLOR="#AAAAAA"><SELECT NAME="EstadoCivil">
+                                 <OPTION>-
+                                 <OPTION VALUE="Soltera">Soltera</OPTION>
+                                 <OPTION VALUE="Divorciada">Divorciada</OPTION>
+                                 <OPTION VALUE="Viuda">Viuda</OPTION>
+                                 <OPTION VALUE="Casada">Casada</OPTION>
+                                 <OPTION VALUE="Separada">Separada</OPTION>
+                                 <OPTION VALUE="Concubinato">Concubinato</OPTION>
+                                 <OPTION VALUE="Union Libre">Union Libre</OPTION>
                               </SELECT></FONT>
                            </TD>
                         </TR>
@@ -361,7 +356,7 @@ startclock();
                               </TH>
                            </TR>   
                         </THEAD>
-                        <TR>
+                        <TR id="datosDireccion">
                            <TD>
                               <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Codigo Postal</B></FONT>
                            </TD>
@@ -375,7 +370,7 @@ startclock();
                               <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Colonia</B></FONT>                              
                            </TD>                           
                         </TR>
-                        <TR>
+                        <TR id="datosDireccion2">
                            <TD>
                               <INPUT TYPE=text id="CP" NAME="CP" VALUE="" SIZE=6 MAXLENGTH=5 ONCHANGE="changeCP('forma');">
                            </TD>
@@ -548,9 +543,6 @@ startclock();
                   <TD BGCOLOR="#FFFFFF">
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>LEGAL</B></FONT></CENTER>
                   </TD>
-                  <!--TD BGCOLOR="#FFFFFF">
-                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>MEDICO</B></FONT></CENTER>
-                  </TD-->
                   <TD BGCOLOR="#FFFFFF">
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>OTROS</B></FONT></CENTER>
                   </TD>
@@ -593,23 +585,6 @@ startclock();
 	</FONT></P>
       </TD>
 
-  <!--TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
-  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
-	<? 
-	include("Datos_Comunicacion.php");
-	$sql ="select * from campos where Tipo = 'AYUDAMEDICA' and activo=1 ORDER BY Nombre ASC";
-	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-	$total_found = @mysql_num_rows($total_result);
-	$i=1;
-	while ($row = mysql_fetch_array($total_result)){
-		$Nombre=$row['Nombre'];
-		$Tipo=$row['Tipo'];
-    		echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
-		$i=$i+1;
-		}
-	?>
-	</FONT></P>
-      </TD-->
 
   <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
   <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
@@ -706,25 +681,90 @@ startclock();
                </TR>
 
             </TABLE>
-            </FONT><FONT FACE="Arial" COLOR="#FFCC00">
-            </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#FFCC00"><TABLE BORDER=0 WIDTH="100%">
-               <TR>
-                  <TD WIDTH=438 BGCOLOR="#FFFFFF">
-                     <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Desarrollo del caso</B></FONT></P>
-                  </TD>
-               </TR>
-               <TR>
+            </FONT>
+            <FONT SIZE="-1" FACE="Arial" COLOR="#FFCC00">
+<TABLE BORDER="0" WIDTH="100%">
+    <TR>
+        <TD WIDTH="438" BGCOLOR="#FFFFFF">
+            <P>
+                <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Motivo principal:</B></FONT>
+            </P>
+        </TD>
+    </TR>
+    <TR>
+        <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+            <P>
+                <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="MPrincipal" ROWS="10" COLS="56" WRAP="virtual"></TEXTAREA></FONT>
+            </P>
+        </TD>
+    </TR>
 
-<TD VALIGN=top NOWRAP WIDTH=438 BGCOLOR="#FFFFFF">
-<P><FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME=DesarrolloCaso ROWS=10 COLS=56 WRAP=virtual></TEXTAREA></FONT></P>
-</TD>
- </TR>
+    <TR>
+        <TD WIDTH="438" BGCOLOR="#FFFFFF">
+            <P>
+                <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Objetivo del usuario (Metas):</B></FONT>
+            </P>
+        </TD>
+    </TR>
+    <TR>
+        <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+            <P>
+                <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Metas" ROWS="10" COLS="56" WRAP="virtual"></TEXTAREA></FONT>
+            </P>
+        </TD>
+    </TR>
+
+    <TR>
+        <TD WIDTH="438" BGCOLOR="#FFFFFF">
+            <P>
+                <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Plan de acción (Objetivo clínico):</B></FONT>
+            </P>
+        </TD>
+    </TR>
+    <TR>
+        <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+            <P>
+                <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="OClinico" ROWS="10" COLS="56" WRAP="virtual"></TEXTAREA></FONT>
+            </P>
+        </TD>
+    </TR>
+
+    <TR>
+        <TD WIDTH="438" BGCOLOR="#FFFFFF">
+            <P>
+                <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Intervención:</B></FONT>
+            </P>
+        </TD>
+    </TR>
+    <TR>
+        <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+            <P>
+                <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Intervencion" ROWS="10" COLS="56" WRAP="virtual"></TEXTAREA></FONT>
+            </P>
+        </TD>
+    </TR>
+
+    <TR>
+        <TD WIDTH="438" BGCOLOR="#FFFFFF">
+            <P>
+                <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Canalización:</B></FONT>
+            </P>
+        </TD>
+    </TR>
+    <TR>
+        <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+            <P>
+                <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Canalizacion" ROWS="10" COLS="56" WRAP="virtual"></TEXTAREA></FONT>
+            </P>
+        </TD>
+    </TR>
+
 </TABLE>
-<p align=center style='text-align:center'><span style='font-size:22.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'>
+
+<p align="center" style='text-align:center'><span style='font-size:22.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'>
 <a href="#" onClick="window.open('?Accion=RealizarBusquedaOrga','mywindow','height=600,width=350,scrollbars=yes,status=yes'); return false;">Busqueda de Organismos</a>
 
-             </FONT><FONT FACE="Arial" COLOR="#FFCC00">&nbsp;
-            </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B><TABLE BORDER=0 WIDTH="100%">
+             </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B><TABLE BORDER=0 WIDTH="100%">
                
 <TD BGCOLOR="#FFFFFF">
 <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA">

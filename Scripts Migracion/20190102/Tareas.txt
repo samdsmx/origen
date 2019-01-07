@@ -1,0 +1,35 @@
+*a) 
+	DONE => No registra callcenter a los abogados
+	OK => Agrega id a llamadas
+	OK => Revisar registros mal tipificados en canaOTro y mover a canaLegal
+		Lic. Viviana Jiménez, Lic. Arturo Cruz, Lic. Isaías Gutierrez, Lic. Julio Cazares, Lic. Alejandra Jimenez y Lic. Yazmin Diaz
+		Mover TRASFERENCIA AL ÁREA LEGAL (La separacion esta en marcar como voluntario)
+
+*b)	Numero de personas que usan el servicio. (Ya esta "Personas Atendidas")
+	Por cada servicio
+
+*c)	DONE => CASOS RESULTOS ==== Casos temporalmente inactivos
+
+*d)	Registros fantasmas... (EN mi copia habia 42.. que tanto crecio) a 56.. en 6 meses crecio 14
+	OK => Update casos SET MedioContacto = 'Llamada telefónica' where MedioContacto = '';
+      
+*f)     OK => En estado, cambiar DISTRITO FEDERAL por CIUDAD DE MÉXICO y por alguna razón hay otro rubro de DISTRITO; que esas llamadas se puedan sumar y no aparezcan separadas y en este apartado dela imagen, generar la modificación  
+
+e y g)      En el rubro de desarrollo agreguemos:  (Estén abiertos para texto y el psicólogo pueda registrar el texto)
+
+Caso --- Motivo principal, 
+Caso --- objetivo del usuario (metas), 
+Caso --- Plan de acción (Objetivo clínico), 
+Caso --- Intervención, 
+Caso --- Canalización 
+
+para las cédulas de seguimiento requirimos Ademas:
+Caso --- Revisión de tareas y avances
+Caso --- caso de éxito: Nos solitan agregar un rubro en donde se pueda tificar en la cédula de rigistro que hace el psicólogo si es  y a su vez pueda observarse este rubro en el reporte de la línea 
+
+
+DONE --- Mover desarrollo de caso a motivo principal
+DONE --- Borrar Desarrollo de caso
+
+--- Poner como paloma CExito
+--- Reporte CExito

@@ -5,14 +5,20 @@
 	$HoraActual=date("h:i A");
 	$FechaActual=date("d/m/Y");
 	$NombreConsejero=RevisaSesion($Sesion, "identidad");
-	$LlamadaNo=$LlamadaNo+1;
 	include("Datos_Comunicacion.php");
-      $sql ="SELECT * FROM casos WHERE IDCaso='".rs($IDCaso)."'";
+    $sql ="SELECT * FROM casos WHERE IDCaso='".rs($IDCaso)."'";
 	$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$row = mysql_fetch_array($result);
 	$TipoCaso=$row['TipoCaso'];
-	$NivelViolencia=$row['NivelViolencia'];
-	$PosibleSolucion=$row['PosibleSolucion'];
+    $NivelViolencia=$row['NivelViolencia'];
+    $PosibleSolucion=$row['PosibleSolucion'];
+	$MPrincipal=$row['MPrincipal'];
+    $Metas=$row['Metas'];
+    $OClinico=$row['OClinico'];
+    $Intervencion=$row['Intervencion'];
+    $Canalizacion=$row['Canalizacion'];
+    $Avances=$row['Avances'];
+    $CExito=$row['CExito'];    
 	$Estatus=$row['Estatus'];
       $sql ="SELECT SUM(duracion) FROM llamadas WHERE IDCaso='".rs($IDCaso)."'";
 	$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
@@ -99,11 +105,14 @@ startclock();
                         <TR>
                            <TD>
                               <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>En referencia al caso</B></FONT></P>
-                           </TD>
+                          </TD>
                         </TR>
                         <TR>
                            <TD>
-                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=hidden NAME=IDCaso VALUE="<? echo $IDCaso;?>"><!--NOEDIT--><? echo $IDCaso;?><!--/NOEDIT--></FONT></P>
+                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=hidden NAME=IDCaso VALUE="<? echo $IDCaso;?>"><!--NOEDIT--><? echo $IDCaso;?><!--/NOEDIT-->
+							  </FONT>
+							  <INPUT TYPE=checkbox NAME="CExito" VALUE="1" <? if($CExito=='1')echo "checked";?> >Caso de Exito
+							  </P>
                            </TD>
                         </TR>
                         <TR>
@@ -223,9 +232,6 @@ startclock();
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>LEGAL</B></FONT></CENTER>
                   </TD>
                   <TD BGCOLOR="#FFFFFF">
-                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>MEDICO</B></FONT></CENTER>
-                  </TD>
-                  <TD BGCOLOR="#FFFFFF">
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>OTROS</B></FONT></CENTER>
                   </TD>
                </TR>
@@ -254,24 +260,6 @@ startclock();
 	<? 
 	include("Datos_Comunicacion.php");
 	$sql ="select * from campos where Tipo = 'AYUDALEGAL' and activo=1 ORDER BY Nombre ASC";
-	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-	$total_found = @mysql_num_rows($total_result);
-	$i=1;
-	while ($row = mysql_fetch_array($total_result)){
-		$Nombre=$row['Nombre'];
-		$Tipo=$row['Tipo'];
-    		echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
-		$i=$i+1;
-		}
-	?>
-	</FONT></P>
-      </TD>
-
-  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
-  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
-	<? 
-	include("Datos_Comunicacion.php");
-	$sql ="select * from campos where Tipo = 'AYUDAMEDICA' and activo=1 ORDER BY Nombre ASC";
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	$i=1;
@@ -381,19 +369,101 @@ startclock();
                </TR>
                
             </TABLE>
-             </FONT><FONT FACE="Arial" COLOR="#FFCC00">
-            </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#FFCC00"><TABLE BORDER=0 WIDTH="100%">
-               <TR>
-                  <TD WIDTH=438 BGCOLOR="#FFFFFF">
-                     <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Desarrollo del caso</B></FONT></P>
-                  </TD>
-               </TR>
-               <TR>
-                  <TD VALIGN=top NOWRAP WIDTH=438 BGCOLOR="#FFFFFF">
-                     <P><FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME=DesarrolloCaso ROWS=10 COLS=91 WRAP=virtual></TEXTAREA></FONT></P>
-                  </TD>
-               </TR>
+             </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#FFCC00">
+
+            <TABLE BORDER="0" WIDTH="100%">
+              
+                <TR>
+                    <TD WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Motivo principal</B></FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="MPrincipal" ROWS="10" COLS="91" WRAP="virtual"></TEXTAREA></FONT>
+                        </P>
+                    </TD>
+                </TR>
+
+                <TR>
+                    <TD WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Objetivo del usuario (Metas)</B></FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Metas" ROWS="10" COLS="91" WRAP="virtual"></TEXTAREA></FONT>
+                        </P>
+                    </TD>
+                </TR>
+
+                <TR>
+                    <TD WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Plan de acción (Objetivo clínico):</B></FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="OClinico" ROWS="10" COLS="91" WRAP="virtual"></TEXTAREA></FONT>
+                        </P>
+                    </TD>
+                </TR>
+
+                <TR>
+                    <TD WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Intervención</B></FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Intervencion" ROWS="10" COLS="91" WRAP="virtual"></TEXTAREA></FONT>
+                        </P>
+                    </TD>
+                </TR>     
+                               
+                <TR>
+                    <TD WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Revisión de tareas y avances:</B></FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Avances" ROWS="10" COLS="91" WRAP="virtual"></TEXTAREA></FONT>
+                        </P>
+                    </TD>
+                </TR>  
+
+                <TR>
+                    <TD WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Canalización</B></FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD VALIGN="top" NOWRAP WIDTH="438" BGCOLOR="#FFFFFF">
+                        <P>
+                            <FONT SIZE="-1" FACE="Arial"><TEXTAREA NAME="Canalizacion" ROWS="10" COLS="91" WRAP="virtual"></TEXTAREA></FONT>
+                        </P>
+                    </TD>
+                </TR>
             </TABLE>
+
 	<p align=center style='text-align:center'><span style='font-size:22.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'>
 	<a href="#" onClick="window.open('?Accion=RealizarBusquedaOrga','mywindow','height=600,width=350,scrollbars=yes,status=yes');">Busqueda de Organismos</a>
 <p align=center style='text-align:center'><span style='font-size:22.0pt;
