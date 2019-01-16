@@ -237,12 +237,12 @@ if ($Sesion){
 	$MasDe60=CuentaEsto("Edad >= '60'");
 
 	//Edad por Casos
-	$CNoDada=CuentaEsto("LlamadaNo=1 AND Edad = '0'");
-	$CDe1a14=CuentaEsto("LlamadaNo=1 AND Edad >='1' AND Edad <='14'");
-	$CDe15a29=CuentaEsto("LlamadaNo=1 AND Edad >= '15' AND Edad <='29'");
-	$CDe30a44=CuentaEsto("LlamadaNo=1 AND Edad >= '30' AND Edad <='44'");
-	$CDe45a59=CuentaEsto("LlamadaNo=1 AND Edad >= '45' AND Edad <='59'");
-	$CMasDe60=CuentaEsto("LlamadaNo=1 AND Edad >= '60'");
+	$CNoDada=CuentaEsto("Edad = '0' group by IDCaso");
+	$CDe1a14=CuentaEsto("Edad >='1' AND Edad <='14' group by IDCaso");
+	$CDe15a29=CuentaEsto("Edad >= '15' AND Edad <='29' group by IDCaso");
+	$CDe30a44=CuentaEsto("Edad >= '30' AND Edad <='44' group by IDCaso");
+	$CDe45a59=CuentaEsto("Edad >= '45' AND Edad <='59' group by IDCaso");
+	$CMasDe60=CuentaEsto("Edad >= '60' group by IDCaso");
 
 	//Genero
 	$TotalGenero=Muestra("Sexo");
