@@ -185,7 +185,7 @@
 				</div>
 
 				<div style="float: right; width:48%;padding:5px;">
-					<!POR A�O>
+					<!POR AÑO>
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
 						<tr>
 							<td bgcolor="#FFFFFF">
@@ -359,38 +359,15 @@
 									<option value="Salvador">Salvador</option>
 									<optgroup label="Estados de Mexico" />
 									<option value="">-En Blanco-</option>
-									<option value="Aguascalientes">Aguascalientes</option>
-									<option value="Baja California">Baja California</option>
-									<option value="Baja California Sur">Baja California Sur</option>
-									<option value="Campeche">Campeche</option>
-									<option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
-									<option value="Colima">Colima</option>
-									<option value="Chiapas">Chiapas</option>
-									<option value="Chihuahua">Chihuahua</option>
-									<option value="Distrito Federal">Distrito Federal</option>
-									<option value="Durango">Durango</option>
-									<option value="Guanajuato">Guanajuato</option>
-									<option value="Guerrero">Guerrero</option>
-									<option value="Hidalgo">Hidalgo</option>
-									<option value="Jalisco">Jalisco</option>
-									<option value="Mexico">M&eacute;xico</option>
-									<option value="Michoacan de Ocampo">Michoac&oacute;n de Ocampo</option>
-									<option value="Morelos">Morelos</option>
-									<option value="Nayarit">Nayarit</option>
-									<option value="Nuevo Leon">Nuevo Le&oacute;n</option>
-									<option value="Oaxaca">Oaxaca</option>
-									<option value="Puebla">Puebla</option>
-									<option value="Queretaro">Queretaro</option>
-									<option value="Quintana Roo">Quintana Roo</option>
-									<option value="San Luis Potosi">San Luis Potos&iacute;</option>
-									<option value="Sinaloa">Sinaloa</option>
-									<option value="Sonora">Sonora</option>
-									<option value="Tabasco">Tabasco</option>
-									<option value="Tamaulipas">Tamaulipas</option>
-									<option value="Tlaxcala">Tlaxcala</option>
-									<option value="Veracruz de Ignacio">Veracruz</option>
-									<option value="Yucatan">Yucatan</option>
-									<option value="Zacatecas">Zacatecas</option>
+									<?
+                                    $sql ="select Estado from catalogocp group by Estado";
+                                    $estados='';
+                                    $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+                                    while ($row = mysql_fetch_array($total_result)){
+                                       $estados.= '<option>'.$row["Estado"].'</option>';
+                                       }
+                                    echo $estados;
+	                                ?>
 								</select>
 							</td>
 						</tr>
@@ -497,7 +474,7 @@
 									<option value="Papalotla">Papalotla</option>
 									<option value="La Paz">La Paz</option>
 									<option value="Plotitlan">Plotitlan</option>
-									<option value="Ra�on">Ra�on</option>
+									<option value="Rañon">Rañon</option>
 									<option value="San Antonio de las Islas ">San Antonio de las Islas</option>
 									<option value="San Felipe del Progreso ">San Felipe del Progreso</option>
 									<option value="San Martin de las Piramides">San Martin de las Piramides</option>

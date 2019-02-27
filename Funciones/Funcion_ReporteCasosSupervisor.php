@@ -281,10 +281,10 @@ if ($Sesion){
 	$TotalEnteraste=MuestraAyuda("ComoTeEnteraste");
 
 	//Canalizacion
-	$TotalCanaLegal=Muestra("CanaLegal","CanaLegal Not Like \"%Voluntario%\" And ","Llamadas DESC","LIMIT 10");
-	$TotalCanaLegalV=Muestra("CanaLegal","CanaLegal Like \"%Voluntario%\" And ","Llamadas DESC","LIMIT 10");
-	$TotalCanaOtro=Muestra("CanaOtro","CanaOtro Not Like \"%Voluntario%\" And ","Llamadas DESC","LIMIT 10");
-	$TotalCanaOtroV=Muestra("CanaOtro","CanaOtro Like \"%Voluntario%\" And ","Llamadas DESC","LIMIT 10");
+	$TotalCanaLegal=Muestra("CanaLegal","CanaLegal Not Like \"%Voluntario%\" And ","Llamadas DESC");
+	$TotalCanaLegalV=Muestra("CanaLegal","CanaLegal Like \"%Voluntario%\" And ","Llamadas DESC");
+	$TotalCanaOtro=Muestra("CanaOtro","CanaOtro Not Like \"%Voluntario%\" And ","Llamadas DESC");
+	$TotalCanaOtroV=Muestra("CanaOtro","CanaOtro Like \"%Voluntario%\" And ","Llamadas DESC");
 
 	include ("Paginas/BuscarCasos_Reporte.html");
 	}
