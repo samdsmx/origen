@@ -6,7 +6,7 @@ if ($Sesion){
 		}
 		else{
 			include("Datos_Comunicacion.php");
-			$sql ="DELETE from Consejeros where Nombre ='".rs($Nombre)."'";
+			$sql ="DELETE from consejeros where Nombre ='".rs($Nombre)."'";
 			$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 			BorraCache();
 			$Mensaje="Usuario Eliminado";

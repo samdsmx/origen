@@ -2,14 +2,14 @@
 if ($Sesion){
 function ListaUsuarios(){
 	include("Datos_Comunicacion.php");
-	$sql ="SELECT Nombre FROM Consejeros";
+	$sql ="SELECT Nombre FROM consejeros";
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	while ($row = mysql_fetch_array($total_result)){
 	    	$Nombre=$row['Nombre'];
 	    	$Usuarios .= "<OPTION VALUE='$Nombre'>$Nombre".chr(10);
 		}
-	$sql2 ="SELECT * FROM Campos ORDER BY Nombre ASC";
+	$sql2 ="SELECT * FROM campos ORDER BY Nombre ASC";
 	$total_result2 = @mysql_query($sql2, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found2 = @mysql_num_rows($total_result2);
 	while ($row = mysql_fetch_array($total_result2)){
@@ -55,7 +55,7 @@ function ListaUsuarios(){
 
 function ListaConsejeras(){
 	include("Datos_Comunicacion.php");
-	$sql ="SELECT Nombre FROM Consejeros WHERE NivelSeguridad=1 OR NivelSeguridad=4";
+	$sql ="SELECT Nombre FROM consejeros WHERE NivelSeguridad=1 OR NivelSeguridad=4";
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	mysql_close($connection);

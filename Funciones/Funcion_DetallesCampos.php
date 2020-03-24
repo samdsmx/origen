@@ -2,7 +2,7 @@
 if ($Sesion){
 	if ($Nombre){
 		include("Datos_Comunicacion.php");
-		$sql ="SELECT Nombre, Tipo, activo FROM Campos WHERE Nombre = '".rs($Nombre)."'";
+		$sql ="SELECT Nombre, Tipo, activo FROM campos WHERE Nombre = '".rs($Nombre)."'";
 		$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		while ($row = mysql_fetch_array($result))	{
 			$Nombre=$row['Nombre'];

@@ -2,7 +2,7 @@
 if ($Sesion){
 	include("Funciones_RevisionArreglo.php");
 	include("Datos_Comunicacion.php");
-	$sql ="SELECT c.*,l.* FROM Llamadas l, Casos c WHERE c.IDCaso = l.IDCaso AND c.IDCaso = '".rs($IDCaso)."' AND l.LlamadaNo='".rs($LlamadaNo)."'";
+	$sql ="SELECT c.*,l.* FROM llamadas l, casos c WHERE c.IDCaso = l.IDCaso AND c.IDCaso = '".rs($IDCaso)."' AND l.LlamadaNo='".rs($LlamadaNo)."'";
 	$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	while ($row = mysql_fetch_array($result)){
 		$ID=$row['IDCaso'];
