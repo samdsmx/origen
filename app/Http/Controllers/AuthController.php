@@ -8,14 +8,14 @@ use DB, Auth, View, Session, Request, Redirect, DateTime, Response, Validator, M
 class AuthController extends BaseController {
 
 	public function login() {
-                $user_data = array(
+		$user_data = array(
 		    'nombre' => Request::get('usuario'),
 		    'password' => Request::get('password'),
 		    'status' => 1
 		);
 		$user_data1 = array(
 		    'nombre' => Request::get('usuario'),
-		    'password' => Request::get('password'),
+		    'password' => Request::get('password')
 		);
     		if (Auth::attempt($user_data)) {
 			return Redirect::to('inicio');

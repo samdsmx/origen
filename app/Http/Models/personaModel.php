@@ -8,7 +8,7 @@ class personaModel extends Model{
     
     protected $table = 'persona';
     protected $primaryKey = 'id_persona';
-    protected $fillable = ['primer_apellido', 'segundo_apellido', 'nombres', 'curp', 'correo', 'telefono', 'id_unidad_responsable', 'status'];
+    protected $fillable = ['primer_apellido', 'segundo_apellido', 'nombres', 'curp', 'correo', 'telefono', 'status'];
     
     public $timestamp = true;
        
