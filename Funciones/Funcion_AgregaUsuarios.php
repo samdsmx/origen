@@ -31,7 +31,7 @@ if (RevisarNombre($Nombre)=="OK"){
 
 function AgregaCampos($Nombre,$Tipo,$activo){
 include("Datos_Comunicacion.php");
-$sql = "INSERT INTO Campos(Nombre,Tipo,activo)
+$sql = "INSERT INTO campos(Nombre,Tipo,activo)
 		VALUES
 		('".rs($Nombre)."','".rs($Tipo)."','".rs($activo)."')";
 		$result = @mysql_query($sql, $connection) or $Mensaje="El campo ya existe" and die(include ("Paginas/Error.html"));
@@ -43,11 +43,11 @@ $sql = "INSERT INTO Campos(Nombre,Tipo,activo)
 function AgregaOrganismo($IDOrganismo,$Tema,$Institucion,$Estado,$Direccion,$Telefono,$Email,$Objetivo,$Referencia,$Observaciones,$Requisitos,$HorariosCostos){
 include("Datos_Comunicacion.php");
 if ($IDOrganismo){
-		$sql ="UPDATE Organismos set Tema='".rs($Tema)."',Institucion='".rs($Institucion)."',Estado='".rs($Estado)."',Direccion='".rs($Direccion)."',Telefono='".rs($Telefono)."',
+		$sql ="UPDATE organismos set Tema='".rs($Tema)."',Institucion='".rs($Institucion)."',Estado='".rs($Estado)."',Direccion='".rs($Direccion)."',Telefono='".rs($Telefono)."',
 		Email='".rs($Email)."',Objetivo='".rs($Objetivo)."',Referencia='".rs($Referencia)."',Observaciones='".rs($Observaciones)."',Requisitos='".rs($Requisitos)."',HorariosCostos='".rs($HorariosCostos)."' WHERE ID='".rs($IDOrganismo)."'";
 		}
 		else{
-			$sql = "INSERT INTO Organismos(Tema,Institucion,Estado,Direccion,Telefono,Email,Objetivo,Referencia,Observaciones,Requisitos,HorariosCostos)
+			$sql = "INSERT INTO organismos(Tema,Institucion,Estado,Direccion,Telefono,Email,Objetivo,Referencia,Observaciones,Requisitos,HorariosCostos)
 			VALUES
 			('".rs($Tema)."','".rs($Institucion)."','".rs($Estado)."','".rs($Direccion)."','".rs($Telefono)."','".rs($Email)."','".rs($Objetivo)."','".rs($Referencia)."','".rs($Observaciones)."','".rs($Requisitos)."','".rs($HorariosCostos)."')";
 			}
@@ -61,7 +61,7 @@ if ($IDOrganismo){
 	
 function EliminaOrganismo($IDOrganismo){
 	include("Datos_Comunicacion.php");
-	$sql ="DELETE from Organismos WHERE ID='".rs($IDOrganismo)."'";
+	$sql ="DELETE from organismos WHERE ID='".rs($IDOrganismo)."'";
 	$result = @mysql_query($sql, $connection) or $Mensaje="Error al eliminar el organismo" and die(include ("Paginas/Error.html"));
 	mysql_close($connection);
 	echo '<script type="text/javascript">window.close()</script>';

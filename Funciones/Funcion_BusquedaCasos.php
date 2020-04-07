@@ -44,7 +44,7 @@ if ($Sesion){
 		$CadBusqueda="";
 		$SecureCad=base64_decode($Sesion);
 		list($Nombre_Consejera, $Password)= split("@", $SecureCad);
-		$sql ="SELECT Acceso FROM Consejeros WHERE Nombre='".rs($Nombre_Consejera)."' AND Password2='".rs($Password)."'";
+		$sql ="SELECT Acceso FROM consejeros WHERE Nombre='".rs($Nombre_Consejera)."' AND Password2='".rs($Password)."'";
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$row = mysql_fetch_array($total_result);
 		$access=$row['Acceso'];
@@ -106,7 +106,7 @@ if ($Sesion){
 			$CadBusqueda .="AND c.Telefono LIKE '%".rs($Telefono)."%' ";
 		$sql ="drop table IF EXISTS $tmp";
 		$total_result = @mysql_query($sql, $connection);
-		$sql ="create table $tmp SELECT DISTINCT l.*, c.Nombre, c.Telefono, c.Edad, c.Sexo, c.ComoTeEnteraste, c.Ocupacion, c.Municipio, c.Estado, c.EstadoCivil FROM Llamadas l, Casos c WHERE c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda Order By l.LlamadaNo Desc";
+		$sql ="create table $tmp SELECT DISTINCT l.*, c.Nombre, c.Telefono, c.Edad, c.Sexo, c.ComoTeEnteraste, c.Ocupacion, c.Municipio, c.Estado, c.EstadoCivil FROM llamadas l, casos c WHERE c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda Order By l.LlamadaNo Desc";
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		}
 	if(!$Correlacion){
@@ -145,7 +145,7 @@ if ($Sesion){
 				}
 switch ($Correlacion){
 	case "IDCaso":	
-		$sql2 = "SELECT IDCaso, FechaLlamada, HoraInicio, Consejera, LlamadaNo, Acceso FROM Llamadas WHERE IDCaso='".rs($IDCaso)."' AND LlamadaNo<>'".rs($LlamadaNo)."' Order By FechaLlamada Desc";		
+		$sql2 = "SELECT IDCaso, FechaLlamada, HoraInicio, Consejera, LlamadaNo, Acceso FROM llamadas WHERE IDCaso='".rs($IDCaso)."' AND LlamadaNo<>'".rs($LlamadaNo)."' Order By FechaLlamada Desc";		
 		break;
 	case "Nombre":	
 		$sql2 = "SELECT IDCaso, FechaLlamada, HoraInicio, Consejera, LlamadaNo, Acceso FROM ".rs($tmp)." WHERE Nombre='".rs($Nombre)."' Order By FechaLlamada Desc";		
@@ -188,7 +188,7 @@ switch ($Correlacion){
 		$Seguimientos .="<LI>Caso No. <a href=\"javascript: openwindow('?Accion=VerDetalles&IDCaso=$IDCasoRef2&LlamadaNo=$LlamadaNo2');\">".$Color2.$IDCasoRef2.", $FechaSeg2, $HoraInicioSeg2, $Consejera2</A></LI></FONT>";			    
 			}
 
-		$sql2 = "SELECT Consejera FROM Llamadas WHERE IDCaso='".rs($IDCaso)."' AND LlamadaNo=1";
+		$sql2 = "SELECT Consejera FROM llamadas WHERE IDCaso='".rs($IDCaso)."' AND LlamadaNo=1";
 		$total_result2 = @mysql_query($sql2, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$row2 = mysql_fetch_array($total_result2);
 		$ConsejeraP=$row2['Consejera'];

@@ -291,14 +291,14 @@ if ($Sesion){
 			    	}
 				$sql = "INSERT INTO casos (Nombre,Edad,Sexo,EstadoCivil,Telefono,Municipio,Estado,Ocupacion,Religion,VivesCon,ComoTeEnteraste,TipoCaso,PosibleSolucion,Estatus,HorasInvertidas,NivelEstudios,LenguaIndigena,CP,Colonia,Pais,CorreoElectronico,MedioContacto,NivelViolencia,Nacionalidad) VALUES ('".rs($Nombre)."','".rs($Edad)."','".rs($Sexo)."','".rs($EstadoCivil)."','".rs($Telefono)."','".rs($Municipio)."','".rs($Estado)."','".rs($Ocupacion)."' '".rs($Ocupacion2)."','".rs($Religion)."','".rs($VivesCon)."','".rs($ComoTeEnteraste)."','".rs($TipoCaso)."','".rs($PosibleSolucion)."','".rs($Estatus)."','".rs($HorasInvertidas)."','".rs($NivelEstudios)."','".rs($LenguaIndigena)."','".rs($CP)."','".rs($Colonia)."','".rs($Pais)."','".rs($CorreoElectronico)."','".rs($MedioContacto)."', '".rs($NivelViolencia)."', '".rs($Nacionalidad)."')";
 				$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-				$sql = "SELECT MAX(IDCaso) IDCaso from Casos";
+				$sql = "SELECT MAX(IDCaso) IDCaso from casos";
 				$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 				$row = mysql_fetch_array($result);
 			        $IDCaso=$row['IDCaso'];
 				}
 			$sql = "UPDATE casos SET TipoCaso='".rs($TipoCaso)."',NivelViolencia='".rs($NivelViolencia)."',Nacionalidad='".rs($Nacionalidad)."',PosibleSolucion='".rs($PosibleSolucion)."',Estatus='".rs($Estatus)."',HorasInvertidas='".rs($HorasInvertidas)."' where IDCaso='".rs($IDCaso)."'";
 			$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-			$sql = "INSERT INTO Llamadas
+			$sql = "INSERT INTO llamadas
 			(IDCaso,FechaLlamada,Consejera,HoraInicio,HoraTermino,ComentariosAdicionales,AyudaPsicologico,AyudaLegal,AyudaMedica,AyudaNutricional,AyudaOtros,DesarrolloCaso,CanaLegal,CanaOtro,LlamadaNo,Duracion,Acceso,TipoViolencia,ModalidadViolencia,Violentometro,AcudeInstitucion)
 			VALUES
 			('".rs($IDCaso)."','".rs($FechaLlamada)."','".rs($Consejera)."','".rs($HoraInicio)."','".rs($HoraTermino)."','".rs($ComentariosAdicionales)."','".rs($AYUDAPSICOLOGICO)."','".rs($AYUDALEGAL)."','".rs($AYUDAMEDICA)."','".rs($AYUDANUTRICIONAL)."','".rs($AYUDAOTROS)."','".rs($DesarrolloCaso)."','".rs($CanaLegal)."', '".rs($CanaOtro)."','".rs($LlamadaNo)."', '".rs($Duracion)."', '".rs($Acceso)."', '".rs($TipoViolencia)."', '".rs($ModalidadViolencia)."', '".rs($Violentometro)."', '".rs($AcudeInstitucion)."')";
