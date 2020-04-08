@@ -8,5 +8,5 @@ class catalogocpModel extends Model{
 
     protected $table = 'catalogocp';
     protected $primaryKey = 'id';
-    protected $fillable = ['idEstado', 'estado', 'idMunicipio', 'municipio', 'cuidad', 'zona', 'cp', 'asentamiento', 'tipo'];
+    protected $fillable = ['id', 'cp', 'estado', 'municipio', 'colonia'];
 }
