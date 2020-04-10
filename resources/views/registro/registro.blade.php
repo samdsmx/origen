@@ -20,6 +20,7 @@ Registro
 
 @section('cuerpo')
 @include('organismos.modalBusqueda')
+@include('registro.modalMaxTime')
 <section class="content-header">
     <h1 style="color:#605ca8;font-weight: bolder;text-align:center;float:inherit;" class="col-md-10 col-sm-12 col-xs-12">
         <?php
@@ -268,10 +269,26 @@ Registro
     var startDate = new Date();
 
     var interval = setInterval(function() {
-        var date2 = new Date();
-        var timeDiff = Math.abs(date2.getTime() - startDate.getTime());
-        var diffMin = Math.ceil(timeDiff / 60000); 
-        document.getElementById('timer_div').innerHTML = diffMin + " Min."
+      var date2 = new Date();
+      var timeDiff = Math.abs(date2.getTime() - startDate.getTime());
+      var diffMin = Math.ceil(timeDiff / 60000); 
+      document.getElementById('timer_div').innerHTML = diffMin + " Min.";
+      if (diffMin === 30){
+        $('#modalBody').text(diffMin + " Min!");
+        $('#modalMaxTime').modal({backdrop: 'static'});
+      }
+      else if (diffMin === 40){
+        $('#modalBody').text(diffMin + " Min!!");
+        $('#modalMaxTime').modal({backdrop: 'static'});
+      }
+      else if (diffMin === 50){
+        $('#modalBody').text(diffMin + " Min!!!");
+        $('#modalMaxTime').modal({backdrop: 'static'});
+      }
+      else if (diffMin >= 60 && diffMin % 5 === 0 ){
+        $('#modalBody').text("Terminar la llamada (+1hr.)");
+        $('#modalMaxTime').modal({backdrop: 'static'});
+      }
     }, 60000);
 
     $('#ComoTeEnteraste').change(function() {
