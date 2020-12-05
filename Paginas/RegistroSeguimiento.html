@@ -1,22 +1,31 @@
 <HTML>
 <HEAD>
    <TITLE>Registro seguimiento</TITLE>
+   <link href="css/dynamicTable.css" rel="stylesheet" />
 <?
 	$HoraActual=date("h:i A");
 	$FechaActual=date("d/m/Y");
 	$NombreConsejero=RevisaSesion($Sesion, "identidad");
 	include("Datos_Comunicacion.php");
-    $sql ="SELECT * FROM casos WHERE IDCaso='".rs($IDCaso)."'";
+   $sql ="SELECT * FROM casos WHERE IDCaso='".rs($IDCaso)."'";
 	$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-	$row = mysql_fetch_array($result);
+	$row = mysql_fetch_assoc($result);
 	$TipoCaso=$row['TipoCaso'];
-    $NivelViolencia=$row['NivelViolencia'];
+   $NivelViolencia=$row['NivelViolencia'];
 	$PosibleSolucion=$row['PosibleSolucion'];
 	$Estatus=$row['Estatus'];
-      $sql ="SELECT SUM(duracion) FROM llamadas WHERE IDCaso='".rs($IDCaso)."'";
+   $sql ="SELECT SUM(duracion) FROM llamadas WHERE IDCaso='".rs($IDCaso)."'";
 	$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-	$row = mysql_fetch_array($result);
-	$HorasInvertidas=$row['SUM(duracion)'];
+	$row = mysql_fetch_assoc($result);
+   $HorasInvertidas=$row['SUM(duracion)'];
+   
+   $sql ="SELECT l.id, b.IdCampo FROM llamadas l, llamadasBienestar b WHERE IDCaso='".rs($IDCaso)."' AND LlamadaNo=1 AND b.IdLlamada=l.id";
+   $result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+   $total_found_bienestar = @mysql_num_rows($result);
+   if ($total_found_bienestar > 0){
+      $ComoTeEnteraste = 'LÍNEA BIENESTAR: ';
+   }
+
 	?>
 <script>
 var timerID = null;
@@ -78,12 +87,12 @@ startclock();
 <BR>
 <BR>
 <FORM ACTION="" METHOD=POST name=forma onSubmit="return validar();">
-   <CENTER><TABLE BORDER=0 BGCOLOR="#EEEEEE" CELLSPACING=0 CELLPADDING=0 WIDTH=630>
+   <CENTER><table BORDER="0" BGCOLOR="#EEEEEE" CELLSPACING="0" CELLPADDING="0" WIDTH="930">
       <TR>
          <TD>
             <P><TABLE BORDER=0 BGCOLOR="#EEEEEE" WIDTH="100%">
                <TR>
-                  <TD VALIGN=top WIDTH="50%" BGCOLOR="#FFFFFF">
+                  <TD VALIGN=top WIDTH="100%" BGCOLOR="#FFFFFF">
                      <P><FONT SIZE="-1" COLOR="#AAAAAA"><TABLE BORDER=0 WIDTH="100%">
                         <TR>
                            <TD>
@@ -177,6 +186,7 @@ startclock();
 
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Llamada No.</B></FONT></P></TD></TR>
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=hidden NAME=LlamadaNo VALUE="<? echo $LlamadaNo;?>"><!--NOEDIT--><? echo $LlamadaNo;?><!--/NOEDIT--></FONT></P></TD></TR>
+<TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=hidden NAME=ComoTeEnteraste VALUE="<? echo $ComoTeEnteraste;?>"><!--NOEDIT--><? echo $ComoTeEnteraste;?><!--/NOEDIT--></FONT></P></TD></TR>
                         
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Tiempo invertido.</B></FONT></P></TD></TR>
 <TR><TD><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE=hidden NAME=HorasInvertidas VALUE="<? echo $HorasInvertidas;?>"><!--NOEDIT--><? echo $HorasInvertidas;?><!--/NOEDIT--></FONT></P></TD></TR>
@@ -218,33 +228,35 @@ startclock();
 </TD>
 </TR>
                      </TABLE>
-                      </FONT><FONT SIZE="-1" FACE="Arial">
-                     </FONT><FONT FACE="Arial"> </FONT></P>
+                      </FONT></P>
                   </TD>
                </TR>
             </TABLE>
 
 <FONT FACE="Arial" COLOR="#D80808"><TABLE BORDER=0 BGCOLOR="#EEEEEE" WIDTH="100%">
                <TR>
-                  <TD BGCOLOR="#FFFFFF">
+                  <TD BGCOLOR="#FFFFFF" <? if($total_found_bienestar > 0) echo "hidden"; ?>>
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>PSICOLOGICO</B></FONT></CENTER>
                   </TD>
-                  <TD BGCOLOR="#FFFFFF">
+                  <TD BGCOLOR="#FFFFFF" <? if($total_found_bienestar > 0) echo "hidden"; ?>>
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>LEGAL</B></FONT></CENTER>
                   </TD>
-                  <TD BGCOLOR="#FFFFFF">
+                  <TD BGCOLOR="#FFFFFF" <? if($total_found_bienestar > 0) echo "hidden"; ?>>
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>MEDICO</B></FONT></CENTER>
                   </TD>
-                  <TD BGCOLOR="#FFFFFF">
+                  <TD BGCOLOR="#FFFFFF" <? if($total_found_bienestar > 0) echo "hidden"; ?>>
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>NUTRICIONAL</B></FONT></CENTER>
                   </TD>
+                  <TD BGCOLOR="#FFFFFF" colspan="4" <? if($total_found_bienestar == 0) echo "hidden"; ?>>
+                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>MOTIVOS BIENESTAR</B></FONT></CENTER>
+                  </td>
                   <TD BGCOLOR="#FFFFFF">
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>OTROS</B></FONT></CENTER>
                   </TD>
                </TR>
                <TR>
 
-  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF" <? if($total_found_bienestar > 0) echo "hidden"; ?>>
   <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
 	<? 
 	include("Datos_Comunicacion.php");
@@ -252,7 +264,7 @@ startclock();
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	$i=1;
-	while ($row = mysql_fetch_array($total_result)){
+	while ($row = mysql_fetch_assoc($total_result)){
 		$Nombre=$row['Nombre'];
 		$Tipo=$row['Tipo'];
     		echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
@@ -262,7 +274,7 @@ startclock();
 	</FONT></P>
       </TD>
 
-  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF" <? if($total_found_bienestar > 0) echo "hidden"; ?>>
   <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
 	<? 
 	include("Datos_Comunicacion.php");
@@ -270,7 +282,7 @@ startclock();
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	$i=1;
-	while ($row = mysql_fetch_array($total_result)){
+	while ($row = mysql_fetch_assoc($total_result)){
 		$Nombre=$row['Nombre'];
 		$Tipo=$row['Tipo'];
     		echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
@@ -280,7 +292,7 @@ startclock();
 	</FONT></P>
       </TD>
 
-  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF" <? if($total_found_bienestar > 0) echo "hidden"; ?>>
   <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
 	<? 
 	include("Datos_Comunicacion.php");
@@ -288,7 +300,7 @@ startclock();
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	$i=1;
-	while ($row = mysql_fetch_array($total_result)){
+	while ($row = mysql_fetch_assoc($total_result)){
 		$Nombre=$row['Nombre'];
 		$Tipo=$row['Tipo'];
     		echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
@@ -298,7 +310,7 @@ startclock();
 	</FONT></P>
       </TD>
 
-  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF" <? if($total_found_bienestar > 0) echo "hidden"; ?>>
   <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
 	<? 
 	include("Datos_Comunicacion.php");
@@ -306,7 +318,7 @@ startclock();
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	$i=1;
-	while ($row = mysql_fetch_array($total_result)){
+	while ($row = mysql_fetch_assoc($total_result)){
 		$Nombre=$row['Nombre'];
 		$Tipo=$row['Tipo'];
     		echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
@@ -315,6 +327,36 @@ startclock();
 	?>
 	</FONT></P>
       </TD>
+
+   <td VALIGN="top" colspan="4" BGCOLOR="#FFFFFF" <? if($total_found_bienestar == 0) echo "hidden"; ?>>
+      <font FACE="Arial" COLOR="#D80808">
+         <?
+         include("Datos_Comunicacion.php");
+         $sql ="select * from campos where Programa = 'BIENESTAR' and activo=1 ORDER BY Tipo ASC";
+         $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+         $total_found = @mysql_num_rows($total_result);
+         $TipoAnt="";
+         echo '<div class="row">';
+         while ($row = mysql_fetch_assoc($total_result)) {
+            $IDCampo=$row['IDCampo'];
+            $Nombre=$row['Nombre'];
+            $Tipo=$row['Tipo'];
+            if ($TipoAnt !== $Tipo){
+               if ($TipoAnt !== ""){
+                  echo "</div>";
+               }
+               echo "<div class='column'><strong style='text-transform: uppercase; font-size: 12px;'>$Tipo</strong><br/><br/>";
+               $TipoAnt = $Tipo;
+            }
+            echo '<label style="margin-bottom: 4px; font-size: 12px;"><INPUT TYPE=checkbox NAME="BIENESTAR[]" VALUE="'.$IDCampo.'">'.$Nombre.'</label>';
+            }
+         echo "</div></div>";
+         ?>
+      </FONT>
+   </td>
+
+
+
   <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
   <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
 	<? 
@@ -323,7 +365,7 @@ startclock();
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	$i=1;
-	while ($row = mysql_fetch_array($total_result)){
+	while ($row = mysql_fetch_assoc($total_result)){
 		$Nombre=$row['Nombre'];
 		$Tipo=$row['Tipo'];
     		echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
@@ -362,7 +404,7 @@ startclock();
   $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
   $total_found = @mysql_num_rows($total_result);
   $i=1;
-  while ($row = mysql_fetch_array($total_result)){
+  while ($row = mysql_fetch_assoc($total_result)){
     $Nombre=$row['Nombre'];
     $Tipo=$row['Tipo'];
         echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
@@ -380,7 +422,7 @@ startclock();
   $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
   $total_found = @mysql_num_rows($total_result);
   $i=1;
-  while ($row = mysql_fetch_array($total_result)){
+  while ($row = mysql_fetch_assoc($total_result)){
     $Nombre=$row['Nombre'];
     $Tipo=$row['Tipo'];
         echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
@@ -398,7 +440,7 @@ startclock();
   $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
   $total_found = @mysql_num_rows($total_result);
   $i=1;
-  while ($row = mysql_fetch_array($total_result)){
+  while ($row = mysql_fetch_assoc($total_result)){
     $Nombre=$row['Nombre'];
     $Tipo=$row['Tipo'];
         echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'['.$i.']" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';

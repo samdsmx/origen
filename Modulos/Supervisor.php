@@ -45,16 +45,15 @@ if($Pagina && $submit <> "Reporte"){
 						include("Funciones/Funcion_BusquedaCasos_Detalles.php");
 				break;
 			case "ModificaVarias":
-				if($submit=="Modificar")
+				if($submit=="Modificar"){
 					include("Funciones/Funciones_RegistroDatos.php");
-					else{
-						include ("Paginas/CodigoMenuSinOpciones.html");
-						include("Paginas/ModificaLlamadas.html");
-						}
+				} else {
+					include ("Paginas/CodigoMenuSinOpciones.html");
+					include("Paginas/ModificaLlamadas.html");
+				}
 				break;
-
 			case "Modifica":
-				include("Funciones/Funcion_ModificaLlamada.php");
+				include("Funciones/Funcion_BusquedaCasos_Detalles.php");
 				break;
 			case "Seguimiento":
 				switch ($AccionSec){

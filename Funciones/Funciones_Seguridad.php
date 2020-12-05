@@ -11,7 +11,7 @@ function Autentifica($Nombre, $Password, $Estado){
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	if ($total_found == "1"){
-		$row = mysql_fetch_array($total_result);
+		$row = mysql_fetch_assoc($total_result);
 		$NivelSeguridad=$row['NivelSeguridad'];
 		switch ($Estado){
 			case "login":

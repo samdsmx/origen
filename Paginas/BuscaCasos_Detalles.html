@@ -175,10 +175,7 @@
                            </TD>
                         </TR>
                      </TABLE>
-                      </FONT><FONT SIZE="-1" COLOR="#000000">
-                     </FONT><FONT COLOR="#000000">
-                     </FONT><FONT SIZE="-1" COLOR="#AAAAAA">
-                     </FONT><FONT SIZE="-1"> </FONT></P>
+                     </FONT></P>
                   </TD>
                   <TD VALIGN=top WIDTH="50%" BGCOLOR="#FFFFFF">
                      <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><TABLE BORDER=0 WIDTH="100%">
@@ -247,7 +244,7 @@
 					      include("Datos_Comunicacion.php");
                      $sql ="SELECT SUM(duracion) FROM llamadas WHERE IDCaso= '".rs($IDCaso)."'";
 						   $result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-						   $row = mysql_fetch_array($result);
+						   $row = mysql_fetch_assoc($result);
 						   $HorasInvertidas=$row['SUM(duracion)'];
 						   echo $HorasInvertidas;
                      mysql_close($connection);                    
@@ -306,42 +303,51 @@
                </TR>
             </TABLE>
             <BR>
-            <FONT SIZE="-2" FACE="Arial" COLOR="#000000"><TABLE BORDER=0 BGCOLOR="#000000" CELLPADDING=3 WIDTH="100%">
 
+            <FONT SIZE="-2" FACE="Arial" COLOR="#000000"><TABLE BORDER=0 BGCOLOR="#000000" CELLPADDING=3 WIDTH="100%">
                <TR>
-                  <TD BGCOLOR="#FFFFFF">
+                  <TD colspan=4 BGCOLOR="#FFFFFF" <? if(!$MotivosBienestar) echo "hidden"; ?> >
+                     <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>MOTIVOS BIENESTAR</B></FONT></CENTER>
+                  </TD>
+                  <TD BGCOLOR="#FFFFFF" <? if($MotivosBienestar) echo "hidden"; ?>>
                      <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>PSICOLOGICO</B></FONT></CENTER>
                   </TD>
-                  <TD BGCOLOR="#FFFFFF">
+                  <TD BGCOLOR="#FFFFFF" <? if($MotivosBienestar) echo "hidden"; ?>>
                      <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>LEGAL</B></FONT></CENTER>
                   </TD>
-                  <TD BGCOLOR="#FFFFFF">
+                  <TD BGCOLOR="#FFFFFF" <? if($MotivosBienestar) echo "hidden"; ?>>
                      <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>MEDICO</B></FONT></CENTER>
                   </TD>
-                  <TD BGCOLOR="#FFFFFF">
+                  <TD BGCOLOR="#FFFFFF" <? if($MotivosBienestar) echo "hidden"; ?>>
                      <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>NUTRICIONAL</B></FONT></CENTER>
                   </TD>
+
                   <TD BGCOLOR="#FFFFFF">
                      <CENTER><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><B>OTROS</B></FONT></CENTER>
                   </TD>
                </TR>
                <TR>
-                  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF">
+                  <TD VALIGN=top BGCOLOR="#FFFFFF" colspan=4 <? if(!$MotivosBienestar) echo "hidden"; ?>>
+                     <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $MotivosBienestar; ?><BR><BR>
+                     </FONT></P>
+                  </TD>
+
+                  <TD VALIGN=top NOWRAP BGCOLOR="#FFFFFF" <? if($MotivosBienestar) echo "hidden"; ?>
                      <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $AyudaPsicologico; ?><U><BR>
                      <BR>
                      </U></FONT></P>
                   </TD>
-                  <TD VALIGN=top BGCOLOR="#FFFFFF">
+                  <TD VALIGN=top BGCOLOR="#FFFFFF" <? if($MotivosBienestar) echo "hidden"; ?>>
                      <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $AyudaLegal; ?><BR>
                      <BR>
                      </FONT></P>
                   </TD>
-                  <TD VALIGN=top BGCOLOR="#FFFFFF">
+                  <TD VALIGN=top BGCOLOR="#FFFFFF" <? if($MotivosBienestar) echo "hidden"; ?>> 
                      <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $AyudaMedica; ?><BR>
                      <BR>
                      </FONT></P>
                   </TD>
-                  <TD VALIGN=top BGCOLOR="#FFFFFF">
+                  <TD VALIGN=top BGCOLOR="#FFFFFF" <? if($MotivosBienestar) echo "hidden"; ?>>
                      <P><FONT SIZE="-2" FACE="Arial" COLOR="#000000"><? echo $AyudaNutricional; ?><BR>
                      <BR>
                      </FONT></P>
@@ -410,10 +416,6 @@
                </TR>
             </TABLE>
             <BR>
-            </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#000000">
-            </FONT><FONT FACE="Arial" COLOR="#000000">
-            </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#FFCC00">
-            </FONT><FONT FACE="Arial" COLOR="#FFCC00">
             </FONT><FONT SIZE="-2" FACE="Arial" COLOR="#000000">
 <B><TABLE BORDER=0 BGCOLOR="#000000" CELLPADDING=3 WIDTH="100%">
 
@@ -474,7 +476,7 @@
 	$NombreConsejero=RevisaSesion($Sesion, "identidad");
 	$sql3 ="SELECT Nombre, NivelSeguridad FROM consejeros WHERE Nombre='".rs($NombreConsejero)."'";
 	$total_result3 = @mysql_query($sql3, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-	$row3=mysql_fetch_array($total_result3);
+	$row3=mysql_fetch_assoc($total_result3);
 	$Seg=$row3['NivelSeguridad'];
 	if($Seg=="2"){
 		echo "<INPUT TYPE=hidden NAME=Accion VALUE=Modifica>";

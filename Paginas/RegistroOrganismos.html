@@ -16,7 +16,7 @@ if ($IDOrganismo) {
 	$sql ="select * from organismos where ID = '".rs($IDOrganismo)."'";
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
-	while ($row = mysql_fetch_array($total_result)){
+	while ($row = mysql_fetch_assoc($total_result)){
 		$IDOrganismo=$row['ID'];
 		$Tema=$row['Tema'];
 		$Institucion=$row['Institucion'];
@@ -58,7 +58,7 @@ if ($IDOrganismo) {
 				$sql ="select Nombre from campos where Tipo = 'Tema' and activo = 1 order by Nombre";
 				$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 				$total_found = @mysql_num_rows($total_result);
-				while ($row = mysql_fetch_array($total_result)){
+				while ($row = mysql_fetch_assoc($total_result)){
 					$Nombre=$row['Nombre'];
 					echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre;
 					}
@@ -84,7 +84,7 @@ if ($IDOrganismo) {
 			$sql ="select estado from organismos group by estado order by estado Asc";
 			$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 			$total_found = @mysql_num_rows($total_result);
-			while ($row = mysql_fetch_array($total_result)){
+			while ($row = mysql_fetch_assoc($total_result)){
 				$Nombre=$row['estado'];
 				if ($Nombre==$Estado)
 					echo '<OPTION SELECTED VALUE="'.$Nombre.'":>'.$Nombre;

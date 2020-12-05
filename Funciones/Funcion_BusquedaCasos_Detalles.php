@@ -1,10 +1,9 @@
 <?
 if ($Sesion){
-	include("Funciones_RevisionArreglo.php");
 	include("Datos_Comunicacion.php");
-	$sql ="SELECT c.*,l.* FROM llamadas l, casos c WHERE c.IDCaso = l.IDCaso AND c.IDCaso = '".rs($IDCaso)."' AND l.LlamadaNo='".rs($LlamadaNo)."'";
+	$sql ="SELECT c.*,l.*, GROUP_CONCAT(CONCAT(f.Tipo,': ',f.Nombre)) as 'MotivosBienestar' FROM casos c, llamadas l LEFT JOIN llamadasBienestar b ON b.IdLlamada=l.id LEFT JOIN campos f ON b.IdCampo = f.IDCampo WHERE c.IDCaso = l.IDCaso AND c.IDCaso = '".rs($IDCaso)."' AND l.LlamadaNo='".rs($LlamadaNo)."' GROUP BY l.id";
 	$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-	while ($row = mysql_fetch_array($result)){
+	if ($row = mysql_fetch_assoc($result)){
 		$ID=$row['IDCaso'];
 		$FechaLlamada=$row['FechaLlamada'];
 		$Consejera=$row['Consejera'];
@@ -49,27 +48,29 @@ if ($Sesion){
 		$PosibleSolucion=$row['PosibleSolucion'];
 		$Estatus=$row['Estatus'];
 		$HorasInvertidas=$row['HorasInvertidas'];
+		$MotivosBienestar=$row['MotivosBienestar'];
+		$AyudaPsicologico = str_replace(',', "<BR>",$AyudaPsicologico);
+		$AyudaLegal = str_replace(',', "<BR>",$AyudaLegal);
+		$AyudaMedica = str_replace(',', "<BR>",$AyudaMedica);
+		$AyudaNutricional = str_replace(',', "<BR>",$AyudaNutricional);
+		$AyudaOtros = str_replace(',', "<BR>",$AyudaOtros);
+		$TipoViolencia = str_replace(',', "<BR>",$TipoViolencia);
+		$ModalidadViolencia = str_replace(',', "<BR>",$ModalidadViolencia);
+		$Violentometro = str_replace(',', "<BR>",$Violentometro);
+		$MotivosBienestar = str_replace(',', "<BR>",$MotivosBienestar);
+
+		if ($Accion == "Modifica"){
+			include("Paginas/CodigoMenuSinOpciones.html");
+			include("Paginas/ModificaLlamada.html");
+		} else {
+			include("Paginas/BuscaCasos_Detalles.html");
 		}
-	$num = @mysql_num_rows($result);
-	if ($num != 0){
-		$AyudaPsicologico = SacaElementos($AyudaPsicologico);
-		$AyudaLegal = SacaElementos($AyudaLegal);
-		$AyudaMedica = SacaElementos($AyudaMedica);
-		$AyudaNutricional = SacaElementos($AyudaNutricional);
-		$AyudaOtros = SacaElementos($AyudaOtros);
-		$TipoViolencia = SacaElementos($TipoViolencia);
-		$ModalidadViolencia = SacaElementos($ModalidadViolencia);
-		$Violentometro = SacaElementos($Violentometro);
-		$Marcador='<FONT SIZE="1" FACE="Arial" COLOR="#000000"><B><U>X</U>_</B></FONT>';
-		include("Paginas/BuscaCasos_Detalles.html");
-		}
-		else{
-			$Mensaje="No se encontro archivado un caso con esa identificacion.";
-			include("Paginas/Error.html");
-			}
-	mysql_close($connection);	
+	} else {
+		$Mensaje="No se encontro archivado un caso con esa identificacion.";
+		include("Paginas/Error.html");
 	}
-	else{
-		header("Refresh: 0; URL= ");
-		}
+	mysql_close($connection);	
+} else {
+	header("Refresh: 0; URL= ");
+}
 ?>

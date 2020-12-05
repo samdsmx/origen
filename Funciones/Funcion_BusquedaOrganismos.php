@@ -27,7 +27,7 @@ if ($Sesion){
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	$display_block ="$total_found Resultados<BR>";
-	while ($row = mysql_fetch_array($total_result)){
+	while ($row = mysql_fetch_assoc($total_result)){
 		$ID2=$row['ID'];
 		$Tema2=$row['Tema'];
 		$Estado2=$row['Estado'];

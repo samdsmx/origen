@@ -24,7 +24,7 @@ function rellenaMedios(formulario){
 					include("Datos_Comunicacion.php");
 					$sql ="select * from campos where Tipo = 'ComoTeEnteraste' AND Activo = 1 AND Nombre like '%-%'";
 					$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-			     	while ($row = mysql_fetch_array($total_result)){
+			     	while ($row = mysql_fetch_assoc($total_result)){
 						$MedioNombre = $row["Nombre"];
 						?>
 					idmedio2="<?php echo $MedioNombre;?>";
@@ -344,7 +344,7 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
 	                                    $sql ="select Municipio from catalogocp group by Municipio";
 	                                    $estados='';
 	                                    $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-	                                    while ($row = mysql_fetch_array($total_result)){
+	                                    while ($row = mysql_fetch_assoc($total_result)){
 	                                       $municipios.= '<option>'.$row["Municipio"].'</option>';
 	                                       }
 	                                    echo $municipios;
@@ -359,7 +359,7 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
 	                                    $sql ="select Estado from catalogocp group by Estado";
 	                                    $estados='<option value="">-</option>';
 	                                    $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-	                                    while ($row = mysql_fetch_array($total_result)){
+	                                    while ($row = mysql_fetch_assoc($total_result)){
 	                                       $estados.= '<option>'.$row["Estado"].'</option>';
 	                                       }
 	                                    $estados.='<option value="Extranjero">Extranjero</option>';
@@ -525,7 +525,7 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	$i=1;
-	while ($row = mysql_fetch_array($total_result)){
+	while ($row = mysql_fetch_assoc($total_result)){
 		$Nombre=$row['Nombre'];
 		$Tipo=$row['Tipo'];
 		if(!strstr($AyudaPsicologico, $Nombre)){
@@ -548,7 +548,7 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	$i=1;
-	while ($row = mysql_fetch_array($total_result)){
+	while ($row = mysql_fetch_assoc($total_result)){
 		$Nombre=$row['Nombre'];
 		$Tipo=$row['Tipo'];
 		if(!strstr($AyudaLegal, $Nombre)){
@@ -571,7 +571,7 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	$i=1;
-	while ($row = mysql_fetch_array($total_result)){
+	while ($row = mysql_fetch_assoc($total_result)){
 		$Nombre=$row['Nombre'];
 		$Tipo=$row['Tipo'];
 		if(!strstr($AyudaMedica, $Nombre)){
@@ -594,7 +594,7 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	$i=1;
-	while ($row = mysql_fetch_array($total_result)){
+	while ($row = mysql_fetch_assoc($total_result)){
 		$Nombre=$row['Nombre'];
 		$Tipo=$row['Tipo'];
 		if(!strstr($AyudaMedica, $Nombre)){
@@ -617,7 +617,7 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	$i=1;
-	while ($row = mysql_fetch_array($total_result)){
+	while ($row = mysql_fetch_assoc($total_result)){
 		$Nombre=$row['Nombre'];
 		$Tipo=$row['Tipo'];
 		if(!strstr($AyudaOtros, $Nombre)){
@@ -655,7 +655,7 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
    $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
    $total_found = @mysql_num_rows($total_result);
    $i=1;
-   while ($row = mysql_fetch_array($total_result)){
+   while ($row = mysql_fetch_assoc($total_result)){
       $Nombre=$row['Nombre'];
       $Tipo=$row['Tipo'];
       if(!strstr($TipoViolencia, $Nombre)){
@@ -678,7 +678,7 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
    $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
    $total_found = @mysql_num_rows($total_result);
    $i=1;
-   while ($row = mysql_fetch_array($total_result)){
+   while ($row = mysql_fetch_assoc($total_result)){
       $Nombre=$row['Nombre'];
       $Tipo=$row['Tipo'];
       if(!strstr($ModalidadViolencia, $Nombre)){
@@ -701,7 +701,7 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
    $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
    $total_found = @mysql_num_rows($total_result);
    $i=1;
-   while ($row = mysql_fetch_array($total_result)){
+   while ($row = mysql_fetch_assoc($total_result)){
       $Nombre=$row['Nombre'];
       $Tipo=$row['Tipo'];
       if(!strstr($Violentometro, $Nombre)){
@@ -750,7 +750,7 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
 						$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 						$total_found = @mysql_num_rows($total_result);
 						$i=1;
-						while ($row = mysql_fetch_array($total_result)){
+						while ($row = mysql_fetch_assoc($total_result)){
 							$Nombre=$row['Nombre'];
 							echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre;
 							$i=$i+1;
@@ -768,7 +768,7 @@ que se le asignara a todas las llamadas que seleccionaste para modificar. Para c
 	$sql ="select * from campos where Tipo = 'ComoTeEnteraste' AND Nombre <> 'Otros' and activo=1 ORDER BY Nombre ASC";
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
-	while ($row = mysql_fetch_array($total_result)){
+	while ($row = mysql_fetch_assoc($total_result)){
 		$Nombre=$row['Nombre'];
 		$Tipo=$row['Tipo'];
 		if($Nombre=="No Informa")

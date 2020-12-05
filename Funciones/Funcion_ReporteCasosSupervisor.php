@@ -16,33 +16,6 @@ if ($Sesion){
 	$MesL[11]="Noviembre";
 	$MesL[12]="Diciembre";
 
-	function preparaQuery($v, $name, &$CadBusqueda, &$criterio, $like=true, $b = "l"){
-		if (count($v)>0){
-			if ($v[0] <> "Todos"){
-				$CadBusqueda .="AND (";
-				$criterio.="$name = ";				
-				for ($i=0;$i<count($v);$i++){
-					if ($like){
-						$CadBusqueda .="$b.$name LIKE '%".$v[$i]."%' ";
-					} else {
-						$CadBusqueda .="$b.$name = '".$v[$i]."' ";
-					}
-					$criterio.="$v[$i] ";						
-					if ($i<count($v)-1){
-						$CadBusqueda .="OR ";
-						$criterio.="o ";
-						}
-					}
-				$CadBusqueda .=") ";
-				$criterio.="<br>";
-				}
-				else{
-					$CadBusqueda .="AND $b.$name <> \"\" ";
-					$criterio.="$name = Todos";
-					}
-			} 
-	}
-
 	function CuentaEsto($CadBusc){
 		if($CadBusc){
 			$CadBusc ="where $CadBusc";
@@ -58,11 +31,11 @@ if ($Sesion){
 		$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$t=0;
 		$u=0;
-		while ($row = mysql_fetch_array($total_result)){
+		while ($row = mysql_fetch_assoc($total_result)){
 			$Ayuda=$row['Nombre'];		
 			$sql2 ="Select c.Nombre, COUNT(*) 'llamadas', COUNT(Distinct(l.idcaso)) 'Usuarios' FROM reporte l, campos c WHERE c.Nombre='$Ayuda' AND c.Tipo='$Tipo' AND l.$Tipo LIKE \"%$Ayuda%\" Group By c.Nombre ORDER BY llamadas DESC";
 			$total_result2 = @mysql_query($sql2, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
-			while ($row2 = mysql_fetch_array($total_result2)){
+			while ($row2 = mysql_fetch_assoc($total_result2)){
 				$Ayuda2=$row2['Nombre'];
 				$CantAyu=$row2['llamadas'];
 				$Usu=$row2['Usuarios'];
@@ -74,31 +47,79 @@ if ($Sesion){
 		return $v;
 		}
 
-	function MuestraAyuda($Tipo){
-		$sql ="SELECT Nombre FROM campos WHERE tipo='$Tipo'";
+	function MuestraTiposBienestar(){ //Esto podria servir para mostrar todas las ayudas y no por separado.
+		$Programa='Bienestar';
+		$sql ="SELECT Tipo FROM campos WHERE Programa='$Programa' Group by Tipo";
 		$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$Seguimientos="<TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH><TR>";
-		$Total=@mysql_num_rows($total_result);
-		while ($row = mysql_fetch_array($total_result)){
-			$Ayuda=$row['Nombre'];	
-			$sql2 ="SELECT c.Nombre, COUNT(*) 'llamadas', COUNT(Distinct(l.idcaso)) 'Usuarios' FROM reporte l, campos c WHERE c.Nombre='$Ayuda' AND c.Tipo='$Tipo' AND l.$Tipo LIKE \"%$Ayuda%\" Group By c.Nombre ORDER BY llamadas DESC";
+		while ($row = mysql_fetch_assoc($total_result)){
+			$Tipo=$row['Tipo'];
+			$sql2 ="SELECT '$Tipo' as t, COUNT(*) 'llamadas', COUNT(Distinct(l.idcaso)) 'Usuarios' FROM reporte l WHERE l.MotivosBienestar LIKE \"%$Tipo:%\" Group By t";
 			$total_result2 = @mysql_query($sql2, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
-			if ($row2 = mysql_fetch_array($total_result2)){
-				$Ayuda2=$row2['Nombre'];
+			if ($row2 = mysql_fetch_assoc($total_result2)){
 				$CantAyu=$row2['llamadas'];
 				$Usu=$row2['Usuarios'];
-				$data .= $Ayuda2.",";
+				$data .= $Tipo.",";
 				$datag .= $CantAyu.",";
-				$Seguimientos .= "<TR><TD>$Ayuda2</TD><TD>$CantAyu</TD><TD>$Usu</TD><TR>";
-				}
+				$Seguimientos .= "<TR><TD>$Tipo</TD><TD>$CantAyu</TD><TD>$Usu</TD><TR>";
 			}
+		}
 		$data = trim($data, ",");
 		$datag = trim($datag, ",");
 		$Seguimientos .= "<TR><TD COLSPAN=13><CENTER>";
 		$Seguimientos .= '<img src="Funciones/grafico_bar.php?Nom='.$Tipo.'&datax='.$data.'&datagx='.$datag.'">';
 		$Seguimientos .= "</CENTER></TD></TR>";
 		return $Seguimientos;
+	}
+
+	function MuestraMotivosBienestar(){
+		$Programa='Bienestar';
+		$sql ="SELECT Nombre FROM campos WHERE Programa='$Programa'";
+		$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
+		$Seguimientos="<TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH><TR>";
+		while ($row = mysql_fetch_assoc($total_result)){
+			$Tipo=$row['Nombre'];
+			$sql2 ="SELECT '$Tipo' as t, COUNT(*) 'llamadas', COUNT(Distinct(l.idcaso)) 'Usuarios' FROM reporte l WHERE l.MotivosBienestar LIKE \"%: $Tipo%\" Group By t";
+			$total_result2 = @mysql_query($sql2, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
+			if ($row2 = mysql_fetch_assoc($total_result2)){
+				$CantAyu=$row2['llamadas'];
+				$Usu=$row2['Usuarios'];
+				$data .= $Tipo.",";
+				$datag .= $CantAyu.",";
+				$Seguimientos .= "<TR><TD>$Tipo</TD><TD>$CantAyu</TD><TD>$Usu</TD><TR>";
+			}
 		}
+		$data = trim($data, ",");
+		$datag = trim($datag, ",");
+		$Seguimientos .= "<TR><TD COLSPAN=13><CENTER>";
+		$Seguimientos .= '<img src="Funciones/grafico_bar.php?Nom='.$Tipo.'&datax='.$data.'&datagx='.$datag.'">';
+		$Seguimientos .= "</CENTER></TD></TR>";
+		return $Seguimientos;
+	}
+
+	function MuestraAyuda($Tipo){
+		$sql ="SELECT Nombre FROM campos WHERE tipo='$Tipo'";
+		$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
+		$Seguimientos="<TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH><TR>";
+		while ($row = mysql_fetch_assoc($total_result)){
+			$Ayuda=$row['Nombre'];
+			$sql2 ="SELECT '$Ayuda' as t, COUNT(*) 'llamadas', COUNT(Distinct(l.idcaso)) 'Usuarios' FROM reporte l WHERE l.$Tipo LIKE \"%$Ayuda%\" Group By t";	
+			$total_result2 = @mysql_query($sql2, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
+			if ($row2 = mysql_fetch_assoc($total_result2)){
+				$CantAyu=$row2['llamadas'];
+				$Usu=$row2['Usuarios'];
+				$data .= $Ayuda.",";
+				$datag .= $CantAyu.",";
+				$Seguimientos .= "<TR><TD>$Ayuda</TD><TD>$CantAyu</TD><TD>$Usu</TD><TR>";
+			}
+		}
+		$data = trim($data, ",");
+		$datag = trim($datag, ",");
+		$Seguimientos .= "<TR><TD COLSPAN=13><CENTER>";
+		$Seguimientos .= '<img src="Funciones/grafico_bar.php?Nom='.$Tipo.'&datax='.$data.'&datagx='.$datag.'">';
+		$Seguimientos .= "</CENTER></TD></TR>";
+		return $Seguimientos;
+	}
 
 	function Muestra($Tipo,$Clausula="",$Order="llamadas DESC",$Other=""){ 
 		$sql ="SELECT $Tipo, COUNT(*) 'llamadas', COUNT(Distinct(idcaso)) 'Usuarios' FROM reporte WHERE $Clausula 1=1 GROUP BY $Tipo ORDER BY $Order $Other";
@@ -106,7 +127,7 @@ if ($Sesion){
 		$Seguimientos="<TR><TH></TH><TH>Llamadas</TH><TH>Usuarios</TH></TR>";
 		$i=0;
 		$Total=@mysql_num_rows($total_result);
-	 	while ($row = mysql_fetch_array($total_result)){
+	 	while ($row = mysql_fetch_assoc($total_result)){
 			$Nombre=$row[$Tipo];
 			$Llam=$row['llamadas'];
 			$Usu=$row['Usuarios'];
@@ -170,6 +191,7 @@ if ($Sesion){
 	preparaQuery($AyudaLegal, "AyudaLegal", &$CadBusqueda, &$criterio);
 	preparaQuery($AyudaMedica, "AyudaMedica", &$CadBusqueda, &$criterio);
 	preparaQuery($AyudaNutricional, "AyudaNutricional", &$CadBusqueda, &$criterio);	
+	preparaQuery($MotivosBienestar, "Nombre", &$CadBusqueda, &$criterio, true, "f","MotivosBienestar");	
 	preparaQuery($AyudaOtros, "AyudaOtros", &$CadBusqueda, &$criterio);	
 	preparaQuery($TipoViolencia, "TipoViolencia", &$CadBusqueda, &$criterio);	
 	preparaQuery($ModalidadViolencia, "ModalidadViolencia", &$CadBusqueda, &$criterio);	
@@ -178,9 +200,9 @@ if ($Sesion){
 
 	$sql ="Drop Table reporte";
 	$total_result = @mysql_query($sql, $GLOBALS['connection']);
-	$sql ="Create table reporte select l.*, c.Edad,c.Religion,c.NivelEstudios,c.Sexo,c.Municipio,c.EstadoCivil,c.LenguaIndigena,c.Estado,c.Ocupacion,c.ComoTeEnteraste,c.MedioContacto,c.CP,c.NivelViolencia,c.Nacionalidad from casos c, llamadas l where c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda";
+	$sql ="Create table reporte select GROUP_CONCAT(CONCAT(f.Tipo,': ',f.Nombre)) as 'MotivosBienestar', l.*, c.Edad,c.Religion,c.NivelEstudios,c.Sexo,c.Municipio,c.EstadoCivil,c.LenguaIndigena,c.Estado,c.Ocupacion,c.ComoTeEnteraste,c.MedioContacto,c.CP,c.NivelViolencia,c.Nacionalidad from casos c, llamadas l LEFT JOIN llamadasBienestar b ON l.id=b.IdLlamada LEFT JOIN campos f ON b.IdCampo = f.IDCampo where c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda group by l.id";
 	$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
-
+	
 	//Totales
 	$TotalLlamadasMes  = CuentaEsto("");
 	$TotalCasos = CuentaEsto("LlamadaNo=1");
@@ -192,7 +214,7 @@ if ($Sesion){
 	$TotalCasosSeguimiento = CuentaEsto("LlamadaNo>1 group by IDCaso");
 
 	$TotalCasossinCana = $TotalCasos-$TotalCasosCana;
-
+	
 	//CasosResueltos
 	if($Mes>1){
 		$MesP=$Mes-1;	
@@ -202,10 +224,12 @@ if ($Sesion){
 			$MesP=12;
 			$AnoP=$Ano-1;
 			}
-	$sql ="SELECT DISTINCT l.IDCaso FROM llamadas l, casos c, llamadas l2 WHERE l.IDCaso=l2.IDCaso AND l.IDCaso=c.IDCaso AND Year(l.FechaLlamada)='$AnoP' AND Month(l.FechaLlamada)='$MesP' AND Year(l2.FechaLlamada)='$Ano' AND Month(l2.FechaLlamada)='$Mes' $CadBusqueda";
+	
+	
+	$sql ="SELECT DISTINCT l.IDCaso FROM llamadas l, casos c, llamadas l2 LEFT JOIN llamadasBienestar b ON l2.id=b.IdLlamada LEFT JOIN campos f ON b.IdCampo = f.IDCampo WHERE l.IDCaso=l2.IDCaso AND l.IDCaso=c.IDCaso AND Year(l.FechaLlamada)='$AnoP' AND Month(l.FechaLlamada)='$MesP' AND Year(l2.FechaLlamada)='$Ano' AND Month(l2.FechaLlamada)='$Mes' $CadBusqueda";
 	$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$TotalNoResueltos=@mysql_num_rows($total_result);
-	$sql ="SELECT DISTINCT l.IDCaso FROM llamadas l, casos c WHERE l.IDCaso=c.IDCaso AND Year(FechaLlamada)='$AnoP' AND Month(FechaLlamada)='$MesP' $CadBusqueda";
+	$sql ="SELECT DISTINCT l.IDCaso FROM casos c, llamadas l LEFT JOIN llamadasBienestar b ON l.id=b.IdLlamada LEFT JOIN campos f ON b.IdCampo = f.IDCampo WHERE l.IDCaso=c.IDCaso AND Year(FechaLlamada)='$AnoP' AND Month(FechaLlamada)='$MesP' $CadBusqueda";
 	$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$TotalMesAnterior=@mysql_num_rows($total_result);
 	$TotalResueltos=$TotalMesAnterior-$TotalNoResueltos;
@@ -294,6 +318,9 @@ if ($Sesion){
 	$TotalMViol=MuestraAyuda("ModalidadViolencia");
 	$TotalViolentometro=MuestraAyuda("Violentometro");
 
+	$TotalTipB=MuestraTiposBienestar();
+	$TotalMotB=MuestraMotivosBienestar();
+	
 	$TotalCP=Muestra("CP","CP <> '' AND ","llamadas DESC","LIMIT 10");
 	$TotalEnteraste=MuestraAyuda("ComoTeEnteraste");
 

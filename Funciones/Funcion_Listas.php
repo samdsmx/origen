@@ -5,14 +5,14 @@ function ListaUsuarios(){
 	$sql ="SELECT Nombre FROM consejeros";
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
-	while ($row = mysql_fetch_array($total_result)){
+	while ($row = mysql_fetch_assoc($total_result)){
 	    	$Nombre=$row['Nombre'];
 	    	$Usuarios .= "<OPTION VALUE='$Nombre'>$Nombre".chr(10);
 		}
 	$sql2 ="SELECT * FROM campos ORDER BY Nombre ASC";
 	$total_result2 = @mysql_query($sql2, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found2 = @mysql_num_rows($total_result2);
-	while ($row = mysql_fetch_array($total_result2)){
+	while ($row = mysql_fetch_assoc($total_result2)){
 	    	$Nombre=$row['Nombre'];
 		$Tipo=$row['Tipo'];
 		if($Tipo == 'AYUDAPSICOLOGICO'){
@@ -59,9 +59,9 @@ function ListaConsejeras(){
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$total_found = @mysql_num_rows($total_result);
 	mysql_close($connection);
-	while ($row = mysql_fetch_array($total_result)){
+	while ($row = mysql_fetch_assoc($total_result)){
 		$Consejera=$row['Nombre'];
-    		$Consejeras .= "<OPTION VALUE='$Consejera'>$Consejera".chr(10);
+    	$Consejeras .= "<OPTION VALUE='$Consejera'>$Consejera".chr(10);
 		}
 	if ($total_found != 0){
 		return $Consejeras;

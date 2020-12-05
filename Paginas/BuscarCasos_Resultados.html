@@ -73,7 +73,7 @@ function ChequearTodos(chkbox){
 	$NombreConsejero=RevisaSesion($Sesion, "identidad");
 	$sql3 ="SELECT Nombre, NivelSeguridad FROM consejeros WHERE Nombre='".rs($NombreConsejero)."'";
 	$total_result3 = @mysql_query($sql3, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-	$row3=mysql_fetch_array($total_result3);
+	$row3=mysql_fetch_assoc($total_result3);
 	$Seg=$row3['NivelSeguridad'];
 	if($Seg=="2"){
 	      echo "<A HREF=\"#\" title=\"Modificar\" onClick=\"contar();\"><IMG SRC=\"resc/edit_f2.png\" WIDTH=18 HEIGHT=15 BORDER=0></A>";

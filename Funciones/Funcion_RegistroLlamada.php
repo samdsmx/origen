@@ -280,7 +280,7 @@ if ($Sesion){
 					$Pais = "Estados Unidos";
 					$Estado = $EstadoEU;
 				} 
-			     	else{
+			    else{
 					$Estado = "Extranjero";
 			     	}			     		
 			    if ($Estado == ""){
@@ -293,8 +293,8 @@ if ($Sesion){
 				$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 				$sql = "SELECT MAX(IDCaso) IDCaso from casos";
 				$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-				$row = mysql_fetch_array($result);
-			        $IDCaso=$row['IDCaso'];
+				$row = mysql_fetch_assoc($result);
+				$IDCaso=$row['IDCaso'];
 				}
 			$sql = "UPDATE casos SET TipoCaso='".rs($TipoCaso)."',NivelViolencia='".rs($NivelViolencia)."',Nacionalidad='".rs($Nacionalidad)."',PosibleSolucion='".rs($PosibleSolucion)."',Estatus='".rs($Estatus)."',HorasInvertidas='".rs($HorasInvertidas)."' where IDCaso='".rs($IDCaso)."'";
 			$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
@@ -303,7 +303,17 @@ if ($Sesion){
 			VALUES
 			('".rs($IDCaso)."','".rs($FechaLlamada)."','".rs($Consejera)."','".rs($HoraInicio)."','".rs($HoraTermino)."','".rs($ComentariosAdicionales)."','".rs($AYUDAPSICOLOGICO)."','".rs($AYUDALEGAL)."','".rs($AYUDAMEDICA)."','".rs($AYUDANUTRICIONAL)."','".rs($AYUDAOTROS)."','".rs($DesarrolloCaso)."','".rs($CanaLegal)."', '".rs($CanaOtro)."','".rs($LlamadaNo)."', '".rs($Duracion)."', '".rs($Acceso)."', '".rs($TipoViolencia)."', '".rs($ModalidadViolencia)."', '".rs($Violentometro)."', '".rs($AcudeInstitucion)."')";
 			$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+			if ($ComoTeEnteraste == 'LÍNEA BIENESTAR: ') {
+				$row = mysql_fetch_assoc($result);
+				$id=$row['id'];
+			 	$sql = "INSERT INTO llamadasBienestar (IdLlamada,IdCampo) VALUES ";
+				foreach ($BIENESTAR as $val) {
+					$sql .= "($id, $val),";
+				}
+				$sql = substr($sql, 0, -1);
+			 	$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 			}
+		}
 	$sql="UPDATE llamadas SET Duracion=((time_to_sec('".rs($HoraTermino)."')-time_to_sec('".rs($HoraInicio)."'))/60) where IDCaso='".rs($IDCaso)."' and LlamadaNo='".rs($LlamadaNo)."'";
 	$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$sql="UPDATE llamadas Set Duracion=(((time_to_sec('".rs($HoraTermino)."')-time_to_sec('00:00:00'))+(time_to_sec('23:59:59')-time_to_sec('".rs($HoraInicio)."')))/60) where IDCaso='".rs($IDCaso)."' and LlamadaNo='".rs($LlamadaNo)."' and duracion < 0";

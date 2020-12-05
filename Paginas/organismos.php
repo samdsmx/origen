@@ -37,7 +37,7 @@ include("Datos_Comunicacion.php");
           $sql ="select Nombre from campos where Tipo = 'Tema' and activo = 1 Order By Nombre";
           $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
           $total_found = @mysql_num_rows($total_result);
-          while ($row = mysql_fetch_array($total_result)){
+          while ($row = mysql_fetch_assoc($total_result)){
             $Nombre=$row['Nombre'];
             echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre.'</option>';
             }
@@ -54,7 +54,7 @@ include("Datos_Comunicacion.php");
             $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
             $total_found = @mysql_num_rows($total_result);
             $i=1;
-            while ($row = mysql_fetch_array($total_result)){
+            while ($row = mysql_fetch_assoc($total_result)){
               $Nombre=$row['estado'];
               echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre;
               $i=$i+1;

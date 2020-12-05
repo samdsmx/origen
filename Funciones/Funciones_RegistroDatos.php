@@ -1,11 +1,11 @@
 <?
-	include("Funciones/Funciones_RevisionArreglo.php");
 	if($submit<>"Modificar"){
 		$HoraTermino=date("h:i A");
 		$Consejera=strtoupper($Consejera);
 		}
-	if (!$Nombre&&$Accion<>"ModificaVarias")
+	if (!$Nombre&&$Accion<>"ModificaVarias"){
 		$Nombre="Anonimo";
+	}
 	list($DD, $MM, $AAAA) = split ('/', $FechaLlamada);
 	if (!isset($Acceso))$Acceso=0;
 	if (!isset($Duracion))$Duracion=0;
@@ -13,13 +13,13 @@
 	$HoraTermino=date("H:i:s",strtotime($HoraTermino));
 	$FechaLlamada="$AAAA-$MM-$DD";
 	$Nombre=strtoupper($Nombre);
-	$AYUDAPSICOLOGICO=METEELEMENTOS($AYUDAPSICOLOGICO);
-	$AYUDALEGAL=METEELEMENTOS($AYUDALEGAL);
-	$AYUDAMEDICA=METEELEMENTOS($AYUDAMEDICA);
-	$AYUDANUTRICIONAL=METEELEMENTOS($AYUDANUTRICIONAL);
-	$AYUDAOTROS=METEELEMENTOS($AYUDAOTROS);
-	$TipoViolencia=METEELEMENTOS($TipoViolencia);
-	$ModalidadViolencia=METEELEMENTOS($ModalidadViolencia);
-	$Violentometro=METEELEMENTOS($Violentometro);
+	$AYUDAPSICOLOGICO=implode(",",$AYUDAPSICOLOGICO);
+	$AYUDALEGAL=implode(",",$AYUDALEGAL);
+	$AYUDAMEDICA=implode(",",$AYUDAMEDICA);
+	$AYUDANUTRICIONAL=implode(",",$AYUDANUTRICIONAL);
+	$AYUDAOTROS=implode(",",$AYUDAOTROS);
+	$TipoViolencia=implode(",",$TipoViolencia);
+	$ModalidadViolencia=implode(",",$ModalidadViolencia);
+	$Violentometro=implode(",",$Violentometro);
 	include("Funciones/Funcion_RegistroLlamada.php");
 ?>

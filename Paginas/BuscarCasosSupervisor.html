@@ -9,10 +9,13 @@
 	<script>
 		$(document).ready(function () {
 			$('.js-example-basic-multiple').select2();
-			$(".js-example-tokenizer").select2({
-				tags: true,
-				tokenSeparators: [',']
-			})
+		});
+
+		window.addEventListener( "pageshow", function ( event ) {
+  			var historyTraversal = event.persisted || ( typeof window.performance != "undefined" && window.performance.navigation.type === 2 );
+			if ( historyTraversal ) {
+				$('.js-example-basic-multiple').select2({data: {id:null, text: null}});
+			}
 		});
 	</script>
 </HEAD>
@@ -327,7 +330,7 @@
 									$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 									$total_found = @mysql_num_rows($total_result);
 									$i=1;
-									while ($row = mysql_fetch_array($total_result)){
+									while ($row = mysql_fetch_assoc($total_result)){
 									$Nombre=$row['Nombre'];
 									$Tipo=$row['Tipo'];
 									echo '<OPTION VALUE="'.$Nombre.'">'.$Nombre;
@@ -364,7 +367,7 @@
                                     $sql ="select Estado from catalogocp group by Estado";
                                     $estados='';
                                     $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-                                    while ($row = mysql_fetch_array($total_result)){
+                                    while ($row = mysql_fetch_assoc($total_result)){
                                        $estados.= '<option>'.$row["Estado"].'</option>';
                                        }
                                     echo $estados;
@@ -390,7 +393,7 @@
                                     $sql ="select Municipio from catalogocp group by Municipio";
                                     $estados='';
                                     $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-                                    while ($row = mysql_fetch_array($total_result)){
+                                    while ($row = mysql_fetch_assoc($total_result)){
                                        $municipios.= '<option>'.$row["Municipio"].'</option>';
                                        }
                                     echo $municipios;
@@ -459,11 +462,10 @@
 									$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 									$total_found = @mysql_num_rows($total_result);
 									$i=1;
-									while ($row = mysql_fetch_array($total_result)){
-									$Nombre=$row['Nombre'];
-									$Tipo=$row['Tipo'];
+									while ($row = mysql_fetch_assoc($total_result)){
+										$Nombre=$row['Nombre'];
 										echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre;
-									$i=$i+1;
+										$i=$i+1;
 									}
 									?>
 								</select>
@@ -490,11 +492,10 @@
 								$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 								$total_found = @mysql_num_rows($total_result);
 								$i=1;
-								while ($row = mysql_fetch_array($total_result)){
-								$Nombre=$row['Nombre'];
-								$Tipo=$row['Tipo'];
+								while ($row = mysql_fetch_assoc($total_result)){
+									$Nombre=$row['Nombre'];
 									echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre;
-								$i=$i+1;
+									$i=$i+1;
 								}
 								?>
 								</select>
@@ -521,11 +522,10 @@
 									$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 									$total_found = @mysql_num_rows($total_result);
 									$i=1;
-									while ($row = mysql_fetch_array($total_result)){
-									$Nombre=$row['Nombre'];
-									$Tipo=$row['Tipo'];
+									while ($row = mysql_fetch_assoc($total_result)){
+										$Nombre=$row['Nombre'];
 										echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre;
-									$i=$i+1;
+										$i=$i+1;
 									}
 									?>
 								</select>
@@ -552,11 +552,40 @@
 									$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 									$total_found = @mysql_num_rows($total_result);
 									$i=1;
-									while ($row = mysql_fetch_array($total_result)){
-									$Nombre=$row['Nombre'];
-									$Tipo=$row['Tipo'];
+									while ($row = mysql_fetch_assoc($total_result)){
+										$Nombre=$row['Nombre'];
 										echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre;
-									$i=$i+1;
+										$i=$i+1;
+									}
+									?>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<div style="float: right; width:48%;padding:5px;">
+					<!MOTIVOS BIENESTAR>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td>
+								<font face="Arial" color="#D80808">Motivos BIENESTAR</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<select name="MotivosBienestar[]" class="js-example-basic-multiple" multiple style="width: 100% !important;">
+									<option value="Todos">Todos</option>
+									<? 
+									include("Datos_Comunicacion.php");
+									$sql ="select * from campos where Programa = 'Bienestar' ORDER BY Nombre ASC";
+									$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+									$total_found = @mysql_num_rows($total_result);
+									$i=1;
+									while ($row = mysql_fetch_assoc($total_result)){
+										$Nombre=$row['Nombre'];
+										echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre;
+										$i=$i+1;
 									}
 									?>
 								</select>
@@ -583,11 +612,10 @@
 								$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 								$total_found = @mysql_num_rows($total_result);
 								$i=1;
-								while ($row = mysql_fetch_array($total_result)){
-								$Nombre=$row['Nombre'];
-								$Tipo=$row['Tipo'];
+								while ($row = mysql_fetch_assoc($total_result)){
+									$Nombre=$row['Nombre'];
 									echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre;
-								$i=$i+1;
+									$i=$i+1;
 								}
 								?>
 								</select>
@@ -614,7 +642,7 @@
 								$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 								$total_found = @mysql_num_rows($total_result);
 								$i=1;
-								while ($row = mysql_fetch_array($total_result)){
+								while ($row = mysql_fetch_assoc($total_result)){
 								$Nombre=$row['Nombre'];
 								$Tipo=$row['Tipo'];
 									echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre.'</OPTION>';
@@ -645,7 +673,7 @@
 									$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 									$total_found = @mysql_num_rows($total_result);
 									$i=1;
-									while ($row = mysql_fetch_array($total_result)){
+									while ($row = mysql_fetch_assoc($total_result)){
 									$Nombre=$row['Nombre'];
 									$Tipo=$row['Tipo'];
 										echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre.'</OPTION>';
@@ -676,7 +704,7 @@
 									$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 									$total_found = @mysql_num_rows($total_result);
 									$i=1;
-									while ($row = mysql_fetch_array($total_result)){
+									while ($row = mysql_fetch_assoc($total_result)){
 									$Nombre=$row['Nombre'];
 									$Tipo=$row['Tipo'];
 										echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre.'</OPTION>';

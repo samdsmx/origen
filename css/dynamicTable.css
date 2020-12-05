@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Create three equal columns that floats next to each other */
+  .column {
+    float: left;
+    width: 33.33%;
+    padding: 8px;
+    height: 300px;
+    border: 1px solid #D4E0EE;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  label {
+   display: block;
+   padding-left: 17px;
+   text-indent: -20px;
+  }
+
+  input[type=checkbox] {
+     vertical-align: middle;
+  }

@@ -1,41 +1,6 @@
 <?
 if ($Sesion){
-
 	include("Datos_Comunicacion.php");
-	
-	function preparaQuery($v, $name, &$CadBusqueda, &$criterio, $like=true, $b = "l"){
-		if (is_array($v)){
-			if (count($v)>0){
-				if ($v[0] <> "Todos"){
-					$CadBusqueda .="AND (";
-					$criterio.="$name = ";				
-					for ($i=0;$i<count($v);$i++){
-						if ($like){
-							$CadBusqueda .="$b.$name LIKE '%".$v[$i]."%' ";
-						} else {
-							$CadBusqueda .="$b.$name = '".$v[$i]."' ";
-						}
-						$criterio.="$v[$i] ";						
-						if ($i<count($v)-1){
-							$CadBusqueda .="OR ";
-							$criterio.="o ";
-							}
-						}
-					$CadBusqueda .=") ";
-					$criterio.="<br>";
-					}
-					else{
-						$CadBusqueda .="AND $b.$name <> \"\" ";
-						$criterio.="$name = Todos";
-						}
-				}
-			} else {
-				if ($v <> "-" AND $v <> ""){
-					$CadBusqueda .="AND $b.$name = '". rs($v) . "' ";
-					$criterio.="$name = $v<BR>";		
-					}	
-			}
-		}
 
 	$tmp=substr(mysql_real_escape_string($Sesion),0,5);
 	if ($Ano OR $IDCaso OR $Nombre OR $Telefono){
@@ -46,7 +11,7 @@ if ($Sesion){
 		list($Nombre_Consejera, $Password)= split("@", $SecureCad);
 		$sql ="SELECT Acceso FROM consejeros WHERE Nombre='".rs($Nombre_Consejera)."' AND Password2='".rs($Password)."'";
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-		$row = mysql_fetch_array($total_result);
+		$row = mysql_fetch_assoc($total_result);
 		$access=$row['Acceso'];
 		if ($access==0 OR $access==2){
 			$Consejera[0]=$Nombre_Consejera;
@@ -90,6 +55,7 @@ if ($Sesion){
 		preparaQuery($AyudaLegal, "AyudaLegal", &$CadBusqueda, &$criterio,true,"l");	
 		preparaQuery($AyudaMedica, "AyudaMedica", &$CadBusqueda, &$criterio,true,"l");	
 		preparaQuery($AyudaNutricional, "AyudaNutricional", &$CadBusqueda, &$criterio);	
+		preparaQuery($MotivosBienestar, "Nombre", &$CadBusqueda, &$criterio, true, "f","MotivosBienestar");	
 		preparaQuery($AyudaOtros, "AyudaOtros", &$CadBusqueda, &$criterio);	
 		preparaQuery($TipoViolencia, "TipoViolencia", &$CadBusqueda, &$criterio);	
 		preparaQuery($ModalidadViolencia, "ModalidadViolencia", &$CadBusqueda, &$criterio);	
@@ -106,7 +72,7 @@ if ($Sesion){
 			$CadBusqueda .="AND c.Telefono LIKE '%".rs($Telefono)."%' ";
 		$sql ="drop table IF EXISTS $tmp";
 		$total_result = @mysql_query($sql, $connection);
-		$sql ="create table $tmp SELECT DISTINCT l.*, c.Nombre, c.Telefono, c.Edad, c.Sexo, c.ComoTeEnteraste, c.Ocupacion, c.Municipio, c.Estado, c.EstadoCivil FROM llamadas l, casos c WHERE c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda Order By l.LlamadaNo Desc";
+		$sql ="create table $tmp SELECT l.*, GROUP_CONCAT(CONCAT(f.Tipo,': ',f.Nombre)) as 'MotivosBienestar', c.Nombre, c.Telefono, c.Edad, c.Sexo, c.ComoTeEnteraste, c.Ocupacion, c.Municipio, c.Estado, c.EstadoCivil FROM casos c, llamadas l LEFT JOIN llamadasBienestar b ON l.id=b.IdLlamada LEFT JOIN campos f ON b.IdCampo = f.IDCampo WHERE c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda group by l.id Order By l.LlamadaNo Desc";
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		}
 	if(!$Correlacion){
@@ -120,7 +86,7 @@ if ($Sesion){
 	$sql ="SELECT * FROM ".rs($tmp)." group by ".rs($Correlacion)." Order By FechaLlamada Desc limit ".rs($inicio).",50";
 
 	$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-	while ($row = mysql_fetch_array($total_result)){
+	while ($row = mysql_fetch_assoc($total_result)){
 		$IDCaso=$row['IDCaso'];
 		$FechaLlamada=$row['FechaLlamada'];
 		$HoraInicio=$row['Horainicio'];
@@ -135,7 +101,7 @@ if ($Sesion){
 
 		$sql3 ="SELECT Nombre, NivelSeguridad FROM consejeros WHERE Nombre='".rs($Consejera)."'";
 		$total_result3 = @mysql_query($sql3, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-		$row3=mysql_fetch_array($total_result3);
+		$row3=mysql_fetch_assoc($total_result3);
 		$Seg=$row3['NivelSeguridad'];
 		if($Seg==4){
 			$Color ="<FONT COLOR=\"#D80808\">";
@@ -157,7 +123,7 @@ switch ($Correlacion){
 
 		$total_result2 = @mysql_query($sql2, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		$total_found2 = @mysql_num_rows($total_result2);
-	 	while ($row2 = mysql_fetch_array($total_result2)){
+	 	while ($row2 = mysql_fetch_assoc($total_result2)){
 			$IDCasoRef2=$row2['IDCaso'];
     		$FechaSeg2=$row2['FechaLlamada'];
    			$HoraInicioSeg2=$row2['HoraInicio'];
@@ -168,7 +134,7 @@ switch ($Correlacion){
 			$FechaSeg2="$DD/$MM/$AAAA";
 			$sql3 ="SELECT Nombre, NivelSeguridad FROM consejeros WHERE Nombre='".rs($Consejera2)."'";
 			$total_result3 = @mysql_query($sql3, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-			$row3=mysql_fetch_array($total_result3);
+			$row3=mysql_fetch_assoc($total_result3);
 			$Seg=$row3['NivelSeguridad'];
 
 
@@ -190,7 +156,7 @@ switch ($Correlacion){
 
 		$sql2 = "SELECT Consejera FROM llamadas WHERE IDCaso='".rs($IDCaso)."' AND LlamadaNo=1";
 		$total_result2 = @mysql_query($sql2, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-		$row2 = mysql_fetch_array($total_result2);
+		$row2 = mysql_fetch_assoc($total_result2);
 		$ConsejeraP=$row2['Consejera'];
 	if (strcmp($Consejera,$ConsejeraP)<>0)
 		$Consejera .= "</FONT><P>-- $ConsejeraP --</P>";
