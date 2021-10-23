@@ -174,7 +174,7 @@ function rellenaMedios(formulario){
       $('.motivos').show();
       $('.bienestar').hide();
       $('input:checkbox[name ="BIENESTAR[]"]').removeAttr('checked');
-      if (idmedio === "BIENESTAR") {
+      if (idmedio === "LINEA BIENESTAR: ") {
          // Esconder motivos actuales
          // limpiar motivos
          $('input:checkbox[name ="AYUDAPSICOLOGICO[]"]').removeAttr('checked');
@@ -1153,7 +1153,7 @@ startclock();
          <font FACE="Arial" COLOR="#D80808">
             <?
             include("Datos_Comunicacion.php");
-            $sql ="select * from campos where Programa = 'BIENESTAR' and activo=1 ORDER BY Tipo ASC";
+            $sql ="select * from campos where Programa = 'Bienestar' and activo=1 ORDER BY Tipo ASC";
             $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
             $total_found = @mysql_num_rows($total_result);
             $TipoAnt="";
