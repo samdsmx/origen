@@ -2,3 +2,5 @@
 .DS_Store
 Thumbs.db
 .vscode
+Datos_Comunicacion.php
+vcalendar/Common.php
