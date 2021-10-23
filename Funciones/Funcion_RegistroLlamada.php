@@ -303,7 +303,7 @@ if ($Sesion){
 			VALUES
 			('".rs($IDCaso)."','".rs($FechaLlamada)."','".rs($Consejera)."','".rs($HoraInicio)."','".rs($HoraTermino)."','".rs($ComentariosAdicionales)."','".rs($AYUDAPSICOLOGICO)."','".rs($AYUDALEGAL)."','".rs($AYUDAMEDICA)."','".rs($AYUDANUTRICIONAL)."','".rs($AYUDAOTROS)."','".rs($DesarrolloCaso)."','".rs($CanaLegal)."', '".rs($CanaOtro)."','".rs($LlamadaNo)."', '".rs($Duracion)."', '".rs($Acceso)."', '".rs($TipoViolencia)."', '".rs($ModalidadViolencia)."', '".rs($Violentometro)."', '".rs($AcudeInstitucion)."')";
 			$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-			if ($ComoTeEnteraste == 'LÍNEA BIENESTAR: ') {
+			if ($ComoTeEnteraste == 'LINEA BIENESTAR: ') {
 				$row = mysql_fetch_assoc($result);
 				$id=$row['id'];
 			 	$sql = "INSERT INTO llamadasBienestar (IdLlamada,IdCampo) VALUES ";
