@@ -1,60 +1,82 @@
-<HTML>
-<HEAD>
-</HEAD>
-<BODY BGCOLOR="#FFFFFF">
-<CENTER><FORM ACTION="" METHOD=POST>
-   <CENTER>
-<?include("Paginas/CodigoMenuSinOpciones.html");?>
-<BR>
-   <FONT FACE="Verdana" COLOR="#356B00"><B><!--NOEDIT--><?echo $Mensaje;?><!--/NOEDIT--><BR>
-   </B></FONT><BR>
-   <TABLE BORDER=0 BGCOLOR="#EEEEEE">
-      <TR>
-         <TD BGCOLOR="#FFFFFF">
-            <CENTER><FONT FACE="Verdana" COLOR="#D80808"><B><BR>
-            <TABLE BORDER=0 WIDTH=450>
-               <TR>
-                  <TD WIDTH=180>
-                     <P ALIGN=right><FONT FACE="Verdana" COLOR="#D80808">Usuario</FONT></P>
-                  </TD>
-                  <TD WIDTH=300>
-                     <P><FONT FACE="Verdana" COLOR="#D80808"><B><INPUT TYPE=text NAME=Nombre VALUE="" SIZE=30></B></FONT></P>
-                  </TD>
-               </TR>
-               <TR>
-                  <TD WIDTH=180>
-                     <P ALIGN=right><FONT FACE="Verdana" COLOR="#D80808">Contrase&ntilde;a</FONT></P>
-                  </TD>
-                  <TD WIDTH=300>
-                     <P><FONT FACE="Verdana" COLOR="#D80808"><B><INPUT TYPE=password NAME=Password VALUE="" SIZE=24 autocomplete="off"></B></FONT></P>
-                  </TD>
-               </TR>
-               <TR>
-                  <TD WIDTH=180>
-                     <P><FONT FACE="Verdana" COLOR="#D80808"><B><INPUT TYPE=hidden NAME=Accion VALUE=Autentifica></B></FONT></P>
-                  </TD>
-                  <TD WIDTH=300>
-                     <P><FONT FACE="Verdana" COLOR="#D80808"><B><BR>
-                     <INPUT TYPE=submit NAME=Submit VALUE="Entrar"><BR>
-                     <BR>
-                     </B></FONT></P>
-                  </TD>
-               </TR>
-            </TABLE>
-</B>
-	<?php
+<html>
+  <head> </head>
+  <body bgcolor="#FFFFFF">
+    <center>
+      <form action="" method="POST">
+        <center>
+          <?include("Paginas/CodigoMenuSinOpciones.html");?>
+          <br />
+          <font face="Verdana" color="#356B00"
+            ><b><!--NOEDIT--><?echo $Mensaje;?><!--/NOEDIT--><br /> </b></font
+          ><br />
+          <table border="0" bgcolor="#EEEEEE">
+            <tr>
+              <td bgcolor="#FFFFFF">
+                <center>
+                  <font face="Verdana" color="#D80808"
+                    ><b
+                      ><br />
+                      <table border="0" width="450">
+                        <tr>
+                          <td width="180">
+                            <p align="right"><font face="Verdana" color="#D80808">Usuario3</font></p>
+                          </td>
+                          <td width="300">
+                            <p>
+                              <font face="Verdana" color="#D80808"
+                                ><b><input type="text" name="Nombre" value="" size="30" /></b
+                              ></font>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td width="180">
+                            <p align="right"><font face="Verdana" color="#D80808">Contrase&ntilde;a</font></p>
+                          </td>
+                          <td width="300">
+                            <p>
+                              <font face="Verdana" color="#D80808"
+                                ><b><input type="password" name="Password" value="" size="24" autocomplete="off" /></b
+                              ></font>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td width="180">
+                            <p>
+                              <font face="Verdana" color="#D80808"
+                                ><b><input type="hidden" name="Accion" value="Autentifica" /></b
+                              ></font>
+                            </p>
+                          </td>
+                          <td width="300">
+                            <p>
+                              <font face="Verdana" color="#D80808"
+                                ><b
+                                  ><br />
+                                  <input type="submit" name="Submit" value="Entrar" /><br />
+                                  <br /> </b
+                              ></font>
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </b>
+                    <?php
 		$ip = $_SERVER['REMOTE_ADDR']; 
 		if ($ip=="192.168.1.254")
 			echo  "Usted esta accesando via internet";
 			else
 				echo  "Usted esta accesando desde el callcenter";
 		?>
-
-             </FONT></CENTER>
-         </TD>
-      </TR>
-   </TABLE>
-    <FONT FACE="Verdana" COLOR="#5DBC00"><B> </B></FONT></CENTER>
-</FORM></CENTER>
-</BODY>
-</HTML>
+                  </font>
+                </center>
+              </td>
+            </tr>
+          </table>
+          <font face="Verdana" color="#5DBC00"><b> </b></font>
+        </center>
+      </form>
+    </center>
+  </body>
+</html>
