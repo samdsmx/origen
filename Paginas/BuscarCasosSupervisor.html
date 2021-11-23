@@ -737,6 +737,36 @@
 					</table>
 				</div>
 
+				<div style="float: right; width:48%;padding:5px;">
+					<!DIMENSION>
+					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">
+						<tr>
+							<td>
+								<font face="Arial" color="#D80808">Dimension</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<select name="Dimension[]" class="js-example-basic-multiple" multiple style="width: 100% !important;">
+									<option value="Todos">Todos</option>
+									<? 
+									include("Datos_Comunicacion.php");
+									$sql ="select * from campos where Tipo = 'dimension' ORDER BY Nombre ASC";
+									$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+									$total_found = @mysql_num_rows($total_result);
+									$i=1;
+									while ($row = mysql_fetch_assoc($total_result)){
+										$Nombre=$row['Nombre'];
+										echo '<OPTION VALUE="'.$Nombre.'":>'.$Nombre;
+										$i=$i+1;
+									}
+									?>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</div>
+
 				<div style="float: left; width:100%;padding:5px;clear: both;">
 					<!Palabra>
 					<table border=0 bgcolor="#EEEEEE" width="100%" style="text-align:center;">

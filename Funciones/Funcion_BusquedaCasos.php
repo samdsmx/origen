@@ -56,6 +56,7 @@ if ($Sesion){
 		preparaQuery($AyudaMedica, "AyudaMedica", &$CadBusqueda, &$criterio,true,"l");	
 		preparaQuery($AyudaNutricional, "AyudaNutricional", &$CadBusqueda, &$criterio);	
 		preparaQuery($MotivosBienestar, "Nombre", &$CadBusqueda, &$criterio, true, "f","MotivosBienestar");	
+		preparaQuery($Dimension, "Nombre", &$CadBusqueda, &$criterio, true, "f","Dimension");	
 		preparaQuery($AyudaOtros, "AyudaOtros", &$CadBusqueda, &$criterio);	
 		preparaQuery($TipoViolencia, "TipoViolencia", &$CadBusqueda, &$criterio);	
 		preparaQuery($ModalidadViolencia, "ModalidadViolencia", &$CadBusqueda, &$criterio);	
@@ -72,7 +73,8 @@ if ($Sesion){
 			$CadBusqueda .="AND c.Telefono LIKE '%".rs($Telefono)."%' ";
 		$sql ="drop table IF EXISTS $tmp";
 		$total_result = @mysql_query($sql, $connection);
-		$sql ="create table $tmp SELECT l.*, GROUP_CONCAT(CONCAT(f.Tipo,': ',f.Nombre)) as 'MotivosBienestar', c.Nombre, c.Telefono, c.Edad, c.Sexo, c.ComoTeEnteraste, c.Ocupacion, c.Municipio, c.Estado, c.EstadoCivil FROM casos c, llamadas l LEFT JOIN llamadasBienestar b ON l.id=b.IdLlamada LEFT JOIN campos f ON b.IdCampo = f.IDCampo WHERE c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda group by l.id Order By l.LlamadaNo Desc";
+		$sql ="create table $tmp SELECT l.*, GROUP_CONCAT(CONCAT(f2.Tipo,': ',f2.Nombre)) as 'Dimension', GROUP_CONCAT(CONCAT(f.Tipo,': ',f.Nombre)) as 'MotivosBienestar', c.Nombre, c.Telefono, c.Edad, c.Sexo, c.ComoTeEnteraste, c.Ocupacion, c.Municipio, c.Estado, c.EstadoCivil FROM casos c, llamadas l LEFT JOIN dimension d ON l.id=d.IdLlamada LEFT JOIN llamadasBienestar b ON l.id=b.IdLlamada LEFT JOIN campos f ON b.IdCampo = f.IDCampo LEFT JOIN campos f2 ON d.IdCampo = f2.IDCampo WHERE c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda group by l.id Order By l.LlamadaNo Desc";
+		//$sql ="create table $tmp SELECT l.*, GROUP_CONCAT(CONCAT(f.Tipo,': ',f.Nombre)) as 'MotivosBienestar', c.Nombre, c.Telefono, c.Edad, c.Sexo, c.ComoTeEnteraste, c.Ocupacion, c.Municipio, c.Estado, c.EstadoCivil FROM casos c, llamadas l LEFT JOIN llamadasBienestar b ON l.id=b.IdLlamada LEFT JOIN campos f ON b.IdCampo = f.IDCampo WHERE c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda group by l.id Order By l.LlamadaNo Desc";
 		$total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 		}
 	if(!$Correlacion){

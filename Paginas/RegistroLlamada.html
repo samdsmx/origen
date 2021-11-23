@@ -174,7 +174,7 @@ function rellenaMedios(formulario){
       $('.motivos').show();
       $('.bienestar').hide();
       $('input:checkbox[name ="BIENESTAR[]"]').removeAttr('checked');
-      if (idmedio === "LINEA BIENESTAR: ") {
+      if (idmedio === "LINEA BIENESTAR") {
          // Esconder motivos actuales
          // limpiar motivos
          $('input:checkbox[name ="AYUDAPSICOLOGICO[]"]').removeAttr('checked');
@@ -1013,43 +1013,42 @@ startclock();
                         </tr>
                         <tr>
                            <td>
-                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><!--NOEDIT--><?echo $NombreConsejero;?><!--/NOEDIT-->
+                              <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><!--NOEDIT--><?echo $NombreConsejero;?><!--/NOEDIT-->
 					<INPUT TYPE="hidden" NAME="Consejera" VALUE="<? echo $NombreConsejero;?>">
 					<INPUT TYPE="hidden" NAME="AccionSec" VALUE="Registrar">
-					<INPUT TYPE="hidden" NAME="LlamadaNo" VALUE="1"></FONT></P>
+					<INPUT TYPE="hidden" NAME="LlamadaNo" VALUE="1"></FONT>
                            </td>
                         </tr>
                         <tr>
                            <td>
-                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Fecha</B></FONT></P>
+                              <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Fecha</B></FONT>
                            </td>
                         </tr>
                         <tr>
                            <td>
-                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE="hidden" NAME="FechaLlamada" VALUE="<? echo $FechaActual;?>"><!--NOEDIT--><? echo $FechaActual;?><!--/NOEDIT--></FONT></P>
+                              <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE="hidden" NAME="FechaLlamada" VALUE="<? echo $FechaActual;?>"><!--NOEDIT--><? echo $FechaActual;?><!--/NOEDIT--></FONT>
                            </td>
                         </tr>
                         <tr>
                            <td>
-                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Hora de inicio</B></FONT></P>
+                              <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Hora de inicio</B></FONT>
                            </td>
                         </tr>
                         <tr>
                            <td>
-                              <P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE="hidden" NAME="HoraInicio" VALUE="<? echo $HoraActual;?>">
-                                <? echo $HoraActual;?></FONT></P>
+                              <FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><INPUT TYPE="hidden" NAME="HoraInicio" VALUE="<? echo $HoraActual;?>"><? echo $HoraActual;?></FONT>
                            </td>
                         </tr>
 
 
-<tr><td><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Objetivo</B></FONT></P></td></tr>
-<tr><td><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><TEXTAREA NAME="TipoCaso" ROWS="5" COLS="38" WRAP="virtual"></TEXTAREA></FONT></P></td></tr>
+<tr><td><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Objetivo</B></FONT></td></tr>
+<tr><td><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><TEXTAREA NAME="TipoCaso" ROWS="5" COLS="38" WRAP="virtual"></TEXTAREA></FONT></td></tr>
 
-<tr><td><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>&iquest;Qu&eacute; tendr&iacute;a que pasar en esta llamada para saber que te fue de utilidad?</B></FONT></P></td></tr>
-<tr><td><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><TEXTAREA NAME="PosibleSolucion" ROWS="5" COLS="38" WRAP="virtual"></TEXTAREA></FONT></P></td></tr>
+<tr><td><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>&iquest;Qu&eacute; tendr&iacute;a que pasar en esta llamada para saber que te fue de utilidad?</B></FONT></td></tr>
+<tr><td><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><TEXTAREA NAME="PosibleSolucion" ROWS="5" COLS="38" WRAP="virtual"></TEXTAREA></FONT></td></tr>
 
-<tr><td><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Recursos y fortalezas</B></FONT></P></td></tr>
-<tr><td><P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><TEXTAREA NAME="Estatus" ROWS="5" COLS="38" WRAP="virtual"></TEXTAREA></FONT></P></td></tr>
+<tr><td><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>Recursos y fortalezas</B></FONT></td></tr>
+<tr><td><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><TEXTAREA NAME="Estatus" ROWS="5" COLS="38" WRAP="virtual"></TEXTAREA></FONT></td></tr>
 
 
                      </table>
@@ -1196,7 +1195,10 @@ startclock();
    </tr>
 
                <tr>
-                  <TD BGCOLOR="#FFFFFF" colspan=2>
+                  <TD BGCOLOR="#FFFFFF">
+                     <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>DIMENSION</B></FONT></CENTER>
+                  </td>
+                  <TD BGCOLOR="#FFFFFF">
                      <CENTER><FONT SIZE="-1" FACE="Arial" COLOR="#D80808"><B>TIPO DE VIOLENCIA</B></FONT></CENTER>
                   </td>
                   <TD BGCOLOR="#FFFFFF" >
@@ -1213,59 +1215,80 @@ startclock();
                      </CENTER>
                   </td>
                </tr>
-               <tr>
-<TD VALIGN="top" NOWRAP BGCOLOR="#FFFFFF" colspan=2>
-  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
-  <? 
-  include("Datos_Comunicacion.php");
-  $sql ="select * from campos where Tipo = 'TipoViolencia' and activo=1 ORDER BY Nombre ASC";
-  $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-  $total_found = @mysql_num_rows($total_result);
-  while ($row = mysql_fetch_assoc($total_result)){
-    $Nombre=$row['Nombre'];
-    $Tipo=$row['Tipo'];
-    echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'[]" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
-    }
-  ?>
-  </FONT></P>
+      
+      <tr>
+
+      <TD VALIGN="top" NOWRAP BGCOLOR="#FFFFFF">
+         <FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
+         <? 
+         include("Datos_Comunicacion.php");
+         $sql ="select * from campos where Tipo = 'Dimension' and activo=1 ORDER BY Nombre ASC";
+         $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+         $total_found = @mysql_num_rows($total_result);
+         while ($row = mysql_fetch_assoc($total_result)){
+            $IDCampo=$row['IDCampo'];
+            $Nombre=$row['Nombre'];
+            $Tipo=$row['Tipo'];
+            $Alerta=$row['Programa'] ? 'onChange="this.checked?alert(\'Enviar correo. Reportar dimensión\'):\'\'"' : ``;
+            echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'[]" VALUE="'.$IDCampo.'"'.$Alerta.'>'.$Nombre.'<BR>';
+            }
+         ?>
+         </FONT>
       </td>
 
-<TD VALIGN="top" NOWRAP BGCOLOR="#FFFFFF">
-  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
-  <? 
-  include("Datos_Comunicacion.php");
-  $sql ="select * from campos where Tipo = 'ModalidadViolencia' and activo=1 ORDER BY Nombre ASC";
-  $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-  $total_found = @mysql_num_rows($total_result);
-  while ($row = mysql_fetch_assoc($total_result)){
-    $Nombre=$row['Nombre'];
-    $Tipo=$row['Tipo'];
-    echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'[]" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
-    }
-  ?>
-  </FONT></P>
+
+
+      <TD VALIGN="top" NOWRAP BGCOLOR="#FFFFFF">
+         <FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
+         <? 
+         include("Datos_Comunicacion.php");
+         $sql ="select * from campos where Tipo = 'TipoViolencia' and activo=1 ORDER BY Nombre ASC";
+         $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+         $total_found = @mysql_num_rows($total_result);
+         while ($row = mysql_fetch_assoc($total_result)){
+            $Nombre=$row['Nombre'];
+            $Tipo=$row['Tipo'];
+            echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'[]" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
+            }
+         ?>
+         </FONT>
+      </td>
+
+      <TD VALIGN="top" NOWRAP BGCOLOR="#FFFFFF">
+         <FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
+         <? 
+         include("Datos_Comunicacion.php");
+         $sql ="select * from campos where Tipo = 'ModalidadViolencia' and activo=1 ORDER BY Nombre ASC";
+         $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+         $total_found = @mysql_num_rows($total_result);
+         while ($row = mysql_fetch_assoc($total_result)){
+            $Nombre=$row['Nombre'];
+            $Tipo=$row['Tipo'];
+            echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'[]" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
+            }
+         ?>
+         </FONT>
       </td>
 
       <TD VALIGN="top" NOWRAP BGCOLOR="#FFFFFF" colspan=2>
-  <P><FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
-  <? 
-  include("Datos_Comunicacion.php");
-  $sql ="select * from campos where Tipo = 'Violentometro' and activo=1 ORDER BY Nombre ASC";
-  $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
-  $total_found = @mysql_num_rows($total_result);
-  while ($row = mysql_fetch_assoc($total_result)){
-    $Nombre=$row['Nombre'];
-    $Tipo=$row['Tipo'];
-    echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'[]" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
-    }
-  ?>
-  </FONT></P>
+         <FONT SIZE="-2" FACE="Arial" COLOR="#D80808">
+         <? 
+         include("Datos_Comunicacion.php");
+         $sql ="select * from campos where Tipo = 'Violentometro' and activo=1 ORDER BY Nombre ASC";
+         $total_result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+         $total_found = @mysql_num_rows($total_result);
+         while ($row = mysql_fetch_assoc($total_result)){
+            $Nombre=$row['Nombre'];
+            $Tipo=$row['Tipo'];
+            echo '<INPUT TYPE=checkbox NAME="'.$Tipo.'[]" VALUE="'.$Nombre.'">'.$Nombre.'<BR>';
+            }
+         ?>
+         </FONT>
       </td>
 
-               </tr>
+      </tr>
 
             </table>
-            </FONT><FONT FACE="Arial" COLOR="#FFCC00">
             </FONT><FONT SIZE="-1" FACE="Arial" COLOR="#FFCC00"><table BORDER="0" WIDTH="100%">
                <tr>
                   <TD WIDTH=438 BGCOLOR="#FFFFFF">
@@ -1292,7 +1315,6 @@ startclock();
 
 <tr>
 <TD BGCOLOR="#FFFFFF">
-<P>
 <select name="selLegal" onChange="rellenaCanaLegal('forma');" id="Legal">
 	<option value="">-
             	<? 
@@ -1307,7 +1329,6 @@ startclock();
 						?>
                   </select>  
 	<INPUT TYPE="text" NAME=CanaLegal VALUE="<?echo $Institucion2;?>" SIZE=40 MAXLENGTH=255>
-	</FONT></P>
 
 </td>
 </tr>
@@ -1320,18 +1341,17 @@ startclock();
 
 <tr>
 <TD BGCOLOR="#FFFFFF">
-<P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>
+<FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>
 <TEXTAREA NAME=CanaOtro ROWS=4 COLS=80 WRAP="virtual"></TEXTAREA>
-</B></FONT></P>
+</B></FONT>
 </td>
 </tr>
 
 <tr>
 <TD BGCOLOR="#FFFFFF">
-<P><FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>
+<FONT SIZE="-1" FACE="Arial" COLOR="#AAAAAA"><B>
 <INPUT TYPE=checkbox NAME=Voluntario VALUE=Voluntario>Voluntario<BR>
-</B></FONT></P>
-</td>
+</B></FONT></td>
 </tr>
 
             </table>

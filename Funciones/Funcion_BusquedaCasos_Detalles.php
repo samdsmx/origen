@@ -1,7 +1,7 @@
 <?
 if ($Sesion){
 	include("Datos_Comunicacion.php");
-	$sql ="SELECT c.*,l.*, GROUP_CONCAT(CONCAT(f.Tipo,': ',f.Nombre)) as 'MotivosBienestar' FROM casos c, llamadas l LEFT JOIN llamadasBienestar b ON b.IdLlamada=l.id LEFT JOIN campos f ON b.IdCampo = f.IDCampo WHERE c.IDCaso = l.IDCaso AND c.IDCaso = '".rs($IDCaso)."' AND l.LlamadaNo='".rs($LlamadaNo)."' GROUP BY l.id";
+	$sql ="SELECT c.*,l.*, GROUP_CONCAT(CONCAT(f2.Tipo,': ',f2.Nombre)) as 'Dimension', GROUP_CONCAT(CONCAT(f.Tipo,': ',f.Nombre)) as 'MotivosBienestar' FROM casos c, llamadas l LEFT JOIN dimension d ON d.IdLlamada=l.id LEFT JOIN llamadasBienestar b ON b.IdLlamada=l.id LEFT JOIN campos f ON b.IdCampo = f.IDCampo LEFT JOIN campos f2 ON d.IdCampo = f2.IDCampo WHERE c.IDCaso = l.IDCaso AND c.IDCaso = '".rs($IDCaso)."' AND l.LlamadaNo='".rs($LlamadaNo)."' GROUP BY l.id";
 	$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
 	if ($row = mysql_fetch_assoc($result)){
 		$ID=$row['IDCaso'];
@@ -48,6 +48,7 @@ if ($Sesion){
 		$PosibleSolucion=$row['PosibleSolucion'];
 		$Estatus=$row['Estatus'];
 		$HorasInvertidas=$row['HorasInvertidas'];
+		$Dimension=$row['Dimension'];
 		$MotivosBienestar=$row['MotivosBienestar'];
 		$AyudaPsicologico = str_replace(',', "<BR>",$AyudaPsicologico);
 		$AyudaLegal = str_replace(',', "<BR>",$AyudaLegal);
@@ -57,6 +58,7 @@ if ($Sesion){
 		$TipoViolencia = str_replace(',', "<BR>",$TipoViolencia);
 		$ModalidadViolencia = str_replace(',', "<BR>",$ModalidadViolencia);
 		$Violentometro = str_replace(',', "<BR>",$Violentometro);
+		$Dimension = str_replace(',', "<BR>",$Dimension);
 		$MotivosBienestar = str_replace(',', "<BR>",$MotivosBienestar);
 
 		if ($Accion == "Modifica"){

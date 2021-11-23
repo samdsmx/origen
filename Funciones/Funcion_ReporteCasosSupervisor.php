@@ -192,6 +192,7 @@ if ($Sesion){
 	preparaQuery($AyudaMedica, "AyudaMedica", &$CadBusqueda, &$criterio);
 	preparaQuery($AyudaNutricional, "AyudaNutricional", &$CadBusqueda, &$criterio);	
 	preparaQuery($MotivosBienestar, "Nombre", &$CadBusqueda, &$criterio, true, "f","MotivosBienestar");	
+	preparaQuery($Dimension, "Nombre", &$CadBusqueda, &$criterio, true, "f","Dimension");	
 	preparaQuery($AyudaOtros, "AyudaOtros", &$CadBusqueda, &$criterio);	
 	preparaQuery($TipoViolencia, "TipoViolencia", &$CadBusqueda, &$criterio);	
 	preparaQuery($ModalidadViolencia, "ModalidadViolencia", &$CadBusqueda, &$criterio);	
@@ -200,7 +201,7 @@ if ($Sesion){
 
 	$sql ="Drop Table reporte";
 	$total_result = @mysql_query($sql, $GLOBALS['connection']);
-	$sql ="Create table reporte select GROUP_CONCAT(CONCAT(f.Tipo,': ',f.Nombre)) as 'MotivosBienestar', l.*, c.Edad,c.Religion,c.NivelEstudios,c.Sexo,c.Municipio,c.EstadoCivil,c.LenguaIndigena,c.Estado,c.Ocupacion,c.ComoTeEnteraste,c.MedioContacto,c.CP,c.NivelViolencia,c.Nacionalidad from casos c, llamadas l LEFT JOIN llamadasBienestar b ON l.id=b.IdLlamada LEFT JOIN campos f ON b.IdCampo = f.IDCampo where c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda group by l.id";
+	$sql ="Create table reporte select GROUP_CONCAT(CONCAT(f.Tipo,': ',f.Nombre)) as 'MotivosBienestar', GROUP_CONCAT(CONCAT(f2.Tipo,': ',f2.Nombre)) as 'Dimension', l.*, c.Edad,c.Religion,c.NivelEstudios,c.Sexo,c.Municipio,c.EstadoCivil,c.LenguaIndigena,c.Estado,c.Ocupacion,c.ComoTeEnteraste,c.MedioContacto,c.CP,c.NivelViolencia,c.Nacionalidad from casos c, llamadas l LEFT JOIN llamadasBienestar b ON l.id=b.IdLlamada LEFT JOIN dimension d ON l.id=d.IdLlamada LEFT JOIN campos f ON b.IdCampo = f.IDCampo LEFT JOIN campos f2 ON d.IdCampo = f2.IDCampo where c.IDCaso=l.IDCaso $CadBusqueda2 $CadBusqueda group by l.id";
 	$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 	
 	//Totales
@@ -226,10 +227,10 @@ if ($Sesion){
 			}
 	
 	
-	$sql ="SELECT DISTINCT l.IDCaso FROM llamadas l, casos c, llamadas l2 LEFT JOIN llamadasBienestar b ON l2.id=b.IdLlamada LEFT JOIN campos f ON b.IdCampo = f.IDCampo WHERE l.IDCaso=l2.IDCaso AND l.IDCaso=c.IDCaso AND Year(l.FechaLlamada)='$AnoP' AND Month(l.FechaLlamada)='$MesP' AND Year(l2.FechaLlamada)='$Ano' AND Month(l2.FechaLlamada)='$Mes' $CadBusqueda";
+	$sql ="SELECT DISTINCT l.IDCaso FROM llamadas l, casos c, llamadas l2 LEFT JOIN dimension d ON l2.id=d.IdLlamada LEFT JOIN llamadasBienestar b ON l2.id=b.IdLlamada LEFT JOIN campos f ON b.IdCampo = f.IDCampo LEFT JOIN campos f2 ON d.IdCampo = f2.IDCampo WHERE l.IDCaso=l2.IDCaso AND l.IDCaso=c.IDCaso AND Year(l.FechaLlamada)='$AnoP' AND Month(l.FechaLlamada)='$MesP' AND Year(l2.FechaLlamada)='$Ano' AND Month(l2.FechaLlamada)='$Mes' $CadBusqueda";
 	$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$TotalNoResueltos=@mysql_num_rows($total_result);
-	$sql ="SELECT DISTINCT l.IDCaso FROM casos c, llamadas l LEFT JOIN llamadasBienestar b ON l.id=b.IdLlamada LEFT JOIN campos f ON b.IdCampo = f.IDCampo WHERE l.IDCaso=c.IDCaso AND Year(FechaLlamada)='$AnoP' AND Month(FechaLlamada)='$MesP' $CadBusqueda";
+	$sql ="SELECT DISTINCT l.IDCaso FROM casos c, llamadas l LEFT JOIN dimension d ON l.id=d.IdLlamada LEFT JOIN llamadasBienestar b ON l.id=b.IdLlamada LEFT JOIN campos f ON b.IdCampo = f.IDCampo LEFT JOIN campos f2 ON d.IdCampo = f2.IDCampo WHERE l.IDCaso=c.IDCaso AND Year(FechaLlamada)='$AnoP' AND Month(FechaLlamada)='$MesP' $CadBusqueda";
 	$total_result = @mysql_query($sql, $GLOBALS['connection']) or die("Error #". mysql_errno() . ": " . mysql_error());
 	$TotalMesAnterior=@mysql_num_rows($total_result);
 	$TotalResueltos=$TotalMesAnterior-$TotalNoResueltos;
@@ -305,6 +306,7 @@ if ($Sesion){
 	$medico=CuentaAyuda("AyudaMedica");
 	$nutricional=CuentaAyuda("AyudaNutricional");
 	$otros=CuentaAyuda("AyudaOtros");
+	$dimension=CuentaAyuda("Dimension");
 
 	$TotalEst=Muestra("Estado");
 	$TotalDele=Muestra("Municipio","Municipio <> '' AND ","llamadas DESC","LIMIT 10");
@@ -317,6 +319,7 @@ if ($Sesion){
 	$TotalTViol=MuestraAyuda("TipoViolencia");
 	$TotalMViol=MuestraAyuda("ModalidadViolencia");
 	$TotalViolentometro=MuestraAyuda("Violentometro");
+	$TotalDimension=MuestraAyuda("Dimension");
 
 	$TotalTipB=MuestraTiposBienestar();
 	$TotalMotB=MuestraMotivosBienestar();

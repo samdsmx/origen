@@ -303,12 +303,27 @@ if ($Sesion){
 			VALUES
 			('".rs($IDCaso)."','".rs($FechaLlamada)."','".rs($Consejera)."','".rs($HoraInicio)."','".rs($HoraTermino)."','".rs($ComentariosAdicionales)."','".rs($AYUDAPSICOLOGICO)."','".rs($AYUDALEGAL)."','".rs($AYUDAMEDICA)."','".rs($AYUDANUTRICIONAL)."','".rs($AYUDAOTROS)."','".rs($DesarrolloCaso)."','".rs($CanaLegal)."', '".rs($CanaOtro)."','".rs($LlamadaNo)."', '".rs($Duracion)."', '".rs($Acceso)."', '".rs($TipoViolencia)."', '".rs($ModalidadViolencia)."', '".rs($Violentometro)."', '".rs($AcudeInstitucion)."')";
 			$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+			$sql = "SELECT MAX(id) id from llamadas";
+			$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+			$row = mysql_fetch_assoc($result);
+			$id=$row['id'];
+			echo("<BR>");var_dump($id);
+			echo("<BR>");var_dump($ComoTeEnteraste);
 			if ($ComoTeEnteraste == 'LINEA BIENESTAR: ') {
-				$row = mysql_fetch_assoc($result);
-				$id=$row['id'];
 			 	$sql = "INSERT INTO llamadasBienestar (IdLlamada,IdCampo) VALUES ";
 				foreach ($BIENESTAR as $val) {
-					$sql .= "($id, $val),";
+					$sql .= "('".rs($id)."','".rs($val)."'),";
+				}
+				$sql = substr($sql, 0, -1);
+				echo("<BR>");var_dump($sql);
+			 	$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
+				echo("<BR>");var_dump($result);
+			}
+			if ($Dimension <> ""){
+				$sql = "INSERT INTO dimension (IdLlamada,IdCampo) VALUES ";
+				foreach ($Dimension as $val) {
+					$sql .= "('".rs($id)."','".rs($val)."'),";
+					//$sql .= "($id, $val),";
 				}
 				$sql = substr($sql, 0, -1);
 			 	$result = @mysql_query($sql, $connection) or die("Error #". mysql_errno() . ": " . mysql_error());
