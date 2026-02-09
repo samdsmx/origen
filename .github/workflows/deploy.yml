@@ -1,0 +1,24 @@
+name: Deploy Laravel to VPS
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy via SSH
+      uses: appleboy/ssh-action@v0.1.6
+      with:
+        host: 72.60.65.168
+        username: root
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd /var/www/origen
+          git pull origin main
+          composer install --no-dev --optimize-autoloader
+          php artisan config:clear
+          php artisan cache:clear
+          php artisan view:clear
