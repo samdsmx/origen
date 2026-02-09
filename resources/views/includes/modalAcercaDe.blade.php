@@ -36,7 +36,7 @@
                             <img src="{!! asset('images/Sergio.jpg' ) !!}" style="border-radius:50%;" width="150">
                             <div>
                                 <div style="font-weight: bold;">Sergio Antonio Márquez De Silva</div>
-                                <div>Autor del sistema</div>
+                                <div>Desarrollador del sistema</div>
                             </div>
                             <div style="background: #fafafa; border-radius: 3px; border: 1px solid #ededed; color: #777; font-size: 13px; padding: 10px; position: relative">
                                 <p>
